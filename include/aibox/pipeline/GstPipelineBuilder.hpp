@@ -141,6 +141,14 @@ void CloseFpsCsv();
 // Frame count snapshot — call BEFORE gst_element_set_state(NULL).
 void SnapshotFrameCounters(RuntimeRegistry& reg);
 
+// Attaches the shared per-camera OUT frame counter to an encoder src pad.
+// SessionManager (src/webrtc) builds the WebRTC per-cam encoder chain, so the
+// counter must be registered from there; the context type and probe callback
+// stay in this translation unit next to the IN counters. Counts real encoded
+// frames (not RTP packets) and feeds the "Frame Count Summary" OUT column.
+void AttachFrameCountOutProbe(GstElement* elem, const std::string& camera_id,
+                              RuntimeRegistry* reg);
+
 // AIBOX_STAGE_LAT=1 wall-clock summary; safe after SnapshotFrameCounters.
 void PrintStageLatSummary(RuntimeRegistry& reg);
 

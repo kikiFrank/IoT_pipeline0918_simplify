@@ -728,6 +728,30 @@ src/pipeline/AppSinkCallbacks.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/aibox_stream_pipeline_demo.dir/build.make CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.s
 .PHONY : src/pipeline/AppSinkCallbacks.cpp.s
 
+src/pipeline/FaceOcOverlay.o: src/pipeline/FaceOcOverlay.cpp.o
+.PHONY : src/pipeline/FaceOcOverlay.o
+
+# target to build an object file
+src/pipeline/FaceOcOverlay.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/aibox_stream_pipeline_demo.dir/build.make CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o
+.PHONY : src/pipeline/FaceOcOverlay.cpp.o
+
+src/pipeline/FaceOcOverlay.i: src/pipeline/FaceOcOverlay.cpp.i
+.PHONY : src/pipeline/FaceOcOverlay.i
+
+# target to preprocess a source file
+src/pipeline/FaceOcOverlay.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/aibox_stream_pipeline_demo.dir/build.make CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.i
+.PHONY : src/pipeline/FaceOcOverlay.cpp.i
+
+src/pipeline/FaceOcOverlay.s: src/pipeline/FaceOcOverlay.cpp.s
+.PHONY : src/pipeline/FaceOcOverlay.s
+
+# target to generate assembly for a file
+src/pipeline/FaceOcOverlay.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/aibox_stream_pipeline_demo.dir/build.make CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.s
+.PHONY : src/pipeline/FaceOcOverlay.cpp.s
+
 src/pipeline/GstDotDumper.o: src/pipeline/GstDotDumper.cpp.o
 .PHONY : src/pipeline/GstDotDumper.o
 
@@ -1214,6 +1238,9 @@ help:
 	@echo "... src/pipeline/AppSinkCallbacks.o"
 	@echo "... src/pipeline/AppSinkCallbacks.i"
 	@echo "... src/pipeline/AppSinkCallbacks.s"
+	@echo "... src/pipeline/FaceOcOverlay.o"
+	@echo "... src/pipeline/FaceOcOverlay.i"
+	@echo "... src/pipeline/FaceOcOverlay.s"
 	@echo "... src/pipeline/GstDotDumper.o"
 	@echo "... src/pipeline/GstDotDumper.i"
 	@echo "... src/pipeline/GstDotDumper.s"

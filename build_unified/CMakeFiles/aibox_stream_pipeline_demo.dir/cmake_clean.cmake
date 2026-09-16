@@ -37,6 +37,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/aibox_stream_pipeline_demo.dir/src/orchestrator/PlanExporter.cpp.o.d"
   "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o"
   "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o.d"
+  "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o"
+  "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o.d"
   "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o"
   "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o.d"
   "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o"

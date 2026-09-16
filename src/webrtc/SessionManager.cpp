@@ -1,6 +1,7 @@
 #include "aibox/webrtc/SessionManager.hpp"
 #include "aibox/webrtc/WrtcTrace.hpp"
 #include "aibox/pipeline/GstElementHelper.hpp"
+#include "aibox/pipeline/GstPipelineBuilder.hpp"
 
 #include <atomic>
 #include <algorithm>
@@ -833,6 +834,11 @@ GstElement* SessionManager::BuildEncoderChain(std::string camera_id) {
 
   gst_bin_add(GST_BIN(pipeline_), bin);
   gst_bin_add_many(GST_BIN(pipeline_), tee, fsink, nullptr);
+
+  // OUT frame counter: the WebRTC encoder chain only exists here, so register
+  // the per-camera counter on the encoder src pad from this point. The "Frame
+  // Count Summary" OUT column reads it (real encoded frames, not RTP packets).
+  pipeline::AttachFrameCountOutProbe(enc, camera_id, registry_);
 
   GstPad* bin_src = gst_element_get_static_pad(bin, "src");
   GstPad* tee_sink = gst_element_get_static_pad(tee, "sink");

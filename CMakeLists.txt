@@ -45,6 +45,7 @@ set(MAIN_SOURCES
     src/orchestrator/PipelineOrchestrator.cpp
     src/orchestrator/PlanExporter.cpp
     src/pipeline/PipelineStructureDumper.cpp
+    src/pipeline/FaceOcOverlay.cpp
     src/pipeline/GstElementHelper.cpp
     src/pipeline/GstLinkHelper.cpp
     src/pipeline/GstPipelineBuilder.cpp

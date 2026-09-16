@@ -2,6 +2,6 @@
 -- Using QTI source headers from: /mnt/workspace/gst-plugins-qti-oss-imsdk.lnx.2.0.0.r2-rel/gst-plugin-base
 -- Using QTI build libs from: /mnt/workspace/build-plugins/gst-plugin-base
 -- Configured GST_ML_MODULES_DIR (local): /home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/ml_modules
--- Configuring done (0.1s)
+-- Configuring done (0.4s)
 -- Generating done (0.0s)
 -- Build files have been written to: /home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board

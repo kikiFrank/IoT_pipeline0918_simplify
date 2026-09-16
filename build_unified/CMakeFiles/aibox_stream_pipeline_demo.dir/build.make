@@ -153,10 +153,24 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/PipelineStructureDumper.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/PipelineStructureDumper.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/PipelineStructureDumper.cpp -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/PipelineStructureDumper.cpp.s
 
+CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
+CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/FaceOcOverlay.cpp
+CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/FaceOcOverlay.cpp
+
+CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/FaceOcOverlay.cpp > CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.i
+
+CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/FaceOcOverlay.cpp -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.s
+
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/GstElementHelper.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/GstElementHelper.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.s: c
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/GstLinkHelper.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/GstLinkHelper.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.i: cmake_force
@@ -184,7 +198,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.s: cmak
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/GstPipelineBuilder.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/GstPipelineBuilder.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.i: cmake_force
@@ -198,7 +212,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.s:
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/GstDotDumper.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/GstDotDumper.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.i: cmake_force
@@ -212,7 +226,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstDotDumper.cpp.s: cmake
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/AppSinkCallbacks.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/pipeline/AppSinkCallbacks.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/AppSinkCallbacks.cpp.s: c
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/aggregator/ResultAggregator.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/aggregator/ResultAggregator.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.i: cmake_force
@@ -240,7 +254,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/aggregator/ResultAggregator.cpp.s:
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/publisher/EventBuilder.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/publisher/EventBuilder.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.i: cmake_force
@@ -254,7 +268,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/EventBuilder.cpp.s: cmak
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/publisher/JsonFileEventSink.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/publisher/JsonFileEventSink.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.i: cmake_force
@@ -268,7 +282,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/JsonFileEventSink.cpp.s:
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/publisher/DetectionEventPublisher.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/publisher/DetectionEventPublisher.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.cpp.i: cmake_force
@@ -282,7 +296,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/publisher/DetectionEventPublisher.
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/adapter/NatsAdapter.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/adapter/NatsAdapter.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.i: cmake_force
@@ -296,7 +310,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/adapter/NatsAdapter.cpp.s: cmake_f
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/detection/Uuid.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/detection/Uuid.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.i: cmake_force
@@ -310,7 +324,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/Uuid.cpp.s: cmake_force
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/detection/CaptureTimestampTracker.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/detection/CaptureTimestampTracker.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.cpp.i: cmake_force
@@ -324,7 +338,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/CaptureTimestampTracker.
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/detection/FrameEventBuilder.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/detection/FrameEventBuilder.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.i: cmake_force
@@ -338,7 +352,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventBuilder.cpp.s:
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/detection/FrameEventPublisher.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/detection/FrameEventPublisher.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.i: cmake_force
@@ -352,7 +366,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/FrameEventPublisher.cpp.
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/detection/NatsFrameTransport.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/detection/NatsFrameTransport.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.i: cmake_force
@@ -366,7 +380,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/detection/NatsFrameTransport.cpp.s
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/media/SnapshotEncoder.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/media/SnapshotEncoder.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.i: cmake_force
@@ -380,7 +394,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotEncoder.cpp.s: cmake
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/media/ThumbnailEncoder.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/media/ThumbnailEncoder.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.i: cmake_force
@@ -394,7 +408,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/ThumbnailEncoder.cpp.s: cmak
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/media/MediaFileWriter.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/media/MediaFileWriter.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.i: cmake_force
@@ -408,7 +422,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/MediaFileWriter.cpp.s: cmake
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/media/NatsMediaReadyTransport.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/media/NatsMediaReadyTransport.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.i: cmake_force
@@ -422,7 +436,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/NatsMediaReadyTransport.cpp.
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/media/SnapshotTriggerPolicy.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/media/SnapshotTriggerPolicy.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.i: cmake_force
@@ -436,7 +450,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/SnapshotTriggerPolicy.cpp.s:
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/media/AnomalySnapshotService.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/media/AnomalySnapshotService.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.i: cmake_force
@@ -450,7 +464,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnomalySnapshotService.cpp.s
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/WebrtcPayload.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/WebrtcPayload.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.i: cmake_force
@@ -464,7 +478,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPayload.cpp.s: cmake_
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/WebrtcSignaling.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/WebrtcSignaling.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.i: cmake_force
@@ -478,7 +492,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcSignaling.cpp.s: cmak
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/WebRtcSession.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/WebRtcSession.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.i: cmake_force
@@ -492,7 +506,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebRtcSession.cpp.s: cmake_
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/SessionManager.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/SessionManager.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.i: cmake_force
@@ -506,7 +520,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.s: cmake
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPadDump.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/flags.make
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPadDump.cpp.o: /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/WebrtcPadDump.cpp
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPadDump.cpp.o: CMakeFiles/aibox_stream_pipeline_demo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPadDump.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPadDump.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPadDump.cpp.o -MF CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPadDump.cpp.o.d -o CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPadDump.cpp.o -c /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/WebrtcPadDump.cpp
 
 CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/WebrtcPadDump.cpp.i: cmake_force
@@ -525,6 +539,7 @@ aibox_stream_pipeline_demo_OBJECTS = \
 "CMakeFiles/aibox_stream_pipeline_demo.dir/src/orchestrator/PipelineOrchestrator.cpp.o" \
 "CMakeFiles/aibox_stream_pipeline_demo.dir/src/orchestrator/PlanExporter.cpp.o" \
 "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/PipelineStructureDumper.cpp.o" \
+"CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o" \
 "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o" \
 "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o" \
 "CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o" \
@@ -561,6 +576,7 @@ aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/src/config
 aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/src/orchestrator/PipelineOrchestrator.cpp.o
 aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/src/orchestrator/PlanExporter.cpp.o
 aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/PipelineStructureDumper.cpp.o
+aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/FaceOcOverlay.cpp.o
 aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstElementHelper.cpp.o
 aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstLinkHelper.cpp.o
 aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o
@@ -591,7 +607,7 @@ aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/build.make
 aibox_stream_pipeline_demo: libimsdk_proto.a
 aibox_stream_pipeline_demo: /usr/lib/aarch64-linux-gnu/libprotobuf.so
 aibox_stream_pipeline_demo: CMakeFiles/aibox_stream_pipeline_demo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Linking CXX executable aibox_stream_pipeline_demo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ubuntu/workspace/IoT_pipeline0825/build_unified/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Linking CXX executable aibox_stream_pipeline_demo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/aibox_stream_pipeline_demo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

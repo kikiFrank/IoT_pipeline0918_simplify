@@ -6,6 +6,7 @@
 #include "aibox/face/face_detection_meta_types.hpp"
 #include "aibox/face/face_result_state_meta_types.hpp"
 #include "aibox/face/face_mask_policy.hpp"
+#include "aibox/pipeline/FaceOcOverlay.hpp"
 
 #include <gst/video/video.h>
 #include <gst/gsttask.h>  // GstTaskState / gst_pad_get_task_state (diagq)
@@ -869,6 +870,23 @@ void OpenFpsCsv(const std::string& path) {
 
 void CloseFpsCsv() {
   if (g_fps_csv.is_open()) g_fps_csv.close();
+}
+
+void AttachFrameCountOutProbe(GstElement* elem,
+                              const std::string& camera_id,
+                              RuntimeRegistry* reg) {
+  if (!elem || !reg) return;
+  GstPad* src = gst_element_get_static_pad(elem, "src");
+  if (!src) {
+    fprintf(stderr, "[OUTCNT] no src pad on %s (camera %s)\n",
+            GST_ELEMENT_NAME(elem), camera_id.c_str());
+    return;
+  }
+  auto* ctx = new FrameCountOutCtx{camera_id, 0};
+  gst_pad_add_probe(src, GST_PAD_PROBE_TYPE_BUFFER, OnFrameOutProbe, ctx,
+                    nullptr);
+  gst_object_unref(src);
+  reg->frame_count_ctx_out.push_back(ctx);
 }
 
 void SnapshotFrameCounters(RuntimeRegistry& reg) {
@@ -2016,6 +2034,26 @@ Result<GstPipelineBuildResult> GstPipelineBuilder::Build(
             return {Status::Error("LINK_FAILED",
                                   "metamux -> T0 -> overlay -> T1 -> tee_post " +
                                   tmux.time_mux_group_id),
+                    GstPipelineBuildResult{}};
+        } else if (aibox::pipeline::FaceOcEnabled()) {
+          // POC: stock overlaycomposition between qtivoverlay and tee_post.
+          // Draws opaque white face rectangles from GstFaceDetectionMeta.
+          GstElement* oc_el = MakeElement("overlaycomposition",
+                                          "oc_" + tmux.time_mux_group_id, &err);
+          if (!oc_el)
+            return {Status::Error("FACE_OC_FAILED", err),
+                    GstPipelineBuildResult{}};
+          std::string oc_err;
+          if (!aibox::pipeline::AttachFaceOcDraw(oc_el, &oc_err))
+            return {Status::Error("FACE_OC_ATTACH_FAILED", oc_err),
+                    GstPipelineBuildResult{}};
+          gst_bin_add(GST_BIN(result.pipeline), oc_el);
+          if (!gst_element_link(term_src, overlay) ||
+              !gst_element_link(overlay, oc_el) ||
+              !gst_element_link(oc_el, tee_post))
+            return {Status::Error("LINK_FAILED",
+                                  "metamux -> overlay -> overlaycomposition -> "
+                                  "tee_post " + tmux.time_mux_group_id),
                     GstPipelineBuildResult{}};
         } else if (!gst_element_link(term_src, overlay) ||
                    !gst_element_link(overlay, tee_post))

@@ -1,6 +1,28 @@
 [  8%] Built target imsdk_proto
-[ 11%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o
-[ 13%] Linking CXX executable aibox_stream_pipeline_demo
+[ 13%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o
+[ 13%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/main.cpp.o
+[ 16%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o
+In file included from /usr/include/gstreamer-1.0/gst/webrtc/webrtc.h:24,
+                 from /home/ubuntu/workspace/IoT_pipeline0825/include/aibox/webrtc/WebRtcSession.hpp:13,
+                 from /home/ubuntu/workspace/IoT_pipeline0825/include/aibox/webrtc/SessionManager.hpp:16,
+                 from /home/ubuntu/workspace/IoT_pipeline0825/src/webrtc/SessionManager.cpp:1:
+/usr/include/gstreamer-1.0/gst/webrtc/webrtc_fwd.h:24:2: warning: #warning "The WebRTC library from gst-plugins-bad is unstable API and may change in future." [-Wcpp]
+   24 | #warning "The WebRTC library from gst-plugins-bad is unstable API and may change in future."
+      |  ^~~~~~~
+/usr/include/gstreamer-1.0/gst/webrtc/webrtc_fwd.h:25:2: warning: #warning "You can define GST_USE_UNSTABLE_API to avoid this warning." [-Wcpp]
+   25 | #warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+      |  ^~~~~~~
+In file included from /usr/include/gstreamer-1.0/gst/webrtc/webrtc.h:24,
+                 from /home/ubuntu/workspace/IoT_pipeline0825/include/aibox/webrtc/WebRtcSession.hpp:13,
+                 from /home/ubuntu/workspace/IoT_pipeline0825/include/aibox/webrtc/SessionManager.hpp:16,
+                 from /home/ubuntu/workspace/IoT_pipeline0825/main.cpp:31:
+/usr/include/gstreamer-1.0/gst/webrtc/webrtc_fwd.h:24:2: warning: #warning "The WebRTC library from gst-plugins-bad is unstable API and may change in future." [-Wcpp]
+   24 | #warning "The WebRTC library from gst-plugins-bad is unstable API and may change in future."
+      |  ^~~~~~~
+/usr/include/gstreamer-1.0/gst/webrtc/webrtc_fwd.h:25:2: warning: #warning "You can define GST_USE_UNSTABLE_API to avoid this warning." [-Wcpp]
+   25 | #warning "You can define GST_USE_UNSTABLE_API to avoid this warning."
+      |  ^~~~~~~
+[ 18%] Linking CXX executable aibox_stream_pipeline_demo
 [100%] Built target aibox_stream_pipeline_demo
 [100%] Built target test_aiboxbatchsplit
 [100%] Built target test_lockstep_qtibatch

@@ -515,6 +515,7 @@ CMakeFiles/aibox_stream_pipeline_demo.dir/src/webrtc/SessionManager.cpp.o: \
  /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /home/ubuntu/workspace/IoT_pipeline0825/include/aibox/pipeline/GstElementHelper.hpp \
+ /home/ubuntu/workspace/IoT_pipeline0825/include/aibox/pipeline/GstPipelineBuilder.hpp \
  /usr/include/c++/13/algorithm \
  /usr/include/c++/13/pstl/glue_algorithm_defs.h \
  /usr/include/c++/13/cstring

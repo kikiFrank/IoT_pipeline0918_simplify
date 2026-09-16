@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG -shared -Wl,-soname,libgstaiboxbatchsplit.so -o libgstaiboxbatchsplit.so CMakeFiles/gstaiboxbatchsplit.dir/gstaiboxbatchsplit.cpp.o  -Wl,-rpath,"\$ORIGIN:" -lgstreamer-1.0 -lgobject-2.0 -lglib-2.0 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC  -Wall -Wno-missing-field-initializers -O3 -DNDEBUG -shared -Wl,-soname,libml-postprocess-yolo-nas.so -o libml-postprocess-yolo-nas.so "CMakeFiles/ml-postprocess-yolo-nas.dir/modules/object-detection/ml-postprocess-yolo26.cc.o" 

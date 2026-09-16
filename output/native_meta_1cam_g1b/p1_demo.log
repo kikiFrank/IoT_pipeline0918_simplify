@@ -1,0 +1,953 @@
+============================================================
+  AIBox Stream Pipeline Demo  v1.0.0
+============================================================
+[INFO] RLIMIT_NOFILE soft=65536 hard=65536
+[INFO] GStreamer initialized (version 1.24.2)
+[INFO] snapshot : /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/pipeline_otm_1cam_webrtc.txt
+[INFO] dump_plan_only : no
+[INFO] build_only     : no
+[INFO] run_seconds    : 0
+[INFO] run_forever    : yes
+[INFO] Snapshot loaded: demo_otm_1cam_webrtc
+[INFO]   streams   : 1
+[INFO]   algorithms: 1
+[INFO]   models    : 1
+[INFO] ExecutionPlan  : plan_demo_otm_1cam_webrtc
+[INFO]   stream_plans : 1
+[INFO]   algo_groups  : 1
+[INFO]   time_mux_grps: 1
+[INFO]   stage_plans  : 2
+[INFO]   chain_plans  : 1
+[INFO] Exported: ./output/execution_plan.json
+[INFO] Exported: ./output/pipeline_structure.txt
+[INFO] WebRTC annotated preview enabled
+[BATCH_DISPATCH] path=time_mux groups=1
+[webrtc] VPU budget OK: 1 dec + 0 webrtc_enc(build) + 0 rec_enc = 1 / 32 (lazy enc unless MAX_ENC set)
+[init] GstAiboxFrameMeta registration triggered (aiboxframemeta)
+failed to get driver name for fd 10
+MESA-LOADER: failed to retrieve device information
+failed to get driver name for fd 10
+[HTP] stage=stage_yellow stage_index=1 -> backend-device-id=1 (n_htp=2)
+[DBG class-filter] stage=stage_yellow class-filter="Green"
+[DBG module] stage=stage_yellow nick=yolo26-otm gtype=187651607105504
+[DBG module] enum_class=0xaaab0b6f8f30 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] stage=stage_human stage_index=2 -> backend-device-id=0 (n_htp=2)
+[DBG class-filter] stage=stage_human class-filter="Human"
+[DBG module] stage=stage_human nick=yolo26-otm gtype=187651607105504
+[DBG module] enum_class=0xaaab0b6f8f30 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[webrtc] overlay_tmux_group_0_0 before tee_post (writable DMA-BUF path)
+[webrtc lazy] tmux_group_0_0 slot0(cam-001): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[INFO] GstPipeline built successfully (P1: mux + decode + fakesink)
+[pad-dump] disabled (set AIBOX_WEBRTC_PAD_DUMP=1 to enable)
+[NatsAdapter] Connected to nats://localhost:4222 (client=aibox-pipeline-webrtc)
+[SessionManager] Initialized
+[SessionManager] Registered camera: cam-001 (lazy stub)
+[WebrtcSignaling] Subscribed to 5 wildcard subjects
+[SessionManager] Signaling started
+[INFO] Registering 1 appsink callbacks...
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO] Exported: ./output/pipeline_runtime.dot
+bash: scripts/render_dot.sh: No such file or directory
+[WARN] Dot render failed (graphviz installed?). Run: bash scripts/render_dot.sh ./output/pipeline_runtime.dot
+[NatsAdapter] Connected to nats://127.0.0.1:4222 (client=aibox-pipeline-detection)
+[INFO] FrameEventPublisher started (NATS subject: detection.frame)
+[INFO] AnomalySnapshotService started media_dir=/home/ubuntu/workspace/IoT_pipeline0825/media encoder_ready=yes thumb_encoder_ready=yes
+[INFO] Setting pipeline to PLAYING (run-forever; Ctrl+C / SIGTERM to stop)...
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:38:dummy call to rpcmem_init, rpcmem APIs will be used from libxdsprpc
+[INFO] set_state(PLAYING) ret=2
+[RTSP] cam=cam-001 pad=recv_rtp_src_0_2453052941_96: linked H264 video RTP -> depay
+Wed Sep 16 2026 12:10:01.446565: INFO: GPU alignment: 64
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+PFP: 0x016dc112, ME: 0x00000000
+Pre-rotation disabled !!!
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+Pre-rotation disabled !!!
+Wed Sep 16 2026 12:10:01.457037: Initilized EGL display version: 1.5
+[OV-NATIVE] rois=5 (no property set)
+[PIPELINE_READY] state=PLAYING
+[TERMINAL] seq=1 camera=cam-001 frame=1 rois=5 labels=Green,Green,Green,Green,Human
+[TERMINAL] seq=2 camera=cam-001 frame=2 rois=5 labels=Green,Green,Green,Green,Human
+[TERMINAL] seq=3 camera=cam-001 frame=3 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=4 camera=cam-001 frame=4 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=5 camera=cam-001 frame=5 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=6 camera=cam-001 frame=6 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=7 camera=cam-001 frame=7 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=8 camera=cam-001 frame=8 rois=4 labels=Green,Green,Green,Green
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=30 camera=cam-001 frame=30 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=30 detections=4 (cam_total=30 det_total=133 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=60 camera=cam-001 frame=60 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=60 detections=4 (cam_total=60 det_total=258 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=90 det_frame=0 age_ms=0 have_state=0 pts=0:00:10.087772364
+[TERMINAL] seq=90 camera=cam-001 frame=90 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=90 detections=4 (cam_total=90 det_total=383 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+
+** (aibox_stream_pipeline_demo:28383): WARNING **: 12:10:11.644: v4l2h264dec_cam_001: 1 initial frames were not dequeued: bug in decoder -- please file a bug
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=120 camera=cam-001 frame=120 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=120 detections=4 (cam_total=120 det_total=508 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=150 camera=cam-001 frame=150 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=150 detections=4 (cam_total=150 det_total=635 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:19.087772364
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=180 camera=cam-001 frame=180 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=180 detections=4 (cam_total=180 det_total=757 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=210 camera=cam-001 frame=210 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=210 detections=4 (cam_total=210 det_total=877 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=240 camera=cam-001 frame=240 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=240 detections=4 (cam_total=240 det_total=1001 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=270 det_frame=0 age_ms=0 have_state=0 pts=0:00:28.087772364
+[TERMINAL] seq=270 camera=cam-001 frame=270 rois=6 labels=Green,Green,Green,Green,Human,Human
+[AGG] camera=cam-001 frame=270 detections=6 (cam_total=270 det_total=1131 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=300 camera=cam-001 frame=300 rois=6 labels=Green,Green,Green,Green,Human,Human
+[AGG] camera=cam-001 frame=300 detections=6 (cam_total=300 det_total=1289 qd=1 drop=0)
+[OV-NATIVE] rois=6 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=330 camera=cam-001 frame=330 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=330 detections=5 (cam_total=330 det_total=1436 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=360 det_frame=0 age_ms=0 have_state=0 pts=0:00:37.087772364
+[TERMINAL] seq=360 camera=cam-001 frame=360 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=360 detections=5 (cam_total=360 det_total=1567 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=390 camera=cam-001 frame=390 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=390 detections=4 (cam_total=390 det_total=1690 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=420 camera=cam-001 frame=420 rois=3 labels=Green,Green,Green
+[AGG] camera=cam-001 frame=420 detections=3 (cam_total=420 det_total=1812 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:00:46.087772364
+[TERMINAL] seq=450 camera=cam-001 frame=450 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=450 detections=4 (cam_total=450 det_total=1939 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=480 camera=cam-001 frame=480 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=480 detections=4 (cam_total=480 det_total=2066 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[WebrtcSignaling] RX: webrtc.cam.cam-001.session.new payload=135b json={"camera_id":"cam-001","session_id":"multi-cam-001-1789560651243-87582cef24159",
+[SessionManager] New session: sid='multi-cam-001-1789560651243-87582cef24159' cam='cam-001' ice_srv=1 payload_sid='multi-cam-001-1789560651243-87582cef24159'
+WRTC_TRACE mono_us=4899807745 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e0 event=SESSION_NEW_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=-
+[CP05-R1B] encoder state cam-001 ABSENT→QUEUED pending=1
+[CP05-R1B] encoder state cam-001 QUEUED→BUILDING (await first frame)
+[ENC-CFG] cam=cam-001 io=auto
+[ENC-CFG] cam=cam-001 postq=off
+[SessionManager] P3b enc structure ready: cam-001 encbin(q→vscale→caps→enc→parse) ghost→tee(top) gen=1 (await first frame for READY)
+[CP05-R1B] encoder cam-001 gen=1 structure up; Init now (offer not gated on first frame) pending_init=1
+[CP05-R1B] DeferredSessionInit cam=cam-001 sessions=1 proceeding while another encoder is BUILDING
+WRTC_TRACE mono_us=4899816920 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=0 gst_cur=void gst_pending=void result=ok detail=init
+WRTC_TRACE mono_us=4899822443 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=0 gst_cur=void gst_pending=void result=begin detail=init
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] STUN: stun:stun.l.google.com:19302
+WRTC_TRACE mono_us=4899828335 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=RTP_SINK_REQUESTED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=sink_%u
+WRTC_TRACE mono_us=4899828413 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=RTP_LINKED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=rtp_to_webrtc
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] video→webrtcbin link: OK
+WRTC_TRACE mono_us=4899828474 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=SENDONLY_CODEC_PREFS qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=sink_transceiver
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] sink transceiver SENDONLY + codec-preferences set
+WRTC_TRACE mono_us=4899828749 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=TEE_LINKED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=tee_to_queue
+WRTC_TRACE mono_us=4899828803 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=SIGNALS_CONNECTED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=before_state_sync
+WRTC_TRACE mono_us=4899828817 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=STATE_SYNC_BEGIN qdepth=0 state=0 gst_cur=null gst_pending=void result=begin detail=session_elements
+WRTC_TRACE mono_us=4899829750 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=NEGOTIATION_SIGNAL_RECEIVED qdepth=0 state=0 gst_cur=ready gst_pending=playing result=ok detail=on_negotiation_needed
+WRTC_TRACE mono_us=4899829813 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=0 gst_cur=playing gst_pending=void result=ok detail=negotiation_needed
+WRTC_TRACE mono_us=4899829799 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=STATE_SYNC_RESULT qdepth=0 state=0 gst_cur=playing gst_pending=void result=ok detail=session_elements
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] Init complete; offer via on-negotiation-needed + direct create-offer (codec-preferences armed)
+[Preview] wait-idr sid=multi-cam-001-1789560651243-87582cef24159 cam=cam-001 why=connect
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] init_offer → create-offer (sync after sync_state)
+WRTC_TRACE mono_us=4899829940 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=INIT_CREATE_OFFER qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=sync_after_state
+WRTC_TRACE mono_us=4899829951 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=CREATE_OFFER_INVOKED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=signal_or_renegotiate
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] Creating offer...
+WRTC_TRACE mono_us=4899843255 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=negotiation_needed
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] on-negotiation-needed ignored (offer already started)
+[OV-NATIVE] rois=4 (no property set)
+[CP05-R1B] encoder state cam-001 BUILDING→READY gen=1 sessions=0 (first-frame; offer already decoupled)
+[WebrtcSignaling] RX: webrtc.cam.cam-002.session.new payload=135b json={"camera_id":"cam-002","session_id":"multi-cam-002-1789560651511-0331bff8103ba",
+[SessionManager] Ignoring session.new for unknown camera: cam-002 (rtsp=)
+WRTC_TRACE mono_us=4900114439 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OFFER_PROMISE_REPLIED qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=offer_ready
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] Offer created (546 bytes)
+[SessionManager] OnSessionOffer: multi-cam-001-1789560651243-87582cef24159 sdp=546b sig=ok
+[SessionManager] PublishOffer result: OK
+WRTC_TRACE mono_us=4900114581 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OFFER_PUBLISHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=callback_returned
+WRTC_TRACE mono_us=4900116072 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=SET_LOCAL_DESCRIPTION qdepth=0 state=1 gst_cur=playing gst_pending=void result=no_reply detail=promise_empty
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] set-local-description: no reply (not an error by itself)
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE gathering: gathering
+WRTC_TRACE mono_us=4900116153 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=ICE_STATE qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=gathering
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE local: mline=0 cand=candidate:1 1 UDP 2015363327 192.168.50.
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE local: mline=0 cand=candidate:2 1 TCP 1015021823 192.168.50.
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE local: mline=0 cand=candidate:3 1 TCP 1010827519 192.168.50.
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE local: mline=0 cand=candidate:4 1 UDP 2015363583 fe80::211:2
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE local: mline=0 cand=candidate:5 1 TCP 1015022079 fe80::211:2
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE local: mline=0 cand=candidate:6 1 TCP 1010827775 fe80::211:2
+[WebrtcSignaling] RX: webrtc.cam.cam-001.session.multi-cam-001-1789560651243-87582cef24159.answer payload=777b json={"camera_id":"cam-001","session_id":"multi-cam-001-1789560651243-87582cef24159",
+WRTC_TRACE mono_us=4900125027 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=ANSWER_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=answer_received
+WRTC_TRACE mono_us=4900125062 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=1 gst_cur=playing gst_pending=void result=ok detail=remote_answer
+WRTC_TRACE mono_us=4900128158 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=remote_answer
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] Setting remote description (answer)
+WRTC_TRACE mono_us=4900128199 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=SET_REMOTE_INVOKED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=answer
+[WebrtcSignaling] RX: webrtc.cam.cam-001.session.multi-cam-001-1789560651243-87582cef24159.ice.remote payload=267b json={"camera_id":"cam-001","session_id":"multi-cam-001-1789560651243-87582cef24159",
+WRTC_TRACE mono_us=4900128902 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=ICE_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=candidate_received
+WRTC_TRACE mono_us=4900128930 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=1 gst_cur=playing gst_pending=void result=ok detail=remote_ice
+WRTC_TRACE mono_us=4900129748 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=SET_REMOTE_REPLIED qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=replied_no_structure
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] Remote description set OK
+WRTC_TRACE mono_us=4900129833 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=ICE_STATE qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=checking
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE connection: checking
+[WebrtcSignaling] TX: webrtc.cam.cam-001.session.multi-cam-001-1789560651243-87582cef24159.state ice=checking peer=connecting ok=1
+WRTC_TRACE mono_us=4900148848 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=remote_ice
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] Adding remote ICE: video0:0
+[Gate3] suppress trip (topology settling) live=1 prev=0 closing=0 pending_repl=0
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE local: mline=0 cand=(empty/end)
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE gathering: complete
+WRTC_TRACE mono_us=4900177547 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=ICE_STATE qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=complete
+WRTC_TRACE mono_us=4900177561 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=1 gst_cur=playing gst_pending=void result=ok detail=generic
+WRTC_TRACE mono_us=4900189625 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=generic
+WRTC_TRACE mono_us=4900196352 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=ICE_STATE qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=connected
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE connection: connected
+WRTC_TRACE mono_us=4900196409 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=2 gst_cur=playing gst_pending=void result=ok detail=generic
+[WebrtcSignaling] TX: webrtc.cam.cam-001.session.multi-cam-001-1789560651243-87582cef24159.state ice=connected peer=connected ok=1
+WRTC_TRACE mono_us=4900196473 tid=281470091783552 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=ICE_STATE qdepth=0 state=2 gst_cur=playing gst_pending=void result=ok detail=completed
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] ICE connection: completed
+[WebrtcSignaling] TX: webrtc.cam.cam-001.session.multi-cam-001-1789560651243-87582cef24159.state ice=completed peer=connected ok=1
+WRTC_TRACE mono_us=4900210752 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=2 gst_cur=playing gst_pending=void result=begin detail=generic
+[Preview] ice-wait-idr sid=multi-cam-001-1789560651243-87582cef24159 cam=cam-001
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] force-key-unit sent=1
+WRTC_TRACE mono_us=4900277235 tid=281470100237696 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=2 gst_cur=playing gst_pending=void result=ok detail=generic
+WRTC_TRACE mono_us=4900293375 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=2 gst_cur=playing gst_pending=void result=begin detail=generic
+[Preview] got-idr sid=multi-cam-001-1789560651243-87582cef24159 cam=cam-001
+WRTC_TRACE mono_us=4900293454 tid=281473279666880 ctx=owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=SESSION_MEDIA_FIRST qdepth=0 state=2 gst_cur=playing gst_pending=void result=ok detail=first_idr
+[WebrtcSignaling] RX: webrtc.cam.cam-003.session.new payload=136b json={"camera_id":"cam-003","session_id":"multi-cam-003-1789560651763-d018a9554645b8"
+[SessionManager] Ignoring session.new for unknown camera: cam-003 (rtsp=)
+[TERMINAL] seq=510 camera=cam-001 frame=510 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=510 detections=4 (cam_total=510 det_total=2187 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=19 enc_in=19 enc_out=19 parsed=19 age_ms raw/in/out/parsed=67/67/65/65 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=79 age_ms=65 stats_pkts=0 stats_age_ms=-1
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:00:55.087772364
+[TERMINAL] seq=540 camera=cam-001 frame=540 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=540 detections=4 (cam_total=540 det_total=2307 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=39 enc_in=39 enc_out=39 parsed=39 age_ms raw/in/out/parsed=74/73/72/72 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=102 age_ms=71 stats_pkts=84 stats_age_ms=1596
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=59 enc_in=59 enc_out=59 parsed=59 age_ms raw/in/out/parsed=88/88/86/86 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=124 age_ms=85 stats_pkts=106 stats_age_ms=1609
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=570 camera=cam-001 frame=570 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=570 detections=4 (cam_total=570 det_total=2428 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=80 enc_in=80 enc_out=80 parsed=80 age_ms raw/in/out/parsed=11/11/9/9 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=267 age_ms=8 stats_pkts=129 stats_age_ms=1600
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=600 camera=cam-001 frame=600 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=600 detections=4 (cam_total=600 det_total=2580 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=100 enc_in=100 enc_out=100 parsed=100 age_ms raw/in/out/parsed=19/19/18/17 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=407 age_ms=17 stats_pkts=295 stats_age_ms=1603
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=6 (no property set)
+[HEALTH] cam=cam-001 raw=120 enc_in=120 enc_out=120 parsed=120 age_ms raw/in/out/parsed=34/34/33/33 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=534 age_ms=33 stats_pkts=430 stats_age_ms=1605
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=630 det_frame=0 age_ms=0 have_state=0 pts=0:01:04.087772364
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=630 camera=cam-001 frame=631 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=631 detections=4 (cam_total=630 det_total=2739 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=139 enc_in=139 enc_out=139 parsed=139 age_ms raw/in/out/parsed=40/40/38/38 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=680 age_ms=38 stats_pkts=543 stats_age_ms=1590
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=660 camera=cam-001 frame=661 rois=3 labels=Green,Green,Green
+[AGG] camera=cam-001 frame=661 detections=3 (cam_total=660 det_total=2873 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=159 enc_in=159 enc_out=159 parsed=159 age_ms raw/in/out/parsed=49/48/46/46 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=766 age_ms=46 stats_pkts=690 stats_age_ms=1569
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=179 enc_in=179 enc_out=179 parsed=179 age_ms raw/in/out/parsed=58/58/56/56 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=803 age_ms=56 stats_pkts=775 stats_age_ms=1552
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=690 camera=cam-001 frame=691 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=691 detections=4 (cam_total=690 det_total=2995 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=199 enc_in=199 enc_out=199 parsed=199 age_ms raw/in/out/parsed=58/58/56/56 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=896 age_ms=56 stats_pkts=810 stats_age_ms=1550
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=720 det_frame=0 age_ms=0 have_state=0 pts=0:01:13.087772364
+[TERMINAL] seq=720 camera=cam-001 frame=721 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=721 detections=4 (cam_total=720 det_total=3117 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=219 enc_in=219 enc_out=219 parsed=219 age_ms raw/in/out/parsed=77/77/75/75 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=921 age_ms=74 stats_pkts=902 stats_age_ms=1548
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=239 enc_in=239 enc_out=239 parsed=239 age_ms raw/in/out/parsed=74/74/72/72 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=995 age_ms=72 stats_pkts=931 stats_age_ms=1532
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=750 camera=cam-001 frame=751 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=751 detections=4 (cam_total=750 det_total=3247 qd=1 drop=0)
+[WebrtcSignaling] RX: webrtc.cam.cam-002.session.multi-cam-002-1789560651511-0331bff8103ba.close payload=104b json={"camera_id":"cam-002","session_id":"multi-cam-002-1789560651511-0331bff8103ba",
+[SessionManager] Close request: multi-cam-002-1789560651511-0331bff8103ba reason=real_timeout
+WRTC_TRACE mono_us=4925068538 tid=281473279666880 ctx=owner cam=- sid=multi-cam-002-1789560651511-0331bff8103ba gen=s0/e0 event=CLOSE_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=close_received
+[OV-NATIVE] rois=4 (no property set)
+[WebrtcSignaling] RX: webrtc.cam.cam-003.session.multi-cam-003-1789560651763-d018a9554645b8.close payload=105b json={"camera_id":"cam-003","session_id":"multi-cam-003-1789560651763-d018a9554645b8"
+[SessionManager] Close request: multi-cam-003-1789560651763-d018a9554645b8 reason=real_timeout
+WRTC_TRACE mono_us=4925313499 tid=281473279666880 ctx=owner cam=- sid=multi-cam-003-1789560651763-d018a9554645b8 gen=s0/e0 event=CLOSE_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=close_received
+[HEALTH] cam=cam-001 raw=259 enc_in=259 enc_out=259 parsed=259 age_ms raw/in/out/parsed=88/88/86/86 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1122 age_ms=86 stats_pkts=1019 stats_age_ms=1525
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=780 camera=cam-001 frame=781 rois=5 labels=Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=781 detections=5 (cam_total=780 det_total=3373 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=280 enc_in=280 enc_out=279 parsed=279 age_ms raw/in/out/parsed=1/1/105/105 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1221 age_ms=105 stats_pkts=1149 stats_age_ms=1509
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=300 enc_in=300 enc_out=300 parsed=300 age_ms raw/in/out/parsed=13/12/11/11 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1312 age_ms=10 stats_pkts=1244 stats_age_ms=1508
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=810 det_frame=0 age_ms=0 have_state=0 pts=0:01:22.087772364
+[TERMINAL] seq=810 camera=cam-001 frame=811 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=811 detections=4 (cam_total=810 det_total=3502 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=320 enc_in=320 enc_out=320 parsed=320 age_ms raw/in/out/parsed=26/26/24/24 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1404 age_ms=24 stats_pkts=1375 stats_age_ms=1489
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=840 camera=cam-001 frame=841 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=841 detections=4 (cam_total=840 det_total=3625 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=340 enc_in=340 enc_out=340 parsed=340 age_ms raw/in/out/parsed=29/29/28/28 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1428 age_ms=28 stats_pkts=1409 stats_age_ms=1490
+[OV-NATIVE] rois=3 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=360 enc_in=360 enc_out=360 parsed=360 age_ms raw/in/out/parsed=43/42/41/41 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1453 age_ms=41 stats_pkts=1433 stats_age_ms=1484
+[TERMINAL] seq=870 camera=cam-001 frame=871 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=871 detections=4 (cam_total=870 det_total=3743 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=380 enc_in=380 enc_out=380 parsed=380 age_ms raw/in/out/parsed=42/42/40/40 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1530 age_ms=40 stats_pkts=1513 stats_age_ms=1467
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=900 det_frame=0 age_ms=0 have_state=0 pts=0:01:31.087772364
+[TERMINAL] seq=900 camera=cam-001 frame=901 rois=5 labels=Green,Green,Green,Human,Human
+[AGG] camera=cam-001 frame=901 detections=5 (cam_total=900 det_total=3879 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=400 enc_in=400 enc_out=400 parsed=400 age_ms raw/in/out/parsed=59/59/57/57 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1670 age_ms=56 stats_pkts=1558 stats_age_ms=1465
+[OV-NATIVE] rois=7 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=420 enc_in=420 enc_out=420 parsed=420 age_ms raw/in/out/parsed=72/71/70/70 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1807 age_ms=70 stats_pkts=1712 stats_age_ms=1446
+[OV-NATIVE] rois=7 (no property set)
+[TERMINAL] seq=930 camera=cam-001 frame=931 rois=6 labels=Green,Green,Green,Green,Human,Human
+[AGG] camera=cam-001 frame=931 detections=6 (cam_total=930 det_total=4043 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=440 enc_in=440 enc_out=440 parsed=440 age_ms raw/in/out/parsed=91/90/88/88 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=1979 age_ms=88 stats_pkts=1898 stats_age_ms=1424
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=960 camera=cam-001 frame=961 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=961 detections=4 (cam_total=960 det_total=4183 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=461 enc_in=461 enc_out=461 parsed=461 age_ms raw/in/out/parsed=13/12/10/10 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2072 age_ms=9 stats_pkts=2011 stats_age_ms=1426
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=481 enc_in=481 enc_out=481 parsed=481 age_ms raw/in/out/parsed=18/17/16/16 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2137 age_ms=16 stats_pkts=2099 stats_age_ms=1398
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=990 det_frame=0 age_ms=0 have_state=0 pts=0:01:40.087772364
+[TERMINAL] seq=990 camera=cam-001 frame=991 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=991 detections=4 (cam_total=990 det_total=4310 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=501 enc_in=501 enc_out=501 parsed=501 age_ms raw/in/out/parsed=34/33/32/32 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2237 age_ms=31 stats_pkts=2208 stats_age_ms=1380
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1020 camera=cam-001 frame=1021 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1021 detections=5 (cam_total=1020 det_total=4429 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=521 enc_in=521 enc_out=521 parsed=521 age_ms raw/in/out/parsed=42/42/41/41 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2274 age_ms=41 stats_pkts=2249 stats_age_ms=1364
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=541 enc_in=541 enc_out=541 parsed=541 age_ms raw/in/out/parsed=60/60/59/59 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2311 age_ms=59 stats_pkts=2287 stats_age_ms=1364
+[TERMINAL] seq=1050 camera=cam-001 frame=1051 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1051 detections=5 (cam_total=1050 det_total=4565 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=561 enc_in=561 enc_out=561 parsed=561 age_ms raw/in/out/parsed=65/65/63/63 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2463 age_ms=62 stats_pkts=2401 stats_age_ms=1327
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1080 det_frame=0 age_ms=0 have_state=0 pts=0:01:49.087772364
+[TERMINAL] seq=1080 camera=cam-001 frame=1081 rois=5 labels=Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1081 detections=5 (cam_total=1080 det_total=4696 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=581 enc_in=581 enc_out=581 parsed=581 age_ms raw/in/out/parsed=67/66/65/64 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2545 age_ms=64 stats_pkts=2476 stats_age_ms=1330
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=601 enc_in=601 enc_out=601 parsed=601 age_ms raw/in/out/parsed=73/73/72/71 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2635 age_ms=71 stats_pkts=2580 stats_age_ms=1330
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1110 camera=cam-001 frame=1111 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1111 detections=4 (cam_total=1110 det_total=4821 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=621 enc_in=621 enc_out=621 parsed=621 age_ms raw/in/out/parsed=83/83/81/81 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2759 age_ms=81 stats_pkts=2718 stats_age_ms=1330
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1140 camera=cam-001 frame=1141 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1141 detections=4 (cam_total=1140 det_total=4942 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=641 enc_in=641 enc_out=641 parsed=641 age_ms raw/in/out/parsed=87/87/85/85 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2784 age_ms=85 stats_pkts=2768 stats_age_ms=1328
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=661 enc_in=661 enc_out=661 parsed=661 age_ms raw/in/out/parsed=82/81/80/80 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2807 age_ms=79 stats_pkts=2792 stats_age_ms=1309
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1170 det_frame=0 age_ms=0 have_state=0 pts=0:01:58.087772364
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=1170 camera=cam-001 frame=1171 rois=5 labels=Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1171 detections=5 (cam_total=1170 det_total=5065 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=681 enc_in=681 enc_out=681 parsed=681 age_ms raw/in/out/parsed=93/93/91/91 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2889 age_ms=90 stats_pkts=2871 stats_age_ms=1311
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1200 camera=cam-001 frame=1201 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1201 detections=5 (cam_total=1200 det_total=5188 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=702 enc_in=702 enc_out=702 parsed=702 age_ms raw/in/out/parsed=14/14/13/13 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=2949 age_ms=12 stats_pkts=2896 stats_age_ms=1313
+[OV-NATIVE] rois=6 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=722 enc_in=722 enc_out=722 parsed=722 age_ms raw/in/out/parsed=3/3/1/1 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3086 age_ms=1 stats_pkts=2994 stats_age_ms=1288
+[TERMINAL] seq=1230 camera=cam-001 frame=1231 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1231 detections=5 (cam_total=1230 det_total=5350 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=742 enc_in=742 enc_out=742 parsed=742 age_ms raw/in/out/parsed=18/18/16/16 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3272 age_ms=16 stats_pkts=3172 stats_age_ms=1290
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1260 det_frame=0 age_ms=0 have_state=0 pts=0:02:07.087772364
+[TERMINAL] seq=1260 camera=cam-001 frame=1262 rois=5 labels=Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1262 detections=5 (cam_total=1260 det_total=5500 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=761 enc_in=761 enc_out=761 parsed=761 age_ms raw/in/out/parsed=24/23/21/21 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3367 age_ms=21 stats_pkts=3288 stats_age_ms=1284
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=781 enc_in=781 enc_out=781 parsed=781 age_ms raw/in/out/parsed=33/33/31/31 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3449 age_ms=31 stats_pkts=3387 stats_age_ms=1265
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1290 camera=cam-001 frame=1292 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1292 detections=4 (cam_total=1290 det_total=5637 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=801 enc_in=801 enc_out=801 parsed=801 age_ms raw/in/out/parsed=35/35/33/33 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3556 age_ms=33 stats_pkts=3525 stats_age_ms=1273
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1320 camera=cam-001 frame=1322 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1322 detections=4 (cam_total=1320 det_total=5762 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=821 enc_in=821 enc_out=821 parsed=821 age_ms raw/in/out/parsed=64/63/62/61 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3597 age_ms=61 stats_pkts=3570 stats_age_ms=1283
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=841 enc_in=841 enc_out=841 parsed=841 age_ms raw/in/out/parsed=72/72/70/70 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3631 age_ms=70 stats_pkts=3613 stats_age_ms=1263
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1350 det_frame=0 age_ms=0 have_state=0 pts=0:02:16.087772364
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1350 camera=cam-001 frame=1352 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1352 detections=4 (cam_total=1350 det_total=5889 qd=1 drop=0)
+[OV-NATIVE] rois=3 (no property set)
+[HEALTH] cam=cam-001 raw=861 enc_in=861 enc_out=861 parsed=861 age_ms raw/in/out/parsed=83/82/80/80 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3747 age_ms=80 stats_pkts=3699 stats_age_ms=1245
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1380 camera=cam-001 frame=1382 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1382 detections=5 (cam_total=1380 det_total=6012 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=882 enc_in=882 enc_out=881 parsed=881 age_ms raw/in/out/parsed=0/0/102/102 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3817 age_ms=102 stats_pkts=3782 stats_age_ms=1263
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=902 enc_in=902 enc_out=902 parsed=902 age_ms raw/in/out/parsed=14/14/12/12 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=3926 age_ms=12 stats_pkts=3864 stats_age_ms=1242
+[TERMINAL] seq=1410 camera=cam-001 frame=1412 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1412 detections=4 (cam_total=1410 det_total=6143 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=922 enc_in=922 enc_out=922 parsed=922 age_ms raw/in/out/parsed=35/35/34/34 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4076 age_ms=34 stats_pkts=4015 stats_age_ms=1220
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1440 det_frame=0 age_ms=0 have_state=0 pts=0:02:25.087772364
+[TERMINAL] seq=1440 camera=cam-001 frame=1442 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1442 detections=4 (cam_total=1440 det_total=6264 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=942 enc_in=942 enc_out=942 parsed=942 age_ms raw/in/out/parsed=36/36/34/34 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4121 age_ms=33 stats_pkts=4097 stats_age_ms=1208
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=962 enc_in=962 enc_out=962 parsed=962 age_ms raw/in/out/parsed=41/41/39/39 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4146 age_ms=39 stats_pkts=4131 stats_age_ms=1205
+[TERMINAL] seq=1470 camera=cam-001 frame=1472 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1472 detections=4 (cam_total=1470 det_total=6384 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=982 enc_in=982 enc_out=982 parsed=982 age_ms raw/in/out/parsed=56/56/55/55 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4227 age_ms=55 stats_pkts=4211 stats_age_ms=1212
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1500 camera=cam-001 frame=1502 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1502 detections=4 (cam_total=1500 det_total=6504 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=1002 enc_in=1002 enc_out=1002 parsed=1002 age_ms raw/in/out/parsed=72/72/70/70 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4251 age_ms=70 stats_pkts=4236 stats_age_ms=1213
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1022 enc_in=1022 enc_out=1022 parsed=1022 age_ms raw/in/out/parsed=80/80/78/78 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4355 age_ms=77 stats_pkts=4283 stats_age_ms=1208
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1530 det_frame=0 age_ms=0 have_state=0 pts=0:02:34.087772364
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=1530 camera=cam-001 frame=1532 rois=5 labels=Green,Green,Green,Human,Human
+[AGG] camera=cam-001 frame=1532 detections=5 (cam_total=1530 det_total=6647 qd=1 drop=0)
+[OV-NATIVE] rois=6 (no property set)
+[HEALTH] cam=cam-001 raw=1042 enc_in=1042 enc_out=1042 parsed=1042 age_ms raw/in/out/parsed=94/94/92/92 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4538 age_ms=92 stats_pkts=4461 stats_age_ms=1206
+[OV-NATIVE] rois=6 (no property set)
+[TERMINAL] seq=1560 camera=cam-001 frame=1562 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1562 detections=5 (cam_total=1560 det_total=6812 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1063 enc_in=1063 enc_out=1063 parsed=1063 age_ms raw/in/out/parsed=2/2/0/0 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4675 age_ms=0 stats_pkts=4598 stats_age_ms=1205
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1083 enc_in=1083 enc_out=1083 parsed=1083 age_ms raw/in/out/parsed=12/11/9/9 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4752 age_ms=9 stats_pkts=4715 stats_age_ms=1205
+[TERMINAL] seq=1590 camera=cam-001 frame=1592 rois=3 labels=Green,Green,Green
+[AGG] camera=cam-001 frame=1592 detections=3 (cam_total=1590 det_total=6955 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1103 enc_in=1103 enc_out=1103 parsed=1103 age_ms raw/in/out/parsed=14/14/12/12 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4881 age_ms=12 stats_pkts=4849 stats_age_ms=1185
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1620 det_frame=0 age_ms=0 have_state=0 pts=0:02:43.087772364
+[TERMINAL] seq=1620 camera=cam-001 frame=1622 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1622 detections=4 (cam_total=1620 det_total=7081 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1123 enc_in=1123 enc_out=1123 parsed=1123 age_ms raw/in/out/parsed=21/21/19/19 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4920 age_ms=19 stats_pkts=4899 stats_age_ms=1186
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1143 enc_in=1143 enc_out=1143 parsed=1143 age_ms raw/in/out/parsed=21/20/19/19 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=4956 age_ms=19 stats_pkts=4937 stats_age_ms=1184
+[TERMINAL] seq=1650 camera=cam-001 frame=1652 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1652 detections=5 (cam_total=1650 det_total=7209 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1163 enc_in=1163 enc_out=1163 parsed=1163 age_ms raw/in/out/parsed=27/27/26/26 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5043 age_ms=25 stats_pkts=5023 stats_age_ms=1180
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1680 camera=cam-001 frame=1682 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1682 detections=4 (cam_total=1680 det_total=7341 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1183 enc_in=1183 enc_out=1183 parsed=1183 age_ms raw/in/out/parsed=28/28/26/26 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5142 age_ms=26 stats_pkts=5077 stats_age_ms=1164
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1203 enc_in=1203 enc_out=1203 parsed=1203 age_ms raw/in/out/parsed=37/37/35/35 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5227 age_ms=34 stats_pkts=5168 stats_age_ms=1165
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1710 det_frame=0 age_ms=0 have_state=0 pts=0:02:52.087772364
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=1710 camera=cam-001 frame=1712 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1712 detections=4 (cam_total=1710 det_total=7473 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1223 enc_in=1223 enc_out=1223 parsed=1223 age_ms raw/in/out/parsed=36/35/34/34 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5378 age_ms=33 stats_pkts=5323 stats_age_ms=1148
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1740 camera=cam-001 frame=1742 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1742 detections=4 (cam_total=1740 det_total=7596 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=1243 enc_in=1243 enc_out=1243 parsed=1243 age_ms raw/in/out/parsed=48/48/46/46 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5448 age_ms=46 stats_pkts=5418 stats_age_ms=1145
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1263 enc_in=1263 enc_out=1263 parsed=1263 age_ms raw/in/out/parsed=68/68/67/67 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5482 age_ms=66 stats_pkts=5464 stats_age_ms=1149
+[TERMINAL] seq=1770 camera=cam-001 frame=1772 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1772 detections=4 (cam_total=1770 det_total=7720 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1283 enc_in=1283 enc_out=1283 parsed=1283 age_ms raw/in/out/parsed=69/69/67/67 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5566 age_ms=66 stats_pkts=5552 stats_age_ms=1146
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1800 det_frame=0 age_ms=0 have_state=0 pts=0:03:01.087772364
+[TERMINAL] seq=1800 camera=cam-001 frame=1802 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1802 detections=4 (cam_total=1800 det_total=7841 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1303 enc_in=1303 enc_out=1303 parsed=1303 age_ms raw/in/out/parsed=78/78/76/76 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5589 age_ms=75 stats_pkts=5577 stats_age_ms=1144
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=6 (no property set)
+[HEALTH] cam=cam-001 raw=1323 enc_in=1323 enc_out=1323 parsed=1323 age_ms raw/in/out/parsed=0/101/99/99 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5634 age_ms=99 stats_pkts=5598 stats_age_ms=1158
+[TERMINAL] seq=1830 camera=cam-001 frame=1832 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1832 detections=5 (cam_total=1830 det_total=7969 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=7 (no property set)
+[HEALTH] cam=cam-001 raw=1344 enc_in=1344 enc_out=1344 parsed=1344 age_ms raw/in/out/parsed=2/2/1/1 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5830 age_ms=0 stats_pkts=5741 stats_age_ms=1142
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=1860 camera=cam-001 frame=1862 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1862 detections=5 (cam_total=1860 det_total=8130 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=1364 enc_in=1364 enc_out=1364 parsed=1364 age_ms raw/in/out/parsed=3/3/1/1 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=5972 age_ms=1 stats_pkts=5888 stats_age_ms=1140
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1890 det_frame=0 age_ms=0 have_state=0 pts=0:03:10.087772364
+[HEALTH] cam=cam-001 raw=1384 enc_in=1384 enc_out=1384 parsed=1384 age_ms raw/in/out/parsed=13/13/11/10 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6072 age_ms=10 stats_pkts=6010 stats_age_ms=1121
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=1890 camera=cam-001 frame=1892 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1892 detections=5 (cam_total=1890 det_total=8280 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1404 enc_in=1404 enc_out=1404 parsed=1404 age_ms raw/in/out/parsed=6/6/4/4 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6216 age_ms=3 stats_pkts=6152 stats_age_ms=1120
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=1920 camera=cam-001 frame=1922 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1922 detections=4 (cam_total=1920 det_total=8411 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1424 enc_in=1424 enc_out=1424 parsed=1424 age_ms raw/in/out/parsed=23/22/21/21 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6271 age_ms=20 stats_pkts=6240 stats_age_ms=1120
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1444 enc_in=1444 enc_out=1444 parsed=1444 age_ms raw/in/out/parsed=38/38/36/36 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6308 age_ms=36 stats_pkts=6288 stats_age_ms=1109
+[TERMINAL] seq=1950 camera=cam-001 frame=1952 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=1952 detections=4 (cam_total=1950 det_total=8533 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1464 enc_in=1464 enc_out=1464 parsed=1464 age_ms raw/in/out/parsed=47/47/45/45 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6402 age_ms=44 stats_pkts=6381 stats_age_ms=1105
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1980 det_frame=0 age_ms=0 have_state=0 pts=0:03:19.087772364
+[TERMINAL] seq=1980 camera=cam-001 frame=1982 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1982 detections=4 (cam_total=1980 det_total=8660 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1484 enc_in=1484 enc_out=1484 parsed=1484 age_ms raw/in/out/parsed=48/47/46/46 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6455 age_ms=45 stats_pkts=6420 stats_age_ms=1104
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1504 enc_in=1504 enc_out=1504 parsed=1504 age_ms raw/in/out/parsed=56/56/54/54 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6537 age_ms=54 stats_pkts=6502 stats_age_ms=1104
+[TERMINAL] seq=2010 camera=cam-001 frame=2012 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2012 detections=4 (cam_total=2010 det_total=8792 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1524 enc_in=1524 enc_out=1524 parsed=1524 age_ms raw/in/out/parsed=73/72/70/70 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6696 age_ms=70 stats_pkts=6639 stats_age_ms=1106
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2040 camera=cam-001 frame=2042 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2042 detections=4 (cam_total=2040 det_total=8921 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1544 enc_in=1544 enc_out=1544 parsed=1544 age_ms raw/in/out/parsed=62/62/60/60 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6778 age_ms=59 stats_pkts=6733 stats_age_ms=1099
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=2070 det_frame=0 age_ms=0 have_state=0 pts=0:03:28.087772364
+[HEALTH] cam=cam-001 raw=1564 enc_in=1564 enc_out=1564 parsed=1564 age_ms raw/in/out/parsed=85/85/83/83 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6830 age_ms=83 stats_pkts=6809 stats_age_ms=1084
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2070 camera=cam-001 frame=2072 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2072 detections=4 (cam_total=2070 det_total=9045 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1584 enc_in=1584 enc_out=1584 parsed=1584 age_ms raw/in/out/parsed=92/91/90/90 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6912 age_ms=90 stats_pkts=6900 stats_age_ms=1084
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2100 camera=cam-001 frame=2102 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2102 detections=4 (cam_total=2100 det_total=9166 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1604 enc_in=1604 enc_out=1604 parsed=1604 age_ms raw/in/out/parsed=99/98/97/96 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6933 age_ms=96 stats_pkts=6922 stats_age_ms=1082
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1624 enc_in=1624 enc_out=1624 parsed=1624 age_ms raw/in/out/parsed=98/98/97/96 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=6955 age_ms=96 stats_pkts=6944 stats_age_ms=1079
+[TERMINAL] seq=2130 camera=cam-001 frame=2132 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2132 detections=4 (cam_total=2130 det_total=9285 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1644 enc_in=1644 enc_out=1644 parsed=1644 age_ms raw/in/out/parsed=97/96/95/95 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=7107 age_ms=95 stats_pkts=7033 stats_age_ms=1061
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=2160 det_frame=0 age_ms=0 have_state=0 pts=0:03:37.087772364
+[TERMINAL] seq=2160 camera=cam-001 frame=2162 rois=6 labels=Green,Green,Green,Green,Human,Human
+[AGG] camera=cam-001 frame=2162 detections=6 (cam_total=2160 det_total=9430 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1665 enc_in=1665 enc_out=1665 parsed=1665 age_ms raw/in/out/parsed=13/13/11/11 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=7254 age_ms=10 stats_pkts=7178 stats_age_ms=1078
+[OV-NATIVE] rois=6 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=2190 camera=cam-001 frame=2192 rois=6 labels=Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=2192 detections=6 (cam_total=2190 det_total=9591 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=1686 enc_in=1686 enc_out=1686 parsed=1686 age_ms raw/in/out/parsed=40/40/39/39 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=7426 age_ms=39 stats_pkts=7309 stats_age_ms=1059
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1705 enc_in=1705 enc_out=1705 parsed=1705 age_ms raw/in/out/parsed=59/59/57/57 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=7530 age_ms=57 stats_pkts=7483 stats_age_ms=1056
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2220 camera=cam-001 frame=2222 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=2222 detections=4 (cam_total=2220 det_total=9734 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1725 enc_in=1725 enc_out=1725 parsed=1725 age_ms raw/in/out/parsed=62/62/61/60 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=7615 age_ms=60 stats_pkts=7586 stats_age_ms=1033
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=2250 det_frame=0 age_ms=0 have_state=0 pts=0:03:46.087772364
+[HEALTH] cam=cam-001 raw=1745 enc_in=1745 enc_out=1745 parsed=1745 age_ms raw/in/out/parsed=84/84/82/82 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=7709 age_ms=82 stats_pkts=7615 stats_age_ms=2036
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2250 camera=cam-001 frame=2252 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=2252 detections=4 (cam_total=2250 det_total=9858 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1765 enc_in=1765 enc_out=1765 parsed=1765 age_ms raw/in/out/parsed=97/97/95/95 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=7747 age_ms=95 stats_pkts=7709 stats_age_ms=2011
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2280 camera=cam-001 frame=2282 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=2282 detections=5 (cam_total=2280 det_total=9981 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1786 enc_in=1786 enc_out=1786 parsed=1786 age_ms raw/in/out/parsed=14/14/12/12 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=7777 age_ms=12 stats_pkts=7749 stats_age_ms=1992
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2310 camera=cam-001 frame=2312 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2312 detections=4 (cam_total=2310 det_total=10116 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=1806 enc_in=1806 enc_out=1806 parsed=1806 age_ms raw/in/out/parsed=24/24/22/22 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=7913 age_ms=22 stats_pkts=7777 stats_age_ms=1967
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1826 enc_in=1826 enc_out=1826 parsed=1826 age_ms raw/in/out/parsed=34/34/32/32 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8003 age_ms=32 stats_pkts=7913 stats_age_ms=1954
+[OV-NATIVE] rois=5 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=2340 det_frame=0 age_ms=0 have_state=0 pts=0:03:55.087772364
+[TERMINAL] seq=2340 camera=cam-001 frame=2342 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2342 detections=4 (cam_total=2340 det_total=10250 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1846 enc_in=1846 enc_out=1846 parsed=1846 age_ms raw/in/out/parsed=50/49/48/47 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8105 age_ms=47 stats_pkts=8005 stats_age_ms=1931
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2370 camera=cam-001 frame=2372 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2372 detections=4 (cam_total=2370 det_total=10374 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=1866 enc_in=1866 enc_out=1866 parsed=1866 age_ms raw/in/out/parsed=59/59/57/57 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8238 age_ms=57 stats_pkts=8108 stats_age_ms=1908
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1886 enc_in=1886 enc_out=1886 parsed=1886 age_ms raw/in/out/parsed=73/72/71/71 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8274 age_ms=71 stats_pkts=8240 stats_age_ms=1895
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2400 camera=cam-001 frame=2402 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2402 detections=4 (cam_total=2400 det_total=10496 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1906 enc_in=1906 enc_out=1906 parsed=1906 age_ms raw/in/out/parsed=92/92/90/90 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8296 age_ms=90 stats_pkts=8275 stats_age_ms=1894
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=2430 det_frame=0 age_ms=0 have_state=0 pts=0:04:04.087772364
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2430 camera=cam-001 frame=2432 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2432 detections=4 (cam_total=2430 det_total=10616 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=1926 enc_in=1926 enc_out=1926 parsed=1926 age_ms raw/in/out/parsed=98/98/96/96 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8374 age_ms=95 stats_pkts=8298 stats_age_ms=1857
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=1946 enc_in=1946 enc_out=1946 parsed=1946 age_ms raw/in/out/parsed=98/98/96/96 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8395 age_ms=95 stats_pkts=8376 stats_age_ms=1855
+[TERMINAL] seq=2460 camera=cam-001 frame=2462 rois=5 labels=Green,Green,Green,Human,Human
+[AGG] camera=cam-001 frame=2462 detections=5 (cam_total=2460 det_total=10747 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=1967 enc_in=1967 enc_out=1967 parsed=1967 age_ms raw/in/out/parsed=11/11/9/9 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8544 age_ms=9 stats_pkts=8413 stats_age_ms=1829
+[OV-NATIVE] rois=6 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=2490 camera=cam-001 frame=2492 rois=6 labels=Green,Green,Green,Green,Human,Human
+[AGG] camera=cam-001 frame=2492 detections=6 (cam_total=2490 det_total=10913 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=1987 enc_in=1987 enc_out=1987 parsed=1987 age_ms raw/in/out/parsed=24/24/22/22 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8742 age_ms=22 stats_pkts=8553 stats_age_ms=1809
+[OV-NATIVE] rois=6 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=2007 enc_in=2007 enc_out=2007 parsed=2007 age_ms raw/in/out/parsed=42/42/41/41 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8864 age_ms=41 stats_pkts=8756 stats_age_ms=1790
+[OV-NATIVE] rois=5 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=2520 det_frame=0 age_ms=0 have_state=0 pts=0:04:13.087772364
+[TERMINAL] seq=2520 camera=cam-001 frame=2522 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=2522 detections=5 (cam_total=2520 det_total=11068 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=2027 enc_in=2027 enc_out=2027 parsed=2027 age_ms raw/in/out/parsed=43/42/41/41 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=8945 age_ms=41 stats_pkts=8869 stats_age_ms=1785
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2550 camera=cam-001 frame=2552 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=2552 detections=5 (cam_total=2550 det_total=11200 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=2047 enc_in=2047 enc_out=2047 parsed=2047 age_ms raw/in/out/parsed=66/66/65/65 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=9057 age_ms=64 stats_pkts=8954 stats_age_ms=1770
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=2067 enc_in=2067 enc_out=2067 parsed=2067 age_ms raw/in/out/parsed=66/65/63/63 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=9101 age_ms=63 stats_pkts=9065 stats_age_ms=1756
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2580 camera=cam-001 frame=2582 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=2582 detections=4 (cam_total=2580 det_total=11331 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[HEALTH] cam=cam-001 raw=2087 enc_in=2087 enc_out=2087 parsed=2087 age_ms raw/in/out/parsed=82/82/80/80 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=9136 age_ms=80 stats_pkts=9107 stats_age_ms=1752
+[OV-NATIVE] rois=5 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=2610 det_frame=0 age_ms=0 have_state=0 pts=0:04:22.087772364
+[TERMINAL] seq=2610 camera=cam-001 frame=2612 rois=4 labels=Green,Green,Green,Human
+[AGG] camera=cam-001 frame=2612 detections=4 (cam_total=2610 det_total=11462 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[HEALTH] cam=cam-001 raw=2107 enc_in=2107 enc_out=2107 parsed=2107 age_ms raw/in/out/parsed=80/80/79/79 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=9229 age_ms=78 stats_pkts=9141 stats_age_ms=1715
+[OV-NATIVE] rois=3 (no property set)
+[HEALTH] cam=cam-001 raw=2127 enc_in=2127 enc_out=2127 parsed=2127 age_ms raw/in/out/parsed=81/81/79/79 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789560651243-87582cef24159 rtp_out=9337 age_ms=79 stats_pkts=9253 stats_age_ms=1714
+[OV-NATIVE] rois=5 (no property set)
+[INFO] Signal received, stopping pipeline...
+[INFO] Shutting down WebRTC sessions...
+[WebrtcSignaling] Stopped
+WRTC_TRACE mono_us=5113231219 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=2 gst_cur=playing gst_pending=void result=ok detail=close
+[CP05-R1A] skip encoder teardown on last session close cam=cam-001 gen=1 (pipeline-owned until whole-pipeline NULL)
+WRTC_TRACE mono_us=5113231261 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=2 gst_cur=playing gst_pending=void result=begin detail=close
+[WebRtcSession:multi-cam-001-1789560651243-87582cef24159] Closing (was 2)
+WRTC_TRACE mono_us=5113231301 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=SESSION_CLOSE_BEGIN qdepth=0 state=3 gst_cur=playing gst_pending=void result=begin detail=close
+[Gate3] teardown begin sid=multi-cam-001-1789560651243-87582cef24159 cam=cam-001
+[CP05-R2] idle-unlink sid=multi-cam-001-1789560651243-87582cef24159 cam=cam-001 why=idle pads_before=2 pads_after=1 enc_gen=1
+WRTC_TRACE mono_us=5113231405 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=PEER_IDLE_UNLINK qdepth=0 state=3 gst_cur=playing gst_pending=void result=ok detail=idle
+[Gate3] idle-probe armed sid=multi-cam-001-1789560651243-87582cef24159 cam=cam-001 probe_id=0
+WRTC_TRACE mono_us=5113231437 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=PEER_IDLE_PROBE_ARM qdepth=0 state=3 gst_cur=playing gst_pending=void result=ok detail=async
+[CP05-R2] private-null sid=multi-cam-001-1789560651243-87582cef24159 elem=webrtcbin ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=1649
+WRTC_TRACE mono_us=5113233174 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=webrtcbin
+[CP05-R2] private-null sid=multi-cam-001-1789560651243-87582cef24159 elem=rtp_caps ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=17
+WRTC_TRACE mono_us=5113233232 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=rtp_caps
+[CP05-R2] private-null sid=multi-cam-001-1789560651243-87582cef24159 elem=pay ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=22
+WRTC_TRACE mono_us=5113233291 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=pay
+[CP05-R2] private-null sid=multi-cam-001-1789560651243-87582cef24159 elem=queue ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=60
+WRTC_TRACE mono_us=5113233391 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=queue
+[Gate3] teardown force-finish sid=multi-cam-001-1789560651243-87582cef24159 cam=cam-001
+WRTC_TRACE mono_us=5113233496 tid=281473279666880 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560651243-87582cef24159 gen=s1/e1 event=SESSION_CLOSE_DONE qdepth=0 state=3 gst_cur=void gst_pending=void result=ok detail=force_finish
+[CP05-TD] Shutdown teardown begin cam=cam-001
+[CP05-TD] cam=cam-001 stage=begin
+[CP05-TD] cam=cam-001 stage=remove_enc_probe enter
+[CP05-TD] cam=cam-001 stage=remove_enc_probe exit
+[CP05-TD] cam=cam-001 stage=unlink_tee_perm enter
+[CP05-TD] cam=cam-001 stage=unlink_tee_perm exit
+[CP05-TD] cam=cam-001 stage=set_null enter
+[CP05-TD] cam=cam-001 stage=set_null exit
+[CP05-TD] cam=cam-001 stage=set_null enter
+[CP05-TD] cam=cam-001 stage=set_null exit
+[CP05-TD] cam=cam-001 stage=set_null enter
+[CP05-TD] cam=cam-001 stage=set_null exit
+[CP05-TD] cam=cam-001 stage=done
+[CP05-TD] Shutdown teardown done cam=cam-001
+[SessionManager] Shutdown complete
+[NatsAdapter] Disconnected.
+[TERMINAL] seq=2640 camera=cam-001 frame=2642 rois=5 labels=Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2642 detections=5 (cam_total=2640 det_total=11595 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=2670 camera=cam-001 frame=2672 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=2672 detections=4 (cam_total=2670 det_total=11719 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[NatsAdapter] nats_CloseAndWait failed: TIMEOUT
+[WARN] NATS internal threads did not stop cleanly
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:42:dummy call to rpcmem_deinit, rpcmem APIs will be used from libxdsprpc
+[INFO] Pipeline reached NULL; VPU decode sessions released.
+[NatsAdapter] Connection close callback timed out; quarantining generation 1
+[NatsAdapter] Disconnected.
+[AGG] SUMMARY cameras=1 total_submitted=2686 total_dropped=0
+[AGG]   camera=cam-001 submitted=2686 detections=11784 dropped=0 last_frame=2688 queue_depth=0
+[INFO] FrameEventPublisher: published=2686 republished=0 build_failures=0 publish_failures=0
+[INFO] CaptureTimestampTracker records=2688 misses=0 regress_fixes=0
+[INFO] AnomalySnapshotService enqueued=120 written_ok=120 write_failures=0 published=525 dropped=0 publish_failures=0
+[INFO] Releasing 1 owned splitter request pad(s)...
+GEM Handle for BO=10 closed 
+GEM Handle for BO=3 closed 
+GEM Handle for BO=9 closed 
+GEM Handle for BO=2 closed 
+GEM Handle for BO=8 closed 
+GEM Handle for BO=1 closed 
+GEM Handle for BO=7 closed 
+GEM Handle for BO=13 closed 
+GEM Handle for BO=6 closed 
+GEM Handle for BO=15 closed 
+GEM Handle for BO=5 closed 
+GEM Handle for BO=14 closed 
+GEM Handle for BO=4 closed 
+GEM Handle for BO=16 closed 
+GEM Handle for BO=11 closed 
+GEM Handle for BO=17 closed 
+GEM Handle for BO=12 closed 
+
+=== Frame Count Summary ===
+Camera            IN       OUT     delta
+cam-001         2688         0      2688
+----------------------------------------
+TOTAL           2688         0      2688
+[INFO] Done.

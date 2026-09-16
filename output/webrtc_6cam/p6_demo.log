@@ -1,0 +1,1723 @@
+============================================================
+  AIBox Stream Pipeline Demo  v1.0.0
+============================================================
+[INFO] RLIMIT_NOFILE soft=65536 hard=65536
+[INFO] GStreamer initialized (version 1.24.2)
+[INFO] snapshot : /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/pipeline_otm_6cam_webrtc.txt
+[INFO] dump_plan_only : no
+[INFO] build_only     : no
+[INFO] run_seconds    : 0
+[INFO] run_forever    : yes
+[INFO] Snapshot loaded: demo_otm_6cam_webrtc
+[INFO]   streams   : 6
+[INFO]   algorithms: 1
+[INFO]   models    : 2
+[INFO] ExecutionPlan  : plan_demo_otm_6cam_webrtc
+[INFO]   stream_plans : 6
+[INFO]   algo_groups  : 1
+[INFO]   time_mux_grps: 2
+[INFO]   stage_plans  : 4
+[INFO]   chain_plans  : 2
+[INFO] Exported: ./output/execution_plan.json
+[INFO] Exported: ./output/pipeline_structure.txt
+[INFO] WebRTC annotated preview enabled
+[BATCH_DISPATCH] path=time_mux groups=2
+[webrtc] VPU budget OK: 6 dec + 0 webrtc_enc(build) + 0 rec_enc = 6 / 32 (lazy enc unless MAX_ENC set)
+[init] GstAiboxFrameMeta registration triggered (aiboxframemeta)
+failed to get driver name for fd 22
+MESA-LOADER: failed to retrieve device information
+failed to get driver name for fd 22
+[HTP] stage=stage_yellow stage_index=1 -> backend-device-id=1 (n_htp=2)
+[DBG class-filter] stage=stage_yellow class-filter="Green"
+[DBG module] stage=stage_yellow nick=yolo26-otm gtype=187651181158848
+[DBG module] enum_class=0xaaaaf1fcbc70 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] stage=stage_human stage_index=2 -> backend-device-id=0 (n_htp=2)
+[DBG class-filter] stage=stage_human class-filter="Human"
+[DBG module] stage=stage_human nick=yolo26-otm gtype=187651181158848
+[DBG module] enum_class=0xaaaaf1fcbc70 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] face group=tmux_group_0_0 ordinal=0 -> backend-device-id=1 (n_htp=2)
+[face] group=tmux_group_0_0 cameras=4 -> pool-size=6
+[face] qtifaceinfer INLINE for group tmux_group_0_0
+[webrtc] overlay_tmux_group_0_0 before tee_post (writable DMA-BUF path)
+[webrtc lazy] tmux_group_0_0 slot0(cam-001): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_0 slot1(cam-002): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_0 slot2(cam-003): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_0 slot3(cam-004): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[HTP] stage=stage_yellow stage_index=3 -> backend-device-id=1 (n_htp=2)
+[DBG class-filter] stage=stage_yellow class-filter="Green"
+[DBG module] stage=stage_yellow nick=yolo26-otm gtype=187651181158848
+[DBG module] enum_class=0xaaaaf1fcbc70 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] stage=stage_human stage_index=4 -> backend-device-id=0 (n_htp=2)
+[DBG class-filter] stage=stage_human class-filter="Human"
+[DBG module] stage=stage_human nick=yolo26-otm gtype=187651181158848
+[DBG module] enum_class=0xaaaaf1fcbc70 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] face group=tmux_group_0_1 ordinal=1 -> backend-device-id=0 (n_htp=2)
+[face] group=tmux_group_0_1 cameras=2 -> pool-size=4
+[face] qtifaceinfer INLINE for group tmux_group_0_1
+[webrtc] overlay_tmux_group_0_1 before tee_post (writable DMA-BUF path)
+[webrtc lazy] tmux_group_0_1 slot0(cam-005): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_1 slot1(cam-006): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[INFO] GstPipeline built successfully (P1: mux + decode + fakesink)
+[pad-dump] disabled (set AIBOX_WEBRTC_PAD_DUMP=1 to enable)
+[NatsAdapter] Connected to nats://localhost:4222 (client=aibox-pipeline-webrtc)
+[SessionManager] Initialized
+[SessionManager] Registered camera: cam-006 (lazy stub)
+[SessionManager] Registered camera: cam-005 (lazy stub)
+[SessionManager] Registered camera: cam-004 (lazy stub)
+[SessionManager] Registered camera: cam-003 (lazy stub)
+[SessionManager] Registered camera: cam-002 (lazy stub)
+[SessionManager] Registered camera: cam-001 (lazy stub)
+[WebrtcSignaling] Subscribed to 5 wildcard subjects
+[SessionManager] Signaling started
+[INFO] Registering 2 appsink callbacks...
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO] Exported: ./output/pipeline_runtime.dot
+bash: scripts/render_dot.sh: No such file or directory
+[WARN] Dot render failed (graphviz installed?). Run: bash scripts/render_dot.sh ./output/pipeline_runtime.dot
+[NatsAdapter] Connected to nats://127.0.0.1:4222 (client=aibox-pipeline-detection)
+[INFO] FrameEventPublisher started (NATS subject: detection.frame)
+[INFO] AnomalySnapshotService started media_dir=/home/ubuntu/workspace/IoT_pipeline0825/media encoder_ready=yes thumb_encoder_ready=yes
+[INFO] Setting pipeline to PLAYING (run-forever; Ctrl+C / SIGTERM to stop)...
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:38:dummy call to rpcmem_init, rpcmem APIs will be used from libxdsprpc
+[faceinfer] async worker started pool=4 worker_slots=4 ttl=250ms
+[faceinfer] async worker started pool=6 worker_slots=6 ttl=250ms
+[INFO] set_state(PLAYING) ret=2
+[RTSP] cam=cam-002 pad=recv_rtp_src_0_765979336_96: linked H264 video RTP -> depay
+[RTSP] cam=cam-006 pad=recv_rtp_src_0_2480639153_96: linked H264 video RTP -> depay
+[RTSP] cam=cam-004 pad=recv_rtp_src_0_1622178379_96: linked H264 video RTP -> depay
+[FaceConfig] Loaded from: /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/face_config.json
+  scrfd_model:   /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../data/models/face/det_2.5g_qcs9075.bin
+  arcface_model: (disabled)
+  kernel_path:   /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels
+  conf=0.75  nms=0.40  max_faces=32
+[faceinfer] init config-path=/home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/face_config.json backend-device-id=1
+[FaceConfig] Loaded from: /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/face_config.json
+  scrfd_model:   /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../data/models/face/det_2.5g_qcs9075.bin
+  arcface_model: (disabled)
+  kernel_path:   /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels
+  conf=0.75  nms=0.40  max_faces=32
+[faceinfer] init config-path=/home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/face_config.json backend-device-id=0
+[RTSP] cam=cam-005 pad=recv_rtp_src_0_3570382504_96: linked H264 video RTP -> depay
+[RTSP] cam=cam-001 pad=recv_rtp_src_0_2453052941_96: linked H264 video RTP -> depay
+[RTSP] cam=cam-003 pad=recv_rtp_src_0_841602716_96: linked H264 video RTP -> depay
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+PFP: 0x016dc112, ME: 0x00000000
+Pre-rotation disabled !!!
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+Pre-rotation disabled !!!
+Wed Sep 16 2026 13:22:25.909913: Initilized EGL display version: 1.5
+[FacePreprocess] built /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels/scrfd_preprocess.cl → kernel 'scrfd_preprocess'
+[FacePreprocess] built /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels/scrfd_preprocess.cl → kernel 'scrfd_preprocess'
+[FacePreprocess] built /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels/arcface_preprocess.cl → kernel 'arcface_preprocess'
+[DmaBuffer] Init ok: fd=207 size=4915200 vaddr=0xfffe29d26000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed0001230
+[DmaBuffer] Init ok: fd=208 size=150528 vaddr=0xfffe29d01000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed02cb3d0
+[FacePreprocess] Init ok: scrfd_out=0xfffe29d26000(207) arcface_out=0xfffe29d01000(208)
+[FaceProcessor] FacePreprocess initialized
+[FaceProcessor] SCRFD HTP backend-device-id=0
+[QnnInferencer] deviceCreate OK deviceId=0
+[QnnInferencer] Phase A (LoadBackend) OK
+[QnnInferencer] Phase B (LoadSystemLib) OK
+[QnnInferencer] Loaded model binary: 2932736 bytes
+[QnnInferencer] Found 1 graph(s) in model
+[QnnInferencer] [QNN]  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+[FacePreprocess] built /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels/arcface_preprocess.cl → kernel 'arcface_preprocess'
+[DmaBuffer] Init ok: fd=215 size=4915200 vaddr=0xfffe28b9e000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed44bafe0
+[DmaBuffer] Init ok: fd=216 size=150528 vaddr=0xfffe28b79000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed40a2960
+[FacePreprocess] Init ok: scrfd_out=0xfffe28b9e000(215) arcface_out=0xfffe28b79000(216)
+[FaceProcessor] FacePreprocess initialized
+[FaceProcessor] SCRFD HTP backend-device-id=1
+[QnnInferencer] deviceCreate OK deviceId=1
+[QnnInferencer] Phase A (LoadBackend) OK
+[QnnInferencer] Phase B (LoadSystemLib) OK
+[QnnInferencer] Loaded model binary: 2932736 bytes
+[QnnInferencer] Found 1 graph(s) in model
+[QnnInferencer] [QNN]  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+[QnnInferencer] Phase C (LoadCachedGraphs) OK
+[QnnInferencer] Input tensor 'input_1': rank=4, dims=[1,3,640,640], elements=1228800, dtype=0x232, bytes=4915200
+[QnnInferencer] Output tensor[0] tensor 'output_0': rank=2, dims=[12800,1], elements=12800, dtype=0x232, bytes=51200
+[QnnInferencer] Output tensor[1] tensor 'output_3': rank=2, dims=[12800,4], elements=51200, dtype=0x232, bytes=204800
+[QnnInferencer] Output tensor[2] tensor 'output_6': rank=2, dims=[12800,10], elements=128000, dtype=0x232, bytes=512000
+[QnnInferencer] Output tensor[3] tensor 'output_1': rank=2, dims=[3200,1], elements=3200, dtype=0x232, bytes=12800
+[QnnInferencer] Output tensor[4] tensor 'output_4': rank=2, dims=[3200,4], elements=12800, dtype=0x232, bytes=51200
+[QnnInferencer] Output tensor[5] tensor 'output_7': rank=2, dims=[3200,10], elements=32000, dtype=0x232, bytes=128000
+[QnnInferencer] Output tensor[6] tensor 'output_2': rank=2, dims=[800,1], elements=800, dtype=0x232, bytes=3200
+[QnnInferencer] Output tensor[7] tensor 'output_5': rank=2, dims=[800,4], elements=3200, dtype=0x232, bytes=12800
+[QnnInferencer] Output tensor[8] tensor 'output_8': rank=2, dims=[800,10], elements=8000, dtype=0x232, bytes=32000
+[QnnInferencer] Phase D (AllocTensorBuffers) OK
+[QnnInferencer] Init complete: 9 output tensor(s)
+[FaceProcessor] SCRFD QNN initialized (9 output tensors)
+[FaceProcessor] ArcFace disabled (no model path)
+Wed Sep 16 2026 13:22:26.055341: INFO: GPU alignment: 64
+[FaceProcessor] Init complete (SCRFD + detection-only)
+[DmaBuffer] Init ok: fd=222 size=460800 vaddr=0xfffe29c90000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed0000ed0
+[DmaBuffer] Init ok: fd=223 size=460800 vaddr=0xfffe29c1f000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed02f0170
+[DmaBuffer] Init ok: fd=228 size=460800 vaddr=0xfffe29bae000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed02ff010
+[DmaBuffer] Init ok: fd=230 size=460800 vaddr=0xfffe29b3d000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed000e790
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffe7833d180, Invalid argument
+
+[QnnInferencer] Phase C (LoadCachedGraphs) OK
+[QnnInferencer] Input tensor 'input_1': rank=4, dims=[1,3,640,640], elements=1228800, dtype=0x232, bytes=4915200
+[QnnInferencer] Output tensor[0] tensor 'output_0': rank=2, dims=[12800,1], elements=12800, dtype=0x232, bytes=51200
+[QnnInferencer] Output tensor[1] tensor 'output_3': rank=2, dims=[12800,4], elements=51200, dtype=0x232, bytes=204800
+[QnnInferencer] Output tensor[2] tensor 'output_6': rank=2, dims=[12800,10], elements=128000, dtype=0x232, bytes=512000
+[QnnInferencer] Output tensor[3] tensor 'output_1': rank=2, dims=[3200,1], elements=3200, dtype=0x232, bytes=12800
+[QnnInferencer] Output tensor[4] tensor 'output_4': rank=2, dims=[3200,4], elements=12800, dtype=0x232, bytes=51200
+[QnnInferencer] Output tensor[5] tensor 'output_7': rank=2, dims=[3200,10], elements=32000, dtype=0x232, bytes=128000
+[QnnInferencer] Output tensor[6] tensor 'output_2': rank=2, dims=[800,1], elements=800, dtype=0x232, bytes=3200
+[QnnInferencer] Output tensor[7] tensor 'output_5': rank=2, dims=[800,4], elements=3200, dtype=0x232, bytes=12800
+[QnnInferencer] Output tensor[8] tensor 'output_8': rank=2, dims=[800,10], elements=8000, dtype=0x232, bytes=32000
+[QnnInferencer] Phase D (AllocTensorBuffers) OK
+[QnnInferencer] Init complete: 9 output tensor(s)
+[FaceProcessor] SCRFD QNN initialized (9 output tensors)
+[FaceProcessor] ArcFace disabled (no model path)
+[FaceProcessor] Init complete (SCRFD + detection-only)
+[DmaBuffer] Init ok: fd=159 size=460800 vaddr=0xfffe28a9d000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed448ba70
+[DmaBuffer] Init ok: fd=286 size=460800 vaddr=0xfffe28a2c000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed42d3570
+[DmaBuffer] Init ok: fd=287 size=460800 vaddr=0xfffe289bb000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed4465dc0
+[DmaBuffer] Init ok: fd=288 size=460800 vaddr=0xfffe2894a000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed43886c0
+[DmaBuffer] Init ok: fd=289 size=460800 vaddr=0xfffe288d9000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed4200830
+[DmaBuffer] Init ok: fd=290 size=460800 vaddr=0xfffe268f8000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffed4336f70
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffe7826fc30, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xffff001ad790, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xffff00201da0, Invalid argument
+
+[OV-NATIVE] rois=5 faces=0 decision=0 (no property set)
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffe8012b740, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffea8165050, Invalid argument
+
+[PIPELINE_READY] state=PLAYING
+[TERMINAL] seq=1 camera=cam-005 frame=1 rois=2 labels=Green,Green
+[TERMINAL] seq=2 camera=cam-002 frame=1 rois=5 labels=Green,Green,Green,Green,Human
+[TERMINAL] seq=3 camera=cam-002 frame=2 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=4 camera=cam-002 frame=3 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=5 camera=cam-003 frame=1 rois=2 labels=Green,Human
+[TERMINAL] seq=6 camera=cam-002 frame=5 rois=2 labels=Green,Green
+[TERMINAL] seq=7 camera=cam-003 frame=2 rois=2 labels=Green,Human
+[TERMINAL] seq=8 camera=cam-003 frame=3 rois=2 labels=Green,Human
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffe80165dc0, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffea81712a0, Invalid argument
+
+[TERMINAL] seq=30 camera=cam-002 frame=13 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=60 camera=cam-006 frame=7 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=90 camera=cam-003 frame=21 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=120 camera=cam-002 frame=29 rois=1 labels=Green
+[AGG] camera=cam-002 frame=32 detections=2 (cam_total=30 det_total=67 qd=1 drop=0)
+[AGG] camera=cam-003 frame=31 detections=2 (cam_total=30 det_total=62 qd=1 drop=0)
+[TERMINAL] seq=150 camera=cam-006 frame=22 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[AGG] camera=cam-004 frame=32 detections=7 (cam_total=30 det_total=236 qd=1 drop=0)
+[AGG] camera=cam-005 frame=30 detections=2 (cam_total=30 det_total=71 qd=1 drop=0)
+[TERMINAL] seq=180 camera=cam-006 frame=27 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-006 frame=30 detections=7 (cam_total=30 det_total=218 qd=1 drop=0)
+[TERMINAL] seq=210 camera=cam-003 frame=41 rois=2 labels=Green,Human
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[AGG] camera=cam-001 frame=30 detections=2 (cam_total=30 det_total=47 qd=1 drop=0)
+[TERMINAL] seq=240 camera=cam-005 frame=40 rois=3 labels=Green,Green,Green
+[faceinfer] hb vfps=35.5 ifps=35.1 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=91ms) | cam-003:VALID(age=106ms) | cam-004:VALID(age=77ms) | cam-001:VALID_EMPTY(age=99ms) copy_p50/95/99=94/141/176us tip_p50/95/99=144/219/248us infer_p50/95/99=13080/17127/17861us
+[TERMINAL] seq=270 camera=cam-005 frame=45 rois=2 labels=Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=300 camera=cam-003 frame=56 rois=2 labels=Green,Human
+[faceinfer] hb vfps=19.7 ifps=19.5 pool=4[f3,q0,i1] queue=0 evict=0 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-005:VALID(age=94ms) | cam-006:VALID(age=88ms) copy_p50/95/99=95/143/160us tip_p50/95/99=148/210/281us infer_p50/95/99=13707/18333/19016us
+[AGG] camera=cam-002 frame=62 detections=1 (cam_total=60 det_total=136 qd=1 drop=0)
+[TERMINAL] seq=330 camera=cam-003 frame=61 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=61 detections=2 (cam_total=60 det_total=126 qd=1 drop=0)
+[OV-NATIVE] rois=9 faces=2 decision=1 (no property set)
+[AGG] camera=cam-004 frame=62 detections=8 (cam_total=60 det_total=472 qd=1 drop=0)
+[AGG] camera=cam-005 frame=60 detections=3 (cam_total=60 det_total=149 qd=1 drop=0)
+[TERMINAL] seq=360 camera=cam-003 frame=66 rois=2 labels=Green,Human
+[AGG] camera=cam-006 frame=60 detections=7 (cam_total=60 det_total=443 qd=1 drop=0)
+[TERMINAL] seq=390 camera=cam-005 frame=65 rois=2 labels=Green,Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=61 detections=1 (cam_total=60 det_total=93 qd=1 drop=0)
+[TERMINAL] seq=420 camera=cam-006 frame=67 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=450 camera=cam-003 frame=81 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=480 camera=cam-001 frame=72 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=90 det_frame=89 age_ms=101 have_state=1 pts=0:00:10.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=90 det_frame=89 age_ms=101 have_state=1 pts=0:00:10.116104114
+[AGG] camera=cam-002 frame=92 detections=1 (cam_total=90 det_total=173 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=90 det_frame=89 age_ms=100 have_state=1 pts=0:00:10.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=90 det_frame=89 age_ms=100 have_state=1 pts=0:00:10.417558750
+[AGG] camera=cam-003 frame=91 detections=2 (cam_total=90 det_total=188 qd=1 drop=0)
+[TERMINAL] seq=510 camera=cam-002 frame=94 rois=1 labels=Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=90 det_frame=89 age_ms=120 have_state=1 pts=0:00:10.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=90 det_frame=89 age_ms=120 have_state=1 pts=0:00:10.723037291
+[AGG] camera=cam-004 frame=92 detections=7 (cam_total=90 det_total=712 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=90 det_frame=89 age_ms=89 have_state=1 pts=0:00:11.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=90 det_frame=89 age_ms=89 have_state=1 pts=0:00:11.021263646
+[AGG] camera=cam-005 frame=90 detections=2 (cam_total=90 det_total=221 qd=1 drop=0)
+[TERMINAL] seq=540 camera=cam-002 frame=99 rois=1 labels=Green
+
+** (aibox_stream_pipeline_demo:3354): WARNING **: 13:22:35.888: v4l2h264dec_cam_001: 18 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:3354): WARNING **: 13:22:35.890: v4l2h264dec_cam_002: 1 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:3354): WARNING **: 13:22:35.890: v4l2h264dec_cam_003: 4 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:3354): WARNING **: 13:22:35.891: v4l2h264dec_cam_006: 13 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:3354): WARNING **: 13:22:35.891: v4l2h264dec_cam_005: 10 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:3354): WARNING **: 13:22:35.896: v4l2h264dec_cam_004: 7 initial frames were not dequeued: bug in decoder -- please file a bug
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=90 det_frame=89 age_ms=101 have_state=1 pts=0:00:11.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=90 det_frame=89 age_ms=101 have_state=1 pts=0:00:11.319582968
+[AGG] camera=cam-006 frame=90 detections=8 (cam_total=90 det_total=666 qd=1 drop=0)
+[faceinfer] hb vfps=40.1 ifps=39.9 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=119ms) | cam-003:VALID(age=92ms) | cam-004:VALID(age=112ms) | cam-001:VALID_EMPTY(age=27ms) copy_p50/95/99=95/163/188us tip_p50/95/99=140/226/248us infer_p50/95/99=13140/16828/17743us
+[TERMINAL] seq=570 camera=cam-003 frame=101 rois=2 labels=Green,Human
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=90 det_frame=89 age_ms=69 have_state=1 pts=0:00:11.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=90 det_frame=89 age_ms=69 have_state=1 pts=0:00:11.812608281
+[AGG] camera=cam-001 frame=91 detections=2 (cam_total=90 det_total=150 qd=1 drop=0)
+[TERMINAL] seq=600 camera=cam-003 frame=106 rois=2 labels=Green,Human
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-005:VALID(age=79ms) | cam-006:VALID(age=97ms) copy_p50/95/99=94/143/188us tip_p50/95/99=146/214/273us infer_p50/95/99=13854/18282/19040us
+[TERMINAL] seq=630 camera=cam-002 frame=114 rois=1 labels=Green
+[OV-NATIVE] rois=9 faces=2 decision=1 (no property set)
+[TERMINAL] seq=660 camera=cam-005 frame=110 rois=2 labels=Green,Green
+[AGG] camera=cam-002 frame=122 detections=2 (cam_total=120 det_total=211 qd=1 drop=0)
+[AGG] camera=cam-003 frame=121 detections=2 (cam_total=120 det_total=252 qd=1 drop=0)
+[TERMINAL] seq=690 camera=cam-006 frame=112 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=8 faces=2 decision=1 (no property set)
+[AGG] camera=cam-004 frame=122 detections=10 (cam_total=120 det_total=967 qd=1 drop=0)
+[AGG] camera=cam-005 frame=120 detections=3 (cam_total=120 det_total=299 qd=1 drop=0)
+[TERMINAL] seq=720 camera=cam-001 frame=112 rois=2 labels=Green,Green
+[AGG] camera=cam-006 frame=120 detections=8 (cam_total=120 det_total=893 qd=1 drop=0)
+[TERMINAL] seq=750 camera=cam-004 frame=128 rois=10 labels=Green,Green,Green,Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=121 detections=3 (cam_total=120 det_total=208 qd=1 drop=0)
+[TERMINAL] seq=780 camera=cam-006 frame=127 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=810 camera=cam-002 frame=144 rois=1 labels=Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=840 camera=cam-003 frame=146 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=152 detections=2 (cam_total=150 det_total=261 qd=1 drop=0)
+[faceinfer] hb vfps=39.9 ifps=40.1 pool=6[f5,q1,i0] queue=0 evict=1 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-002:VALID_EMPTY(age=103ms) | cam-003:VALID(age=30ms) | cam-004:VALID(age=115ms) | cam-001:VALID_EMPTY(age=13ms) copy_p50/95/99=94/155/186us tip_p50/95/99=137/211/237us infer_p50/95/99=13212/16603/17788us
+[TERMINAL] seq=870 camera=cam-003 frame=151 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=151 detections=2 (cam_total=150 det_total=314 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=152 detections=9 (cam_total=150 det_total=1226 qd=1 drop=0)
+[AGG] camera=cam-005 frame=150 detections=2 (cam_total=150 det_total=371 qd=1 drop=0)
+[TERMINAL] seq=900 camera=cam-002 frame=159 rois=1 labels=Green
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-005:VALID(age=109ms) | cam-006:VALID(age=102ms) copy_p50/95/99=94/140/174us tip_p50/95/99=143/200/255us infer_p50/95/99=13786/18173/18721us
+[AGG] camera=cam-006 frame=150 detections=7 (cam_total=150 det_total=1129 qd=1 drop=0)
+[TERMINAL] seq=930 camera=cam-003 frame=161 rois=2 labels=Green,Human
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=151 detections=3 (cam_total=150 det_total=273 qd=1 drop=0)
+[TERMINAL] seq=960 camera=cam-006 frame=157 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=990 camera=cam-002 frame=174 rois=2 labels=Green,Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=1020 camera=cam-003 frame=176 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=180 det_frame=179 age_ms=69 have_state=1 pts=0:00:19.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=180 det_frame=179 age_ms=69 have_state=1 pts=0:00:19.116104114
+[AGG] camera=cam-002 frame=182 detections=2 (cam_total=180 det_total=305 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=180 det_frame=179 age_ms=115 have_state=1 pts=0:00:19.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=180 det_frame=179 age_ms=115 have_state=1 pts=0:00:19.417558750
+[AGG] camera=cam-003 frame=181 detections=2 (cam_total=180 det_total=378 qd=1 drop=0)
+[TERMINAL] seq=1050 camera=cam-002 frame=184 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=180 det_frame=179 age_ms=88 have_state=1 pts=0:00:19.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=180 det_frame=179 age_ms=88 have_state=1 pts=0:00:19.723037291
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-004 frame=182 detections=9 (cam_total=180 det_total=1488 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=180 det_frame=179 age_ms=85 have_state=1 pts=0:00:20.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=180 det_frame=179 age_ms=85 have_state=1 pts=0:00:20.021263646
+[AGG] camera=cam-005 frame=180 detections=3 (cam_total=180 det_total=449 qd=1 drop=0)
+[TERMINAL] seq=1080 camera=cam-004 frame=183 rois=9 labels=Green,Green,Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=180 det_frame=179 age_ms=107 have_state=1 pts=0:00:20.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=180 det_frame=179 age_ms=107 have_state=1 pts=0:00:20.319582968
+[AGG] camera=cam-006 frame=180 detections=7 (cam_total=180 det_total=1368 qd=1 drop=0)
+[TERMINAL] seq=1110 camera=cam-002 frame=194 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=180 det_frame=179 age_ms=104 have_state=1 pts=0:00:20.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=180 det_frame=179 age_ms=104 have_state=1 pts=0:00:20.812608281
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=181 detections=1 (cam_total=180 det_total=315 qd=1 drop=0)
+[TERMINAL] seq=1140 camera=cam-002 frame=199 rois=2 labels=Green,Green
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=118ms) | cam-003:VALID(age=31ms) | cam-004:VALID(age=105ms) | cam-001:VALID_EMPTY(age=13ms) copy_p50/95/99=94/143/166us tip_p50/95/99=139/196/224us infer_p50/95/99=13038/16736/17954us
+[TERMINAL] seq=1170 camera=cam-006 frame=192 rois=9 labels=Green,Green,Green,Green,Green,Green,Green,Green,Human
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[TERMINAL] seq=1200 camera=cam-003 frame=206 rois=2 labels=Green,Human
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=100ms) | cam-006:VALID(age=108ms) copy_p50/95/99=94/140/177us tip_p50/95/99=145/226/250us infer_p50/95/99=13907/18012/18819us
+[AGG] camera=cam-002 frame=212 detections=2 (cam_total=210 det_total=348 qd=1 drop=0)
+[AGG] camera=cam-003 frame=211 detections=2 (cam_total=210 det_total=440 qd=1 drop=0)
+[TERMINAL] seq=1230 camera=cam-002 frame=214 rois=2 labels=Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=212 detections=8 (cam_total=210 det_total=1729 qd=1 drop=0)
+[AGG] camera=cam-005 frame=210 detections=2 (cam_total=210 det_total=521 qd=1 drop=0)
+[TERMINAL] seq=1260 camera=cam-001 frame=202 rois=2 labels=Green,Green
+[AGG] camera=cam-006 frame=210 detections=9 (cam_total=210 det_total=1600 qd=1 drop=0)
+[TERMINAL] seq=1290 camera=cam-004 frame=218 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=211 detections=2 (cam_total=210 det_total=354 qd=1 drop=0)
+[TERMINAL] seq=1320 camera=cam-002 frame=229 rois=2 labels=Green,Green
+[TERMINAL] seq=1350 camera=cam-006 frame=222 rois=6 labels=Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=7 faces=2 decision=1 (no property set)
+[TERMINAL] seq=1380 camera=cam-001 frame=222 rois=3 labels=Green,Green,Green
+[AGG] camera=cam-002 frame=242 detections=1 (cam_total=240 det_total=397 qd=1 drop=0)
+[AGG] camera=cam-003 frame=241 detections=2 (cam_total=240 det_total=504 qd=1 drop=0)
+[TERMINAL] seq=1410 camera=cam-004 frame=238 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=242 detections=9 (cam_total=240 det_total=1973 qd=1 drop=0)
+[AGG] camera=cam-005 frame=240 detections=2 (cam_total=240 det_total=559 qd=1 drop=0)
+[TERMINAL] seq=1440 camera=cam-003 frame=246 rois=2 labels=Green,Human
+[AGG] camera=cam-006 frame=240 detections=7 (cam_total=240 det_total=1798 qd=1 drop=0)
+[faceinfer] hb vfps=39.9 ifps=39.9 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=103ms) | cam-003:VALID(age=88ms) | cam-004:VALID(age=71ms) | cam-001:VALID_EMPTY(age=94ms) copy_p50/95/99=94/148/201us tip_p50/95/99=139/212/264us infer_p50/95/99=13024/17543/18234us
+[TERMINAL] seq=1470 camera=cam-002 frame=254 rois=1 labels=Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=241 detections=1 (cam_total=240 det_total=397 qd=1 drop=0)
+[TERMINAL] seq=1500 camera=cam-005 frame=250 rois=1 labels=Green
+[faceinfer] hb vfps=20.0 ifps=20.2 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=99ms) | cam-006:VALID(age=91ms) copy_p50/95/99=94/135/172us tip_p50/95/99=140/196/250us infer_p50/95/99=13917/18122/18819us
+[TERMINAL] seq=1530 camera=cam-006 frame=252 rois=6 labels=Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=1560 camera=cam-001 frame=252 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=270 det_frame=269 age_ms=93 have_state=1 pts=0:00:28.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=270 det_frame=269 age_ms=93 have_state=1 pts=0:00:28.116104114
+[AGG] camera=cam-002 frame=272 detections=1 (cam_total=270 det_total=432 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=270 det_frame=269 age_ms=113 have_state=1 pts=0:00:28.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=270 det_frame=269 age_ms=113 have_state=1 pts=0:00:28.417558750
+[TERMINAL] seq=1590 camera=cam-003 frame=271 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=271 detections=2 (cam_total=270 det_total=566 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=270 det_frame=269 age_ms=76 have_state=1 pts=0:00:28.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=270 det_frame=269 age_ms=76 have_state=1 pts=0:00:28.723037291
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=272 detections=7 (cam_total=270 det_total=2210 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=270 det_frame=269 age_ms=93 have_state=1 pts=0:00:29.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=270 det_frame=269 age_ms=93 have_state=1 pts=0:00:29.021263646
+[AGG] camera=cam-005 frame=270 detections=2 (cam_total=270 det_total=604 qd=1 drop=0)
+[TERMINAL] seq=1620 camera=cam-001 frame=262 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=270 det_frame=269 age_ms=102 have_state=1 pts=0:00:29.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=270 det_frame=269 age_ms=102 have_state=1 pts=0:00:29.319582968
+[AGG] camera=cam-006 frame=270 detections=7 (cam_total=270 det_total=2000 qd=1 drop=0)
+[TERMINAL] seq=1650 camera=cam-004 frame=278 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=270 det_frame=269 age_ms=81 have_state=1 pts=0:00:29.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=270 det_frame=269 age_ms=81 have_state=1 pts=0:00:29.812608281
+[AGG] camera=cam-001 frame=271 detections=1 (cam_total=270 det_total=431 qd=1 drop=0)
+[OV-NATIVE] rois=9 faces=1 decision=1 (no property set)
+[TERMINAL] seq=1680 camera=cam-005 frame=280 rois=1 labels=Human
+[TERMINAL] seq=1710 camera=cam-004 frame=288 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=1740 camera=cam-003 frame=296 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=302 detections=1 (cam_total=300 det_total=473 qd=1 drop=0)
+[faceinfer] hb vfps=40.1 ifps=39.9 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=105ms) | cam-003:VALID(age=96ms) | cam-004:VALID(age=84ms) | cam-001:VALID_EMPTY(age=115ms) copy_p50/95/99=95/163/180us tip_p50/95/99=140/206/239us infer_p50/95/99=13135/16572/17960us
+[AGG] camera=cam-003 frame=301 detections=2 (cam_total=300 det_total=630 qd=1 drop=0)
+[TERMINAL] seq=1770 camera=cam-002 frame=304 rois=2 labels=Green,Green
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[AGG] camera=cam-004 frame=302 detections=7 (cam_total=300 det_total=2435 qd=1 drop=0)
+[AGG] camera=cam-005 frame=300 detections=2 (cam_total=300 det_total=667 qd=1 drop=0)
+[TERMINAL] seq=1800 camera=cam-002 frame=309 rois=1 labels=Green
+[AGG] camera=cam-006 frame=300 detections=8 (cam_total=300 det_total=2238 qd=1 drop=0)
+[faceinfer] hb vfps=19.8 ifps=19.8 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=85ms) | cam-006:VALID_EMPTY(age=93ms) copy_p50/95/99=93/139/177us tip_p50/95/99=140/201/250us infer_p50/95/99=13916/18175/19566us
+[TERMINAL] seq=1830 camera=cam-003 frame=311 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=301 detections=1 (cam_total=300 det_total=463 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=2 decision=1 (no property set)
+[TERMINAL] seq=1860 camera=cam-001 frame=302 rois=1 labels=Green
+[TERMINAL] seq=1890 camera=cam-005 frame=315 rois=2 labels=Green,Human
+[OV-NATIVE] rois=7 faces=2 decision=1 (no property set)
+[TERMINAL] seq=1920 camera=cam-006 frame=317 rois=9 labels=Green,Green,Green,Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-002 frame=332 detections=1 (cam_total=330 det_total=507 qd=1 drop=0)
+[AGG] camera=cam-003 frame=331 detections=2 (cam_total=330 det_total=692 qd=1 drop=0)
+[TERMINAL] seq=1950 camera=cam-001 frame=317 rois=1 labels=Green
+[OV-NATIVE] rois=7 faces=2 decision=1 (no property set)
+[AGG] camera=cam-004 frame=332 detections=7 (cam_total=330 det_total=2660 qd=1 drop=0)
+[AGG] camera=cam-005 frame=330 detections=1 (cam_total=330 det_total=733 qd=1 drop=0)
+[TERMINAL] seq=1980 camera=cam-004 frame=333 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-006 frame=330 detections=7 (cam_total=330 det_total=2458 qd=1 drop=0)
+[TERMINAL] seq=2010 camera=cam-002 frame=344 rois=1 labels=Green
+[AGG] camera=cam-001 frame=331 detections=2 (cam_total=330 det_total=498 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=2040 camera=cam-003 frame=346 rois=2 labels=Green,Human
+[faceinfer] hb vfps=40.2 ifps=40.0 pool=6[f3,q2,i1] queue=2 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=111ms) | cam-003:VALID(age=86ms) | cam-004:VALID(age=72ms) | cam-001:VALID_EMPTY(age=101ms) copy_p50/95/99=96/166/193us tip_p50/95/99=140/213/253us infer_p50/95/99=13099/16818/18251us
+[TERMINAL] seq=2070 camera=cam-006 frame=342 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=2100 camera=cam-003 frame=356 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=360 det_frame=359 age_ms=102 have_state=1 pts=0:00:37.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=360 det_frame=359 age_ms=102 have_state=1 pts=0:00:37.116104114
+[AGG] camera=cam-002 frame=362 detections=1 (cam_total=360 det_total=546 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=104ms) | cam-006:VALID(age=94ms) copy_p50/95/99=93/133/169us tip_p50/95/99=138/187/229us infer_p50/95/99=13843/18278/19131us
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=360 det_frame=359 age_ms=94 have_state=1 pts=0:00:37.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=360 det_frame=359 age_ms=94 have_state=1 pts=0:00:37.417558750
+[TERMINAL] seq=2130 camera=cam-004 frame=358 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-003 frame=361 detections=2 (cam_total=360 det_total=756 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=360 det_frame=359 age_ms=104 have_state=1 pts=0:00:37.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=360 det_frame=359 age_ms=104 have_state=1 pts=0:00:37.723037291
+[AGG] camera=cam-004 frame=362 detections=7 (cam_total=360 det_total=2885 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=360 det_frame=359 age_ms=99 have_state=1 pts=0:00:38.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=360 det_frame=359 age_ms=99 have_state=1 pts=0:00:38.021263646
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[AGG] camera=cam-005 frame=360 detections=3 (cam_total=360 det_total=784 qd=1 drop=0)
+[TERMINAL] seq=2160 camera=cam-002 frame=369 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=360 det_frame=359 age_ms=102 have_state=1 pts=0:00:38.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=360 det_frame=359 age_ms=102 have_state=1 pts=0:00:38.319582968
+[AGG] camera=cam-006 frame=360 detections=7 (cam_total=360 det_total=2671 qd=1 drop=0)
+[TERMINAL] seq=2190 camera=cam-002 frame=374 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=360 det_frame=359 age_ms=89 have_state=1 pts=0:00:38.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=360 det_frame=359 age_ms=89 have_state=1 pts=0:00:38.812608281
+[AGG] camera=cam-001 frame=361 detections=1 (cam_total=360 det_total=552 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=2220 camera=cam-005 frame=370 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=2250 camera=cam-003 frame=381 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=2280 camera=cam-006 frame=377 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=392 detections=2 (cam_total=390 det_total=586 qd=1 drop=0)
+[AGG] camera=cam-003 frame=391 detections=2 (cam_total=390 det_total=818 qd=1 drop=0)
+[TERMINAL] seq=2310 camera=cam-002 frame=394 rois=1 labels=Green
+[AGG] camera=cam-004 frame=392 detections=7 (cam_total=390 det_total=3110 qd=1 drop=0)
+[AGG] camera=cam-005 frame=390 detections=1 (cam_total=390 det_total=843 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=2340 camera=cam-001 frame=382 rois=1 labels=Green
+[AGG] camera=cam-006 frame=390 detections=7 (cam_total=390 det_total=2890 qd=1 drop=0)
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f3,q2,i1] queue=2 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=102ms) | cam-003:VALID(age=117ms) | cam-004:VALID(age=86ms) | cam-001:VALID_EMPTY(age=110ms) copy_p50/95/99=95/154/190us tip_p50/95/99=138/212/256us infer_p50/95/99=13046/16692/17527us
+[TERMINAL] seq=2370 camera=cam-006 frame=392 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=391 detections=2 (cam_total=390 det_total=592 qd=1 drop=0)
+[TERMINAL] seq=2400 camera=cam-002 frame=409 rois=1 labels=Green
+[OV-NATIVE] rois=7 faces=2 decision=1 (no property set)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=100ms) | cam-006:VALID_EMPTY(age=93ms) copy_p50/95/99=93/134/170us tip_p50/95/99=137/192/229us infer_p50/95/99=13714/18345/18962us
+[TERMINAL] seq=2430 camera=cam-003 frame=411 rois=2 labels=Green,Human
+[TERMINAL] seq=2460 camera=cam-006 frame=407 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=422 detections=2 (cam_total=420 det_total=626 qd=1 drop=0)
+[TERMINAL] seq=2490 camera=cam-003 frame=421 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=421 detections=2 (cam_total=420 det_total=882 qd=1 drop=0)
+[AGG] camera=cam-004 frame=422 detections=7 (cam_total=420 det_total=3335 qd=1 drop=0)
+[AGG] camera=cam-005 frame=420 detections=1 (cam_total=420 det_total=876 qd=1 drop=0)
+[TERMINAL] seq=2520 camera=cam-003 frame=426 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-006 frame=420 detections=8 (cam_total=420 det_total=3106 qd=1 drop=0)
+[TERMINAL] seq=2550 camera=cam-005 frame=425 rois=1 labels=Green
+[AGG] camera=cam-001 frame=421 detections=2 (cam_total=420 det_total=653 qd=1 drop=0)
+[TERMINAL] seq=2580 camera=cam-006 frame=427 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=2610 camera=cam-002 frame=444 rois=2 labels=Green,Human
+[TERMINAL] seq=2640 camera=cam-006 frame=437 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=450 det_frame=449 age_ms=110 have_state=1 pts=0:00:46.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=450 det_frame=449 age_ms=110 have_state=1 pts=0:00:46.116104114
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=452 detections=2 (cam_total=450 det_total=690 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=450 det_frame=449 age_ms=105 have_state=1 pts=0:00:46.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=450 det_frame=449 age_ms=105 have_state=1 pts=0:00:46.417558750
+[AGG] camera=cam-003 frame=451 detections=2 (cam_total=450 det_total=944 qd=1 drop=0)
+[faceinfer] hb vfps=40.0 ifps=40.2 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=107ms) | cam-003:VALID(age=116ms) | cam-004:VALID(age=91ms) | cam-001:VALID_EMPTY(age=23ms) copy_p50/95/99=96/155/214us tip_p50/95/99=139/208/346us infer_p50/95/99=13154/16969/17682us
+[TERMINAL] seq=2670 camera=cam-002 frame=454 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=450 det_frame=449 age_ms=100 have_state=1 pts=0:00:46.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=450 det_frame=449 age_ms=100 have_state=1 pts=0:00:46.723037291
+[AGG] camera=cam-004 frame=452 detections=7 (cam_total=450 det_total=3560 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=450 det_frame=449 age_ms=107 have_state=1 pts=0:00:47.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=450 det_frame=449 age_ms=107 have_state=1 pts=0:00:47.021263646
+[AGG] camera=cam-005 frame=450 detections=0 (cam_total=450 det_total=908 qd=1 drop=0)
+[TERMINAL] seq=2700 camera=cam-003 frame=456 rois=2 labels=Green,Human
+[OV-NATIVE] rois=7 faces=0 decision=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=450 det_frame=449 age_ms=98 have_state=1 pts=0:00:47.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=450 det_frame=449 age_ms=98 have_state=1 pts=0:00:47.319582968
+[AGG] camera=cam-006 frame=450 detections=7 (cam_total=450 det_total=3318 qd=1 drop=0)
+[faceinfer] hb vfps=20.1 ifps=20.1 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=23ms) | cam-006:VALID_EMPTY(age=114ms) copy_p50/95/99=93/147/180us tip_p50/95/99=135/206/237us infer_p50/95/99=13868/18066/18660us
+[TERMINAL] seq=2730 camera=cam-006 frame=452 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=450 det_frame=449 age_ms=103 have_state=1 pts=0:00:47.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=450 det_frame=449 age_ms=103 have_state=1 pts=0:00:47.812608281
+[AGG] camera=cam-001 frame=451 detections=2 (cam_total=450 det_total=716 qd=1 drop=0)
+[TERMINAL] seq=2760 camera=cam-004 frame=463 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=2790 camera=cam-001 frame=457 rois=2 labels=Green,Human
+[TERMINAL] seq=2820 camera=cam-003 frame=476 rois=2 labels=Green,Human
+[OV-NATIVE] rois=7 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=482 detections=1 (cam_total=480 det_total=748 qd=1 drop=0)
+[TERMINAL] seq=2850 camera=cam-004 frame=478 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-003 frame=481 detections=2 (cam_total=480 det_total=1008 qd=1 drop=0)
+[AGG] camera=cam-004 frame=482 detections=7 (cam_total=480 det_total=3785 qd=1 drop=0)
+[AGG] camera=cam-005 frame=480 detections=2 (cam_total=480 det_total=947 qd=1 drop=0)
+[TERMINAL] seq=2880 camera=cam-003 frame=486 rois=2 labels=Green,Human
+[OV-NATIVE] rois=7 faces=2 decision=1 (no property set)
+[AGG] camera=cam-006 frame=480 detections=7 (cam_total=480 det_total=3529 qd=1 drop=0)
+[TERMINAL] seq=2910 camera=cam-006 frame=482 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=481 detections=2 (cam_total=480 det_total=776 qd=1 drop=0)
+[TERMINAL] seq=2940 camera=cam-004 frame=493 rois=6 labels=Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=25ms) | cam-003:VALID(age=108ms) | cam-004:VALID(age=114ms) | cam-001:VALID_EMPTY(age=125ms) copy_p50/95/99=95/162/279us tip_p50/95/99=140/210/346us infer_p50/95/99=13146/16929/18284us
+[TERMINAL] seq=2970 camera=cam-004 frame=498 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=3000 camera=cam-003 frame=506 rois=2 labels=Green,Human
+[OV-NATIVE] rois=7 faces=2 decision=1 (no property set)
+[AGG] camera=cam-002 frame=512 detections=2 (cam_total=510 det_total=790 qd=1 drop=0)
+[AGG] camera=cam-003 frame=511 detections=2 (cam_total=510 det_total=1070 qd=1 drop=0)
+[faceinfer] hb vfps=19.9 ifps=19.9 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-005:VALID_EMPTY(age=98ms) | cam-006:VALID_EMPTY(age=89ms) copy_p50/95/99=93/169/217us tip_p50/95/99=135/227/277us infer_p50/95/99=13791/17905/18371us
+[TERMINAL] seq=3030 camera=cam-002 frame=514 rois=2 labels=Green,Human
+[AGG] camera=cam-004 frame=512 detections=7 (cam_total=510 det_total=4010 qd=1 drop=0)
+[TERMINAL] seq=3060 camera=cam-003 frame=516 rois=2 labels=Green,Human
+[AGG] camera=cam-005 frame=510 detections=2 (cam_total=510 det_total=1006 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-006 frame=510 detections=7 (cam_total=510 det_total=3740 qd=1 drop=0)
+[TERMINAL] seq=3090 camera=cam-004 frame=518 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=511 detections=1 (cam_total=510 det_total=813 qd=1 drop=0)
+[TERMINAL] seq=3120 camera=cam-001 frame=512 rois=1 labels=Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=3150 camera=cam-001 frame=517 rois=1 labels=Green
+[TERMINAL] seq=3180 camera=cam-002 frame=539 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=540 det_frame=539 age_ms=85 have_state=1 pts=0:00:55.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=540 det_frame=539 age_ms=85 have_state=1 pts=0:00:55.116104114
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=542 detections=2 (cam_total=540 det_total=860 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=540 det_frame=539 age_ms=103 have_state=1 pts=0:00:55.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=540 det_frame=539 age_ms=103 have_state=1 pts=0:00:55.417558750
+[TERMINAL] seq=3210 camera=cam-001 frame=527 rois=2 labels=Green,Green
+[AGG] camera=cam-003 frame=541 detections=2 (cam_total=540 det_total=1134 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=540 det_frame=539 age_ms=103 have_state=1 pts=0:00:55.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=540 det_frame=539 age_ms=103 have_state=1 pts=0:00:55.723037291
+[AGG] camera=cam-004 frame=542 detections=7 (cam_total=540 det_total=4235 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=540 det_frame=539 age_ms=92 have_state=1 pts=0:00:56.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=540 det_frame=539 age_ms=92 have_state=1 pts=0:00:56.021263646
+[AGG] camera=cam-005 frame=540 detections=1 (cam_total=540 det_total=1053 qd=1 drop=0)
+[TERMINAL] seq=3240 camera=cam-006 frame=537 rois=7 labels=Green,Green,Green,Green,Green,Green,Human
+[OV-NATIVE] rois=1 faces=1 decision=1 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=540 det_frame=539 age_ms=83 have_state=1 pts=0:00:56.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=540 det_frame=539 age_ms=83 have_state=1 pts=0:00:56.319582968
+[AGG] camera=cam-006 frame=540 detections=8 (cam_total=540 det_total=3933 qd=1 drop=0)
+[TERMINAL] seq=3270 camera=cam-003 frame=551 rois=2 labels=Green,Human
+[faceinfer] hb vfps=40.1 ifps=39.9 pool=6[f3,q2,i1] queue=2 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=27ms) | cam-003:VALID(age=109ms) | cam-004:VALID(age=95ms) | cam-001:VALID_EMPTY(age=133ms) copy_p50/95/99=93/164/260us tip_p50/95/99=136/212/300us infer_p50/95/99=13233/16464/17979us
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=540 det_frame=539 age_ms=122 have_state=1 pts=0:00:56.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=540 det_frame=539 age_ms=122 have_state=1 pts=0:00:56.812608281
+[AGG] camera=cam-001 frame=541 detections=1 (cam_total=540 det_total=850 qd=1 drop=0)
+[TERMINAL] seq=3300 camera=cam-004 frame=553 rois=6 labels=Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=102ms) | cam-006:VALID_EMPTY(age=84ms) copy_p50/95/99=94/165/217us tip_p50/95/99=138/226/277us infer_p50/95/99=13880/17886/18823us
+[TERMINAL] seq=3330 camera=cam-002 frame=564 rois=2 labels=Green,Human
+[TERMINAL] seq=3360 camera=cam-002 frame=569 rois=3 labels=Green,Green,Human
+[OV-NATIVE] rois=8 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=572 detections=2 (cam_total=570 det_total=929 qd=1 drop=0)
+[TERMINAL] seq=3390 camera=cam-003 frame=571 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=571 detections=2 (cam_total=570 det_total=1196 qd=1 drop=0)
+[AGG] camera=cam-004 frame=572 detections=7 (cam_total=570 det_total=4460 qd=1 drop=0)
+[AGG] camera=cam-005 frame=570 detections=2 (cam_total=570 det_total=1113 qd=1 drop=0)
+[TERMINAL] seq=3420 camera=cam-003 frame=576 rois=2 labels=Green,Human
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[AGG] camera=cam-006 frame=570 detections=5 (cam_total=570 det_total=4124 qd=1 drop=0)
+[TERMINAL] seq=3450 camera=cam-003 frame=581 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=571 detections=1 (cam_total=570 det_total=885 qd=1 drop=0)
+[TERMINAL] seq=3480 camera=cam-006 frame=577 rois=7 labels=Green,Green,Green,Green,Green,Green,Human
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=3510 camera=cam-003 frame=591 rois=2 labels=Green,Human
+[TERMINAL] seq=3540 camera=cam-006 frame=587 rois=7 labels=Green,Green,Green,Green,Green,Green,Human
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=602 detections=2 (cam_total=600 det_total=983 qd=1 drop=0)
+[AGG] camera=cam-003 frame=601 detections=2 (cam_total=600 det_total=1260 qd=1 drop=0)
+[TERMINAL] seq=3570 camera=cam-005 frame=595 rois=1 labels=Green
+[faceinfer] hb vfps=39.6 ifps=39.8 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=103ms) | cam-003:VALID(age=86ms) | cam-004:VALID(age=72ms) | cam-001:VALID_EMPTY(age=96ms) copy_p50/95/99=94/169/207us tip_p50/95/99=136/218/260us infer_p50/95/99=12982/16762/18130us
+[AGG] camera=cam-004 frame=602 detections=7 (cam_total=600 det_total=4685 qd=1 drop=0)
+[AGG] camera=cam-005 frame=600 detections=1 (cam_total=600 det_total=1161 qd=1 drop=0)
+[TERMINAL] seq=3600 camera=cam-002 frame=609 rois=1 labels=Green
+[OV-NATIVE] rois=8 faces=2 decision=1 (no property set)
+[AGG] camera=cam-006 frame=600 detections=5 (cam_total=600 det_total=4329 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.2 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-005:VALID_EMPTY(age=22ms) | cam-006:VALID(age=109ms) copy_p50/95/99=95/166/217us tip_p50/95/99=139/227/272us infer_p50/95/99=13694/17892/18823us
+[TERMINAL] seq=3630 camera=cam-001 frame=597 rois=1 labels=Green
+[AGG] camera=cam-001 frame=601 detections=1 (cam_total=600 det_total=915 qd=1 drop=0)
+[TERMINAL] seq=3660 camera=cam-003 frame=616 rois=2 labels=Green,Human
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=3690 camera=cam-005 frame=615 rois=1 labels=Green
+[TERMINAL] seq=3720 camera=cam-004 frame=623 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=630 det_frame=629 age_ms=97 have_state=1 pts=0:01:04.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=630 det_frame=629 age_ms=97 have_state=1 pts=0:01:04.116104114
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=632 detections=1 (cam_total=630 det_total=1017 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=630 det_frame=629 age_ms=101 have_state=1 pts=0:01:04.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=630 det_frame=629 age_ms=101 have_state=1 pts=0:01:04.417558750
+[AGG] camera=cam-003 frame=631 detections=2 (cam_total=630 det_total=1322 qd=1 drop=0)
+[TERMINAL] seq=3750 camera=cam-005 frame=625 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=630 det_frame=629 age_ms=79 have_state=1 pts=0:01:04.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=630 det_frame=629 age_ms=79 have_state=1 pts=0:01:04.723037291
+[AGG] camera=cam-004 frame=632 detections=7 (cam_total=630 det_total=4910 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=630 det_frame=629 age_ms=91 have_state=1 pts=0:01:05.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=630 det_frame=629 age_ms=91 have_state=1 pts=0:01:05.021263646
+[AGG] camera=cam-005 frame=630 detections=1 (cam_total=630 det_total=1190 qd=1 drop=0)
+[TERMINAL] seq=3780 camera=cam-003 frame=636 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=630 det_frame=629 age_ms=107 have_state=1 pts=0:01:05.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=630 det_frame=629 age_ms=107 have_state=1 pts=0:01:05.319582968
+[AGG] camera=cam-006 frame=630 detections=6 (cam_total=630 det_total=4514 qd=1 drop=0)
+[TERMINAL] seq=3810 camera=cam-006 frame=632 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=630 det_frame=629 age_ms=111 have_state=1 pts=0:01:05.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=630 det_frame=629 age_ms=111 have_state=1 pts=0:01:05.812608281
+[AGG] camera=cam-001 frame=631 detections=1 (cam_total=630 det_total=956 qd=1 drop=0)
+[TERMINAL] seq=3840 camera=cam-003 frame=646 rois=2 labels=Green,Human
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=3870 camera=cam-005 frame=645 rois=2 labels=Green,Green
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f5,q1,i0] queue=0 evict=1 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-002:VALID_EMPTY(age=93ms) | cam-003:VALID(age=100ms) | cam-004:VALID(age=77ms) | cam-001:VALID_EMPTY(age=107ms) copy_p50/95/99=96/169/203us tip_p50/95/99=138/216/265us infer_p50/95/99=13269/16638/17814us
+[TERMINAL] seq=3900 camera=cam-003 frame=656 rois=2 labels=Green,Human
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=662 detections=1 (cam_total=660 det_total=1069 qd=1 drop=0)
+[AGG] camera=cam-003 frame=661 detections=2 (cam_total=660 det_total=1386 qd=1 drop=0)
+[TERMINAL] seq=3930 camera=cam-004 frame=658 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=19.9 ifps=19.9 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-005:VALID_EMPTY(age=97ms) | cam-006:VALID(age=86ms) copy_p50/95/99=95/145/182us tip_p50/95/99=140/204/247us infer_p50/95/99=13694/17580/18116us
+[AGG] camera=cam-004 frame=662 detections=7 (cam_total=660 det_total=5135 qd=1 drop=0)
+[TERMINAL] seq=3960 camera=cam-005 frame=660 rois=1 labels=Green
+[AGG] camera=cam-005 frame=660 detections=1 (cam_total=660 det_total=1234 qd=1 drop=0)
+[AGG] camera=cam-006 frame=660 detections=5 (cam_total=660 det_total=4688 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=3990 camera=cam-001 frame=657 rois=3 labels=Green,Green,Human
+[AGG] camera=cam-001 frame=661 detections=2 (cam_total=660 det_total=1008 qd=1 drop=0)
+[TERMINAL] seq=4020 camera=cam-002 frame=679 rois=1 labels=Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=4050 camera=cam-003 frame=681 rois=2 labels=Green,Human
+[TERMINAL] seq=4080 camera=cam-006 frame=677 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=692 detections=2 (cam_total=690 det_total=1112 qd=1 drop=0)
+[AGG] camera=cam-003 frame=691 detections=2 (cam_total=690 det_total=1448 qd=1 drop=0)
+[TERMINAL] seq=4110 camera=cam-002 frame=694 rois=2 labels=Green,Green
+[AGG] camera=cam-004 frame=692 detections=7 (cam_total=690 det_total=5360 qd=1 drop=0)
+[AGG] camera=cam-005 frame=690 detections=0 (cam_total=690 det_total=1262 qd=1 drop=0)
+[TERMINAL] seq=4140 camera=cam-002 frame=699 rois=2 labels=Green,Green
+[AGG] camera=cam-006 frame=690 detections=6 (cam_total=690 det_total=4885 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=4170 camera=cam-006 frame=692 rois=9 labels=Green,Green,Green,Green,Green,Green,Green,Green,Human
+[faceinfer] hb vfps=40.2 ifps=40.0 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=92ms) | cam-003:VALID(age=100ms) | cam-004:VALID(age=74ms) | cam-001:VALID_EMPTY(age=107ms) copy_p50/95/99=97/158/191us tip_p50/95/99=141/210/255us infer_p50/95/99=13037/16985/17892us
+[AGG] camera=cam-001 frame=691 detections=2 (cam_total=690 det_total=1049 qd=1 drop=0)
+[TERMINAL] seq=4200 camera=cam-002 frame=709 rois=2 labels=Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=4230 camera=cam-006 frame=702 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Human
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q0,i1] queue=0 evict=0 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-005:VALID_EMPTY(age=104ms) | cam-006:VALID(age=82ms) copy_p50/95/99=96/144/172us tip_p50/95/99=141/204/227us infer_p50/95/99=13674/17655/18347us
+[TERMINAL] seq=4260 camera=cam-002 frame=719 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=720 det_frame=719 age_ms=73 have_state=1 pts=0:01:13.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=720 det_frame=719 age_ms=73 have_state=1 pts=0:01:13.116104114
+[AGG] camera=cam-002 frame=722 detections=2 (cam_total=720 det_total=1153 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=720 det_frame=719 age_ms=99 have_state=1 pts=0:01:13.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=720 det_frame=719 age_ms=99 have_state=1 pts=0:01:13.417558750
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=4290 camera=cam-004 frame=718 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-003 frame=721 detections=2 (cam_total=720 det_total=1512 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=720 det_frame=719 age_ms=88 have_state=1 pts=0:01:13.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=720 det_frame=719 age_ms=88 have_state=1 pts=0:01:13.723037291
+[AGG] camera=cam-004 frame=722 detections=7 (cam_total=720 det_total=5585 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=720 det_frame=719 age_ms=105 have_state=1 pts=0:01:14.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=720 det_frame=719 age_ms=105 have_state=1 pts=0:01:14.021263646
+[AGG] camera=cam-005 frame=720 detections=2 (cam_total=720 det_total=1311 qd=1 drop=0)
+[TERMINAL] seq=4320 camera=cam-006 frame=717 rois=6 labels=Green,Green,Green,Green,Green,Human
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=720 det_frame=719 age_ms=101 have_state=1 pts=0:01:14.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=720 det_frame=719 age_ms=101 have_state=1 pts=0:01:14.319582968
+[AGG] camera=cam-006 frame=720 detections=7 (cam_total=720 det_total=5099 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=4350 camera=cam-001 frame=717 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=720 det_frame=719 age_ms=111 have_state=1 pts=0:01:14.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=720 det_frame=719 age_ms=111 have_state=1 pts=0:01:14.812608281
+[AGG] camera=cam-001 frame=721 detections=2 (cam_total=720 det_total=1105 qd=1 drop=0)
+[TERMINAL] seq=4380 camera=cam-003 frame=736 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=4410 camera=cam-002 frame=744 rois=2 labels=Green,Green
+[TERMINAL] seq=4440 camera=cam-001 frame=732 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=752 detections=2 (cam_total=750 det_total=1199 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=4470 camera=cam-004 frame=748 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-003 frame=751 detections=2 (cam_total=750 det_total=1574 qd=1 drop=0)
+[faceinfer] hb vfps=39.9 ifps=40.1 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=113ms) | cam-003:VALID(age=83ms) | cam-004:VALID(age=97ms) | cam-001:VALID_EMPTY(age=19ms) copy_p50/95/99=96/139/158us tip_p50/95/99=139/193/213us infer_p50/95/99=13114/16889/18181us
+[AGG] camera=cam-004 frame=752 detections=7 (cam_total=750 det_total=5810 qd=1 drop=0)
+[AGG] camera=cam-005 frame=750 detections=1 (cam_total=750 det_total=1356 qd=1 drop=0)
+[TERMINAL] seq=4500 camera=cam-003 frame=756 rois=2 labels=Green,Human
+[AGG] camera=cam-006 frame=750 detections=6 (cam_total=750 det_total=5328 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=4530 camera=cam-005 frame=755 rois=2 labels=Green,Green
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=97ms) | cam-006:VALID(age=106ms) copy_p50/95/99=96/144/169us tip_p50/95/99=143/204/233us infer_p50/95/99=13830/17976/19266us
+[AGG] camera=cam-001 frame=751 detections=2 (cam_total=750 det_total=1169 qd=1 drop=0)
+[TERMINAL] seq=4560 camera=cam-004 frame=763 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=4590 camera=cam-002 frame=774 rois=1 labels=Green
+[TERMINAL] seq=4620 camera=cam-002 frame=779 rois=1 labels=Green
+[AGG] camera=cam-002 frame=782 detections=1 (cam_total=780 det_total=1239 qd=1 drop=0)
+[OV-NATIVE] rois=6 faces=1 decision=1 (no property set)
+[AGG] camera=cam-003 frame=781 detections=2 (cam_total=780 det_total=1638 qd=1 drop=0)
+[TERMINAL] seq=4650 camera=cam-006 frame=772 rois=9 labels=Green,Green,Green,Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-004 frame=782 detections=7 (cam_total=780 det_total=6035 qd=1 drop=0)
+[AGG] camera=cam-005 frame=780 detections=2 (cam_total=780 det_total=1404 qd=1 drop=0)
+[TERMINAL] seq=4680 camera=cam-006 frame=777 rois=7 labels=Green,Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-006 frame=780 detections=6 (cam_total=780 det_total=5532 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=4710 camera=cam-006 frame=782 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=781 detections=2 (cam_total=780 det_total=1227 qd=1 drop=0)
+[TERMINAL] seq=4740 camera=cam-003 frame=796 rois=2 labels=Green,Human
+[OV-NATIVE] rois=7 faces=2 decision=1 (no property set)
+[TERMINAL] seq=4770 camera=cam-005 frame=795 rois=1 labels=Human
+[faceinfer] hb vfps=40.4 ifps=40.0 pool=6[f3,q2,i1] queue=2 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=127ms) | cam-003:VALID(age=31ms) | cam-004:VALID(age=102ms) | cam-001:VALID_EMPTY(age=134ms) copy_p50/95/99=95/160/181us tip_p50/95/99=138/210/249us infer_p50/95/99=13012/17161/18330us
+[TERMINAL] seq=4800 camera=cam-004 frame=803 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=810 det_frame=809 age_ms=61 have_state=1 pts=0:01:22.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=810 det_frame=809 age_ms=61 have_state=1 pts=0:01:22.116104114
+[AGG] camera=cam-002 frame=812 detections=2 (cam_total=810 det_total=1276 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=810 det_frame=809 age_ms=108 have_state=1 pts=0:01:22.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=810 det_frame=809 age_ms=108 have_state=1 pts=0:01:22.417558750
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=4830 camera=cam-003 frame=811 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=811 detections=2 (cam_total=810 det_total=1700 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=112ms) | cam-006:VALID(age=102ms) copy_p50/95/99=95/139/162us tip_p50/95/99=143/203/233us infer_p50/95/99=13830/18019/18746us
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=810 det_frame=809 age_ms=84 have_state=1 pts=0:01:22.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=810 det_frame=809 age_ms=84 have_state=1 pts=0:01:22.723037291
+[AGG] camera=cam-004 frame=812 detections=7 (cam_total=810 det_total=6260 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=810 det_frame=809 age_ms=106 have_state=1 pts=0:01:23.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=810 det_frame=809 age_ms=106 have_state=1 pts=0:01:23.021263646
+[AGG] camera=cam-005 frame=810 detections=1 (cam_total=810 det_total=1470 qd=1 drop=0)
+[TERMINAL] seq=4860 camera=cam-001 frame=802 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=810 det_frame=809 age_ms=90 have_state=1 pts=0:01:23.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=810 det_frame=809 age_ms=90 have_state=1 pts=0:01:23.319582968
+[AGG] camera=cam-006 frame=810 detections=7 (cam_total=810 det_total=5739 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=4890 camera=cam-004 frame=818 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=810 det_frame=809 age_ms=106 have_state=1 pts=0:01:23.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=810 det_frame=809 age_ms=106 have_state=1 pts=0:01:23.812608281
+[AGG] camera=cam-001 frame=811 detections=1 (cam_total=810 det_total=1261 qd=1 drop=0)
+[TERMINAL] seq=4920 camera=cam-002 frame=829 rois=1 labels=Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=4950 camera=cam-002 frame=834 rois=2 labels=Green,Green
+[TERMINAL] seq=4980 camera=cam-003 frame=836 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=842 detections=1 (cam_total=840 det_total=1312 qd=1 drop=0)
+[OV-NATIVE] rois=8 faces=0 decision=0 (no property set)
+[TERMINAL] seq=5010 camera=cam-002 frame=844 rois=1 labels=Green
+[AGG] camera=cam-003 frame=841 detections=2 (cam_total=840 det_total=1764 qd=1 drop=0)
+[AGG] camera=cam-004 frame=842 detections=7 (cam_total=840 det_total=6485 qd=1 drop=0)
+[TERMINAL] seq=5040 camera=cam-005 frame=840 rois=5 labels=Green,Green,Green,Human,Human
+[AGG] camera=cam-005 frame=840 detections=5 (cam_total=840 det_total=1546 qd=1 drop=0)
+[AGG] camera=cam-006 frame=840 detections=8 (cam_total=840 det_total=5956 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=5070 camera=cam-006 frame=842 rois=6 labels=Green,Green,Green,Green,Green,Human
+[faceinfer] hb vfps=39.7 ifps=39.8 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=101ms) | cam-003:VALID(age=93ms) | cam-004:VALID(age=85ms) | cam-001:VALID_EMPTY(age=69ms) copy_p50/95/99=95/167/197us tip_p50/95/99=140/226/260us infer_p50/95/99=13072/17167/18330us
+[AGG] camera=cam-001 frame=841 detections=3 (cam_total=840 det_total=1300 qd=1 drop=0)
+[TERMINAL] seq=5100 camera=cam-004 frame=853 rois=6 labels=Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=5130 camera=cam-003 frame=861 rois=2 labels=Green,Human
+[OV-NATIVE] rois=8 faces=2 decision=1 (no property set)
+[faceinfer] hb vfps=19.8 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=104ms) | cam-006:VALID(age=97ms) copy_p50/95/99=96/139/173us tip_p50/95/99=143/205/268us infer_p50/95/99=13949/18019/18738us
+[TERMINAL] seq=5160 camera=cam-006 frame=857 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=872 detections=1 (cam_total=870 det_total=1347 qd=1 drop=0)
+[AGG] camera=cam-003 frame=871 detections=2 (cam_total=870 det_total=1826 qd=1 drop=0)
+[TERMINAL] seq=5190 camera=cam-004 frame=868 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=872 detections=7 (cam_total=870 det_total=6710 qd=1 drop=0)
+[AGG] camera=cam-005 frame=870 detections=2 (cam_total=870 det_total=1639 qd=1 drop=0)
+[TERMINAL] seq=5220 camera=cam-006 frame=867 rois=5 labels=Green,Green,Green,Green,Green
+[AGG] camera=cam-006 frame=870 detections=6 (cam_total=870 det_total=6140 qd=1 drop=0)
+[TERMINAL] seq=5250 camera=cam-006 frame=872 rois=6 labels=Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=871 detections=2 (cam_total=870 det_total=1335 qd=1 drop=0)
+[TERMINAL] seq=5280 camera=cam-004 frame=883 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=5310 camera=cam-002 frame=894 rois=1 labels=Green
+[OV-NATIVE] rois=8 faces=2 decision=1 (no property set)
+[TERMINAL] seq=5340 camera=cam-003 frame=896 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=900 det_frame=899 age_ms=124 have_state=1 pts=0:01:31.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=900 det_frame=899 age_ms=124 have_state=1 pts=0:01:31.116104114
+[AGG] camera=cam-002 frame=902 detections=1 (cam_total=900 det_total=1386 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=900 det_frame=899 age_ms=76 have_state=1 pts=0:01:31.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=900 det_frame=899 age_ms=76 have_state=1 pts=0:01:31.417558750
+[TERMINAL] seq=5370 camera=cam-006 frame=892 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-003 frame=901 detections=2 (cam_total=900 det_total=1890 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=94ms) | cam-003:VALID(age=86ms) | cam-004:VALID(age=72ms) | cam-001:VALID_EMPTY(age=100ms) copy_p50/95/99=96/155/188us tip_p50/95/99=141/206/261us infer_p50/95/99=13097/17135/18537us
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=900 det_frame=899 age_ms=101 have_state=1 pts=0:01:31.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=900 det_frame=899 age_ms=101 have_state=1 pts=0:01:31.723037291
+[AGG] camera=cam-004 frame=902 detections=7 (cam_total=900 det_total=6935 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=900 det_frame=899 age_ms=94 have_state=1 pts=0:01:32.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=900 det_frame=899 age_ms=94 have_state=1 pts=0:01:32.021263646
+[AGG] camera=cam-005 frame=900 detections=3 (cam_total=900 det_total=1704 qd=1 drop=0)
+[TERMINAL] seq=5400 camera=cam-004 frame=903 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=900 det_frame=899 age_ms=87 have_state=1 pts=0:01:32.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=900 det_frame=899 age_ms=87 have_state=1 pts=0:01:32.319582968
+[AGG] camera=cam-006 frame=900 detections=6 (cam_total=900 det_total=6323 qd=1 drop=0)
+[TERMINAL] seq=5430 camera=cam-001 frame=897 rois=1 labels=Green
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=105ms) | cam-006:VALID(age=97ms) copy_p50/95/99=96/143/200us tip_p50/95/99=142/203/290us infer_p50/95/99=13724/18121/18738us
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=900 det_frame=899 age_ms=118 have_state=1 pts=0:01:32.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=900 det_frame=899 age_ms=118 have_state=1 pts=0:01:32.812608281
+[AGG] camera=cam-001 frame=901 detections=1 (cam_total=900 det_total=1365 qd=1 drop=0)
+[TERMINAL] seq=5460 camera=cam-003 frame=916 rois=2 labels=Green,Human
+[TERMINAL] seq=5490 camera=cam-002 frame=924 rois=1 labels=Green
+[OV-NATIVE] rois=4 faces=1 decision=1 (no property set)
+[TERMINAL] seq=5520 camera=cam-005 frame=920 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=932 detections=1 (cam_total=930 det_total=1424 qd=1 drop=0)
+[AGG] camera=cam-003 frame=931 detections=2 (cam_total=930 det_total=1952 qd=1 drop=0)
+[TERMINAL] seq=5550 camera=cam-005 frame=925 rois=1 labels=Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=932 detections=7 (cam_total=930 det_total=7160 qd=1 drop=0)
+[AGG] camera=cam-005 frame=930 detections=2 (cam_total=930 det_total=1774 qd=1 drop=0)
+[TERMINAL] seq=5580 camera=cam-002 frame=939 rois=1 labels=Green
+[AGG] camera=cam-006 frame=930 detections=6 (cam_total=930 det_total=6517 qd=1 drop=0)
+[TERMINAL] seq=5610 camera=cam-003 frame=941 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-001 frame=931 detections=1 (cam_total=930 det_total=1404 qd=1 drop=0)
+[TERMINAL] seq=5640 camera=cam-006 frame=937 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Human
+[TERMINAL] seq=5670 camera=cam-001 frame=937 rois=3 labels=Green,Green,Human
+[OV-NATIVE] rois=8 faces=0 decision=0 (no property set)
+[faceinfer] hb vfps=40.2 ifps=40.0 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=82ms) | cam-003:VALID(age=97ms) | cam-004:VALID(age=69ms) | cam-001:VALID_EMPTY(age=105ms) copy_p50/95/99=96/146/183us tip_p50/95/99=140/195/249us infer_p50/95/99=13136/16931/18112us
+[TERMINAL] seq=5700 camera=cam-004 frame=953 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=962 detections=2 (cam_total=960 det_total=1478 qd=1 drop=0)
+[TERMINAL] seq=5730 camera=cam-003 frame=961 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=961 detections=2 (cam_total=960 det_total=2016 qd=1 drop=0)
+[OV-NATIVE] rois=8 faces=0 decision=0 (no property set)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=110ms) | cam-006:VALID_EMPTY(age=101ms) copy_p50/95/99=96/167/225us tip_p50/95/99=141/235/303us infer_p50/95/99=13841/18134/19129us
+[AGG] camera=cam-004 frame=962 detections=7 (cam_total=960 det_total=7385 qd=1 drop=0)
+[TERMINAL] seq=5760 camera=cam-005 frame=960 rois=2 labels=Green,Human
+[AGG] camera=cam-005 frame=960 detections=2 (cam_total=960 det_total=1832 qd=1 drop=0)
+[AGG] camera=cam-006 frame=960 detections=9 (cam_total=960 det_total=6744 qd=1 drop=0)
+[TERMINAL] seq=5790 camera=cam-002 frame=974 rois=3 labels=Green,Green,Human
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=961 detections=2 (cam_total=960 det_total=1443 qd=1 drop=0)
+[TERMINAL] seq=5820 camera=cam-006 frame=967 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=5850 camera=cam-006 frame=972 rois=6 labels=Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=5880 camera=cam-002 frame=989 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=990 det_frame=989 age_ms=109 have_state=1 pts=0:01:40.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=990 det_frame=989 age_ms=109 have_state=1 pts=0:01:40.116104114
+[AGG] camera=cam-002 frame=992 detections=2 (cam_total=990 det_total=1544 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=990 det_frame=989 age_ms=125 have_state=1 pts=0:01:40.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=990 det_frame=989 age_ms=125 have_state=1 pts=0:01:40.417558750
+[AGG] camera=cam-003 frame=991 detections=2 (cam_total=990 det_total=2078 qd=1 drop=0)
+[TERMINAL] seq=5910 camera=cam-001 frame=977 rois=2 labels=Green,Human
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=990 det_frame=989 age_ms=116 have_state=1 pts=0:01:40.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=990 det_frame=989 age_ms=116 have_state=1 pts=0:01:40.723037291
+[AGG] camera=cam-004 frame=992 detections=7 (cam_total=990 det_total=7610 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=990 det_frame=989 age_ms=98 have_state=1 pts=0:01:41.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=990 det_frame=989 age_ms=98 have_state=1 pts=0:01:41.021263646
+[AGG] camera=cam-005 frame=990 detections=1 (cam_total=990 det_total=1890 qd=1 drop=0)
+[TERMINAL] seq=5940 camera=cam-006 frame=987 rois=6 labels=Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=990 det_frame=989 age_ms=106 have_state=1 pts=0:01:41.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=990 det_frame=989 age_ms=106 have_state=1 pts=0:01:41.319582968
+[AGG] camera=cam-006 frame=990 detections=7 (cam_total=990 det_total=6921 qd=1 drop=0)
+[TERMINAL] seq=5970 camera=cam-001 frame=988 rois=1 labels=Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[faceinfer] hb vfps=39.9 ifps=39.9 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=92ms) | cam-003:VALID(age=107ms) | cam-004:VALID(age=101ms) | cam-001:VALID_EMPTY(age=194ms) copy_p50/95/99=94/151/178us tip_p50/95/99=134/205/238us infer_p50/95/99=13094/16607/18028us
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=990 det_frame=989 age_ms=87 have_state=1 pts=0:01:41.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=990 det_frame=989 age_ms=87 have_state=1 pts=0:01:41.812608281
+[AGG] camera=cam-001 frame=991 detections=1 (cam_total=990 det_total=1493 qd=1 drop=0)
+[TERMINAL] seq=6000 camera=cam-005 frame=1000 rois=2 labels=Green,Green
+[TERMINAL] seq=6030 camera=cam-002 frame=1014 rois=1 labels=Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=97ms) | cam-006:VALID(age=104ms) copy_p50/95/99=95/148/200us tip_p50/95/99=142/222/303us infer_p50/95/99=13960/18152/19129us
+[TERMINAL] seq=6060 camera=cam-004 frame=1013 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=1022 detections=1 (cam_total=1020 det_total=1584 qd=1 drop=0)
+[TERMINAL] seq=6090 camera=cam-001 frame=1007 rois=1 labels=Green
+[AGG] camera=cam-003 frame=1021 detections=2 (cam_total=1020 det_total=2142 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-004 frame=1022 detections=7 (cam_total=1020 det_total=7835 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1020 detections=1 (cam_total=1020 det_total=1931 qd=1 drop=0)
+[TERMINAL] seq=6120 camera=cam-006 frame=1017 rois=5 labels=Green,Green,Green,Green,Green
+[AGG] camera=cam-006 frame=1020 detections=5 (cam_total=1020 det_total=7102 qd=1 drop=0)
+[TERMINAL] seq=6150 camera=cam-004 frame=1028 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=6 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=1021 detections=2 (cam_total=1020 det_total=1541 qd=1 drop=0)
+[TERMINAL] seq=6180 camera=cam-003 frame=1036 rois=2 labels=Green,Human
+[TERMINAL] seq=6210 camera=cam-003 frame=1041 rois=2 labels=Green,Human
+[OV-NATIVE] rois=6 faces=1 decision=1 (no property set)
+[TERMINAL] seq=6240 camera=cam-001 frame=1032 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=1052 detections=1 (cam_total=1050 det_total=1638 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1051 detections=2 (cam_total=1050 det_total=2204 qd=1 drop=0)
+[TERMINAL] seq=6270 camera=cam-002 frame=1054 rois=3 labels=Green,Human,Human
+[faceinfer] hb vfps=40.1 ifps=40.1 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=25ms) | cam-003:VALID(age=81ms) | cam-004:VALID(age=117ms) | cam-001:VALID_EMPTY(age=86ms) copy_p50/95/99=94/156/217us tip_p50/95/99=138/211/277us infer_p50/95/99=13011/16519/17777us
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-004 frame=1052 detections=7 (cam_total=1050 det_total=8060 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1050 detections=2 (cam_total=1050 det_total=1964 qd=1 drop=0)
+[TERMINAL] seq=6300 camera=cam-004 frame=1053 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-006 frame=1050 detections=6 (cam_total=1050 det_total=7275 qd=1 drop=0)
+[TERMINAL] seq=6330 camera=cam-001 frame=1047 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[faceinfer] hb vfps=19.9 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=95ms) | cam-006:VALID(age=88ms) copy_p50/95/99=95/139/173us tip_p50/95/99=141/192/313us infer_p50/95/99=13969/18321/19200us
+[AGG] camera=cam-001 frame=1051 detections=3 (cam_total=1050 det_total=1604 qd=1 drop=0)
+[TERMINAL] seq=6360 camera=cam-001 frame=1052 rois=1 labels=Green
+[TERMINAL] seq=6390 camera=cam-003 frame=1071 rois=2 labels=Green,Human
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=6420 camera=cam-001 frame=1062 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1080 det_frame=1079 age_ms=106 have_state=1 pts=0:01:49.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1080 det_frame=1079 age_ms=106 have_state=1 pts=0:01:49.116104114
+[AGG] camera=cam-002 frame=1082 detections=3 (cam_total=1080 det_total=1702 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1080 det_frame=1079 age_ms=82 have_state=1 pts=0:01:49.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1080 det_frame=1079 age_ms=82 have_state=1 pts=0:01:49.417558750
+[TERMINAL] seq=6450 camera=cam-003 frame=1081 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=1081 detections=2 (cam_total=1080 det_total=2268 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1080 det_frame=1079 age_ms=114 have_state=1 pts=0:01:49.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1080 det_frame=1079 age_ms=114 have_state=1 pts=0:01:49.723037291
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=1082 detections=8 (cam_total=1080 det_total=8287 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1080 det_frame=1079 age_ms=118 have_state=1 pts=0:01:50.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1080 det_frame=1079 age_ms=118 have_state=1 pts=0:01:50.021263646
+[TERMINAL] seq=6480 camera=cam-005 frame=1080 rois=3 labels=Green,Green,Human
+[AGG] camera=cam-005 frame=1080 detections=3 (cam_total=1080 det_total=2021 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1080 det_frame=1079 age_ms=97 have_state=1 pts=0:01:50.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1080 det_frame=1079 age_ms=97 have_state=1 pts=0:01:50.319582968
+[AGG] camera=cam-006 frame=1080 detections=8 (cam_total=1080 det_total=7486 qd=1 drop=0)
+[TERMINAL] seq=6510 camera=cam-001 frame=1077 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1080 det_frame=1079 age_ms=113 have_state=1 pts=0:01:50.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1080 det_frame=1079 age_ms=113 have_state=1 pts=0:01:50.812608281
+[AGG] camera=cam-001 frame=1081 detections=2 (cam_total=1080 det_total=1659 qd=1 drop=0)
+[TERMINAL] seq=6540 camera=cam-003 frame=1096 rois=2 labels=Green,Human
+[TERMINAL] seq=6570 camera=cam-003 frame=1101 rois=2 labels=Green,Human
+[faceinfer] hb vfps=40.2 ifps=40.0 pool=6[f3,q2,i1] queue=2 evict=1 noslot=0 err=0 worker=8 stuck_ms=0 results=cam-002:VALID_EMPTY(age=100ms) | cam-003:VALID(age=86ms) | cam-004:VALID(age=116ms) | cam-001:VALID_EMPTY(age=28ms) copy_p50/95/99=96/156/184us tip_p50/95/99=138/206/241us infer_p50/95/99=13255/16763/17777us
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=6600 camera=cam-006 frame=1097 rois=9 labels=Green,Green,Green,Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-002 frame=1112 detections=2 (cam_total=1110 det_total=1771 qd=1 drop=0)
+[TERMINAL] seq=6630 camera=cam-003 frame=1111 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=1111 detections=2 (cam_total=1110 det_total=2330 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=101ms) | cam-006:VALID(age=94ms) copy_p50/95/99=94/144/199us tip_p50/95/99=141/214/255us infer_p50/95/99=13955/18378/19200us
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[AGG] camera=cam-004 frame=1112 detections=7 (cam_total=1110 det_total=8498 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1110 detections=3 (cam_total=1110 det_total=2095 qd=1 drop=0)
+[TERMINAL] seq=6660 camera=cam-002 frame=1119 rois=1 labels=Green
+[AGG] camera=cam-006 frame=1110 detections=7 (cam_total=1110 det_total=7725 qd=1 drop=0)
+[TERMINAL] seq=6690 camera=cam-003 frame=1121 rois=2 labels=Green,Human
+[OV-NATIVE] rois=6 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=1111 detections=1 (cam_total=1110 det_total=1707 qd=1 drop=0)
+[TERMINAL] seq=6720 camera=cam-001 frame=1112 rois=1 labels=Green
+[TERMINAL] seq=6750 camera=cam-003 frame=1131 rois=2 labels=Green,Human
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=6780 camera=cam-003 frame=1136 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=1142 detections=1 (cam_total=1140 det_total=1808 qd=1 drop=0)
+[TERMINAL] seq=6810 camera=cam-001 frame=1127 rois=2 labels=Green,Green
+[AGG] camera=cam-003 frame=1141 detections=2 (cam_total=1140 det_total=2394 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-004 frame=1142 detections=7 (cam_total=1140 det_total=8707 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1140 detections=2 (cam_total=1140 det_total=2178 qd=1 drop=0)
+[TERMINAL] seq=6840 camera=cam-004 frame=1143 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-006 frame=1140 detections=7 (cam_total=1140 det_total=7935 qd=1 drop=0)
+[TERMINAL] seq=6870 camera=cam-003 frame=1151 rois=2 labels=Green,Human
+[faceinfer] hb vfps=39.6 ifps=39.8 pool=6[f5,q1,i0] queue=0 evict=1 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-002:VALID_EMPTY(age=74ms) | cam-003:VALID(age=96ms) | cam-004:VALID(age=90ms) | cam-001:VALID_EMPTY(age=103ms) copy_p50/95/99=95/171/203us tip_p50/95/99=135/218/263us infer_p50/95/99=13147/16519/17790us
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-001 frame=1141 detections=1 (cam_total=1140 det_total=1748 qd=1 drop=0)
+[TERMINAL] seq=6900 camera=cam-001 frame=1142 rois=1 labels=Green
+[TERMINAL] seq=6930 camera=cam-004 frame=1158 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q0,i1] queue=0 evict=0 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-005:VALID(age=103ms) | cam-006:VALID(age=93ms) copy_p50/95/99=95/151/199us tip_p50/95/99=144/214/255us infer_p50/95/99=14010/18461/19277us
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=6960 camera=cam-001 frame=1152 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1170 det_frame=1169 age_ms=125 have_state=1 pts=0:01:58.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1170 det_frame=1169 age_ms=125 have_state=1 pts=0:01:58.116104114
+[AGG] camera=cam-002 frame=1172 detections=1 (cam_total=1170 det_total=1846 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1170 det_frame=1169 age_ms=104 have_state=1 pts=0:01:58.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1170 det_frame=1169 age_ms=104 have_state=1 pts=0:01:58.417558750
+[TERMINAL] seq=6990 camera=cam-003 frame=1171 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=1171 detections=2 (cam_total=1170 det_total=2456 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1170 det_frame=1169 age_ms=124 have_state=1 pts=0:01:58.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1170 det_frame=1169 age_ms=124 have_state=1 pts=0:01:58.723037291
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=1172 detections=7 (cam_total=1170 det_total=8917 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1170 det_frame=1169 age_ms=102 have_state=1 pts=0:01:59.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1170 det_frame=1169 age_ms=102 have_state=1 pts=0:01:59.021263646
+[AGG] camera=cam-005 frame=1170 detections=3 (cam_total=1170 det_total=2254 qd=1 drop=0)
+[TERMINAL] seq=7020 camera=cam-002 frame=1179 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1170 det_frame=1169 age_ms=103 have_state=1 pts=0:01:59.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1170 det_frame=1169 age_ms=103 have_state=1 pts=0:01:59.319582968
+[AGG] camera=cam-006 frame=1170 detections=6 (cam_total=1170 det_total=8122 qd=1 drop=0)
+[TERMINAL] seq=7050 camera=cam-003 frame=1181 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1170 det_frame=1169 age_ms=103 have_state=1 pts=0:01:59.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1170 det_frame=1169 age_ms=103 have_state=1 pts=0:01:59.812608281
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-001 frame=1171 detections=1 (cam_total=1170 det_total=1783 qd=1 drop=0)
+[TERMINAL] seq=7080 camera=cam-002 frame=1189 rois=1 labels=Green
+[TERMINAL] seq=7110 camera=cam-002 frame=1194 rois=1 labels=Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=7140 camera=cam-006 frame=1187 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=1202 detections=1 (cam_total=1200 det_total=1890 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1201 detections=2 (cam_total=1200 det_total=2520 qd=1 drop=0)
+[TERMINAL] seq=7170 camera=cam-002 frame=1204 rois=1 labels=Green
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=88ms) | cam-003:VALID(age=104ms) | cam-004:VALID(age=70ms) | cam-001:VALID_EMPTY(age=95ms) copy_p50/95/99=95/150/205us tip_p50/95/99=139/206/267us infer_p50/95/99=13022/16744/17824us
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=1202 detections=7 (cam_total=1200 det_total=9126 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1200 detections=3 (cam_total=1200 det_total=2339 qd=1 drop=0)
+[TERMINAL] seq=7200 camera=cam-002 frame=1209 rois=2 labels=Green,Green
+[AGG] camera=cam-006 frame=1200 detections=8 (cam_total=1200 det_total=8340 qd=1 drop=0)
+[TERMINAL] seq=7230 camera=cam-002 frame=1214 rois=1 labels=Green
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=105ms) | cam-006:VALID(age=96ms) copy_p50/95/99=95/137/173us tip_p50/95/99=142/187/245us infer_p50/95/99=13957/18214/18999us
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-001 frame=1201 detections=1 (cam_total=1200 det_total=1814 qd=1 drop=0)
+[TERMINAL] seq=7260 camera=cam-002 frame=1219 rois=1 labels=Green
+[TERMINAL] seq=7290 camera=cam-003 frame=1221 rois=2 labels=Green,Human
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=7320 camera=cam-002 frame=1229 rois=1 labels=Green
+[AGG] camera=cam-002 frame=1232 detections=2 (cam_total=1230 det_total=1928 qd=1 drop=0)
+[TERMINAL] seq=7350 camera=cam-003 frame=1231 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=1231 detections=2 (cam_total=1230 det_total=2582 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-004 frame=1232 detections=7 (cam_total=1230 det_total=9336 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1230 detections=2 (cam_total=1230 det_total=2383 qd=1 drop=0)
+[TERMINAL] seq=7380 camera=cam-006 frame=1227 rois=6 labels=Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-006 frame=1230 detections=8 (cam_total=1230 det_total=8578 qd=1 drop=0)
+[TERMINAL] seq=7410 camera=cam-004 frame=1238 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1231 detections=1 (cam_total=1230 det_total=1849 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=7440 camera=cam-003 frame=1246 rois=2 labels=Green,Human
+[TERMINAL] seq=7470 camera=cam-006 frame=1242 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=40.2 ifps=40.0 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=103ms) | cam-003:VALID(age=87ms) | cam-004:VALID(age=73ms) | cam-001:VALID_EMPTY(age=94ms) copy_p50/95/99=95/167/217us tip_p50/95/99=139/221/282us infer_p50/95/99=13057/16567/18113us
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=7500 camera=cam-006 frame=1247 rois=6 labels=Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1260 det_frame=1259 age_ms=114 have_state=1 pts=0:02:07.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1260 det_frame=1259 age_ms=114 have_state=1 pts=0:02:07.116104114
+[AGG] camera=cam-002 frame=1262 detections=2 (cam_total=1260 det_total=1970 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1260 det_frame=1259 age_ms=104 have_state=1 pts=0:02:07.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1260 det_frame=1259 age_ms=104 have_state=1 pts=0:02:07.417558750
+[TERMINAL] seq=7530 camera=cam-003 frame=1261 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=1261 detections=2 (cam_total=1260 det_total=2646 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1260 det_frame=1259 age_ms=113 have_state=1 pts=0:02:07.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1260 det_frame=1259 age_ms=113 have_state=1 pts=0:02:07.723037291
+[faceinfer] hb vfps=20.1 ifps=20.1 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-005:VALID(age=21ms) | cam-006:VALID(age=112ms) copy_p50/95/99=94/163/190us tip_p50/95/99=140/228/297us infer_p50/95/99=13921/18343/19221us
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-004 frame=1262 detections=7 (cam_total=1260 det_total=9546 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1260 det_frame=1259 age_ms=88 have_state=1 pts=0:02:08.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1260 det_frame=1259 age_ms=88 have_state=1 pts=0:02:08.021263646
+[AGG] camera=cam-005 frame=1260 detections=1 (cam_total=1260 det_total=2431 qd=1 drop=0)
+[TERMINAL] seq=7560 camera=cam-001 frame=1252 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1260 det_frame=1259 age_ms=92 have_state=1 pts=0:02:08.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1260 det_frame=1259 age_ms=92 have_state=1 pts=0:02:08.319582968
+[AGG] camera=cam-006 frame=1260 detections=5 (cam_total=1260 det_total=8802 qd=1 drop=0)
+[TERMINAL] seq=7590 camera=cam-004 frame=1268 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1260 det_frame=1259 age_ms=74 have_state=1 pts=0:02:08.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1260 det_frame=1259 age_ms=74 have_state=1 pts=0:02:08.812608281
+[AGG] camera=cam-001 frame=1261 detections=1 (cam_total=1260 det_total=1885 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=7620 camera=cam-002 frame=1279 rois=0 labels=
+[TERMINAL] seq=7650 camera=cam-002 frame=1284 rois=1 labels=Green
+[OV-NATIVE] rois=1 faces=1 decision=1 (no property set)
+[TERMINAL] seq=7680 camera=cam-006 frame=1277 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=1292 detections=2 (cam_total=1290 det_total=2016 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1291 detections=2 (cam_total=1290 det_total=2708 qd=1 drop=0)
+[TERMINAL] seq=7710 camera=cam-002 frame=1294 rois=1 labels=Green
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[AGG] camera=cam-004 frame=1292 detections=7 (cam_total=1290 det_total=9755 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1290 detections=2 (cam_total=1290 det_total=2477 qd=1 drop=0)
+[TERMINAL] seq=7740 camera=cam-001 frame=1282 rois=2 labels=Green,Human
+[AGG] camera=cam-006 frame=1290 detections=8 (cam_total=1290 det_total=9038 qd=1 drop=0)
+[TERMINAL] seq=7770 camera=cam-003 frame=1301 rois=2 labels=Green,Human
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=96ms) | cam-003:VALID(age=115ms) | cam-004:VALID(age=83ms) | cam-001:VALID_EMPTY(age=104ms) copy_p50/95/99=96/165/220us tip_p50/95/99=142/219/264us infer_p50/95/99=13142/16910/17993us
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-001 frame=1291 detections=2 (cam_total=1290 det_total=1938 qd=1 drop=0)
+[TERMINAL] seq=7800 camera=cam-001 frame=1292 rois=1 labels=Green
+[TERMINAL] seq=7830 camera=cam-006 frame=1302 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q0,i1] queue=0 evict=0 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-005:VALID(age=18ms) | cam-006:VALID(age=112ms) copy_p50/95/99=94/161/198us tip_p50/95/99=143/229/297us infer_p50/95/99=14001/18325/18752us
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=7860 camera=cam-004 frame=1313 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=1322 detections=2 (cam_total=1320 det_total=2054 qd=1 drop=0)
+[TERMINAL] seq=7890 camera=cam-003 frame=1321 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=1321 detections=2 (cam_total=1320 det_total=2772 qd=1 drop=0)
+[AGG] camera=cam-004 frame=1322 detections=7 (cam_total=1320 det_total=9964 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-005 frame=1320 detections=2 (cam_total=1320 det_total=2557 qd=1 drop=0)
+[TERMINAL] seq=7920 camera=cam-004 frame=1323 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-006 frame=1320 detections=7 (cam_total=1320 det_total=9271 qd=1 drop=0)
+[TERMINAL] seq=7950 camera=cam-004 frame=1328 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1322 detections=2 (cam_total=1320 det_total=1975 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=7980 camera=cam-002 frame=1339 rois=2 labels=Green,Green
+[TERMINAL] seq=8010 camera=cam-004 frame=1338 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[TERMINAL] seq=8040 camera=cam-004 frame=1343 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1350 det_frame=1349 age_ms=106 have_state=1 pts=0:02:16.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1350 det_frame=1349 age_ms=106 have_state=1 pts=0:02:16.116104114
+[AGG] camera=cam-002 frame=1352 detections=1 (cam_total=1350 det_total=2091 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1350 det_frame=1349 age_ms=133 have_state=1 pts=0:02:16.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1350 det_frame=1349 age_ms=133 have_state=1 pts=0:02:16.417558750
+[TERMINAL] seq=8070 camera=cam-003 frame=1351 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=1351 detections=2 (cam_total=1350 det_total=2834 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1350 det_frame=1349 age_ms=102 have_state=1 pts=0:02:16.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1350 det_frame=1349 age_ms=102 have_state=1 pts=0:02:16.723037291
+[faceinfer] hb vfps=39.9 ifps=39.9 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=121ms) | cam-003:VALID(age=104ms) | cam-004:VALID(age=90ms) | cam-001:VALID_EMPTY(age=25ms) copy_p50/95/99=96/168/216us tip_p50/95/99=137/218/262us infer_p50/95/99=13195/16675/17597us
+[AGG] camera=cam-004 frame=1352 detections=7 (cam_total=1350 det_total=10179 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1350 det_frame=1349 age_ms=99 have_state=1 pts=0:02:17.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1350 det_frame=1349 age_ms=99 have_state=1 pts=0:02:17.021263646
+[AGG] camera=cam-005 frame=1350 detections=3 (cam_total=1350 det_total=2627 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=8100 camera=cam-004 frame=1353 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1350 det_frame=1349 age_ms=99 have_state=1 pts=0:02:17.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1350 det_frame=1349 age_ms=99 have_state=1 pts=0:02:17.319582968
+[AGG] camera=cam-006 frame=1350 detections=8 (cam_total=1350 det_total=9486 qd=1 drop=0)
+[TERMINAL] seq=8130 camera=cam-003 frame=1361 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1350 det_frame=1349 age_ms=62 have_state=1 pts=0:02:17.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1350 det_frame=1349 age_ms=62 have_state=1 pts=0:02:17.812608281
+[faceinfer] hb vfps=19.9 ifps=19.9 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=99ms) | cam-006:VALID_EMPTY(age=91ms) copy_p50/95/99=95/166/228us tip_p50/95/99=146/232/302us infer_p50/95/99=13897/18325/19207us
+[AGG] camera=cam-001 frame=1352 detections=2 (cam_total=1350 det_total=2033 qd=1 drop=0)
+[OV-NATIVE] rois=8 faces=0 decision=0 (no property set)
+[TERMINAL] seq=8160 camera=cam-004 frame=1363 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=8190 camera=cam-004 frame=1368 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=8220 camera=cam-004 frame=1373 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=1382 detections=1 (cam_total=1380 det_total=2125 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1381 detections=2 (cam_total=1380 det_total=2898 qd=1 drop=0)
+[TERMINAL] seq=8250 camera=cam-004 frame=1378 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-004 frame=1382 detections=7 (cam_total=1380 det_total=10393 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1380 detections=2 (cam_total=1380 det_total=2706 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=8280 camera=cam-004 frame=1383 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-006 frame=1380 detections=8 (cam_total=1380 det_total=9723 qd=1 drop=0)
+[TERMINAL] seq=8310 camera=cam-004 frame=1388 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1382 detections=1 (cam_total=1380 det_total=2092 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[TERMINAL] seq=8340 camera=cam-003 frame=1396 rois=2 labels=Green,Human
+[TERMINAL] seq=8370 camera=cam-001 frame=1387 rois=2 labels=Green,Human
+[faceinfer] hb vfps=40.2 ifps=40.0 pool=6[f3,q2,i1] queue=2 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=123ms) | cam-003:VALID(age=30ms) | cam-004:VALID(age=116ms) | cam-001:VALID_EMPTY(age=86ms) copy_p50/95/99=95/165/201us tip_p50/95/99=139/222/253us infer_p50/95/99=13149/16651/17563us
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[TERMINAL] seq=8400 camera=cam-001 frame=1392 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=1412 detections=1 (cam_total=1410 det_total=2159 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1411 detections=2 (cam_total=1410 det_total=2960 qd=1 drop=0)
+[TERMINAL] seq=8430 camera=cam-004 frame=1408 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-004 frame=1412 detections=7 (cam_total=1410 det_total=10608 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=104ms) | cam-006:VALID(age=95ms) copy_p50/95/99=94/160/244us tip_p50/95/99=144/218/301us infer_p50/95/99=13987/18196/18979us
+[AGG] camera=cam-005 frame=1410 detections=3 (cam_total=1410 det_total=2784 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=8460 camera=cam-004 frame=1413 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-006 frame=1410 detections=7 (cam_total=1410 det_total=9952 qd=1 drop=0)
+[TERMINAL] seq=8490 camera=cam-003 frame=1421 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1412 detections=2 (cam_total=1410 det_total=2156 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=8520 camera=cam-004 frame=1423 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=8550 camera=cam-004 frame=1428 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=8580 camera=cam-004 frame=1433 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1440 det_frame=1439 age_ms=112 have_state=1 pts=0:02:25.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1440 det_frame=1439 age_ms=112 have_state=1 pts=0:02:25.116104114
+[AGG] camera=cam-002 frame=1442 detections=1 (cam_total=1440 det_total=2201 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1440 det_frame=1439 age_ms=73 have_state=1 pts=0:02:25.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1440 det_frame=1439 age_ms=73 have_state=1 pts=0:02:25.417558750
+[AGG] camera=cam-003 frame=1441 detections=2 (cam_total=1440 det_total=3024 qd=1 drop=0)
+[TERMINAL] seq=8610 camera=cam-002 frame=1444 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1440 det_frame=1439 age_ms=102 have_state=1 pts=0:02:25.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1440 det_frame=1439 age_ms=102 have_state=1 pts=0:02:25.723037291
+[AGG] camera=cam-004 frame=1442 detections=7 (cam_total=1440 det_total=10822 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1440 det_frame=1439 age_ms=102 have_state=1 pts=0:02:26.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1440 det_frame=1439 age_ms=102 have_state=1 pts=0:02:26.021263646
+[AGG] camera=cam-005 frame=1440 detections=3 (cam_total=1440 det_total=2867 qd=1 drop=0)
+[TERMINAL] seq=8640 camera=cam-004 frame=1443 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1440 det_frame=1439 age_ms=106 have_state=1 pts=0:02:26.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1440 det_frame=1439 age_ms=106 have_state=1 pts=0:02:26.319582968
+[AGG] camera=cam-006 frame=1440 detections=7 (cam_total=1440 det_total=10156 qd=1 drop=0)
+[TERMINAL] seq=8670 camera=cam-004 frame=1448 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1440 det_frame=1439 age_ms=108 have_state=1 pts=0:02:26.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1440 det_frame=1439 age_ms=108 have_state=1 pts=0:02:26.812608281
+[faceinfer] hb vfps=39.9 ifps=40.1 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=125ms) | cam-003:VALID(age=34ms) | cam-004:VALID(age=108ms) | cam-001:VALID_EMPTY(age=25ms) copy_p50/95/99=95/170/226us tip_p50/95/99=141/221/319us infer_p50/95/99=13143/16949/18082us
+[AGG] camera=cam-001 frame=1442 detections=1 (cam_total=1440 det_total=2198 qd=1 drop=0)
+[TERMINAL] seq=8700 camera=cam-002 frame=1459 rois=1 labels=Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=8730 camera=cam-003 frame=1461 rois=2 labels=Green,Human
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=105ms) | cam-006:VALID(age=96ms) copy_p50/95/99=94/160/233us tip_p50/95/99=144/222/283us infer_p50/95/99=14028/18389/18979us
+[TERMINAL] seq=8760 camera=cam-003 frame=1466 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=1472 detections=2 (cam_total=1470 det_total=2244 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1471 detections=2 (cam_total=1470 det_total=3086 qd=1 drop=0)
+[TERMINAL] seq=8790 camera=cam-004 frame=1468 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-004 frame=1472 detections=7 (cam_total=1470 det_total=11037 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1470 detections=3 (cam_total=1470 det_total=2950 qd=1 drop=0)
+[TERMINAL] seq=8820 camera=cam-003 frame=1476 rois=2 labels=Green,Human
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[AGG] camera=cam-006 frame=1470 detections=8 (cam_total=1470 det_total=10388 qd=1 drop=0)
+[TERMINAL] seq=8850 camera=cam-003 frame=1481 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1472 detections=2 (cam_total=1470 det_total=2237 qd=1 drop=0)
+[TERMINAL] seq=8880 camera=cam-004 frame=1483 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[TERMINAL] seq=8910 camera=cam-004 frame=1488 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=8940 camera=cam-004 frame=1493 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=1502 detections=2 (cam_total=1500 det_total=2308 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1501 detections=2 (cam_total=1500 det_total=3150 qd=1 drop=0)
+[TERMINAL] seq=8970 camera=cam-002 frame=1504 rois=3 labels=Green,Green,Human
+[faceinfer] hb vfps=39.7 ifps=39.9 pool=6[f5,q1,i0] queue=0 evict=1 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-002:VALID_EMPTY(age=76ms) | cam-003:VALID(age=90ms) | cam-004:VALID(age=64ms) | cam-001:VALID_EMPTY(age=84ms) copy_p50/95/99=93/165/203us tip_p50/95/99=136/209/256us infer_p50/95/99=13117/16928/18220us
+[AGG] camera=cam-004 frame=1502 detections=7 (cam_total=1500 det_total=11251 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1500 detections=2 (cam_total=1500 det_total=3029 qd=1 drop=0)
+[TERMINAL] seq=9000 camera=cam-004 frame=1503 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-006 frame=1500 detections=7 (cam_total=1500 det_total=10603 qd=1 drop=0)
+[TERMINAL] seq=9030 camera=cam-004 frame=1508 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=96ms) | cam-006:VALID_EMPTY(age=105ms) copy_p50/95/99=94/142/182us tip_p50/95/99=144/206/249us infer_p50/95/99=14102/18191/18643us
+[AGG] camera=cam-001 frame=1502 detections=1 (cam_total=1500 det_total=2274 qd=1 drop=0)
+[TERMINAL] seq=9060 camera=cam-004 frame=1513 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=9090 camera=cam-003 frame=1521 rois=2 labels=Green,Human
+[TERMINAL] seq=9120 camera=cam-004 frame=1523 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1530 det_frame=1529 age_ms=111 have_state=1 pts=0:02:34.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1530 det_frame=1529 age_ms=111 have_state=1 pts=0:02:34.116104114
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=1532 detections=1 (cam_total=1530 det_total=2359 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1530 det_frame=1529 age_ms=118 have_state=1 pts=0:02:34.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1530 det_frame=1529 age_ms=118 have_state=1 pts=0:02:34.417558750
+[AGG] camera=cam-003 frame=1531 detections=2 (cam_total=1530 det_total=3212 qd=1 drop=0)
+[TERMINAL] seq=9150 camera=cam-002 frame=1534 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1530 det_frame=1529 age_ms=110 have_state=1 pts=0:02:34.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1530 det_frame=1529 age_ms=110 have_state=1 pts=0:02:34.723037291
+[AGG] camera=cam-004 frame=1532 detections=7 (cam_total=1530 det_total=11466 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1530 det_frame=1529 age_ms=96 have_state=1 pts=0:02:35.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1530 det_frame=1529 age_ms=96 have_state=1 pts=0:02:35.021263646
+[AGG] camera=cam-005 frame=1530 detections=3 (cam_total=1530 det_total=3117 qd=1 drop=0)
+[TERMINAL] seq=9180 camera=cam-004 frame=1533 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1530 det_frame=1529 age_ms=95 have_state=1 pts=0:02:35.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1530 det_frame=1529 age_ms=95 have_state=1 pts=0:02:35.319582968
+[AGG] camera=cam-006 frame=1530 detections=7 (cam_total=1530 det_total=10837 qd=1 drop=0)
+[TERMINAL] seq=9210 camera=cam-003 frame=1541 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1530 det_frame=1529 age_ms=97 have_state=1 pts=0:02:35.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1530 det_frame=1529 age_ms=97 have_state=1 pts=0:02:35.812608281
+[AGG] camera=cam-001 frame=1532 detections=2 (cam_total=1530 det_total=2310 qd=1 drop=0)
+[TERMINAL] seq=9240 camera=cam-004 frame=1543 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[TERMINAL] seq=9270 camera=cam-001 frame=1537 rois=1 labels=Green
+[faceinfer] hb vfps=39.9 ifps=39.9 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=90ms) | cam-003:VALID(age=105ms) | cam-004:VALID(age=75ms) | cam-001:VALID_EMPTY(age=99ms) copy_p50/95/99=95/175/217us tip_p50/95/99=138/216/273us infer_p50/95/99=13159/16664/17431us
+[TERMINAL] seq=9300 camera=cam-004 frame=1553 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[AGG] camera=cam-002 frame=1562 detections=2 (cam_total=1560 det_total=2402 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1561 detections=2 (cam_total=1560 det_total=3276 qd=1 drop=0)
+[TERMINAL] seq=9330 camera=cam-004 frame=1558 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=107ms) | cam-006:VALID(age=101ms) copy_p50/95/99=95/142/197us tip_p50/95/99=145/212/264us infer_p50/95/99=14045/18325/18840us
+[AGG] camera=cam-004 frame=1562 detections=7 (cam_total=1560 det_total=11680 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1560 detections=3 (cam_total=1560 det_total=3197 qd=1 drop=0)
+[TERMINAL] seq=9360 camera=cam-002 frame=1569 rois=3 labels=Green,Green,Human
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-006 frame=1560 detections=9 (cam_total=1560 det_total=11068 qd=1 drop=0)
+[TERMINAL] seq=9390 camera=cam-001 frame=1557 rois=1 labels=Green
+[TERMINAL] seq=9420 camera=cam-001 frame=1562 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=1562 detections=2 (cam_total=1560 det_total=2345 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=9450 camera=cam-004 frame=1578 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=9480 camera=cam-004 frame=1583 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[AGG] camera=cam-002 frame=1592 detections=2 (cam_total=1590 det_total=2473 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1591 detections=2 (cam_total=1590 det_total=3338 qd=1 drop=0)
+[TERMINAL] seq=9510 camera=cam-004 frame=1588 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-004 frame=1592 detections=7 (cam_total=1590 det_total=11895 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1590 detections=2 (cam_total=1590 det_total=3271 qd=1 drop=0)
+[TERMINAL] seq=9540 camera=cam-004 frame=1593 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[AGG] camera=cam-006 frame=1590 detections=8 (cam_total=1590 det_total=11304 qd=1 drop=0)
+[TERMINAL] seq=9570 camera=cam-004 frame=1598 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=40.4 ifps=40.0 pool=6[f3,q2,i1] queue=2 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=104ms) | cam-003:VALID(age=113ms) | cam-004:VALID(age=76ms) | cam-001:VALID_EMPTY(age=88ms) copy_p50/95/99=96/156/213us tip_p50/95/99=140/211/257us infer_p50/95/99=13027/16470/17683us
+[AGG] camera=cam-001 frame=1592 detections=2 (cam_total=1590 det_total=2393 qd=1 drop=0)
+[TERMINAL] seq=9600 camera=cam-003 frame=1606 rois=2 labels=Green,Human
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[TERMINAL] seq=9630 camera=cam-004 frame=1608 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=20.0 ifps=20.2 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-005:VALID(age=21ms) | cam-006:VALID(age=104ms) copy_p50/95/99=96/141/192us tip_p50/95/99=146/204/257us infer_p50/95/99=14043/18529/19283us
+[TERMINAL] seq=9660 camera=cam-003 frame=1616 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1620 det_frame=1619 age_ms=104 have_state=1 pts=0:02:43.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1620 det_frame=1619 age_ms=104 have_state=1 pts=0:02:43.116104114
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[AGG] camera=cam-002 frame=1622 detections=4 (cam_total=1620 det_total=2545 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1620 det_frame=1619 age_ms=118 have_state=1 pts=0:02:43.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1620 det_frame=1619 age_ms=118 have_state=1 pts=0:02:43.417558750
+[TERMINAL] seq=9690 camera=cam-003 frame=1621 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=1621 detections=2 (cam_total=1620 det_total=3402 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1620 det_frame=1619 age_ms=77 have_state=1 pts=0:02:43.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1620 det_frame=1619 age_ms=77 have_state=1 pts=0:02:43.723037291
+[AGG] camera=cam-004 frame=1622 detections=7 (cam_total=1620 det_total=12109 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1620 det_frame=1619 age_ms=104 have_state=1 pts=0:02:44.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1620 det_frame=1619 age_ms=104 have_state=1 pts=0:02:44.021263646
+[AGG] camera=cam-005 frame=1620 detections=3 (cam_total=1620 det_total=3345 qd=1 drop=0)
+[TERMINAL] seq=9720 camera=cam-001 frame=1613 rois=3 labels=Green,Green,Green
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1620 det_frame=1619 age_ms=103 have_state=1 pts=0:02:44.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1620 det_frame=1619 age_ms=103 have_state=1 pts=0:02:44.319582968
+[AGG] camera=cam-006 frame=1620 detections=8 (cam_total=1620 det_total=11541 qd=1 drop=0)
+[TERMINAL] seq=9750 camera=cam-003 frame=1632 rois=3 labels=Green,Green,Human
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1620 det_frame=1619 age_ms=98 have_state=1 pts=0:02:44.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1620 det_frame=1619 age_ms=98 have_state=1 pts=0:02:44.812608281
+[TERMINAL] seq=9780 camera=cam-002 frame=1640 rois=1 labels=Green
+[AGG] camera=cam-001 frame=1623 detections=2 (cam_total=1620 det_total=2444 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=9810 camera=cam-005 frame=1636 rois=2 labels=Green,Green
+[TERMINAL] seq=9840 camera=cam-006 frame=1638 rois=9 labels=Green,Green,Green,Green,Green,Green,Green,Green,Green
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[AGG] camera=cam-002 frame=1652 detections=2 (cam_total=1650 det_total=2589 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1651 detections=2 (cam_total=1650 det_total=3464 qd=1 drop=0)
+[TERMINAL] seq=9870 camera=cam-001 frame=1638 rois=1 labels=Green
+[faceinfer] hb vfps=39.5 ifps=39.9 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=110ms) | cam-003:VALID(age=16ms) | cam-004:VALID(age=89ms) | cam-001:VALID_EMPTY(age=103ms) copy_p50/95/99=94/150/183us tip_p50/95/99=137/201/242us infer_p50/95/99=13154/17264/17683us
+[AGG] camera=cam-004 frame=1652 detections=7 (cam_total=1650 det_total=12324 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1650 detections=2 (cam_total=1650 det_total=3414 qd=1 drop=0)
+[TERMINAL] seq=9900 camera=cam-003 frame=1657 rois=2 labels=Green,Human
+[OV-NATIVE] rois=6 faces=1 decision=1 (no property set)
+[AGG] camera=cam-006 frame=1650 detections=6 (cam_total=1650 det_total=11765 qd=1 drop=0)
+[TERMINAL] seq=9930 camera=cam-002 frame=1665 rois=1 labels=Green
+[faceinfer] hb vfps=19.9 ifps=19.9 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=94ms) | cam-006:VALID(age=85ms) copy_p50/95/99=96/141/182us tip_p50/95/99=146/196/238us infer_p50/95/99=14074/18529/19283us
+[TERMINAL] seq=9960 camera=cam-001 frame=1653 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1653 detections=2 (cam_total=1650 det_total=2494 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=9990 camera=cam-003 frame=1672 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=10020 camera=cam-002 frame=1680 rois=2 labels=Green,Human
+[OV-NATIVE] rois=6 faces=1 decision=1 (no property set)
+[AGG] camera=cam-002 frame=1682 detections=1 (cam_total=1680 det_total=2629 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1681 detections=2 (cam_total=1680 det_total=3528 qd=1 drop=0)
+[TERMINAL] seq=10050 camera=cam-003 frame=1682 rois=2 labels=Green,Human
+[AGG] camera=cam-004 frame=1682 detections=7 (cam_total=1680 det_total=12538 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1680 detections=3 (cam_total=1680 det_total=3496 qd=1 drop=0)
+[TERMINAL] seq=10080 camera=cam-001 frame=1673 rois=2 labels=Green,Human
+[AGG] camera=cam-006 frame=1680 detections=6 (cam_total=1680 det_total=11969 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[TERMINAL] seq=10110 camera=cam-003 frame=1692 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=10140 camera=cam-001 frame=1683 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1683 detections=2 (cam_total=1680 det_total=2554 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=10170 camera=cam-001 frame=1688 rois=2 labels=Green,Human
+[faceinfer] hb vfps=40.3 ifps=39.9 pool=6[f3,q2,i1] queue=2 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=120ms) | cam-003:VALID(age=29ms) | cam-004:VALID(age=105ms) | cam-001:VALID_EMPTY(age=135ms) copy_p50/95/99=95/166/211us tip_p50/95/99=138/216/287us infer_p50/95/99=13022/17085/17830us
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1710 det_frame=1709 age_ms=63 have_state=1 pts=0:02:52.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1710 det_frame=1709 age_ms=63 have_state=1 pts=0:02:52.116104114
+[TERMINAL] seq=10200 camera=cam-002 frame=1710 rois=1 labels=Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-002 frame=1712 detections=1 (cam_total=1710 det_total=2680 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1710 det_frame=1709 age_ms=104 have_state=1 pts=0:02:52.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1710 det_frame=1709 age_ms=104 have_state=1 pts=0:02:52.417558750
+[AGG] camera=cam-003 frame=1711 detections=2 (cam_total=1710 det_total=3590 qd=1 drop=0)
+[TERMINAL] seq=10230 camera=cam-001 frame=1698 rois=3 labels=Green,Green,Human
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1710 det_frame=1709 age_ms=114 have_state=1 pts=0:02:52.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1710 det_frame=1709 age_ms=114 have_state=1 pts=0:02:52.723037291
+[AGG] camera=cam-004 frame=1712 detections=7 (cam_total=1710 det_total=12753 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=108ms) | cam-006:VALID_EMPTY(age=102ms) copy_p50/95/99=95/133/173us tip_p50/95/99=147/191/232us infer_p50/95/99=14094/18103/19232us
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1710 det_frame=1709 age_ms=108 have_state=1 pts=0:02:53.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1710 det_frame=1709 age_ms=108 have_state=1 pts=0:02:53.021263646
+[AGG] camera=cam-005 frame=1710 detections=3 (cam_total=1710 det_total=3580 qd=1 drop=0)
+[TERMINAL] seq=10260 camera=cam-001 frame=1703 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1710 det_frame=1709 age_ms=105 have_state=1 pts=0:02:53.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1710 det_frame=1709 age_ms=105 have_state=1 pts=0:02:53.319582968
+[AGG] camera=cam-006 frame=1710 detections=8 (cam_total=1710 det_total=12204 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=10290 camera=cam-005 frame=1716 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1710 det_frame=1709 age_ms=104 have_state=1 pts=0:02:53.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1710 det_frame=1709 age_ms=104 have_state=1 pts=0:02:53.812608281
+[TERMINAL] seq=10320 camera=cam-001 frame=1713 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1713 detections=2 (cam_total=1710 det_total=2610 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=10350 camera=cam-005 frame=1726 rois=3 labels=Green,Green,Green
+[TERMINAL] seq=10380 camera=cam-001 frame=1723 rois=1 labels=Green
+[AGG] camera=cam-002 frame=1742 detections=2 (cam_total=1740 det_total=2721 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-003 frame=1741 detections=2 (cam_total=1740 det_total=3654 qd=1 drop=0)
+[TERMINAL] seq=10410 camera=cam-002 frame=1745 rois=1 labels=Green
+[AGG] camera=cam-004 frame=1742 detections=7 (cam_total=1740 det_total=12967 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1740 detections=3 (cam_total=1740 det_total=3661 qd=1 drop=0)
+[TERMINAL] seq=10440 camera=cam-003 frame=1747 rois=2 labels=Green,Human
+[AGG] camera=cam-006 frame=1740 detections=8 (cam_total=1740 det_total=12432 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[TERMINAL] seq=10470 camera=cam-002 frame=1755 rois=1 labels=Green
+[faceinfer] hb vfps=40.0 ifps=40.2 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=28ms) | cam-003:VALID(age=37ms) | cam-004:VALID(age=109ms) | cam-001:VALID_EMPTY(age=130ms) copy_p50/95/99=97/167/261us tip_p50/95/99=145/237/347us infer_p50/95/99=13099/16961/17877us
+[TERMINAL] seq=10500 camera=cam-003 frame=1757 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1743 detections=2 (cam_total=1740 det_total=2652 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=10530 camera=cam-001 frame=1748 rois=2 labels=Green,Green
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=105ms) | cam-006:VALID(age=113ms) copy_p50/95/99=94/131/145us tip_p50/95/99=142/188/210us infer_p50/95/99=14052/18213/19232us
+[TERMINAL] seq=10560 camera=cam-001 frame=1753 rois=1 labels=Green
+[AGG] camera=cam-002 frame=1772 detections=1 (cam_total=1770 det_total=2766 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-003 frame=1771 detections=2 (cam_total=1770 det_total=3716 qd=1 drop=0)
+[TERMINAL] seq=10590 camera=cam-003 frame=1772 rois=3 labels=Green,Green,Human
+[AGG] camera=cam-004 frame=1772 detections=7 (cam_total=1770 det_total=13182 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1770 detections=3 (cam_total=1770 det_total=3745 qd=1 drop=0)
+[TERMINAL] seq=10620 camera=cam-002 frame=1780 rois=2 labels=Green,Green
+[AGG] camera=cam-006 frame=1770 detections=7 (cam_total=1770 det_total=12642 qd=1 drop=0)
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[TERMINAL] seq=10650 camera=cam-001 frame=1768 rois=1 labels=Green
+[TERMINAL] seq=10680 camera=cam-004 frame=1784 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1773 detections=1 (cam_total=1770 det_total=2688 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=1 decision=1 (no property set)
+[TERMINAL] seq=10710 camera=cam-003 frame=1792 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=10740 camera=cam-001 frame=1783 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1800 det_frame=1799 age_ms=101 have_state=1 pts=0:03:01.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1800 det_frame=1799 age_ms=101 have_state=1 pts=0:03:01.116104114
+[AGG] camera=cam-002 frame=1802 detections=2 (cam_total=1800 det_total=2813 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1800 det_frame=1799 age_ms=85 have_state=1 pts=0:03:01.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1800 det_frame=1799 age_ms=85 have_state=1 pts=0:03:01.417558750
+[OV-NATIVE] rois=8 faces=1 decision=1 (no property set)
+[AGG] camera=cam-003 frame=1801 detections=2 (cam_total=1800 det_total=3780 qd=1 drop=0)
+[TERMINAL] seq=10770 camera=cam-001 frame=1788 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1800 det_frame=1799 age_ms=108 have_state=1 pts=0:03:01.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1800 det_frame=1799 age_ms=108 have_state=1 pts=0:03:01.723037291
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=30ms) | cam-003:VALID(age=127ms) | cam-004:VALID(age=111ms) | cam-001:VALID_EMPTY(age=37ms) copy_p50/95/99=95/150/167us tip_p50/95/99=136/200/256us infer_p50/95/99=13144/17000/18077us
+[AGG] camera=cam-004 frame=1802 detections=7 (cam_total=1800 det_total=13396 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1800 det_frame=1799 age_ms=106 have_state=1 pts=0:03:02.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1800 det_frame=1799 age_ms=106 have_state=1 pts=0:03:02.021263646
+[AGG] camera=cam-005 frame=1800 detections=3 (cam_total=1800 det_total=3826 qd=1 drop=0)
+[TERMINAL] seq=10800 camera=cam-002 frame=1810 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1800 det_frame=1799 age_ms=102 have_state=1 pts=0:03:02.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1800 det_frame=1799 age_ms=102 have_state=1 pts=0:03:02.319582968
+[AGG] camera=cam-006 frame=1800 detections=7 (cam_total=1800 det_total=12856 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=10830 camera=cam-002 frame=1815 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1800 det_frame=1799 age_ms=114 have_state=1 pts=0:03:02.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1800 det_frame=1799 age_ms=114 have_state=1 pts=0:03:02.812608281
+[TERMINAL] seq=10860 camera=cam-003 frame=1817 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1803 detections=1 (cam_total=1800 det_total=2725 qd=1 drop=0)
+[faceinfer] hb vfps=19.8 ifps=20.0 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-005:VALID_EMPTY(age=102ms) | cam-006:VALID_EMPTY(age=95ms) copy_p50/95/99=94/141/164us tip_p50/95/99=141/199/237us infer_p50/95/99=14106/18242/19282us
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=10890 camera=cam-003 frame=1822 rois=2 labels=Green,Human
+[TERMINAL] seq=10920 camera=cam-001 frame=1813 rois=1 labels=Green
+[AGG] camera=cam-002 frame=1832 detections=1 (cam_total=1830 det_total=2854 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[AGG] camera=cam-003 frame=1831 detections=2 (cam_total=1830 det_total=3842 qd=1 drop=0)
+[TERMINAL] seq=10950 camera=cam-002 frame=1835 rois=1 labels=Green
+[AGG] camera=cam-004 frame=1832 detections=7 (cam_total=1830 det_total=13611 qd=1 drop=0)
+[AGG] camera=cam-005 frame=1830 detections=1 (cam_total=1830 det_total=3867 qd=1 drop=0)
+[TERMINAL] seq=10980 camera=cam-002 frame=1840 rois=1 labels=Green
+[AGG] camera=cam-006 frame=1830 detections=7 (cam_total=1830 det_total=13071 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=11010 camera=cam-003 frame=1842 rois=2 labels=Green,Human
+[TERMINAL] seq=11040 camera=cam-001 frame=1833 rois=1 labels=Green
+[AGG] camera=cam-001 frame=1833 detections=1 (cam_total=1830 det_total=2758 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=0 decision=0 (no property set)
+[TERMINAL] seq=11070 camera=cam-001 frame=1838 rois=1 labels=Green
+[faceinfer] hb vfps=39.7 ifps=39.9 pool=6[f5,q1,i0] queue=0 evict=1 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-002:VALID_EMPTY(age=83ms) | cam-003:VALID(age=102ms) | cam-004:VALID(age=71ms) | cam-001:VALID_EMPTY(age=91ms) copy_p50/95/99=94/151/207us tip_p50/95/99=138/202/260us infer_p50/95/99=13170/16904/17650us
+[TERMINAL] seq=11100 camera=cam-006 frame=1848 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=1862 detections=1 (cam_total=1860 det_total=2892 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[AGG] camera=cam-003 frame=1861 detections=2 (cam_total=1860 det_total=3906 qd=1 drop=0)
+[TERMINAL] seq=11130 camera=cam-005 frame=1856 rois=2 labels=Green,Human
+[AGG] camera=cam-004 frame=1862 detections=7 (cam_total=1860 det_total=13825 qd=1 drop=0)
+[faceinfer] hb vfps=19.8 ifps=19.8 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=96ms) | cam-006:VALID_EMPTY(age=104ms) copy_p50/95/99=94/142/168us tip_p50/95/99=135/204/229us infer_p50/95/99=14042/18213/19074us
+[TERMINAL] seq=11160 camera=cam-006 frame=1858 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-005 frame=1861 detections=1 (cam_total=1860 det_total=3906 qd=1 drop=0)
+[AGG] camera=cam-006 frame=1860 detections=7 (cam_total=1860 det_total=13283 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=0 decision=0 (no property set)
+[TERMINAL] seq=11190 camera=cam-006 frame=1863 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=1863 detections=2 (cam_total=1860 det_total=2795 qd=1 drop=0)
+[TERMINAL] seq=11220 camera=cam-005 frame=1871 rois=2 labels=Green,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=11250 camera=cam-001 frame=1868 rois=1 labels=Green
+[INFO] Signal received, stopping pipeline...
+[INFO] Shutting down WebRTC sessions...
+[WebrtcSignaling] Stopped
+[SessionManager] Shutdown complete
+[NatsAdapter] Disconnected.
+[TERMINAL] seq=11280 camera=cam-001 frame=1873 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=1890 det_frame=1889 age_ms=107 have_state=1 pts=0:03:10.116104114
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=1890 det_frame=1889 age_ms=107 have_state=1 pts=0:03:10.116104114
+[AGG] camera=cam-002 frame=1892 detections=1 (cam_total=1890 det_total=2932 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=1890 det_frame=1889 age_ms=102 have_state=1 pts=0:03:10.417558750
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=1890 det_frame=1889 age_ms=102 have_state=1 pts=0:03:10.417558750
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[AGG] camera=cam-003 frame=1891 detections=2 (cam_total=1890 det_total=3968 qd=1 drop=0)
+[TERMINAL] seq=11310 camera=cam-004 frame=1889 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=1890 det_frame=1889 age_ms=132 have_state=1 pts=0:03:10.723037291
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=1890 det_frame=1889 age_ms=132 have_state=1 pts=0:03:10.723037291
+[AGG] camera=cam-004 frame=1892 detections=7 (cam_total=1890 det_total=14040 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=1890 det_frame=1889 age_ms=92 have_state=1 pts=0:03:11.021263646
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=1890 det_frame=1889 age_ms=92 have_state=1 pts=0:03:11.021263646
+[TERMINAL] seq=11340 camera=cam-005 frame=1891 rois=3 labels=Green,Green,Human
+[AGG] camera=cam-005 frame=1891 detections=3 (cam_total=1890 det_total=3965 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=1890 det_frame=1889 age_ms=97 have_state=1 pts=0:03:11.319582968
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=1890 det_frame=1889 age_ms=97 have_state=1 pts=0:03:11.319582968
+[AGG] camera=cam-006 frame=1890 detections=7 (cam_total=1890 det_total=13495 qd=1 drop=0)
+[OV-NATIVE] rois=7 faces=1 decision=1 (no property set)
+[TERMINAL] seq=11370 camera=cam-003 frame=1902 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=1890 det_frame=1889 age_ms=105 have_state=1 pts=0:03:11.812608281
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1890 det_frame=1889 age_ms=105 have_state=1 pts=0:03:11.812608281
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-002:VALID_EMPTY(age=72ms) | cam-003:VALID(age=97ms) | cam-004:VALID(age=88ms) | cam-001:VALID_EMPTY(age=103ms) copy_p50/95/99=94/158/215us tip_p50/95/99=135/214/260us infer_p50/95/99=13042/17144/18167us
+[TERMINAL] seq=11400 camera=cam-002 frame=1910 rois=1 labels=Green
+[AGG] camera=cam-001 frame=1893 detections=1 (cam_total=1890 det_total=2831 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=11430 camera=cam-005 frame=1906 rois=2 labels=Green,Human
+[TERMINAL] seq=11460 camera=cam-005 frame=1911 rois=2 labels=Green,Human
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=108ms) | cam-006:VALID_EMPTY(age=98ms) copy_p50/95/99=94/140/168us tip_p50/95/99=134/193/226us infer_p50/95/99=13923/18149/19451us
+[AGG] camera=cam-002 frame=1922 detections=1 (cam_total=1920 det_total=2967 qd=1 drop=0)
+[AGG] camera=cam-003 frame=1921 detections=2 (cam_total=1920 det_total=4032 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=11490 camera=cam-005 frame=1916 rois=3 labels=Green,Green,Human
+[AGG] camera=cam-004 frame=1922 detections=7 (cam_total=1920 det_total=14254 qd=1 drop=0)
+[TERMINAL] seq=11520 camera=cam-004 frame=1924 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-005 frame=1921 detections=3 (cam_total=1920 det_total=4032 qd=1 drop=0)
+[AGG] camera=cam-006 frame=1920 detections=7 (cam_total=1920 det_total=13705 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=1 decision=1 (no property set)
+[TERMINAL] seq=11550 camera=cam-005 frame=1926 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1923 detections=1 (cam_total=1920 det_total=2887 qd=1 drop=0)
+[TERMINAL] seq=11580 camera=cam-004 frame=1933 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[NatsAdapter] nats_CloseAndWait failed: TIMEOUT
+[WARN] NATS internal threads did not stop cleanly
+[QnnInferencer] [QNN]  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+[QnnInferencer] [QNN]  <W> The device handle 0x5 was not found in current thread
+
+[QnnInferencer] [QNN]  <W> Failed to remove device handle 0x5 from LoggerSetupTask
+
+[QnnInferencer] Destroyed
+[FaceProcessor] Destroyed
+[QnnInferencer] [QNN]  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+[QnnInferencer] [QNN]  <W> The device handle 0x6 was not found in current thread
+
+[QnnInferencer] [QNN]  <W> Failed to remove device handle 0x6 from LoggerSetupTask
+
+[QnnInferencer] Destroyed
+[FaceProcessor] Destroyed
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:42:dummy call to rpcmem_deinit, rpcmem APIs will be used from libxdsprpc
+[INFO] Pipeline reached NULL; VPU decode sessions released.
+[NatsAdapter] Connection close callback timed out; quarantining generation 1
+[NatsAdapter] Disconnected.
+[AGG] SUMMARY cameras=6 total_submitted=11580 total_dropped=0
+[AGG]   camera=cam-001 submitted=1920 detections=2887 dropped=0 last_frame=1923 queue_depth=0
+[AGG]   camera=cam-002 submitted=1937 detections=2991 dropped=0 last_frame=1939 queue_depth=0
+[AGG]   camera=cam-003 submitted=1935 detections=4063 dropped=0 last_frame=1936 queue_depth=0
+[AGG]   camera=cam-004 submitted=1931 detections=14333 dropped=0 last_frame=1933 queue_depth=0
+[AGG]   camera=cam-005 submitted=1929 detections=4047 dropped=0 last_frame=1930 queue_depth=0
+[AGG]   camera=cam-006 submitted=1928 detections=13763 dropped=0 last_frame=1928 queue_depth=0
+[INFO] FrameEventPublisher: published=11580 republished=0 build_failures=0 publish_failures=0
+[INFO] CaptureTimestampTracker records=11589 misses=0 regress_fixes=0
+[INFO] AnomalySnapshotService enqueued=219 written_ok=218 write_failures=0 published=657 dropped=1 publish_failures=0
+[INFO] Releasing 6 owned splitter request pad(s)...
+GEM Handle for BO=61 closed 
+GEM Handle for BO=64 closed 
+GEM Handle for BO=68 closed 
+GEM Handle for BO=50 closed 
+GEM Handle for BO=71 closed 
+GEM Handle for BO=79 closed 
+GEM Handle for BO=59 closed 
+GEM Handle for BO=82 closed 
+GEM Handle for BO=62 closed 
+GEM Handle for BO=65 closed 
+GEM Handle for BO=48 closed 
+GEM Handle for BO=69 closed 
+GEM Handle for BO=51 closed 
+GEM Handle for BO=74 closed 
+GEM Handle for BO=57 closed 
+GEM Handle for BO=80 closed 
+GEM Handle for BO=60 closed 
+GEM Handle for BO=63 closed 
+GEM Handle for BO=66 closed 
+GEM Handle for BO=49 closed 
+GEM Handle for BO=70 closed 
+GEM Handle for BO=75 closed 
+GEM Handle for BO=58 closed 
+GEM Handle for BO=81 closed 
+GEM Handle for BO=55 closed 
+GEM Handle for BO=47 closed 
+GEM Handle for BO=44 closed 
+GEM Handle for BO=67 closed 
+GEM Handle for BO=77 closed 
+GEM Handle for BO=56 closed 
+GEM Handle for BO=52 closed 
+GEM Handle for BO=78 closed 
+GEM Handle for BO=45 closed 
+GEM Handle for BO=53 closed 
+GEM Handle for BO=32 closed 
+GEM Handle for BO=14 closed 
+GEM Handle for BO=35 closed 
+GEM Handle for BO=17 closed 
+GEM Handle for BO=27 closed 
+GEM Handle for BO=30 closed 
+GEM Handle for BO=12 closed 
+GEM Handle for BO=33 closed 
+GEM Handle for BO=15 closed 
+GEM Handle for BO=18 closed 
+GEM Handle for BO=28 closed 
+GEM Handle for BO=10 closed 
+GEM Handle for BO=31 closed 
+GEM Handle for BO=13 closed 
+GEM Handle for BO=34 closed 
+GEM Handle for BO=16 closed 
+GEM Handle for BO=19 closed 
+GEM Handle for BO=26 closed 
+GEM Handle for BO=29 closed 
+GEM Handle for BO=11 closed 
+GEM Handle for BO=7 closed 
+GEM Handle for BO=5 closed 
+GEM Handle for BO=76 closed 
+GEM Handle for BO=37 closed 
+GEM Handle for BO=22 closed 
+GEM Handle for BO=42 closed 
+GEM Handle for BO=25 closed 
+GEM Handle for BO=3 closed 
+GEM Handle for BO=41 closed 
+GEM Handle for BO=21 closed 
+GEM Handle for BO=6 closed 
+GEM Handle for BO=36 closed 
+GEM Handle for BO=40 closed 
+GEM Handle for BO=39 closed 
+GEM Handle for BO=46 closed 
+GEM Handle for BO=24 closed 
+GEM Handle for BO=9 closed 
+GEM Handle for BO=43 closed 
+GEM Handle for BO=23 closed 
+GEM Handle for BO=8 closed 
+GEM Handle for BO=73 closed 
+GEM Handle for BO=72 closed 
+GEM Handle for BO=54 closed 
+GEM Handle for BO=38 closed 
+GEM Handle for BO=1 closed 
+GEM Handle for BO=20 closed 
+GEM Handle for BO=2 closed 
+GEM Handle for BO=4 closed 
+
+=== Frame Count Summary ===
+Camera            IN       OUT     delta
+cam-001         1923         0      1923
+cam-002         1939         0      1939
+cam-003         1936         0      1936
+cam-004         1933         0      1933
+cam-005         1930         0      1930
+cam-006         1928         0      1928
+----------------------------------------
+TOTAL          11589         0     11589
+[INFO] Done.

@@ -1,0 +1,11 @@
+[
+  {"id": 0, "color": "0x00FF00FF", "label": "Gesture"},
+  {"id": 1, "color": "0x00FF00FF", "label": "Green"},
+  {"id": 2, "color": "0xFFFF00FF", "label": "Green-Yellow"},
+  {"id": 3, "color": "0x00FF00FF", "label": "Hujman"},
+  {"id": 4, "color": "0xFF0000FF", "label": "Human"},
+  {"id": 5, "color": "0x808080FF", "label": "None"},
+  {"id": 6, "color": "0xFF0000FF", "label": "Red"},
+  {"id": 7, "color": "0xFFA500FF", "label": "Red-green"},
+  {"id": 8, "color": "0xFFFF00FF", "label": "Yellow"}
+]

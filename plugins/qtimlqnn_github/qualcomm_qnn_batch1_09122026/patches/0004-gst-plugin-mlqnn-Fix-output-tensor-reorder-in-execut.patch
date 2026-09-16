@@ -1,0 +1,77 @@
+From c71f302344a3be88eaa7d04c26238ef61d288efa Mon Sep 17 00:00:00 2001
+From: Boris Markov <mboris@qti.qualcomm.com>
+Date: Thu, 06 Aug 2026 11:01:50 +0300
+Subject: [PATCH 4/4] gst-plugin-mlqnn: Fix output tensor reorder in execute()
+
+When the tensors property is used and a reorder is needed,
+populate pointed each native output tensor's clientBuf
+at its own native block instead of its final destination block,
+so in the convert to float stage the not yet read tensors
+get overriden by earlier tensors.
+
+Resolve graphindices at populate time instead, so each native output
+tensor's clientBuf.data points directly at its final destination
+block before graphExecute() runs.
+
+Change-Id: I2a8109de05c5ec04e3c66303fa96d175daf0bf96
+Signed-off-by: Boris Markov <mboris@qti.qualcomm.com>
+Signed-off-by: Raja Ganapathi Busam <rbusam@qti.qualcomm.com>
+---
+ gst-plugin-mlqnn/ml-qnn-engine.cc | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
+
+diff --git a/gst-plugin-mlqnn/ml-qnn-engine.cc b/gst-plugin-mlqnn/ml-qnn-engine.cc
+index 6df3875..2b64666 100644
+--- a/gst-plugin-mlqnn/ml-qnn-engine.cc
++++ b/gst-plugin-mlqnn/ml-qnn-engine.cc
+@@ -1606,7 +1606,7 @@ gst_ml_qnn_engine_execute (GstMLQnnEngine *engine, GstMLFrame *inframe,
+   GstMLTensorMeta *mlmeta = NULL;
+   GstClockTime time = GST_CLOCK_TIME_NONE;
+   const GraphInfo_t *graph_info = engine->graph_infos[0];
+-  guint idx;
++  guint idx = 0, num = 0, size = 0;
+ 
+   if (GST_ML_FRAME_N_BLOCKS (inframe) != engine->ininfo->n_tensors) {
+     GST_WARNING ("Input buffer has %u memory blocks but engine requires %u!",
+@@ -1630,9 +1630,12 @@ gst_ml_qnn_engine_execute (GstMLQnnEngine *engine, GstMLFrame *inframe,
+   }
+ 
+   // populate output tensor data
+-  for (idx = 0; idx < graph_info->numOutputTensors; idx++) {
+-    Qnn_Tensor_t *tensor = &(graph_info->outputTensors[idx]);
+-    guint size = gst_ml_info_tensor_size (&(outframe->info), idx);
++  for (idx = 0; idx < engine->outinfo->n_tensors; idx++) {
++    num = (engine->graphindices != NULL) ?
++        g_array_index (engine->graphindices, guint, idx) : idx;
++
++    Qnn_Tensor_t *tensor = &(graph_info->outputTensors[num]);
++    size = gst_ml_info_tensor_size (&(outframe->info), idx);
+ 
+     QNN_TENSOR_CLIENTBUF (tensor).data = GST_ML_FRAME_BLOCK_DATA (outframe, idx);
+     QNN_TENSOR_CLIENTBUF (tensor).dataSize = size;
+@@ -1656,19 +1659,19 @@ gst_ml_qnn_engine_execute (GstMLQnnEngine *engine, GstMLFrame *inframe,
+     GST_ERROR ("Graph execution failed!");
+     return FALSE;
+   }
+-
++#if 0
+   for (idx = 0; idx < engine->ininfo->n_tensors; ++idx) {
+     Qnn_Tensor_t *tensor = &(graph_info->inputTensors[idx]);
+ 
+     if (engine->graphindices != NULL) {
+-      guint num = g_array_index (engine->graphindices, guint, idx);
++      num = g_array_index (engine->graphindices, guint, idx);
+       tensor = &(graph_info->inputTensors[num]);
+     }
+ 
+     mlmeta = gst_buffer_get_ml_tensor_meta_id (inframe->buffer, idx);
+     mlmeta->name = g_quark_from_string (QNN_TENSOR_NAME (tensor));
+   }
+-
++#endif
+   for (idx = 0; idx < engine->outinfo->n_tensors; ++idx) {
+     Qnn_Tensor_t *tensor = &(graph_info->outputTensors[idx]);
+ 
+-- 
+2.43.0
+

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O2 -g -DNDEBUG CMakeFiles/test_aiboxbatchgate.dir/test/batch/test_aiboxbatchgate.cpp.o -o test_aiboxbatchgate  -lgstreamer-1.0 -lgobject-2.0 -lglib-2.0 -lgstapp-1.0 -lgstbase-1.0 -lgstreamer-1.0 -lgobject-2.0 -lglib-2.0 -lgstapp-1.0 -lgstbase-1.0 

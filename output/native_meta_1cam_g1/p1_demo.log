@@ -1,0 +1,269 @@
+============================================================
+  AIBox Stream Pipeline Demo  v1.0.0
+============================================================
+[INFO] RLIMIT_NOFILE soft=65536 hard=65536
+[INFO] GStreamer initialized (version 1.24.2)
+[INFO] snapshot : /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/pipeline_otm_1cam_webrtc.txt
+[INFO] dump_plan_only : no
+[INFO] build_only     : no
+[INFO] run_seconds    : 0
+[INFO] run_forever    : yes
+[INFO] Snapshot loaded: demo_otm_1cam_webrtc
+[INFO]   streams   : 1
+[INFO]   algorithms: 1
+[INFO]   models    : 1
+[INFO] ExecutionPlan  : plan_demo_otm_1cam_webrtc
+[INFO]   stream_plans : 1
+[INFO]   algo_groups  : 1
+[INFO]   time_mux_grps: 1
+[INFO]   stage_plans  : 2
+[INFO]   chain_plans  : 1
+[INFO] Exported: ./output/execution_plan.json
+[INFO] Exported: ./output/pipeline_structure.txt
+[INFO] WebRTC annotated preview enabled
+[BATCH_DISPATCH] path=time_mux groups=1
+[webrtc] VPU budget OK: 1 dec + 0 webrtc_enc(build) + 0 rec_enc = 1 / 32 (lazy enc unless MAX_ENC set)
+[init] GstAiboxFrameMeta registration triggered (aiboxframemeta)
+failed to get driver name for fd 10
+MESA-LOADER: failed to retrieve device information
+failed to get driver name for fd 10
+[HTP] stage=stage_yellow stage_index=1 -> backend-device-id=1 (n_htp=2)
+[DBG class-filter] stage=stage_yellow class-filter="Green"
+[DBG module] stage=stage_yellow nick=yolo26-otm gtype=187650873511472
+[DBG module] enum_class=0xaaaadfa96050 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] stage=stage_human stage_index=2 -> backend-device-id=0 (n_htp=2)
+[DBG class-filter] stage=stage_human class-filter="Human"
+[DBG module] stage=stage_human nick=yolo26-otm gtype=187650873511472
+[DBG module] enum_class=0xaaaadfa96050 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[webrtc] overlay_tmux_group_0_0 before tee_post (writable DMA-BUF path)
+[webrtc lazy] tmux_group_0_0 slot0(cam-001): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[INFO] GstPipeline built successfully (P1: mux + decode + fakesink)
+[pad-dump] disabled (set AIBOX_WEBRTC_PAD_DUMP=1 to enable)
+[NatsAdapter] Connected to nats://localhost:4222 (client=aibox-pipeline-webrtc)
+[SessionManager] Initialized
+[SessionManager] Registered camera: cam-001 (lazy stub)
+[WebrtcSignaling] Subscribed to 5 wildcard subjects
+[SessionManager] Signaling started
+[INFO] Registering 1 appsink callbacks...
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO] Exported: ./output/pipeline_runtime.dot
+bash: scripts/render_dot.sh: No such file or directory
+[WARN] Dot render failed (graphviz installed?). Run: bash scripts/render_dot.sh ./output/pipeline_runtime.dot
+[NatsAdapter] Connected to nats://127.0.0.1:4222 (client=aibox-pipeline-detection)
+[INFO] FrameEventPublisher started (NATS subject: detection.frame)
+[INFO] AnomalySnapshotService started media_dir=/home/ubuntu/workspace/IoT_pipeline0825/media encoder_ready=yes thumb_encoder_ready=yes
+[INFO] Setting pipeline to PLAYING (run-forever; Ctrl+C / SIGTERM to stop)...
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:38:dummy call to rpcmem_init, rpcmem APIs will be used from libxdsprpc
+[INFO] set_state(PLAYING) ret=2
+[RTSP] cam=cam-001 pad=recv_rtp_src_0_2453052941_96: linked H264 video RTP -> depay
+Wed Sep 16 2026 12:07:08.050634: INFO: GPU alignment: 64
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+PFP: 0x016dc112, ME: 0x00000000
+Pre-rotation disabled !!!
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+Pre-rotation disabled !!!
+Wed Sep 16 2026 12:07:08.082155: Initilized EGL display version: 1.5
+[OV-NATIVE] rois=3 (no property set)
+[PIPELINE_READY] state=PLAYING
+[TERMINAL] seq=1 camera=cam-001 frame=1 rois=3 labels=Green,Green,Green
+[TERMINAL] seq=2 camera=cam-001 frame=2 rois=3 labels=Green,Green,Green
+[TERMINAL] seq=3 camera=cam-001 frame=3 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=4 camera=cam-001 frame=4 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=5 camera=cam-001 frame=5 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=6 camera=cam-001 frame=6 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=7 camera=cam-001 frame=7 rois=4 labels=Green,Green,Green,Green
+[TERMINAL] seq=8 camera=cam-001 frame=8 rois=4 labels=Green,Green,Green,Green
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=30 camera=cam-001 frame=30 rois=3 labels=Green,Green,Green
+[AGG] camera=cam-001 frame=30 detections=3 (cam_total=30 det_total=119 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=60 camera=cam-001 frame=60 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=60 detections=4 (cam_total=60 det_total=239 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+
+** (aibox_stream_pipeline_demo:26761): WARNING **: 12:07:18.035: v4l2h264dec_cam_001: 17 initial frames were not dequeued: bug in decoder -- please file a bug
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=90 det_frame=0 age_ms=0 have_state=0 pts=0:00:11.741905536
+[TERMINAL] seq=90 camera=cam-001 frame=90 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=90 detections=4 (cam_total=90 det_total=358 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=6 (no property set)
+[OV-NATIVE] rois=6 (no property set)
+[TERMINAL] seq=120 camera=cam-001 frame=120 rois=5 labels=Green,Green,Green,Human,Human
+[AGG] camera=cam-001 frame=120 detections=5 (cam_total=120 det_total=498 qd=1 drop=0)
+[OV-NATIVE] rois=6 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=150 camera=cam-001 frame=150 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=150 detections=4 (cam_total=150 det_total=669 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:20.741905536
+[TERMINAL] seq=180 camera=cam-001 frame=180 rois=6 labels=Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=180 detections=6 (cam_total=180 det_total=810 qd=1 drop=0)
+[OV-NATIVE] rois=5 (no property set)
+[OV-NATIVE] rois=3 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=210 camera=cam-001 frame=210 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=210 detections=4 (cam_total=210 det_total=933 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[TERMINAL] seq=240 camera=cam-001 frame=240 rois=5 labels=Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=240 detections=5 (cam_total=240 det_total=1055 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=270 det_frame=0 age_ms=0 have_state=0 pts=0:00:29.741905536
+[TERMINAL] seq=270 camera=cam-001 frame=270 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=270 detections=4 (cam_total=270 det_total=1183 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[WebrtcSignaling] RX: webrtc.cam.cam-001.session.new payload=135b json={"camera_id":"cam-001","session_id":"multi-cam-001-1789560456514-a8572cabb2987",
+[SessionManager] New session: sid='multi-cam-001-1789560456514-a8572cabb2987' cam='cam-001' ice_srv=1 payload_sid='multi-cam-001-1789560456514-a8572cabb2987'
+WRTC_TRACE mono_us=4705082251 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e0 event=SESSION_NEW_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=-
+[CP05-R1B] encoder state cam-001 ABSENT→QUEUED pending=1
+[CP05-R1B] encoder state cam-001 QUEUED→BUILDING (await first frame)
+[ENC-CFG] cam=cam-001 io=auto
+[ENC-CFG] cam=cam-001 postq=off
+[SessionManager] P3b enc structure ready: cam-001 encbin(q→vscale→caps→enc→parse) ghost→tee(top) gen=1 (await first frame for READY)
+[CP05-R1B] encoder cam-001 gen=1 structure up; Init now (offer not gated on first frame) pending_init=1
+[CP05-R1B] DeferredSessionInit cam=cam-001 sessions=1 proceeding while another encoder is BUILDING
+WRTC_TRACE mono_us=4705092695 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=0 gst_cur=void gst_pending=void result=ok detail=init
+WRTC_TRACE mono_us=4705104189 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=0 gst_cur=void gst_pending=void result=begin detail=init
+[WebRtcSession:multi-cam-001-1789560456514-a8572cabb2987] STUN: stun:stun.l.google.com:19302
+WRTC_TRACE mono_us=4705128883 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=RTP_SINK_REQUESTED qdepth=0 state=0 gst_cur=null gst_pending=void result=fail detail=sink_%u
+[WebRtcSession:multi-cam-001-1789560456514-a8572cabb2987] sink_%u request failed
+WRTC_TRACE mono_us=4705129255 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=TEE_LINKED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=tee_to_queue
+WRTC_TRACE mono_us=4705129324 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=SIGNALS_CONNECTED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=before_state_sync
+WRTC_TRACE mono_us=4705129344 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=STATE_SYNC_BEGIN qdepth=0 state=0 gst_cur=null gst_pending=void result=begin detail=session_elements
+WRTC_TRACE mono_us=4705130066 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=STATE_SYNC_RESULT qdepth=0 state=0 gst_cur=null gst_pending=playing result=ok detail=session_elements
+[WebRtcSession:multi-cam-001-1789560456514-a8572cabb2987] Init complete; offer via on-negotiation-needed + direct create-offer (codec-preferences armed)
+[Preview] wait-idr sid=multi-cam-001-1789560456514-a8572cabb2987 cam=cam-001 why=connect
+[WebRtcSession:multi-cam-001-1789560456514-a8572cabb2987] init_offer → create-offer (sync after sync_state)
+WRTC_TRACE mono_us=4705130201 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=INIT_CREATE_OFFER qdepth=0 state=1 gst_cur=null gst_pending=playing result=ok detail=sync_after_state
+WRTC_TRACE mono_us=4705130226 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=CREATE_OFFER_INVOKED qdepth=0 state=1 gst_cur=null gst_pending=playing result=begin detail=signal_or_renegotiate
+[WebRtcSession:multi-cam-001-1789560456514-a8572cabb2987] Creating offer...
+WRTC_TRACE mono_us=4705130305 tid=281472912640704 ctx=owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=OFFER_PROMISE_REPLIED qdepth=0 state=1 gst_cur=null gst_pending=playing result=fail detail=promise_error
+[WebRtcSession:multi-cam-001-1789560456514-a8572cabb2987] create-offer error (reply=err)
+[WebrtcSignaling] TX: webrtc.cam.cam-001.session.multi-cam-001-1789560456514-a8572cabb2987.state ice=checking peer=connecting ok=1
+[ERROR] Your GStreamer installation is missing a plug-in.
+[DEBUG] ../ext/webrtc/gstwebrtcbin.c(154): _have_nice_elements (): /GstPipeline:aibox_stream_pipeline_demo/GstWebRTCBin:webrtcbin_multi-cam-001-1789560456514-a8572cabb2987:
+libnice elements are not available
+[INFO] Stopping pipeline (exit_reason=4)...
+[INFO] Shutting down WebRTC sessions...
+[WebrtcSignaling] Stopped
+WRTC_TRACE mono_us=4705130571 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=1 gst_cur=null gst_pending=playing result=ok detail=close
+WRTC_TRACE mono_us=4705130589 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=1 gst_cur=null gst_pending=playing result=begin detail=close
+[WebRtcSession:multi-cam-001-1789560456514-a8572cabb2987] Closing (was 1)
+WRTC_TRACE mono_us=4705130615 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=SESSION_CLOSE_BEGIN qdepth=0 state=3 gst_cur=null gst_pending=playing result=begin detail=close
+[Gate3] teardown begin sid=multi-cam-001-1789560456514-a8572cabb2987 cam=cam-001
+[CP05-R2] idle-unlink sid=multi-cam-001-1789560456514-a8572cabb2987 cam=cam-001 why=idle pads_before=2 pads_after=1 enc_gen=1
+WRTC_TRACE mono_us=4705130732 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=PEER_IDLE_UNLINK qdepth=0 state=3 gst_cur=playing gst_pending=void result=ok detail=idle
+[Gate3] idle-probe armed sid=multi-cam-001-1789560456514-a8572cabb2987 cam=cam-001 probe_id=0
+WRTC_TRACE mono_us=4705130773 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=PEER_IDLE_PROBE_ARM qdepth=0 state=3 gst_cur=playing gst_pending=void result=ok detail=async
+[CP05-R2] private-null sid=multi-cam-001-1789560456514-a8572cabb2987 elem=webrtcbin ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=16
+WRTC_TRACE mono_us=4705130851 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=webrtcbin
+[CP05-R2] private-null sid=multi-cam-001-1789560456514-a8572cabb2987 elem=rtp_caps ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=18
+WRTC_TRACE mono_us=4705130930 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=rtp_caps
+[CP05-R2] private-null sid=multi-cam-001-1789560456514-a8572cabb2987 elem=pay ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=16
+WRTC_TRACE mono_us=4705131099 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=pay
+[CP05-R2] private-null sid=multi-cam-001-1789560456514-a8572cabb2987 elem=queue ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=277
+WRTC_TRACE mono_us=4705131489 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=queue
+[Gate3] teardown force-finish sid=multi-cam-001-1789560456514-a8572cabb2987 cam=cam-001
+WRTC_TRACE mono_us=4705131634 tid=281472912640704 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789560456514-a8572cabb2987 gen=s1/e1 event=SESSION_CLOSE_DONE qdepth=0 state=3 gst_cur=void gst_pending=void result=ok detail=force_finish
+[CP05-TD] Shutdown teardown begin cam=cam-001
+[CP05-TD] cam=cam-001 stage=begin
+[CP05-TD] cam=cam-001 stage=remove_enc_probe enter
+[CP05-TD] cam=cam-001 stage=remove_enc_probe exit
+[CP05-TD] cam=cam-001 stage=unlink_tee_perm enter
+[CP05-TD] cam=cam-001 stage=unlink_tee_perm exit
+[CP05-TD] cam=cam-001 stage=set_null enter
+[CP05-TD] cam=cam-001 stage=set_null exit
+[CP05-TD] cam=cam-001 stage=set_null enter
+[CP05-TD] cam=cam-001 stage=set_null exit
+[CP05-TD] cam=cam-001 stage=set_null enter
+[CP05-TD] cam=cam-001 stage=set_null exit
+[CP05-TD] cam=cam-001 stage=done
+[CP05-TD] Shutdown teardown done cam=cam-001
+[SessionManager] Shutdown complete
+[NatsAdapter] Disconnected.
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=5 (no property set)
+[TERMINAL] seq=300 camera=cam-001 frame=300 rois=4 labels=Green,Green,Green,Green
+[AGG] camera=cam-001 frame=300 detections=4 (cam_total=300 det_total=1317 qd=1 drop=0)
+[OV-NATIVE] rois=4 (no property set)
+[OV-NATIVE] rois=4 (no property set)
+[NatsAdapter] nats_CloseAndWait failed: TIMEOUT
+[WARN] NATS internal threads did not stop cleanly
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:42:dummy call to rpcmem_deinit, rpcmem APIs will be used from libxdsprpc
+[INFO] Pipeline reached NULL; VPU decode sessions released.
+[NatsAdapter] Connection close callback timed out; quarantining generation 1
+[NatsAdapter] Disconnected.
+[AGG] SUMMARY cameras=1 total_submitted=327 total_dropped=0
+[AGG]   camera=cam-001 submitted=327 detections=1434 dropped=0 last_frame=327 queue_depth=0
+[INFO] FrameEventPublisher: published=327 republished=0 build_failures=0 publish_failures=0
+[INFO] CaptureTimestampTracker records=327 misses=0 regress_fixes=0
+[INFO] AnomalySnapshotService enqueued=13 written_ok=13 write_failures=0 published=56 dropped=0 publish_failures=0
+[INFO] Releasing 1 owned splitter request pad(s)...
+GEM Handle for BO=10 closed 
+GEM Handle for BO=3 closed 
+GEM Handle for BO=9 closed 
+GEM Handle for BO=2 closed 
+GEM Handle for BO=15 closed 
+GEM Handle for BO=1 closed 
+GEM Handle for BO=14 closed 
+GEM Handle for BO=13 closed 
+GEM Handle for BO=6 closed 
+GEM Handle for BO=12 closed 
+GEM Handle for BO=5 closed 
+GEM Handle for BO=11 closed 
+GEM Handle for BO=4 closed 
+GEM Handle for BO=16 closed 
+GEM Handle for BO=17 closed 
+GEM Handle for BO=8 closed 
+GEM Handle for BO=7 closed 
+
+=== Frame Count Summary ===
+Camera            IN       OUT     delta
+cam-001          327         0       327
+----------------------------------------
+TOTAL            327         0       327
+[INFO] Done.

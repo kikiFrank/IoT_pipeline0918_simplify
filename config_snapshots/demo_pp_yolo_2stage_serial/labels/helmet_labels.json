@@ -1,0 +1,6 @@
+[
+  {"id": 0, "label": "A_helmet_not_worn", "color": "0xFF4444FF"},
+  {"id": 1, "label": "B_helmet_worn",     "color": "0x44FF44FF"},
+  {"id": 2, "label": "C_Motorcycle",      "color": "0x4444FFFF"},
+  {"id": 3, "label": "D_person",          "color": "0xFFFF44FF"}
+]

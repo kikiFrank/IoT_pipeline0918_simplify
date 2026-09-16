@@ -1,0 +1,1083 @@
+============================================================
+  AIBox Stream Pipeline Demo  v1.0.0
+============================================================
+[INFO] RLIMIT_NOFILE soft=65536 hard=65536
+[INFO] GStreamer initialized (version 1.24.2)
+[INFO] snapshot : /home/ubuntu/workspace/IoT_pipeline0825/test/face_accept/snapshots/pipeline_otm_6cam_gles_face.txt
+[INFO] dump_plan_only : no
+[INFO] build_only     : no
+[INFO] run_seconds    : 0
+[INFO] run_forever    : yes
+[INFO] Snapshot loaded: demo_otm_6cam_webrtc
+[INFO]   streams   : 6
+[INFO]   algorithms: 1
+[INFO]   models    : 2
+[INFO] ExecutionPlan  : plan_demo_otm_6cam_webrtc
+[INFO]   stream_plans : 6
+[INFO]   algo_groups  : 1
+[INFO]   time_mux_grps: 2
+[INFO]   stage_plans  : 4
+[INFO]   chain_plans  : 2
+[INFO] Exported: ./output/execution_plan.json
+[INFO] Exported: ./output/pipeline_structure.txt
+[INFO] WebRTC annotated preview enabled
+[BATCH_DISPATCH] path=time_mux groups=2
+[webrtc] VPU budget OK: 6 dec + 0 webrtc_enc(build) + 0 rec_enc = 6 / 32 (lazy enc unless MAX_ENC set)
+[init] GstAiboxFrameMeta registration triggered (aiboxframemeta)
+failed to get driver name for fd 22
+MESA-LOADER: failed to retrieve device information
+failed to get driver name for fd 22
+[HTP] stage=stage_yellow stage_index=1 -> backend-device-id=1 (n_htp=2)
+[DBG class-filter] stage=stage_yellow class-filter="Green"
+[DBG module] stage=stage_yellow nick=yolo26-otm gtype=187650529829408
+[DBG module] enum_class=0xaaaacb26a540 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] stage=stage_human stage_index=2 -> backend-device-id=0 (n_htp=2)
+[DBG class-filter] stage=stage_human class-filter="Human"
+[DBG module] stage=stage_human nick=yolo26-otm gtype=187650529829408
+[DBG module] enum_class=0xaaaacb26a540 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] face group=tmux_group_0_0 ordinal=0 -> backend-device-id=1 (n_htp=2)
+[face] group=tmux_group_0_0 cameras=4 -> pool-size=6
+[face] qtifaceinfer INLINE for group tmux_group_0_0
+[webrtc] overlay_tmux_group_0_0 before tee_post (writable DMA-BUF path)
+[webrtc lazy] tmux_group_0_0 slot0(cam-001): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_0 slot1(cam-002): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_0 slot2(cam-003): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_0 slot3(cam-004): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[HTP] stage=stage_yellow stage_index=3 -> backend-device-id=1 (n_htp=2)
+[DBG class-filter] stage=stage_yellow class-filter="Green"
+[DBG module] stage=stage_yellow nick=yolo26-otm gtype=187650529829408
+[DBG module] enum_class=0xaaaacb26a540 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] stage=stage_human stage_index=4 -> backend-device-id=0 (n_htp=2)
+[DBG class-filter] stage=stage_human class-filter="Human"
+[DBG module] stage=stage_human nick=yolo26-otm gtype=187650529829408
+[DBG module] enum_class=0xaaaacb26a540 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] face group=tmux_group_0_1 ordinal=1 -> backend-device-id=0 (n_htp=2)
+[face] group=tmux_group_0_1 cameras=2 -> pool-size=4
+[face] qtifaceinfer INLINE for group tmux_group_0_1
+[webrtc] overlay_tmux_group_0_1 before tee_post (writable DMA-BUF path)
+[webrtc lazy] tmux_group_0_1 slot0(cam-005): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_1 slot1(cam-006): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[INFO] GstPipeline built successfully (P1: mux + decode + fakesink)
+[pad-dump] disabled (set AIBOX_WEBRTC_PAD_DUMP=1 to enable)
+[NatsAdapter] Connected to nats://localhost:4222 (client=aibox-pipeline-webrtc)
+[SessionManager] Initialized
+[SessionManager] Registered camera: cam-006 (lazy stub)
+[SessionManager] Registered camera: cam-005 (lazy stub)
+[SessionManager] Registered camera: cam-004 (lazy stub)
+[SessionManager] Registered camera: cam-003 (lazy stub)
+[SessionManager] Registered camera: cam-002 (lazy stub)
+[SessionManager] Registered camera: cam-001 (lazy stub)
+[WebrtcSignaling] Subscribed to 5 wildcard subjects
+[SessionManager] Signaling started
+[INFO] Registering 2 appsink callbacks...
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO] Exported: ./output/pipeline_runtime.dot
+bash: scripts/render_dot.sh: No such file or directory
+[WARN] Dot render failed (graphviz installed?). Run: bash scripts/render_dot.sh ./output/pipeline_runtime.dot
+[NatsAdapter] Connected to nats://127.0.0.1:4222 (client=aibox-pipeline-detection)
+[INFO] FrameEventPublisher started (NATS subject: detection.frame)
+[INFO] AnomalySnapshotService started media_dir=/home/ubuntu/workspace/IoT_pipeline0825/media encoder_ready=yes thumb_encoder_ready=yes
+[INFO] Setting pipeline to PLAYING (run-forever; Ctrl+C / SIGTERM to stop)...
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:38:dummy call to rpcmem_init, rpcmem APIs will be used from libxdsprpc
+[faceinfer] async worker started pool=4 worker_slots=4 ttl=250ms
+[faceinfer] async worker started pool=6 worker_slots=6 ttl=250ms
+[INFO] set_state(PLAYING) ret=2
+[RTSP] cam=cam-006 pad=recv_rtp_src_0_2480639153_96: linked H264 video RTP -> depay
+[FaceConfig] Loaded from: /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/face_config.json
+  scrfd_model:   /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../data/models/face/det_2.5g_qcs9075.bin
+  arcface_model: (disabled)
+  kernel_path:   /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels
+  conf=0.75  nms=0.40  max_faces=32
+[faceinfer] init config-path=/home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/face_config.json backend-device-id=0
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+PFP: 0x016dc112, ME: 0x00000000
+Pre-rotation disabled !!!
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+Pre-rotation disabled !!!
+Wed Sep 16 2026 13:36:30.630401: Initilized EGL display version: 1.5
+[FacePreprocess] built /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels/scrfd_preprocess.cl → kernel 'scrfd_preprocess'
+[FacePreprocess] built /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels/arcface_preprocess.cl → kernel 'arcface_preprocess'
+[DmaBuffer] Init ok: fd=130 size=4915200 vaddr=0xfffe7425f000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffefc0d53f0
+[DmaBuffer] Init ok: fd=131 size=150528 vaddr=0xfffe943ef000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffefc2628d0
+[FacePreprocess] Init ok: scrfd_out=0xfffe7425f000(130) arcface_out=0xfffe943ef000(131)
+[FaceProcessor] FacePreprocess initialized
+[FaceProcessor] SCRFD HTP backend-device-id=0
+[QnnInferencer] deviceCreate OK deviceId=0
+[QnnInferencer] Phase A (LoadBackend) OK
+[QnnInferencer] Phase B (LoadSystemLib) OK
+[QnnInferencer] Loaded model binary: 2932736 bytes
+[QnnInferencer] Found 1 graph(s) in model
+[QnnInferencer] [QNN]  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+[RTSP] cam=cam-002 pad=recv_rtp_src_0_765979336_96: linked H264 video RTP -> depay
+[QnnInferencer] Phase C (LoadCachedGraphs) OK
+[RTSP] cam=cam-005 pad=recv_rtp_src_0_3570382504_96: linked H264 video RTP -> depay
+[QnnInferencer] Input tensor 'input_1': rank=4, dims=[1,3,640,640], elements=1228800, dtype=0x232, bytes=4915200
+[QnnInferencer] Output tensor[0] tensor 'output_0': rank=2, dims=[12800,1], elements=12800, dtype=0x232, bytes=51200
+[QnnInferencer] Output tensor[1] tensor 'output_3': rank=2, dims=[12800,4], elements=51200, dtype=0x232, bytes=204800
+[QnnInferencer] Output tensor[2] tensor 'output_6': rank=2, dims=[12800,10], elements=128000, dtype=0x232, bytes=512000
+[QnnInferencer] Output tensor[3] tensor 'output_1': rank=2, dims=[3200,1], elements=3200, dtype=0x232, bytes=12800
+[QnnInferencer] Output tensor[4] tensor 'output_4': rank=2, dims=[3200,4], elements=12800, dtype=0x232, bytes=51200
+[QnnInferencer] Output tensor[5] tensor 'output_7': rank=2, dims=[3200,10], elements=32000, dtype=0x232, bytes=128000
+[QnnInferencer] Output tensor[6] tensor 'output_2': rank=2, dims=[800,1], elements=800, dtype=0x232, bytes=3200
+[QnnInferencer] Output tensor[7] tensor 'output_5': rank=2, dims=[800,4], elements=3200, dtype=0x232, bytes=12800
+[QnnInferencer] Output tensor[8] tensor 'output_8': rank=2, dims=[800,10], elements=8000, dtype=0x232, bytes=32000
+[QnnInferencer] Phase D (AllocTensorBuffers) OK
+[QnnInferencer] Init complete: 9 output tensor(s)
+[FaceProcessor] SCRFD QNN initialized (9 output tensors)
+[FaceProcessor] ArcFace disabled (no model path)
+[FaceConfig] Loaded from: /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/face_config.json
+  scrfd_model:   /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../data/models/face/det_2.5g_qcs9075.bin
+  arcface_model: (disabled)
+  kernel_path:   /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels
+  conf=0.75  nms=0.40  max_faces=32
+[faceinfer] init config-path=/home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/face_config.json backend-device-id=1
+[FaceProcessor] Init complete (SCRFD + detection-only)
+[DmaBuffer] Init ok: fd=151 size=460800 vaddr=0xfffe531af000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffefc33ef00
+[DmaBuffer] Init ok: fd=152 size=460800 vaddr=0xfffe5313e000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffefc3306b0
+[DmaBuffer] Init ok: fd=154 size=460800 vaddr=0xfffe530cd000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffefc32e6d0
+[DmaBuffer] Init ok: fd=155 size=460800 vaddr=0xfffe5305c000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffefc3a2480
+Wed Sep 16 2026 13:36:30.712147: INFO: GPU alignment: 64
+[FacePreprocess] built /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels/scrfd_preprocess.cl → kernel 'scrfd_preprocess'
+[FacePreprocess] built /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/face/../../../plugins/qtifaceinfer/face_preprocess/kernels/arcface_preprocess.cl → kernel 'arcface_preprocess'
+[DmaBuffer] Init ok: fd=202 size=4915200 vaddr=0xfffe4beca000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffee832fad0
+[DmaBuffer] Init ok: fd=203 size=150528 vaddr=0xfffe74033000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffee8041ca0
+[FacePreprocess] Init ok: scrfd_out=0xfffe4beca000(202) arcface_out=0xfffe74033000(203)
+[FaceProcessor] FacePreprocess initialized
+[FaceProcessor] SCRFD HTP backend-device-id=1
+[QnnInferencer] deviceCreate OK deviceId=1
+[QnnInferencer] Phase A (LoadBackend) OK
+[QnnInferencer] Phase B (LoadSystemLib) OK
+[QnnInferencer] Loaded model binary: 2932736 bytes
+[QnnInferencer] Found 1 graph(s) in model
+[QnnInferencer] [QNN]  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+[QnnInferencer] Phase C (LoadCachedGraphs) OK
+[QnnInferencer] Input tensor 'input_1': rank=4, dims=[1,3,640,640], elements=1228800, dtype=0x232, bytes=4915200
+[QnnInferencer] Output tensor[0] tensor 'output_0': rank=2, dims=[12800,1], elements=12800, dtype=0x232, bytes=51200
+[QnnInferencer] Output tensor[1] tensor 'output_3': rank=2, dims=[12800,4], elements=51200, dtype=0x232, bytes=204800
+[QnnInferencer] Output tensor[2] tensor 'output_6': rank=2, dims=[12800,10], elements=128000, dtype=0x232, bytes=512000
+[QnnInferencer] Output tensor[3] tensor 'output_1': rank=2, dims=[3200,1], elements=3200, dtype=0x232, bytes=12800
+[QnnInferencer] Output tensor[4] tensor 'output_4': rank=2, dims=[3200,4], elements=12800, dtype=0x232, bytes=51200
+[QnnInferencer] Output tensor[5] tensor 'output_7': rank=2, dims=[3200,10], elements=32000, dtype=0x232, bytes=128000
+[QnnInferencer] Output tensor[6] tensor 'output_2': rank=2, dims=[800,1], elements=800, dtype=0x232, bytes=3200
+[QnnInferencer] Output tensor[7] tensor 'output_5': rank=2, dims=[800,4], elements=3200, dtype=0x232, bytes=12800
+[QnnInferencer] Output tensor[8] tensor 'output_8': rank=2, dims=[800,10], elements=8000, dtype=0x232, bytes=32000
+[QnnInferencer] Phase D (AllocTensorBuffers) OK
+[QnnInferencer] Init complete: 9 output tensor(s)
+[FaceProcessor] SCRFD QNN initialized (9 output tensors)
+[FaceProcessor] ArcFace disabled (no model path)
+[FaceProcessor] Init complete (SCRFD + detection-only)
+[DmaBuffer] Init ok: fd=220 size=460800 vaddr=0xfffe4ab4f000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffee8200d00
+[DmaBuffer] Init ok: fd=221 size=460800 vaddr=0xfffe4aade000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffee83b6430
+[DmaBuffer] Init ok: fd=222 size=460800 vaddr=0xfffe4aa6d000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffee8334730
+[DmaBuffer] Init ok: fd=223 size=460800 vaddr=0xfffe4a9fc000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffee83254d0
+[DmaBuffer] Init ok: fd=224 size=460800 vaddr=0xfffe4a98b000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffee839d050
+[DmaBuffer] Init ok: fd=225 size=460800 vaddr=0xfffe4a91a000
+[DmaBuffer] BindOpenCl ok: cl_mem=0xfffee8011d60
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffe8836da90, Invalid argument
+
+[RTSP] cam=cam-003 pad=recv_rtp_src_0_841602716_96: linked H264 video RTP -> depay
+[RTSP] cam=cam-004 pad=recv_rtp_src_0_1622178379_96: linked H264 video RTP -> depay
+[RTSP] cam=cam-001 pad=recv_rtp_src_0_2453052941_96: linked H264 video RTP -> depay
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffec02fb0b0, Invalid argument
+
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffe883811f0, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffec02d8620, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffe9848fe50, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffec439d2c0, Invalid argument
+
+[PIPELINE_READY] state=PLAYING
+[TERMINAL] seq=1 camera=cam-001 frame=1 rois=1 labels=Green
+[TERMINAL] seq=2 camera=cam-005 frame=1 rois=2 labels=Green,Human
+[TERMINAL] seq=3 camera=cam-005 frame=2 rois=2 labels=Green,Human
+[TERMINAL] seq=4 camera=cam-005 frame=3 rois=2 labels=Green,Human
+[TERMINAL] seq=5 camera=cam-005 frame=4 rois=2 labels=Green,Human
+[TERMINAL] seq=6 camera=cam-006 frame=1 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=7 camera=cam-005 frame=5 rois=1 labels=Human
+[TERMINAL] seq=8 camera=cam-006 frame=2 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffe98385f50, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xfffec4415630, Invalid argument
+
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=23 face_frames=7 face_metas=7 last_face_ago_ms=88 (no property set)
+[TERMINAL] seq=30 camera=cam-005 frame=13 rois=1 labels=Human
+[TERMINAL] seq=60 camera=cam-002 frame=8 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=74 face_frames=25 face_metas=28 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=90 camera=cam-003 frame=10 rois=2 labels=Green,Human
+[TERMINAL] seq=120 camera=cam-001 frame=21 rois=1 labels=Green
+[AGG] camera=cam-005 frame=30 detections=2 (cam_total=30 det_total=51 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=134 face_frames=45 face_metas=58 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-006 frame=30 detections=8 (cam_total=30 det_total=235 qd=1 drop=0)
+[TERMINAL] seq=150 camera=cam-002 frame=23 rois=1 labels=Green
+[AGG] camera=cam-001 frame=30 detections=2 (cam_total=30 det_total=38 qd=1 drop=0)
+[TERMINAL] seq=180 camera=cam-002 frame=28 rois=1 labels=Green
+[AGG] camera=cam-002 frame=30 detections=1 (cam_total=30 det_total=35 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=196 face_frames=77 face_metas=100 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-003 frame=30 detections=2 (cam_total=30 det_total=61 qd=1 drop=0)
+[TERMINAL] seq=210 camera=cam-006 frame=41 rois=7 labels=Green,Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-004 frame=30 detections=9 (cam_total=30 det_total=241 qd=1 drop=0)
+[TERMINAL] seq=240 camera=cam-001 frame=41 rois=2 labels=Green,Human
+[faceinfer] hb vfps=19.8 ifps=19.6 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=17ms) | cam-006:VALID_EMPTY(age=115ms) copy_p50/95/99=92/158/198us tip_p50/95/99=143/245/280us infer_p50/95/99=13746/18481/19218us
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=256 face_frames=103 face_metas=136 last_face_ago_ms=7 (no property set)
+[TERMINAL] seq=270 camera=cam-006 frame=51 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Human
+[faceinfer] hb vfps=36.9 ifps=36.5 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=106ms) | cam-002:VALID_EMPTY(age=23ms) | cam-003:VALID(age=122ms) | cam-004:VALID(age=92ms) copy_p50/95/99=96/184/254us tip_p50/95/99=141/249/318us infer_p50/95/99=13067/16799/18122us
+[TERMINAL] seq=300 camera=cam-001 frame=51 rois=1 labels=Green
+[AGG] camera=cam-005 frame=60 detections=1 (cam_total=60 det_total=96 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=318 face_frames=132 face_metas=175 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-006 frame=60 detections=8 (cam_total=60 det_total=469 qd=1 drop=0)
+[TERMINAL] seq=330 camera=cam-006 frame=61 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-001 frame=60 detections=1 (cam_total=60 det_total=89 qd=1 drop=0)
+[TERMINAL] seq=360 camera=cam-001 frame=61 rois=1 labels=Green
+[AGG] camera=cam-002 frame=60 detections=1 (cam_total=60 det_total=80 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=378 face_frames=167 face_metas=220 last_face_ago_ms=11 (no property set)
+[TERMINAL] seq=390 camera=cam-001 frame=66 rois=2 labels=Green,Green
+[AGG] camera=cam-003 frame=60 detections=2 (cam_total=60 det_total=123 qd=1 drop=0)
+[AGG] camera=cam-004 frame=60 detections=8 (cam_total=60 det_total=479 qd=1 drop=0)
+[TERMINAL] seq=420 camera=cam-002 frame=68 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=9 faces=2 decision=1 | frames=438 face_frames=197 face_metas=261 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=450 camera=cam-001 frame=76 rois=1 labels=Green
+[TERMINAL] seq=480 camera=cam-004 frame=72 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=90 det_frame=89 age_ms=118 have_state=1 pts=0:00:10.135667975
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=90 det_frame=89 age_ms=118 have_state=1 pts=0:00:10.135667975
+[AGG] camera=cam-005 frame=90 detections=1 (cam_total=90 det_total=160 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=500 face_frames=230 face_metas=304 last_face_ago_ms=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=90 det_frame=89 age_ms=86 have_state=1 pts=0:00:10.436062416
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=90 det_frame=89 age_ms=86 have_state=1 pts=0:00:10.436062416
+[AGG] camera=cam-006 frame=90 detections=8 (cam_total=90 det_total=696 qd=1 drop=0)
+[TERMINAL] seq=510 camera=cam-003 frame=80 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=90 det_frame=89 age_ms=115 have_state=1 pts=0:00:10.929884499
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=90 det_frame=89 age_ms=115 have_state=1 pts=0:00:10.929884499
+[AGG] camera=cam-001 frame=90 detections=2 (cam_total=90 det_total=132 qd=1 drop=0)
+[TERMINAL] seq=540 camera=cam-004 frame=82 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+
+** (aibox_stream_pipeline_demo:11472): WARNING **: 13:36:40.711: v4l2h264dec_cam_006: 5 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:11472): WARNING **: 13:36:40.802: v4l2h264dec_cam_002: 12 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:11472): WARNING **: 13:36:40.802: v4l2h264dec_cam_003: 15 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:11472): WARNING **: 13:36:40.806: v4l2h264dec_cam_001: 9 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:11472): WARNING **: 13:36:40.807: v4l2h264dec_cam_005: 1 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:11472): WARNING **: 13:36:40.808: v4l2h264dec_cam_004: 18 initial frames were not dequeued: bug in decoder -- please file a bug
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=90 det_frame=89 age_ms=102 have_state=1 pts=0:00:11.230806380
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=90 det_frame=89 age_ms=102 have_state=1 pts=0:00:11.230806380
+[AGG] camera=cam-002 frame=90 detections=1 (cam_total=90 det_total=126 qd=1 drop=0)
+[faceinfer] hb vfps=19.9 ifps=19.9 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=96ms) | cam-006:VALID(age=103ms) copy_p50/95/99=94/142/192us tip_p50/95/99=146/232/264us infer_p50/95/99=13897/18257/19218us
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=560 face_frames=265 face_metas=349 last_face_ago_ms=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=90 det_frame=89 age_ms=106 have_state=1 pts=0:00:11.531231070
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=90 det_frame=89 age_ms=106 have_state=1 pts=0:00:11.531231070
+[AGG] camera=cam-003 frame=90 detections=2 (cam_total=90 det_total=184 qd=1 drop=0)
+[TERMINAL] seq=570 camera=cam-002 frame=93 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=90 det_frame=89 age_ms=103 have_state=1 pts=0:00:11.832101805
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=90 det_frame=89 age_ms=103 have_state=1 pts=0:00:11.832101805
+[AGG] camera=cam-004 frame=90 detections=10 (cam_total=90 det_total=718 qd=1 drop=0)
+[TERMINAL] seq=600 camera=cam-003 frame=95 rois=3 labels=Green,Green,Human
+[faceinfer] hb vfps=40.1 ifps=40.1 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=138ms) | cam-002:VALID_EMPTY(age=39ms) | cam-003:VALID(age=132ms) | cam-004:VALID(age=31ms) copy_p50/95/99=97/151/187us tip_p50/95/99=141/218/240us infer_p50/95/99=13103/16027/17580us
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=621 face_frames=294 face_metas=388 last_face_ago_ms=73 (no property set)
+[TERMINAL] seq=630 camera=cam-002 frame=103 rois=1 labels=Green
+[TERMINAL] seq=660 camera=cam-001 frame=111 rois=1 labels=Green
+[AGG] camera=cam-005 frame=120 detections=1 (cam_total=120 det_total=190 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=680 face_frames=324 face_metas=428 last_face_ago_ms=67 (no property set)
+[AGG] camera=cam-006 frame=120 detections=7 (cam_total=120 det_total=904 qd=1 drop=0)
+[TERMINAL] seq=690 camera=cam-001 frame=116 rois=1 labels=Green
+[AGG] camera=cam-001 frame=120 detections=2 (cam_total=120 det_total=191 qd=1 drop=0)
+[TERMINAL] seq=720 camera=cam-005 frame=129 rois=1 labels=Green
+[AGG] camera=cam-002 frame=120 detections=1 (cam_total=120 det_total=163 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=743 face_frames=360 face_metas=474 last_face_ago_ms=4 (no property set)
+[AGG] camera=cam-003 frame=120 detections=2 (cam_total=120 det_total=246 qd=1 drop=0)
+[TERMINAL] seq=750 camera=cam-001 frame=126 rois=2 labels=Green,Human
+[AGG] camera=cam-004 frame=120 detections=8 (cam_total=120 det_total=956 qd=1 drop=0)
+[TERMINAL] seq=780 camera=cam-004 frame=122 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=804 face_frames=393 face_metas=517 last_face_ago_ms=3 (no property set)
+[TERMINAL] seq=810 camera=cam-006 frame=141 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=840 camera=cam-001 frame=141 rois=2 labels=Green,Human
+[AGG] camera=cam-005 frame=150 detections=1 (cam_total=150 det_total=228 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-005:VALID_EMPTY(age=108ms) | cam-006:VALID(age=99ms) copy_p50/95/99=95/142/198us tip_p50/95/99=142/205/277us infer_p50/95/99=14010/18239/19218us
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=1 decision=1 | frames=863 face_frames=422 face_metas=556 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-006 frame=150 detections=7 (cam_total=150 det_total=1123 qd=1 drop=0)
+[TERMINAL] seq=870 camera=cam-005 frame=154 rois=1 labels=Green
+[AGG] camera=cam-001 frame=150 detections=2 (cam_total=150 det_total=252 qd=1 drop=0)
+[TERMINAL] seq=900 camera=cam-006 frame=156 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=40.2 ifps=40.2 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=136ms) | cam-002:VALID_EMPTY(age=30ms) | cam-003:VALID(age=130ms) | cam-004:VALID(age=38ms) copy_p50/95/99=95/151/173us tip_p50/95/99=140/217/236us infer_p50/95/99=13225/16759/18012us
+[AGG] camera=cam-002 frame=150 detections=2 (cam_total=150 det_total=208 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=8 faces=2 decision=1 | frames=924 face_frames=452 face_metas=597 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-003 frame=150 detections=2 (cam_total=150 det_total=307 qd=1 drop=0)
+[TERMINAL] seq=930 camera=cam-006 frame=161 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-004 frame=150 detections=10 (cam_total=150 det_total=1195 qd=1 drop=0)
+[TERMINAL] seq=960 camera=cam-001 frame=161 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=2 decision=1 | frames=985 face_frames=484 face_metas=639 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=990 camera=cam-003 frame=160 rois=2 labels=Green,Human
+[TERMINAL] seq=1020 camera=cam-001 frame=171 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=180 det_frame=179 age_ms=102 have_state=1 pts=0:00:19.135667975
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=180 det_frame=179 age_ms=102 have_state=1 pts=0:00:19.135667975
+[AGG] camera=cam-005 frame=180 detections=1 (cam_total=180 det_total=267 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=180 det_frame=179 age_ms=104 have_state=1 pts=0:00:19.436062416
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=180 det_frame=179 age_ms=104 have_state=1 pts=0:00:19.436062416
+[AGG] camera=cam-006 frame=180 detections=8 (cam_total=180 det_total=1345 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=8 faces=2 decision=1 | frames=1045 face_frames=504 face_metas=669 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=1050 camera=cam-002 frame=173 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=180 det_frame=179 age_ms=110 have_state=1 pts=0:00:19.929884499
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=180 det_frame=179 age_ms=110 have_state=1 pts=0:00:19.929884499
+[AGG] camera=cam-001 frame=180 detections=1 (cam_total=180 det_total=298 qd=1 drop=0)
+[TERMINAL] seq=1080 camera=cam-003 frame=175 rois=3 labels=Green,Green,Human
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=180 det_frame=179 age_ms=103 have_state=1 pts=0:00:20.230806380
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=180 det_frame=179 age_ms=103 have_state=1 pts=0:00:20.230806380
+[AGG] camera=cam-002 frame=180 detections=1 (cam_total=180 det_total=244 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=1106 face_frames=527 face_metas=702 last_face_ago_ms=68 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=180 det_frame=179 age_ms=104 have_state=1 pts=0:00:20.531231070
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=180 det_frame=179 age_ms=104 have_state=1 pts=0:00:20.531231070
+[AGG] camera=cam-003 frame=180 detections=2 (cam_total=180 det_total=369 qd=1 drop=0)
+[TERMINAL] seq=1110 camera=cam-002 frame=183 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=180 det_frame=179 age_ms=105 have_state=1 pts=0:00:20.832101805
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=180 det_frame=179 age_ms=105 have_state=1 pts=0:00:20.832101805
+[AGG] camera=cam-004 frame=180 detections=8 (cam_total=180 det_total=1433 qd=1 drop=0)
+[TERMINAL] seq=1140 camera=cam-003 frame=185 rois=2 labels=Green,Human
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-005:VALID_EMPTY(age=103ms) | cam-006:VALID(age=93ms) copy_p50/95/99=96/139/182us tip_p50/95/99=140/204/230us infer_p50/95/99=14146/18151/19142us
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=1167 face_frames=558 face_metas=743 last_face_ago_ms=5 (no property set)
+[TERMINAL] seq=1170 camera=cam-006 frame=201 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=1200 camera=cam-001 frame=201 rois=1 labels=Green
+[faceinfer] hb vfps=39.8 ifps=39.8 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=143ms) | cam-002:VALID_EMPTY(age=29ms) | cam-003:VALID(age=37ms) | cam-004:VALID(age=113ms) copy_p50/95/99=95/151/209us tip_p50/95/99=137/217/263us infer_p50/95/99=13156/16985/18242us
+[AGG] camera=cam-005 frame=210 detections=2 (cam_total=210 det_total=300 qd=1 drop=0)
+[AGG] camera=cam-006 frame=210 detections=7 (cam_total=210 det_total=1576 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=1 decision=1 | frames=1229 face_frames=588 face_metas=783 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=1230 camera=cam-004 frame=197 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=210 detections=1 (cam_total=210 det_total=337 qd=1 drop=0)
+[TERMINAL] seq=1260 camera=cam-006 frame=216 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=210 detections=1 (cam_total=210 det_total=286 qd=1 drop=0)
+[AGG] camera=cam-003 frame=210 detections=2 (cam_total=210 det_total=430 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=1 decision=1 | frames=1289 face_frames=619 face_metas=824 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=1290 camera=cam-002 frame=213 rois=1 labels=Green
+[AGG] camera=cam-004 frame=210 detections=10 (cam_total=210 det_total=1672 qd=1 drop=0)
+[TERMINAL] seq=1320 camera=cam-001 frame=221 rois=2 labels=Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=1 decision=1 | frames=1350 face_frames=652 face_metas=867 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=1350 camera=cam-005 frame=234 rois=1 labels=Green
+[TERMINAL] seq=1380 camera=cam-002 frame=228 rois=1 labels=Green
+[AGG] camera=cam-005 frame=240 detections=1 (cam_total=240 det_total=353 qd=1 drop=0)
+[AGG] camera=cam-006 frame=240 detections=7 (cam_total=240 det_total=1800 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=1410 face_frames=692 face_metas=917 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=1410 camera=cam-003 frame=230 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=240 detections=1 (cam_total=240 det_total=378 qd=1 drop=0)
+[TERMINAL] seq=1440 camera=cam-006 frame=246 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=240 detections=1 (cam_total=240 det_total=320 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=97ms) | cam-006:VALID(age=105ms) copy_p50/95/99=95/140/187us tip_p50/95/99=141/211/233us infer_p50/95/99=14079/17773/19142us
+[AGG] camera=cam-003 frame=240 detections=2 (cam_total=240 det_total=492 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1470 face_frames=722 face_metas=957 last_face_ago_ms=11 (no property set)
+[TERMINAL] seq=1470 camera=cam-002 frame=243 rois=2 labels=Green,Green
+[AGG] camera=cam-004 frame=240 detections=8 (cam_total=240 det_total=1910 qd=1 drop=0)
+[TERMINAL] seq=1500 camera=cam-001 frame=251 rois=1 labels=Green
+[faceinfer] hb vfps=39.7 ifps=39.9 pool=6[f5,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=3 stuck_ms=0 results=cam-001:VALID_EMPTY(age=89ms) | cam-002:VALID_EMPTY(age=98ms) | cam-003:VALID(age=77ms) | cam-004:VALID(age=107ms) copy_p50/95/99=95/152/192us tip_p50/95/99=140/210/267us infer_p50/95/99=13051/16985/18041us
+[TERMINAL] seq=1530 camera=cam-001 frame=256 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=8 faces=2 decision=1 | frames=1531 face_frames=761 face_metas=1007 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=1560 camera=cam-004 frame=252 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=270 det_frame=269 age_ms=99 have_state=1 pts=0:00:28.135667975
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=270 det_frame=269 age_ms=99 have_state=1 pts=0:00:28.135667975
+[AGG] camera=cam-005 frame=270 detections=1 (cam_total=270 det_total=397 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=270 det_frame=269 age_ms=102 have_state=1 pts=0:00:28.436062416
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=270 det_frame=269 age_ms=102 have_state=1 pts=0:00:28.436062416
+[AGG] camera=cam-006 frame=270 detections=6 (cam_total=270 det_total=2039 qd=1 drop=0)
+[TERMINAL] seq=1590 camera=cam-003 frame=260 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=8 faces=2 decision=1 | frames=1591 face_frames=795 face_metas=1051 last_face_ago_ms=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=270 det_frame=269 age_ms=105 have_state=1 pts=0:00:28.929884499
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=270 det_frame=269 age_ms=105 have_state=1 pts=0:00:28.929884499
+[AGG] camera=cam-001 frame=270 detections=1 (cam_total=270 det_total=411 qd=1 drop=0)
+[TERMINAL] seq=1620 camera=cam-004 frame=262 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=270 det_frame=269 age_ms=94 have_state=1 pts=0:00:29.230806380
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=270 det_frame=269 age_ms=94 have_state=1 pts=0:00:29.230806380
+[AGG] camera=cam-002 frame=270 detections=1 (cam_total=270 det_total=354 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=270 det_frame=269 age_ms=62 have_state=1 pts=0:00:29.531231070
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=270 det_frame=269 age_ms=62 have_state=1 pts=0:00:29.531231070
+[AGG] camera=cam-003 frame=270 detections=2 (cam_total=270 det_total=553 qd=1 drop=0)
+[TERMINAL] seq=1650 camera=cam-005 frame=284 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1652 face_frames=825 face_metas=1091 last_face_ago_ms=74 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=270 det_frame=269 age_ms=136 have_state=1 pts=0:00:29.832101805
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=270 det_frame=269 age_ms=136 have_state=1 pts=0:00:29.832101805
+[AGG] camera=cam-004 frame=270 detections=10 (cam_total=270 det_total=2149 qd=1 drop=0)
+[TERMINAL] seq=1680 camera=cam-005 frame=289 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=1710 camera=cam-004 frame=277 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=1713 face_frames=855 face_metas=1131 last_face_ago_ms=73 (no property set)
+[TERMINAL] seq=1740 camera=cam-006 frame=296 rois=7 labels=Green,Green,Green,Green,Green,Green,Human
+[AGG] camera=cam-005 frame=300 detections=2 (cam_total=300 det_total=462 qd=1 drop=0)
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=99ms) | cam-006:VALID(age=91ms) copy_p50/95/99=95/136/158us tip_p50/95/99=142/198/219us infer_p50/95/99=13899/17874/19142us
+[AGG] camera=cam-006 frame=300 detections=7 (cam_total=300 det_total=2269 qd=1 drop=0)
+[TERMINAL] seq=1770 camera=cam-001 frame=296 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1772 face_frames=885 face_metas=1171 last_face_ago_ms=66 (no property set)
+[AGG] camera=cam-001 frame=300 detections=1 (cam_total=300 det_total=446 qd=1 drop=0)
+[TERMINAL] seq=1800 camera=cam-003 frame=295 rois=3 labels=Green,Green,Human
+[faceinfer] hb vfps=40.3 ifps=40.1 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=115ms) | cam-002:VALID_EMPTY(age=123ms) | cam-003:VALID(age=23ms) | cam-004:VALID(age=87ms) copy_p50/95/99=96/141/180us tip_p50/95/99=141/198/231us infer_p50/95/99=13057/16562/18118us
+[AGG] camera=cam-002 frame=300 detections=1 (cam_total=300 det_total=392 qd=1 drop=0)
+[AGG] camera=cam-003 frame=300 detections=2 (cam_total=300 det_total=615 qd=1 drop=0)
+[TERMINAL] seq=1830 camera=cam-002 frame=303 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=2 decision=1 | frames=1832 face_frames=916 face_metas=1213 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-004 frame=300 detections=8 (cam_total=300 det_total=2387 qd=1 drop=0)
+[TERMINAL] seq=1860 camera=cam-004 frame=302 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=1890 camera=cam-003 frame=310 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=1892 face_frames=945 face_metas=1251 last_face_ago_ms=66 (no property set)
+[TERMINAL] seq=1920 camera=cam-006 frame=326 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-005 frame=330 detections=2 (cam_total=330 det_total=525 qd=1 drop=0)
+[AGG] camera=cam-006 frame=330 detections=7 (cam_total=330 det_total=2478 qd=1 drop=0)
+[TERMINAL] seq=1950 camera=cam-006 frame=331 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1953 face_frames=975 face_metas=1291 last_face_ago_ms=80 (no property set)
+[AGG] camera=cam-001 frame=330 detections=1 (cam_total=330 det_total=480 qd=1 drop=0)
+[TERMINAL] seq=1980 camera=cam-004 frame=322 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=330 detections=1 (cam_total=330 det_total=434 qd=1 drop=0)
+[AGG] camera=cam-003 frame=330 detections=2 (cam_total=330 det_total=676 qd=1 drop=0)
+[TERMINAL] seq=2010 camera=cam-002 frame=333 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=5 faces=1 decision=1 | frames=2015 face_frames=1007 face_metas=1333 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-004 frame=330 detections=10 (cam_total=330 det_total=2626 qd=1 drop=0)
+[TERMINAL] seq=2040 camera=cam-001 frame=341 rois=3 labels=Green,Green,Human
+[faceinfer] hb vfps=19.9 ifps=20.1 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=122ms) | cam-006:VALID(age=19ms) copy_p50/95/99=96/133/154us tip_p50/95/99=143/193/219us infer_p50/95/99=13866/17895/19346us
+[TERMINAL] seq=2070 camera=cam-002 frame=343 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=2074 face_frames=1037 face_metas=1373 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=2100 camera=cam-002 frame=348 rois=2 labels=Green,Human
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=360 det_frame=359 age_ms=109 have_state=1 pts=0:00:37.135667975
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=360 det_frame=359 age_ms=109 have_state=1 pts=0:00:37.135667975
+[AGG] camera=cam-005 frame=360 detections=2 (cam_total=360 det_total=613 qd=1 drop=0)
+[faceinfer] hb vfps=40.0 ifps=40.0 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=27ms) | cam-002:VALID_EMPTY(age=86ms) | cam-003:VALID(age=117ms) | cam-004:VALID(age=80ms) copy_p50/95/99=95/155/196us tip_p50/95/99=142/207/236us infer_p50/95/99=13158/16816/17747us
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=360 det_frame=359 age_ms=86 have_state=1 pts=0:00:37.436062416
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=360 det_frame=359 age_ms=86 have_state=1 pts=0:00:37.436062416
+[AGG] camera=cam-006 frame=360 detections=6 (cam_total=360 det_total=2672 qd=1 drop=0)
+[TERMINAL] seq=2130 camera=cam-004 frame=347 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=6 faces=1 decision=1 | frames=2135 face_frames=1078 face_metas=1424 last_face_ago_ms=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=360 det_frame=359 age_ms=104 have_state=1 pts=0:00:37.929884499
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=360 det_frame=359 age_ms=104 have_state=1 pts=0:00:37.929884499
+[AGG] camera=cam-001 frame=360 detections=2 (cam_total=360 det_total=534 qd=1 drop=0)
+[TERMINAL] seq=2160 camera=cam-001 frame=361 rois=3 labels=Green,Green,Human
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=360 det_frame=359 age_ms=106 have_state=1 pts=0:00:38.230806380
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=360 det_frame=359 age_ms=106 have_state=1 pts=0:00:38.230806380
+[AGG] camera=cam-002 frame=360 detections=2 (cam_total=360 det_total=497 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=360 det_frame=359 age_ms=94 have_state=1 pts=0:00:38.531231070
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=360 det_frame=359 age_ms=94 have_state=1 pts=0:00:38.531231070
+[AGG] camera=cam-003 frame=360 detections=2 (cam_total=360 det_total=738 qd=1 drop=0)
+[TERMINAL] seq=2190 camera=cam-001 frame=366 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=2 decision=1 | frames=2197 face_frames=1108 face_metas=1465 last_face_ago_ms=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=360 det_frame=359 age_ms=102 have_state=1 pts=0:00:38.832101805
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=360 det_frame=359 age_ms=102 have_state=1 pts=0:00:38.832101805
+[AGG] camera=cam-004 frame=360 detections=8 (cam_total=360 det_total=2864 qd=1 drop=0)
+[TERMINAL] seq=2220 camera=cam-005 frame=379 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=2250 camera=cam-006 frame=381 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=9 faces=2 decision=1 | frames=2256 face_frames=1135 face_metas=1502 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=2280 camera=cam-005 frame=389 rois=2 labels=Green,Human
+[AGG] camera=cam-005 frame=390 detections=1 (cam_total=390 det_total=696 qd=1 drop=0)
+[AGG] camera=cam-006 frame=390 detections=8 (cam_total=390 det_total=2906 qd=1 drop=0)
+[TERMINAL] seq=2310 camera=cam-004 frame=377 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=2317 face_frames=1162 face_metas=1539 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-001 frame=390 detections=1 (cam_total=390 det_total=578 qd=1 drop=0)
+[TERMINAL] seq=2340 camera=cam-002 frame=388 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=390 detections=2 (cam_total=390 det_total=557 qd=1 drop=0)
+[faceinfer] hb vfps=19.9 ifps=19.9 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=92ms) | cam-006:VALID_EMPTY(age=85ms) copy_p50/95/99=97/137/169us tip_p50/95/99=140/199/240us infer_p50/95/99=13902/18028/19346us
+[TERMINAL] seq=2370 camera=cam-006 frame=401 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-003 frame=390 detections=2 (cam_total=390 det_total=799 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=2378 face_frames=1183 face_metas=1570 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-004 frame=390 detections=10 (cam_total=390 det_total=3103 qd=1 drop=0)
+[TERMINAL] seq=2400 camera=cam-002 frame=398 rois=1 labels=Green
+[faceinfer] hb vfps=40.2 ifps=40.2 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=121ms) | cam-002:VALID_EMPTY(age=31ms) | cam-003:VALID(age=24ms) | cam-004:VALID(age=99ms) copy_p50/95/99=95/159/183us tip_p50/95/99=140/212/259us infer_p50/95/99=13146/16457/17627us
+[TERMINAL] seq=2430 camera=cam-001 frame=406 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=2440 face_frames=1210 face_metas=1607 last_face_ago_ms=7 (no property set)
+[TERMINAL] seq=2460 camera=cam-002 frame=408 rois=1 labels=Green
+[AGG] camera=cam-005 frame=420 detections=2 (cam_total=420 det_total=757 qd=1 drop=0)
+[AGG] camera=cam-006 frame=420 detections=6 (cam_total=420 det_total=3124 qd=1 drop=0)
+[TERMINAL] seq=2490 camera=cam-002 frame=413 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=2 decision=1 | frames=2501 face_frames=1235 face_metas=1643 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-001 frame=420 detections=1 (cam_total=420 det_total=631 qd=1 drop=0)
+[TERMINAL] seq=2520 camera=cam-001 frame=421 rois=1 labels=Green
+[AGG] camera=cam-002 frame=420 detections=2 (cam_total=420 det_total=596 qd=1 drop=0)
+[AGG] camera=cam-003 frame=420 detections=2 (cam_total=420 det_total=861 qd=1 drop=0)
+[TERMINAL] seq=2550 camera=cam-005 frame=434 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=2562 face_frames=1261 face_metas=1678 last_face_ago_ms=2 (no property set)
+[AGG] camera=cam-004 frame=420 detections=8 (cam_total=420 det_total=3341 qd=1 drop=0)
+[TERMINAL] seq=2580 camera=cam-005 frame=439 rois=2 labels=Green,Human
+[TERMINAL] seq=2610 camera=cam-002 frame=433 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=2623 face_frames=1292 face_metas=1720 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=2640 camera=cam-004 frame=432 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=450 det_frame=449 age_ms=103 have_state=1 pts=0:00:46.135667975
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=450 det_frame=449 age_ms=103 have_state=1 pts=0:00:46.135667975
+[AGG] camera=cam-005 frame=450 detections=1 (cam_total=450 det_total=812 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=450 det_frame=449 age_ms=111 have_state=1 pts=0:00:46.436062416
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=450 det_frame=449 age_ms=111 have_state=1 pts=0:00:46.436062416
+[AGG] camera=cam-006 frame=450 detections=7 (cam_total=450 det_total=3335 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=100ms) | cam-006:VALID(age=93ms) copy_p50/95/99=97/140/196us tip_p50/95/99=141/199/259us infer_p50/95/99=14039/18028/19005us
+[TERMINAL] seq=2670 camera=cam-003 frame=440 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=2 decision=1 | frames=2683 face_frames=1322 face_metas=1760 last_face_ago_ms=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=450 det_frame=449 age_ms=102 have_state=1 pts=0:00:46.929884499
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=450 det_frame=449 age_ms=102 have_state=1 pts=0:00:46.929884499
+[AGG] camera=cam-001 frame=450 detections=2 (cam_total=450 det_total=680 qd=1 drop=0)
+[TERMINAL] seq=2700 camera=cam-002 frame=448 rois=2 labels=Green,Human
+[faceinfer] hb vfps=39.9 ifps=39.9 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=36ms) | cam-002:VALID_EMPTY(age=27ms) | cam-003:VALID(age=135ms) | cam-004:VALID(age=103ms) copy_p50/95/99=96/159/246us tip_p50/95/99=139/214/281us infer_p50/95/99=13203/16949/18144us
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=450 det_frame=449 age_ms=86 have_state=1 pts=0:00:47.230806380
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=450 det_frame=449 age_ms=86 have_state=1 pts=0:00:47.230806380
+[AGG] camera=cam-002 frame=450 detections=2 (cam_total=450 det_total=658 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=450 det_frame=449 age_ms=91 have_state=1 pts=0:00:47.531231070
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=450 det_frame=449 age_ms=91 have_state=1 pts=0:00:47.531231070
+[AGG] camera=cam-003 frame=450 detections=2 (cam_total=450 det_total=922 qd=1 drop=0)
+[TERMINAL] seq=2730 camera=cam-001 frame=456 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=2743 face_frames=1349 face_metas=1797 last_face_ago_ms=0 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=450 det_frame=449 age_ms=112 have_state=1 pts=0:00:47.832101805
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=450 det_frame=449 age_ms=112 have_state=1 pts=0:00:47.832101805
+[AGG] camera=cam-004 frame=450 detections=10 (cam_total=450 det_total=3580 qd=1 drop=0)
+[TERMINAL] seq=2760 camera=cam-003 frame=455 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=2790 camera=cam-002 frame=463 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=2804 face_frames=1372 face_metas=1830 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=2820 camera=cam-006 frame=476 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-005 frame=480 detections=2 (cam_total=480 det_total=868 qd=1 drop=0)
+[AGG] camera=cam-006 frame=480 detections=7 (cam_total=480 det_total=3551 qd=1 drop=0)
+[TERMINAL] seq=2850 camera=cam-002 frame=473 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2864 face_frames=1400 face_metas=1868 last_face_ago_ms=71 (no property set)
+[AGG] camera=cam-001 frame=480 detections=2 (cam_total=480 det_total=747 qd=1 drop=0)
+[TERMINAL] seq=2880 camera=cam-006 frame=486 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=480 detections=2 (cam_total=480 det_total=721 qd=1 drop=0)
+[AGG] camera=cam-003 frame=480 detections=2 (cam_total=480 det_total=984 qd=1 drop=0)
+[TERMINAL] seq=2910 camera=cam-006 frame=491 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2925 face_frames=1420 face_metas=1898 last_face_ago_ms=79 (no property set)
+[AGG] camera=cam-004 frame=480 detections=8 (cam_total=480 det_total=3818 qd=1 drop=0)
+[TERMINAL] seq=2940 camera=cam-002 frame=488 rois=2 labels=Green,Human
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=108ms) | cam-006:VALID_EMPTY(age=101ms) copy_p50/95/99=97/139/196us tip_p50/95/99=141/192/259us infer_p50/95/99=14068/17998/19078us
+[TERMINAL] seq=2970 camera=cam-003 frame=490 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=2985 face_frames=1441 face_metas=1929 last_face_ago_ms=82 (no property set)
+[TERMINAL] seq=3000 camera=cam-004 frame=492 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-005 frame=510 detections=2 (cam_total=510 det_total=925 qd=1 drop=0)
+[faceinfer] hb vfps=39.7 ifps=39.9 pool=6[f5,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-001:VALID_EMPTY(age=100ms) | cam-002:VALID_EMPTY(age=108ms) | cam-003:VALID(age=92ms) | cam-004:VALID(age=76ms) copy_p50/95/99=94/138/160us tip_p50/95/99=138/193/210us infer_p50/95/99=13167/17128/18137us
+[AGG] camera=cam-006 frame=510 detections=7 (cam_total=510 det_total=3763 qd=1 drop=0)
+[TERMINAL] seq=3030 camera=cam-003 frame=500 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=3046 face_frames=1461 face_metas=1959 last_face_ago_ms=70 (no property set)
+[AGG] camera=cam-001 frame=510 detections=1 (cam_total=510 det_total=791 qd=1 drop=0)
+[TERMINAL] seq=3060 camera=cam-002 frame=508 rois=1 labels=Green
+[AGG] camera=cam-002 frame=510 detections=1 (cam_total=510 det_total=771 qd=1 drop=0)
+[AGG] camera=cam-003 frame=510 detections=2 (cam_total=510 det_total=1045 qd=1 drop=0)
+[TERMINAL] seq=3090 camera=cam-004 frame=507 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=0 decision=0 | frames=3106 face_frames=1482 face_metas=1990 last_face_ago_ms=9 (no property set)
+[AGG] camera=cam-004 frame=510 detections=10 (cam_total=510 det_total=4057 qd=1 drop=0)
+[TERMINAL] seq=3120 camera=cam-003 frame=515 rois=3 labels=Green,Green,Human
+[TERMINAL] seq=3150 camera=cam-002 frame=523 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=3167 face_frames=1502 face_metas=2020 last_face_ago_ms=16 (no property set)
+[TERMINAL] seq=3180 camera=cam-004 frame=522 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=540 det_frame=539 age_ms=113 have_state=1 pts=0:00:55.135667975
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=540 det_frame=539 age_ms=113 have_state=1 pts=0:00:55.135667975
+[AGG] camera=cam-005 frame=540 detections=1 (cam_total=540 det_total=960 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=540 det_frame=539 age_ms=105 have_state=1 pts=0:00:55.436062416
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=540 det_frame=539 age_ms=105 have_state=1 pts=0:00:55.436062416
+[AGG] camera=cam-006 frame=540 detections=7 (cam_total=540 det_total=3975 qd=1 drop=0)
+[TERMINAL] seq=3210 camera=cam-001 frame=536 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=3226 face_frames=1522 face_metas=2050 last_face_ago_ms=7 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=540 det_frame=539 age_ms=95 have_state=1 pts=0:00:55.929884499
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=540 det_frame=539 age_ms=95 have_state=1 pts=0:00:55.929884499
+[AGG] camera=cam-001 frame=540 detections=1 (cam_total=540 det_total=824 qd=1 drop=0)
+[TERMINAL] seq=3240 camera=cam-001 frame=541 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=540 det_frame=539 age_ms=87 have_state=1 pts=0:00:56.230806380
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=540 det_frame=539 age_ms=87 have_state=1 pts=0:00:56.230806380
+[AGG] camera=cam-002 frame=540 detections=1 (cam_total=540 det_total=804 qd=1 drop=0)
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=110ms) | cam-006:VALID_EMPTY(age=101ms) copy_p50/95/99=96/148/197us tip_p50/95/99=141/201/250us infer_p50/95/99=14075/17962/19507us
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=540 det_frame=539 age_ms=118 have_state=1 pts=0:00:56.531231070
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=540 det_frame=539 age_ms=118 have_state=1 pts=0:00:56.531231070
+[TERMINAL] seq=3270 camera=cam-003 frame=540 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=540 detections=2 (cam_total=540 det_total=1107 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=3288 face_frames=1542 face_metas=2080 last_face_ago_ms=2 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=540 det_frame=539 age_ms=120 have_state=1 pts=0:00:56.832101805
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=540 det_frame=539 age_ms=120 have_state=1 pts=0:00:56.832101805
+[AGG] camera=cam-004 frame=540 detections=8 (cam_total=540 det_total=4295 qd=1 drop=0)
+[TERMINAL] seq=3300 camera=cam-006 frame=556 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[faceinfer] hb vfps=40.2 ifps=40.0 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=103ms) | cam-002:VALID_EMPTY(age=110ms) | cam-003:VALID(age=96ms) | cam-004:VALID(age=81ms) copy_p50/95/99=96/154/169us tip_p50/95/99=140/199/230us infer_p50/95/99=13095/17090/18097us
+[TERMINAL] seq=3330 camera=cam-003 frame=550 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=3348 face_frames=1572 face_metas=2120 last_face_ago_ms=11 (no property set)
+[TERMINAL] seq=3360 camera=cam-002 frame=558 rois=2 labels=Green,Human
+[AGG] camera=cam-005 frame=570 detections=2 (cam_total=570 det_total=1000 qd=1 drop=0)
+[AGG] camera=cam-006 frame=570 detections=8 (cam_total=570 det_total=4188 qd=1 drop=0)
+[TERMINAL] seq=3390 camera=cam-001 frame=566 rois=2 labels=Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=3409 face_frames=1603 face_metas=2162 last_face_ago_ms=16 (no property set)
+[AGG] camera=cam-001 frame=570 detections=1 (cam_total=570 det_total=859 qd=1 drop=0)
+[TERMINAL] seq=3420 camera=cam-002 frame=568 rois=3 labels=Green,Green,Human
+[AGG] camera=cam-002 frame=570 detections=1 (cam_total=570 det_total=852 qd=1 drop=0)
+[AGG] camera=cam-003 frame=570 detections=2 (cam_total=570 det_total=1168 qd=1 drop=0)
+[TERMINAL] seq=3450 camera=cam-001 frame=576 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=10 faces=2 decision=1 | frames=3469 face_frames=1636 face_metas=2205 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-004 frame=570 detections=10 (cam_total=570 det_total=4534 qd=1 drop=0)
+[TERMINAL] seq=3480 camera=cam-001 frame=581 rois=1 labels=Green
+[TERMINAL] seq=3510 camera=cam-005 frame=594 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=3530 face_frames=1662 face_metas=2241 last_face_ago_ms=59 (no property set)
+[TERMINAL] seq=3540 camera=cam-006 frame=596 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-005 frame=600 detections=1 (cam_total=600 det_total=1061 qd=1 drop=0)
+[AGG] camera=cam-006 frame=600 detections=7 (cam_total=600 det_total=4398 qd=1 drop=0)
+[faceinfer] hb vfps=20.2 ifps=20.2 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=111ms) | cam-006:VALID_EMPTY(age=103ms) copy_p50/95/99=94/148/165us tip_p50/95/99=140/201/247us infer_p50/95/99=14112/17974/19569us
+[TERMINAL] seq=3570 camera=cam-005 frame=604 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=3590 face_frames=1690 face_metas=2279 last_face_ago_ms=75 (no property set)
+[AGG] camera=cam-001 frame=600 detections=1 (cam_total=600 det_total=890 qd=1 drop=0)
+[TERMINAL] seq=3600 camera=cam-002 frame=598 rois=1 labels=Green
+[AGG] camera=cam-002 frame=600 detections=1 (cam_total=600 det_total=889 qd=1 drop=0)
+[faceinfer] hb vfps=40.1 ifps=39.9 pool=6[f3,q2,i1] queue=2 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=105ms) | cam-002:VALID_EMPTY(age=76ms) | cam-003:VALID(age=112ms) | cam-004:VALID(age=90ms) copy_p50/95/99=95/157/222us tip_p50/95/99=137/208/283us infer_p50/95/99=13083/17234/18415us
+[TERMINAL] seq=3630 camera=cam-001 frame=606 rois=1 labels=Green
+[AGG] camera=cam-003 frame=600 detections=2 (cam_total=600 det_total=1230 qd=1 drop=0)
+[AGG] camera=cam-004 frame=600 detections=8 (cam_total=600 det_total=4772 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=3 faces=1 decision=1 | frames=3650 face_frames=1726 face_metas=2325 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=3660 camera=cam-002 frame=608 rois=2 labels=Green,Green
+[TERMINAL] seq=3690 camera=cam-004 frame=607 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=3710 face_frames=1760 face_metas=2369 last_face_ago_ms=65 (no property set)
+[TERMINAL] seq=3720 camera=cam-002 frame=618 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=630 det_frame=629 age_ms=106 have_state=1 pts=0:01:04.135667975
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=630 det_frame=629 age_ms=106 have_state=1 pts=0:01:04.135667975
+[AGG] camera=cam-005 frame=630 detections=3 (cam_total=630 det_total=1146 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=630 det_frame=629 age_ms=96 have_state=1 pts=0:01:04.436062416
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=630 det_frame=629 age_ms=96 have_state=1 pts=0:01:04.436062416
+[AGG] camera=cam-006 frame=630 detections=7 (cam_total=630 det_total=4600 qd=1 drop=0)
+[TERMINAL] seq=3750 camera=cam-006 frame=631 rois=7 labels=Green,Green,Green,Green,Green,Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=3771 face_frames=1791 face_metas=2410 last_face_ago_ms=4 (no property set)
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=630 det_frame=629 age_ms=113 have_state=1 pts=0:01:04.929884499
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=630 det_frame=629 age_ms=113 have_state=1 pts=0:01:04.929884499
+[AGG] camera=cam-001 frame=630 detections=1 (cam_total=630 det_total=928 qd=1 drop=0)
+[TERMINAL] seq=3780 camera=cam-002 frame=628 rois=1 labels=Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=630 det_frame=629 age_ms=103 have_state=1 pts=0:01:05.230806380
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=630 det_frame=629 age_ms=103 have_state=1 pts=0:01:05.230806380
+[AGG] camera=cam-002 frame=630 detections=2 (cam_total=630 det_total=924 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=630 det_frame=629 age_ms=88 have_state=1 pts=0:01:05.531231070
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=630 det_frame=629 age_ms=88 have_state=1 pts=0:01:05.531231070
+[AGG] camera=cam-003 frame=630 detections=2 (cam_total=630 det_total=1291 qd=1 drop=0)
+[TERMINAL] seq=3810 camera=cam-005 frame=644 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=630 det_frame=629 age_ms=75 have_state=1 pts=0:01:05.832101805
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=630 det_frame=629 age_ms=75 have_state=1 pts=0:01:05.832101805
+[AGG] camera=cam-004 frame=630 detections=10 (cam_total=630 det_total=5011 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=3833 face_frames=1823 face_metas=2452 last_face_ago_ms=10 (no property set)
+[TERMINAL] seq=3840 camera=cam-001 frame=641 rois=1 labels=Green
+[TERMINAL] seq=3870 camera=cam-003 frame=640 rois=2 labels=Green,Human
+[faceinfer] hb vfps=19.6 ifps=19.8 pool=4[f3,q1,i0] queue=0 evict=0 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-005:VALID(age=107ms) | cam-006:VALID_EMPTY(age=98ms) copy_p50/95/99=94/153/168us tip_p50/95/99=141/209/247us infer_p50/95/99=13914/18065/18808us
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=3893 face_frames=1856 face_metas=2495 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=3900 camera=cam-002 frame=648 rois=1 labels=Green
+[AGG] camera=cam-005 frame=660 detections=3 (cam_total=660 det_total=1213 qd=1 drop=0)
+[faceinfer] hb vfps=40.1 ifps=40.3 pool=6[f4,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-001:VALID_EMPTY(age=123ms) | cam-002:VALID(age=108ms) | cam-003:VALID(age=31ms) | cam-004:VALID(age=16ms) copy_p50/95/99=96/155/189us tip_p50/95/99=140/210/274us infer_p50/95/99=13244/16671/18149us
+[AGG] camera=cam-006 frame=660 detections=8 (cam_total=660 det_total=4793 qd=1 drop=0)
+[TERMINAL] seq=3930 camera=cam-002 frame=653 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=3953 face_frames=1892 face_metas=2541 last_face_ago_ms=7 (no property set)
+[AGG] camera=cam-001 frame=660 detections=2 (cam_total=660 det_total=966 qd=1 drop=0)
+[TERMINAL] seq=3960 camera=cam-004 frame=652 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=660 detections=1 (cam_total=660 det_total=968 qd=1 drop=0)
+[AGG] camera=cam-003 frame=660 detections=2 (cam_total=660 det_total=1353 qd=1 drop=0)
+[TERMINAL] seq=3990 camera=cam-002 frame=663 rois=2 labels=Green,Green
+[AGG] camera=cam-004 frame=660 detections=8 (cam_total=660 det_total=5249 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=1 decision=1 | frames=4014 face_frames=1924 face_metas=2583 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=4020 camera=cam-005 frame=679 rois=2 labels=Green,Green
+[TERMINAL] seq=4050 camera=cam-001 frame=676 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=8 faces=2 decision=1 | frames=4076 face_frames=1953 face_metas=2623 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=4080 camera=cam-003 frame=675 rois=2 labels=Green,Human
+[AGG] camera=cam-005 frame=690 detections=3 (cam_total=690 det_total=1292 qd=1 drop=0)
+[AGG] camera=cam-006 frame=690 detections=7 (cam_total=690 det_total=4989 qd=1 drop=0)
+[TERMINAL] seq=4110 camera=cam-005 frame=694 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=690 detections=1 (cam_total=690 det_total=1022 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=2 decision=1 | frames=4135 face_frames=1975 face_metas=2655 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=4140 camera=cam-001 frame=691 rois=1 labels=Green
+[AGG] camera=cam-002 frame=690 detections=2 (cam_total=690 det_total=1011 qd=1 drop=0)
+[TERMINAL] seq=4170 camera=cam-006 frame=701 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-003 frame=690 detections=3 (cam_total=690 det_total=1417 qd=1 drop=0)
+[faceinfer] hb vfps=20.2 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=101ms) | cam-006:VALID(age=83ms) copy_p50/95/99=94/148/168us tip_p50/95/99=140/209/240us infer_p50/95/99=13885/18218/19235us
+[AGG] camera=cam-004 frame=690 detections=10 (cam_total=690 det_total=5488 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=4195 face_frames=2011 face_metas=2701 last_face_ago_ms=12 (no property set)
+[TERMINAL] seq=4200 camera=cam-002 frame=698 rois=2 labels=Green,Green
+[faceinfer] hb vfps=39.9 ifps=39.7 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=30ms) | cam-002:VALID_EMPTY(age=39ms) | cam-003:VALID_EMPTY(age=124ms) | cam-004:VALID(age=113ms) copy_p50/95/99=95/161/189us tip_p50/95/99=138/210/243us infer_p50/95/99=13148/16202/17875us
+[TERMINAL] seq=4230 camera=cam-001 frame=706 rois=1 labels=Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=4256 face_frames=2041 face_metas=2741 last_face_ago_ms=68 (no property set)
+[TERMINAL] seq=4260 camera=cam-001 frame=711 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=720 det_frame=719 age_ms=89 have_state=1 pts=0:01:13.135667975
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=720 det_frame=719 age_ms=89 have_state=1 pts=0:01:13.135667975
+[AGG] camera=cam-005 frame=720 detections=2 (cam_total=720 det_total=1366 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=720 det_frame=719 age_ms=105 have_state=1 pts=0:01:13.436062416
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=720 det_frame=719 age_ms=105 have_state=1 pts=0:01:13.436062416
+[AGG] camera=cam-006 frame=720 detections=6 (cam_total=720 det_total=5181 qd=1 drop=0)
+[TERMINAL] seq=4290 camera=cam-002 frame=713 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=720 det_frame=719 age_ms=104 have_state=1 pts=0:01:13.929884499
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=720 det_frame=719 age_ms=104 have_state=1 pts=0:01:13.929884499
+[AGG] camera=cam-001 frame=720 detections=3 (cam_total=720 det_total=1069 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=4316 face_frames=2071 face_metas=2781 last_face_ago_ms=90 (no property set)
+[TERMINAL] seq=4320 camera=cam-004 frame=712 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=720 det_frame=719 age_ms=120 have_state=1 pts=0:01:14.230806380
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=720 det_frame=719 age_ms=120 have_state=1 pts=0:01:14.230806380
+[AGG] camera=cam-002 frame=720 detections=1 (cam_total=720 det_total=1058 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=720 det_frame=719 age_ms=93 have_state=1 pts=0:01:14.531231070
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=720 det_frame=719 age_ms=93 have_state=1 pts=0:01:14.531231070
+[AGG] camera=cam-003 frame=720 detections=2 (cam_total=720 det_total=1478 qd=1 drop=0)
+[TERMINAL] seq=4350 camera=cam-006 frame=731 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=720 det_frame=719 age_ms=124 have_state=1 pts=0:01:14.832101805
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=720 det_frame=719 age_ms=124 have_state=1 pts=0:01:14.832101805
+[AGG] camera=cam-004 frame=720 detections=8 (cam_total=720 det_total=5726 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=4376 face_frames=2102 face_metas=2822 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=4380 camera=cam-002 frame=728 rois=1 labels=Green
+[TERMINAL] seq=4410 camera=cam-004 frame=727 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=4438 face_frames=2130 face_metas=2860 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=4440 camera=cam-006 frame=746 rois=6 labels=Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-005 frame=750 detections=1 (cam_total=750 det_total=1418 qd=1 drop=0)
+[AGG] camera=cam-006 frame=750 detections=4 (cam_total=750 det_total=5361 qd=1 drop=0)
+[TERMINAL] seq=4470 camera=cam-005 frame=754 rois=3 labels=Green,Green,Green
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=96ms) | cam-006:VALID(age=103ms) copy_p50/95/99=93/136/168us tip_p50/95/99=140/198/240us infer_p50/95/99=13790/18460/19058us
+[AGG] camera=cam-001 frame=750 detections=1 (cam_total=750 det_total=1117 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=6 faces=1 decision=1 | frames=4497 face_frames=2160 face_metas=2900 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=4500 camera=cam-004 frame=742 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-002 frame=750 detections=2 (cam_total=750 det_total=1091 qd=1 drop=0)
+[faceinfer] hb vfps=39.7 ifps=39.9 pool=6[f5,q1,i0] queue=0 evict=1 noslot=0 err=0 worker=4 stuck_ms=0 results=cam-001:VALID_EMPTY(age=93ms) | cam-002:VALID_EMPTY(age=79ms) | cam-003:VALID_EMPTY(age=65ms) | cam-004:VALID(age=86ms) copy_p50/95/99=94/166/194us tip_p50/95/99=137/215/242us infer_p50/95/99=13099/16574/17704us
+[TERMINAL] seq=4530 camera=cam-003 frame=750 rois=1 labels=Green
+[AGG] camera=cam-003 frame=750 detections=1 (cam_total=750 det_total=1537 qd=1 drop=0)
+[AGG] camera=cam-004 frame=750 detections=10 (cam_total=750 det_total=5965 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=4558 face_frames=2189 face_metas=2939 last_face_ago_ms=2 (no property set)
+[TERMINAL] seq=4560 camera=cam-004 frame=752 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[TERMINAL] seq=4590 camera=cam-004 frame=757 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=4618 face_frames=2218 face_metas=2978 last_face_ago_ms=5 (no property set)
+[TERMINAL] seq=4620 camera=cam-003 frame=765 rois=2 labels=Green,Human
+[AGG] camera=cam-005 frame=780 detections=3 (cam_total=780 det_total=1470 qd=1 drop=0)
+[AGG] camera=cam-006 frame=780 detections=7 (cam_total=780 det_total=5561 qd=1 drop=0)
+[TERMINAL] seq=4650 camera=cam-005 frame=784 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=780 detections=2 (cam_total=780 det_total=1177 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=5 faces=1 decision=1 | frames=4679 face_frames=2247 face_metas=3017 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=4680 camera=cam-001 frame=781 rois=2 labels=Green,Human
+[AGG] camera=cam-002 frame=780 detections=2 (cam_total=780 det_total=1130 qd=1 drop=0)
+[AGG] camera=cam-003 frame=780 detections=2 (cam_total=780 det_total=1594 qd=1 drop=0)
+[TERMINAL] seq=4710 camera=cam-004 frame=777 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-004 frame=780 detections=8 (cam_total=780 det_total=6203 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=4739 face_frames=2275 face_metas=3055 last_face_ago_ms=3 (no property set)
+[TERMINAL] seq=4740 camera=cam-005 frame=799 rois=2 labels=Green,Human
+[TERMINAL] seq=4770 camera=cam-002 frame=793 rois=1 labels=Green
+[faceinfer] hb vfps=20.0 ifps=20.0 pool=4[f2,q1,i1] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID_EMPTY(age=110ms) | cam-006:VALID(age=103ms) copy_p50/95/99=94/134/171us tip_p50/95/99=140/187/250us infer_p50/95/99=13890/18448/18921us
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=1 decision=1 | frames=4799 face_frames=2300 face_metas=3091 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=4800 camera=cam-001 frame=801 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-005 vframe=810 det_frame=809 age_ms=93 have_state=1 pts=0:01:22.135667975
+[face-sync] qtivoverlay.sink cam=cam-005 vframe=810 det_frame=809 age_ms=93 have_state=1 pts=0:01:22.135667975
+[AGG] camera=cam-005 frame=810 detections=2 (cam_total=810 det_total=1525 qd=1 drop=0)
+[faceinfer] hb vfps=39.9 ifps=39.9 pool=6[f5,q1,i0] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=106ms) | cam-002:VALID_EMPTY(age=81ms) | cam-003:VALID_EMPTY(age=97ms) | cam-004:VALID(age=68ms) copy_p50/95/99=94/165/198us tip_p50/95/99=137/211/250us infer_p50/95/99=13234/16571/17704us
+[face-sync] qtifaceinfer.src cam=cam-006 vframe=810 det_frame=809 age_ms=105 have_state=1 pts=0:01:22.436062416
+[face-sync] qtivoverlay.sink cam=cam-006 vframe=810 det_frame=809 age_ms=105 have_state=1 pts=0:01:22.436062416
+[AGG] camera=cam-006 frame=810 detections=8 (cam_total=810 det_total=5774 qd=1 drop=0)
+[TERMINAL] seq=4830 camera=cam-002 frame=803 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-001 vframe=810 det_frame=809 age_ms=119 have_state=1 pts=0:01:22.929884499
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=810 det_frame=809 age_ms=119 have_state=1 pts=0:01:22.929884499
+[AGG] camera=cam-001 frame=810 detections=2 (cam_total=810 det_total=1231 qd=1 drop=0)
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=1 decision=1 | frames=4860 face_frames=2316 face_metas=3117 last_face_ago_ms=0 (no property set)
+[TERMINAL] seq=4860 camera=cam-005 frame=819 rois=2 labels=Green,Human
+[INFO] Signal received, stopping pipeline...
+[INFO] Shutting down WebRTC sessions...
+[WebrtcSignaling] Stopped
+[SessionManager] Shutdown complete
+[NatsAdapter] Disconnected.
+[face-sync] qtifaceinfer.src cam=cam-002 vframe=810 det_frame=809 age_ms=109 have_state=1 pts=0:01:23.230806380
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=810 det_frame=809 age_ms=109 have_state=1 pts=0:01:23.230806380
+[AGG] camera=cam-002 frame=810 detections=2 (cam_total=810 det_total=1172 qd=1 drop=0)
+[TERMINAL] seq=4890 camera=cam-001 frame=816 rois=2 labels=Green,Green
+[face-sync] qtifaceinfer.src cam=cam-003 vframe=810 det_frame=809 age_ms=113 have_state=1 pts=0:01:23.531231070
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=810 det_frame=809 age_ms=113 have_state=1 pts=0:01:23.531231070
+[AGG] camera=cam-003 frame=810 detections=2 (cam_total=810 det_total=1643 qd=1 drop=0)
+[face-sync] qtifaceinfer.src cam=cam-004 vframe=810 det_frame=809 age_ms=60 have_state=1 pts=0:01:23.832101805
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=810 det_frame=809 age_ms=60 have_state=1 pts=0:01:23.832101805
+[AGG] camera=cam-004 frame=810 detections=10 (cam_total=810 det_total=6442 qd=1 drop=0)
+[TERMINAL] seq=4920 camera=cam-004 frame=812 rois=7 labels=Green,Green,Green,Green,Green,Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=4921 face_frames=2340 face_metas=3151 last_face_ago_ms=12 (no property set)
+[TERMINAL] seq=4950 camera=cam-005 frame=834 rois=2 labels=Green,Green
+[TERMINAL] seq=4980 camera=cam-006 frame=836 rois=8 labels=Green,Green,Green,Green,Green,Green,Human,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=7 faces=2 decision=1 | frames=4981 face_frames=2370 face_metas=3191 last_face_ago_ms=0 (no property set)
+[AGG] camera=cam-005 frame=840 detections=2 (cam_total=840 det_total=1599 qd=1 drop=0)
+[AGG] camera=cam-006 frame=840 detections=6 (cam_total=840 det_total=6004 qd=1 drop=0)
+[TERMINAL] seq=5010 camera=cam-006 frame=841 rois=8 labels=Green,Green,Green,Green,Green,Green,Green,Green
+[AGG] camera=cam-001 frame=840 detections=1 (cam_total=840 det_total=1275 qd=1 drop=0)
+[TERMINAL] seq=5040 camera=cam-002 frame=838 rois=2 labels=Green,Green
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=5041 face_frames=2400 face_metas=3231 last_face_ago_ms=27 (no property set)
+[AGG] camera=cam-002 frame=840 detections=1 (cam_total=840 det_total=1209 qd=1 drop=0)
+[TERMINAL] seq=5070 camera=cam-003 frame=840 rois=2 labels=Green,Human
+[AGG] camera=cam-003 frame=840 detections=2 (cam_total=840 det_total=1702 qd=1 drop=0)
+[faceinfer] hb vfps=19.8 ifps=20.0 pool=4[f3,q1,i0] queue=1 evict=0 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-005:VALID(age=99ms) | cam-006:VALID(age=90ms) copy_p50/95/99=95/137/167us tip_p50/95/99=142/188/229us infer_p50/95/99=13848/17919/18528us
+[AGG] camera=cam-004 frame=840 detections=8 (cam_total=840 det_total=6680 qd=1 drop=0)
+[TERMINAL] seq=5100 camera=cam-003 frame=845 rois=2 labels=Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=5102 face_frames=2430 face_metas=3271 last_face_ago_ms=65 (no property set)
+[faceinfer] hb vfps=40.2 ifps=40.0 pool=6[f4,q1,i1] queue=1 evict=1 noslot=0 err=0 worker=0 stuck_ms=0 results=cam-001:VALID_EMPTY(age=85ms) | cam-002:VALID_EMPTY(age=108ms) | cam-003:VALID_EMPTY(age=71ms) | cam-004:VALID(age=101ms) copy_p50/95/99=94/139/174us tip_p50/95/99=136/187/222us infer_p50/95/99=13183/16822/17946us
+[TERMINAL] seq=5130 camera=cam-001 frame=856 rois=1 labels=Green
+[TERMINAL] seq=5160 camera=cam-006 frame=866 rois=9 labels=Green,Green,Green,Green,Green,Green,Green,Green,Human
+[FACE-BUF] caps=video/x-raw, format=(string)NV12, width=(int)640, height=(int)480, interlace-mode=(string)progressive, multiview-mode=(string)mono, multiview-flags=(GstVideoMultiviewFlagsSet)0:ffffffff:/right-view-first/left-flipped/left-flopped/right-flipped/right-flopped/half-aspect/mixed-mono, pixel-aspect-ratio=(fraction)1/1, colorimetry=(string)bt709, framerate=(fraction)10/1 | features=memory:SystemMemory | writable=1 n_mem=1 refcount=1 vmeta=0 stride0=-1 offset0=-1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=5162 face_frames=2460 face_metas=3311 last_face_ago_ms=81 (no property set)
+[AGG] camera=cam-005 frame=870 detections=2 (cam_total=870 det_total=1677 qd=1 drop=0)
+[NatsAdapter] nats_CloseAndWait failed: TIMEOUT
+[WARN] NATS internal threads did not stop cleanly
+[QnnInferencer] [QNN]  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+[QnnInferencer] [QNN]  <W> The device handle 0x5 was not found in current thread
+
+[QnnInferencer] [QNN]  <W> Failed to remove device handle 0x5 from LoggerSetupTask
+
+[QnnInferencer] Destroyed
+[FaceProcessor] Destroyed
+[QnnInferencer] [QNN]  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+[QnnInferencer] [QNN]  <W> The device handle 0x6 was not found in current thread
+
+[QnnInferencer] [QNN]  <W> Failed to remove device handle 0x6 from LoggerSetupTask
+
+[QnnInferencer] Destroyed
+[FaceProcessor] Destroyed
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:42:dummy call to rpcmem_deinit, rpcmem APIs will be used from libxdsprpc
+[INFO] Pipeline reached NULL; VPU decode sessions released.
+[NatsAdapter] Connection close callback timed out; quarantining generation 1
+[NatsAdapter] Disconnected.
+[AGG] SUMMARY cameras=6 total_submitted=5167 total_dropped=0
+[AGG]   camera=cam-001 submitted=862 detections=1302 dropped=0 last_frame=862 queue_depth=0
+[AGG]   camera=cam-002 submitted=859 detections=1240 dropped=0 last_frame=859 queue_depth=0
+[AGG]   camera=cam-003 submitted=856 detections=1731 dropped=0 last_frame=856 queue_depth=0
+[AGG]   camera=cam-004 submitted=853 detections=6784 dropped=0 last_frame=853 queue_depth=0
+[AGG]   camera=cam-005 submitted=870 detections=1677 dropped=0 last_frame=870 queue_depth=0
+[AGG]   camera=cam-006 submitted=867 detections=6204 dropped=0 last_frame=867 queue_depth=0
+[INFO] FrameEventPublisher: published=5167 republished=0 build_failures=0 publish_failures=0
+[INFO] CaptureTimestampTracker records=5167 misses=0 regress_fixes=0
+[INFO] AnomalySnapshotService enqueued=114 written_ok=114 write_failures=0 published=309 dropped=0 publish_failures=0
+[INFO] Releasing 6 owned splitter request pad(s)...
+GEM Handle for BO=5 closed 
+GEM Handle for BO=17 closed 
+GEM Handle for BO=20 closed 
+GEM Handle for BO=7 closed 
+GEM Handle for BO=23 closed 
+GEM Handle for BO=49 closed 
+GEM Handle for BO=16 closed 
+GEM Handle for BO=6 closed 
+GEM Handle for BO=18 closed 
+GEM Handle for BO=47 closed 
+GEM Handle for BO=21 closed 
+GEM Handle for BO=50 closed 
+GEM Handle for BO=24 closed 
+GEM Handle for BO=14 closed 
+GEM Handle for BO=4 closed 
+GEM Handle for BO=19 closed 
+GEM Handle for BO=48 closed 
+GEM Handle for BO=22 closed 
+GEM Handle for BO=25 closed 
+GEM Handle for BO=15 closed 
+GEM Handle for BO=3 closed 
+GEM Handle for BO=10 closed 
+GEM Handle for BO=32 closed 
+GEM Handle for BO=33 closed 
+GEM Handle for BO=45 closed 
+GEM Handle for BO=43 closed 
+GEM Handle for BO=8 closed 
+GEM Handle for BO=26 closed 
+GEM Handle for BO=28 closed 
+GEM Handle for BO=29 closed 
+GEM Handle for BO=37 closed 
+GEM Handle for BO=11 closed 
+GEM Handle for BO=27 closed 
+GEM Handle for BO=31 closed 
+GEM Handle for BO=30 closed 
+GEM Handle for BO=36 closed 
+GEM Handle for BO=1 closed 
+GEM Handle for BO=12 closed 
+GEM Handle for BO=13 closed 
+GEM Handle for BO=9 closed 
+GEM Handle for BO=2 closed 
+GEM Handle for BO=61 closed 
+GEM Handle for BO=39 closed 
+GEM Handle for BO=64 closed 
+GEM Handle for BO=67 closed 
+GEM Handle for BO=71 closed 
+GEM Handle for BO=54 closed 
+GEM Handle for BO=58 closed 
+GEM Handle for BO=62 closed 
+GEM Handle for BO=40 closed 
+GEM Handle for BO=65 closed 
+GEM Handle for BO=68 closed 
+GEM Handle for BO=72 closed 
+GEM Handle for BO=56 closed 
+GEM Handle for BO=59 closed 
+GEM Handle for BO=63 closed 
+GEM Handle for BO=66 closed 
+GEM Handle for BO=70 closed 
+GEM Handle for BO=53 closed 
+GEM Handle for BO=73 closed 
+GEM Handle for BO=57 closed 
+GEM Handle for BO=38 closed 
+GEM Handle for BO=44 closed 
+GEM Handle for BO=46 closed 
+GEM Handle for BO=41 closed 
+GEM Handle for BO=52 closed 
+GEM Handle for BO=69 closed 
+GEM Handle for BO=34 closed 
+GEM Handle for BO=55 closed 
+GEM Handle for BO=75 closed 
+GEM Handle for BO=60 closed 
+GEM Handle for BO=51 closed 
+GEM Handle for BO=74 closed 
+GEM Handle for BO=35 closed 
+GEM Handle for BO=42 closed 
+
+=== Frame Count Summary ===
+Camera            IN       OUT     delta
+cam-001          862         0       862
+cam-002          859         0       859
+cam-003          856         0       856
+cam-004          853         0       853
+cam-005          870         0       870
+cam-006          867         0       867
+----------------------------------------
+TOTAL           5167         0      5167
+[INFO] Done.

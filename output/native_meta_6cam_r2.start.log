@@ -1,0 +1,49 @@
+SHA=3a5aa2b571272afbabfc0c7898bd6cf502bd7f1a53156df09136842c711eed66
+PLUGINS=/home/ubuntu/workspace/IoT_pipeline0825/runtime_plugins
+SNAP=/home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/pipeline_otm_6cam_webrtc.txt
+AIBOX_STACK_PROFILE=compat (gstreamer1.0-plugins-qcom=1:1.8.1+ubuntu3-0ubuntu1)
+EGL_ICD_OK json=/usr/share/glvnd/egl_vendor.d/10_adreno.json lib=/usr/lib/aarch64-linux-gnu/libEGL_adreno.so.1.0.0
+EGL_VENDOR_JSONS=10_adreno.json 50_mesa.json 
+EGL_VENDOR_PIN=/usr/share/glvnd/egl_vendor.d/10_adreno.json
+	libgbm.so.1 (libc6,AArch64) => /lib/aarch64-linux-gnu/libgbm.so.1
+	libgbm.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libgbm.so
+	libGLESv2_adreno.so.2 (libc6,AArch64) => /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+	libGLESv2_adreno.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libGLESv2_adreno.so
+	libGLESv2.so.2 (libc6,AArch64) => /lib/aarch64-linux-gnu/libGLESv2.so.2
+	libGLESv2.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libGLESv2.so
+	libEGL_mesa.so.0 (libc6,AArch64) => /lib/aarch64-linux-gnu/libEGL_mesa.so.0
+	libEGL.so.1 (libc6,AArch64) => /lib/aarch64-linux-gnu/libEGL.so.1
+	libEGL.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libEGL.so
+GST_REGISTRY=/home/ubuntu/workspace/IoT_pipeline0825/runtime_registry/gst_registry_compat.bin
+NATS_OK
+HTTP_REUSE pid=28288
+GFX_WESTON_LOG=/home/ubuntu/workspace/IoT_pipeline0825/output/weston_adreno_forceon/weston_0916_105512.log
+GFX_GATE_OK weston(ubuntu)+socket5s+kgsl+adreno-icd
+DEMO_ALIVE=0
+VIDEO32_HOLDERS=
+VIDEO33_HOLDERS=
+IRIS_REFCNT=0
+VPU_OPEN=OK
+CMA_FREE=113512
+DMESG_HIT=0
+LAST_NULL=unknown
+LAST_NULL_LOG=/home/ubuntu/workspace/IoT_pipeline0825/output/webrtc_6cam/p6_demo.log
+VERDICT=READY
+VPU_RESET_SKIP verdict=READY policy=if-needed
+DEMO_ALIVE=0
+VIDEO32_HOLDERS=
+VIDEO33_HOLDERS=
+IRIS_REFCNT=0
+VPU_OPEN=OK
+CMA_FREE=113512
+DMESG_HIT=0
+LAST_NULL=unknown
+LAST_NULL_LOG=/home/ubuntu/workspace/IoT_pipeline0825/output/webrtc_6cam/p6_demo.log
+VERDICT=READY
+VPU=OPEN_OK
+RUN_ARG=--run-forever
+STARTED_PID=35265
+BOOT_OK
+AGG_OK count=6
+HTML=http://192.168.50.57:8080/webrtc-test-6.html
+READY_FOR_BROWSER

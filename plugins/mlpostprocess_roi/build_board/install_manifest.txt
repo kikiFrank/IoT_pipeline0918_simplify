@@ -1,0 +1,5 @@
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/libgstqtimlpostprocess_roi.so
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo-nas.so
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-otm.so
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-obb.so
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-ppyoloe.so

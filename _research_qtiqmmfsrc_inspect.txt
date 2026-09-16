@@ -1,0 +1,139 @@
+﻿Factory Details:
+  Rank                     primary (256)
+  Long-name                QMMF Video Source
+  Klass                    Source/Video
+  Description              Reads frames from a device via QMMF service
+  Author                   QTI
+
+Plugin Details:
+  Name                     qtiqmmfsrc
+  Description              QTI QMMF plugin library
+  Filename                 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstqtiqmmfsrc.so
+  Version                  1.0.0
+  License                  BSD
+  Source module            gstreamer1.0-plugins-qcom-oss
+  Binary package           Qualcomm open-source GStreamer Plug-ins
+  Origin URL               http://www.qualcomm.com
+
+GObject
+ +----GInitiallyUnowned
+       +----GstObject
+             +----GstElement
+                   +----GstQmmfSrc
+
+Implemented Interfaces:
+  GstChildProxy
+
+Pad Templates:
+  SRC template: 'image_%u'
+    Availability: On request
+    Capabilities:
+      image/jpeg
+                  width: [ 16, 5184 ]
+                 height: [ 16, 3880 ]
+              framerate: [ 0/1, 30/1 ]
+      video/x-raw
+                 format: { (string)NV21 }
+                  width: [ 16, 5184 ]
+                 height: [ 16, 3880 ]
+              framerate: [ 0/1, 30/1 ]
+      video/x-bayer
+                 format: { (string)bggr, (string)rggb, (string)gbrg, (string)grbg, (string)mono }
+                    bpp: { (string)8, (string)10, (string)12, (string)16 }
+                  width: [ 16, 5184 ]
+                 height: [ 16, 3880 ]
+              framerate: [ 0/1, 30/1 ]
+    Type: GstQmmfSrcImagePad
+    Pad Properties:
+    
+      logical-stream-type : Type of stream to select specific physical camera or layout to stitch images.
+                            flags: readable, writable, changeable only in NULL, READY or PAUSED state
+                            Enum "GstQmmfSrcPadLogicalStreamType" Default: 18, "none"
+                               (0): camera-index-0   - The stream uses specific physical camera with the index 0.
+                               (1): camera-index-1   - The stream uses specific physical camera with the index 1.
+                               (2): camera-index-2   - The stream uses specific physical camera with the index 2.
+                               (3): camera-index-3   - The stream uses specific physical camera with the index 3.
+                               (4): camera-index-4   - The stream uses specific physical camera with the index 4.
+                               (5): camera-index-5   - The stream uses specific physical camera with the index 5.
+                               (6): camera-index-6   - The stream uses specific physical camera with the index 6.
+                               (7): camera-index-7   - The stream uses specific physical camera with the index 7.
+                               (8): camera-index-8   - The stream uses specific physical camera with the index 8.
+                               (9): camera-index-9   - The stream uses specific physical camera with the index 9.
+                               (10): camera-index-10  - The stream uses specific physical camera with the index 10.
+                               (11): camera-index-11  - The stream uses specific physical camera with the index 11.
+                               (12): camera-index-12  - The stream uses specific physical camera with the index 12.
+                               (13): camera-index-13  - The stream uses specific physical camera with the index 13.
+                               (14): camera-index-14  - The stream uses specific physical camera with the index 14.
+                               (15): camera-index-15  - The stream uses specific physical camera with the index 15.
+                               (16): sidebyside       - The stream uses all physical cameras and stitch images side by side.
+                               (17): panorama         - The stream uses all physical cameras and stitch images to panorama.
+                               (18): none             - None
+      
+      rotate              : Set Orientation Angle for Image Stream
+                            flags: readable, writable
+                            Enum "GstRotate" Default: 0, "none"
+                               (0): none             - No Rotation 
+                               (1): 90CCW            - Rotate 90 degrees counter-clockwise
+                               (2): 180CCW           - Rotate 180 degrees counter-clockwise
+                               (3): 270CCW           - Rotate 270 degrees counter-clockwise
+      
+  
+  SRC template: 'video_%u'
+    Availability: On request
+    Capabilities:
+      image/jpeg
+                  width: [ 16, 5184 ]
+                 height: [ 16, 3880 ]
+              framerate: [ 0/1, 120/1 ]
+      video/x-raw
+                 format: { (string)NV12, (string)NV16, (string)NV12_Q08C, (string)RGB }
+                  width: [ 16, 5184 ]
+                 height: [ 16, 3880 ]
+              framerate: [ 0/1, 120/1 ]
+      video/x-bayer
+                 format: { (string)bggr, (string)rggb, (string)gbrg, (string)grbg, (string)mono }
+                    bpp: { (string)8, (string)10, (string)12, (string)16 }
+                  width: [ 16, 5184 ]
+                 height: [ 16, 3880 ]
+              framerate: [ 0/1, 120/1 ]
+    Type: GstQmmfSrcVideoPad
+    Pad Properties:
+    
+      crop                : Crop rectangle ('<X, Y, WIDTH, HEIGHT>'). Applicable only for JPEG and YUY2 formats
+                            flags: readable, writable, changeable in NULL, READY, PAUSED or PLAYING state
+                            Default: "<  >"
+                            GstValueArray of GValues of type "gint"
+      
+      extra-buffers       : Number of additional buffers that will be allocated.
+                            flags: readable, writable, changeable only in NULL or READY state
+                            Unsigned Integer. Range: 0 - 4294967295 Default: 0 
+      
+      framerate           : Target framerate in frames per second for displaying
+                            flags: readable, writable, changeable in NULL, READY, PAUSED or PLAYING state
+                            Double. Range:               0 -              30 Default:              30 
+      
+      logical-stream-type : Type of the stream for logical camera.
+                            flags: readable, writable, changeable only in NULL, READY or PAUSED state
+                            Enum "GstQmmfSrcPadLogicalStreamType" Default: 18, "none"
+                               (0): camera-index-0   - The stream uses specific physical camera with the index 0.
+                               (1): camera-index-1   - The stream uses specific physical camera with the index 1.
+                               (2): camera-index-2   - The stream uses specific physical camera with the index 2.
+                               (3): camera-index-3   - The stream uses specific physical camera with the index 3.
+                               (4): camera-index-4   - The stream uses specific physical camera with the index 4.
+                               (5): camera-index-5   - The stream uses specific physical camera with the index 5.
+                               (6): camera-index-6   - The stream uses specific physical camera with the index 6.
+                               (7): camera-index-7   - The stream uses specific physical camera with the index 7.
+                               (8): camera-index-8   - The stream uses specific physical camera with the index 8.
+                               (9): camera-index-9   - The stream uses specific physical camera with the index 9.
+                               (10): camera-index-10  - The stream uses specific physical camera with the index 10.
+                               (11): camera-index-11  - The stream uses specific physical camera with the index 11.
+                               (12): camera-index-12  - The stream uses specific physical camera with the index 12.
+                               (13): camera-index-13  - The stream uses specific physical camera with the index 13.
+                               (14): camera-index-14  - The stream uses specific physical camera with the index 14.
+                               (15): camera-index-15  - The stream uses specific physical camera with the index 15.
+                               (16): sidebyside       - The stream uses all physical cameras and stitch images side by side.
+                               (17): panorama         - The stream uses all physical cameras and stitch images to panorama.
+                               (18): none             - None
+                               (0): (null)           - 
+                               (-1043625696): (null)           - 0����
+                            

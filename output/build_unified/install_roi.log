@@ -1,0 +1,6 @@
+-- Install configuration: "Release"
+-- Up-to-date: /home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/libgstqtimlpostprocess_roi.so
+-- Up-to-date: /home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo-nas.so
+-- Up-to-date: /home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-otm.so
+-- Up-to-date: /home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-obb.so
+-- Up-to-date: /home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-ppyoloe.so

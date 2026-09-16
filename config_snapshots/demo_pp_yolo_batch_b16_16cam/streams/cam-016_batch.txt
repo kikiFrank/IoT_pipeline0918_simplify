@@ -1,0 +1,19 @@
+[stream]
+camera_id=cam-016
+name=PP-YOLO Batch16 Camera 16
+enabled=1
+source_type=rtsp
+rtsp_url=rtsp://192.168.50.41:8554/cam15
+encoding=h264
+
+[decode]
+depay=rtph264depay
+parse=h264parse
+decoder=v4l2h264dec
+output_caps=video/x-raw,format=NV12
+
+[inference]
+algorithm=ppyoloe_batch_b16
+frequency=0
+thresh=0.5
+drop_policy=latest

@@ -1,0 +1,61 @@
+From d389bb88df73c7594897a6b2344b7c7974342ee0 Mon Sep 17 00:00:00 2001
+From: Pratik Pachange <ppachang@qti.qualcomm.com>
+Date: Fri, 11 Sep 2026 18:34:20 +0530
+Subject: [PATCH 3/4] qtimlqnn: fix segfault on teardown by clearing tensor
+ client buffers
+
+gst_ml_qnn_engine_free() no longer clears the input/output Qnn_Tensor_t
+clientBuf.data/dataSize before releasing graph info and the QNN system
+context. These tensors alias memory owned by the system context handle
+(for cached/DLC models) or the model library, and their clientBuf still
+points at the last GstBuffer used in execute() at teardown time. Freeing
+the system context while that stale buffer pointer is still set caused
+libQnnSystem.so to crash inside its internal free() during
+QnnSystemContext_free().
+
+This clearing step existed prior to "qtimlqnn: Add support for loading
+model graph from DLC" (a992eeaf), which dropped it while refactoring the
+cached/uncached graph teardown into the FreeGraph/g_free branches.
+Restore it, iterating graph_infos[0] before releasing graph info, as
+before.
+
+Change-Id: I502e64dd9f190e787886a6157d784271c0e5569d
+Signed-off-by: Pratik Pachange <ppachang@qti.qualcomm.com>
+Signed-off-by: Raja Ganapathi Busam <rbusam@qti.qualcomm.com>
+---
+ gst-plugin-mlqnn/ml-qnn-engine.cc | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/gst-plugin-mlqnn/ml-qnn-engine.cc b/gst-plugin-mlqnn/ml-qnn-engine.cc
+index b4a4579..6df3875 100644
+--- a/gst-plugin-mlqnn/ml-qnn-engine.cc
++++ b/gst-plugin-mlqnn/ml-qnn-engine.cc
+@@ -1498,6 +1498,25 @@ gst_ml_qnn_engine_free (GstMLQnnEngine * engine)
+   }
+ 
+   if (engine->graph_infos) {
++    const GraphInfo_t *graph_info = engine->graph_infos[0];
++    Qnn_Tensor_t *tensor;
++
++    // Clear the client buffer pointers set during execute(), some of the
++    // graph info below may alias memory owned by the QNN system context or
++    // model library, which must not be walked with stale buffer pointers
++    // when it gets freed.
++    for (guint idx = 0; idx < graph_info->numInputTensors; idx++) {
++      tensor = &(graph_info->inputTensors[idx]);
++      QNN_TENSOR_CLIENTBUF (tensor).data = NULL;
++      QNN_TENSOR_CLIENTBUF (tensor).dataSize = 0;
++    }
++
++    for (guint idx = 0; idx < graph_info->numOutputTensors; ++idx) {
++      tensor = &(graph_info->outputTensors[idx]);
++      QNN_TENSOR_CLIENTBUF (tensor).data = NULL;
++      QNN_TENSOR_CLIENTBUF (tensor).dataSize = 0;
++    }
++
+     // A model library owns its graph info and frees it through its own API.
+     if (engine->FreeGraph != NULL) {
+       engine->FreeGraph (&(engine->graph_infos), engine->n_graphs);
+-- 
+2.43.0
+

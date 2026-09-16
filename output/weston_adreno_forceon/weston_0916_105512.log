@@ -1,0 +1,19 @@
+Date: 2026-09-16 UTC
+[10:55:14.071] weston 13.0.0
+               https://wayland.freedesktop.org
+               Bug reports to: https://gitlab.freedesktop.org/wayland/weston/issues/
+               Build: 13.0.0
+[10:55:14.071] Command line: weston --backend=drm-backend.so --socket=wayland-0 --idle-time=0 --continue-without-input -c /tmp/weston_cfg_aibox/weston.ini
+[10:55:14.071] OS: Linux, 6.8.0-1080.85, #3 SMP PREEMPT_DYNAMIC Sat Sep 12 13:17:10 CST 2026, aarch64
+[10:55:14.071] Flight recorder: enabled
+[10:55:14.072] Using config file '/tmp/weston_cfg_aibox/weston.ini'
+[10:55:14.072] Output repaint window is 7 ms maximum.
+[10:55:14.072] Loading module '/usr/lib/aarch64-linux-gnu/libweston-13/drm-backend.so'
+[10:55:14.074] initializing drm backend
+[10:55:14.074] Trying libseat launcher...
+[10:55:14.075] [libseat/backend/seatd.c:308] Could not poll connection: Broken pipe
+[10:55:14.075] [libseat/libseat.c:58] Backend 'seatd' failed to open seat: Bad file descriptor
+[10:55:14.075] libseat: could not open seat
+[10:55:14.075] fatal: your system should either provide the logind D-Bus API, or use seatd.
+[10:55:14.075] fatal: failed to create compositor backend
+Internal warning: debug scope 'drm-backend' has not been destroyed.

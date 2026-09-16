@@ -1,0 +1,11 @@
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/gstqtimlpostprocess_roi.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/ml-postprocess-yolo-nas.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/ml-postprocess-yolo26-otm.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/ml-postprocess-yolo26-obb.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/ml-postprocess-ppyoloe.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/edit_cache.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/list_install_components.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/install.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/install/local.dir
+/home/ubuntu/workspace/IoT_pipeline0825/plugins/mlpostprocess_roi/build_board/CMakeFiles/install/strip.dir

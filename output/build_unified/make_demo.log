@@ -1,0 +1,6 @@
+[  8%] Built target imsdk_proto
+[ 11%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o
+[ 13%] Linking CXX executable aibox_stream_pipeline_demo
+[100%] Built target aibox_stream_pipeline_demo
+[100%] Built target test_aiboxbatchsplit
+[100%] Built target test_lockstep_qtibatch

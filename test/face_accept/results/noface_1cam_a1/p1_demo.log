@@ -1,0 +1,554 @@
+============================================================
+  AIBox Stream Pipeline Demo  v1.0.0
+============================================================
+[INFO] RLIMIT_NOFILE soft=65536 hard=65536
+[INFO] GStreamer initialized (version 1.24.2)
+[INFO] snapshot : /home/ubuntu/workspace/IoT_pipeline0825/test/face_accept/snapshots/pipeline_otm_1cam_gles_noface.txt
+[INFO] dump_plan_only : no
+[INFO] build_only     : no
+[INFO] run_seconds    : 0
+[INFO] run_forever    : yes
+[INFO] Snapshot loaded: demo_otm_1cam_webrtc
+[INFO]   streams   : 1
+[INFO]   algorithms: 1
+[INFO]   models    : 1
+[INFO] ExecutionPlan  : plan_demo_otm_1cam_webrtc
+[INFO]   stream_plans : 1
+[INFO]   algo_groups  : 1
+[INFO]   time_mux_grps: 1
+[INFO]   stage_plans  : 2
+[INFO]   chain_plans  : 1
+[INFO] Exported: ./output/execution_plan.json
+[INFO] Exported: ./output/pipeline_structure.txt
+[INFO] WebRTC annotated preview enabled
+[BATCH_DISPATCH] path=time_mux groups=1
+[webrtc] VPU budget OK: 1 dec + 0 webrtc_enc(build) + 0 rec_enc = 1 / 32 (lazy enc unless MAX_ENC set)
+[init] GstAiboxFrameMeta registration triggered (aiboxframemeta)
+failed to get driver name for fd 10
+MESA-LOADER: failed to retrieve device information
+failed to get driver name for fd 10
+[HTP] stage=stage_yellow stage_index=1 -> backend-device-id=1 (n_htp=2)
+[DBG class-filter] stage=stage_yellow class-filter="Green"
+[DBG module] stage=stage_yellow nick=yolo26-otm gtype=187650941021824
+[DBG module] enum_class=0xaaaae3b3ef20 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] stage=stage_human stage_index=2 -> backend-device-id=0 (n_htp=2)
+[DBG class-filter] stage=stage_human class-filter="Human"
+[DBG module] stage=stage_human nick=yolo26-otm gtype=187650941021824
+[DBG module] enum_class=0xaaaae3b3ef20 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[webrtc] overlay_tmux_group_0_0 before tee_post (writable DMA-BUF path)
+[webrtc lazy] tmux_group_0_0 slot0(cam-001): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[INFO] GstPipeline built successfully (P1: mux + decode + fakesink)
+[pad-dump] disabled (set AIBOX_WEBRTC_PAD_DUMP=1 to enable)
+[NatsAdapter] Connected to nats://localhost:4222 (client=aibox-pipeline-webrtc)
+[SessionManager] Initialized
+[SessionManager] Registered camera: cam-001 (lazy stub)
+[WebrtcSignaling] Subscribed to 5 wildcard subjects
+[SessionManager] Signaling started
+[INFO] Registering 1 appsink callbacks...
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO] Exported: ./output/pipeline_runtime.dot
+bash: scripts/render_dot.sh: No such file or directory
+[WARN] Dot render failed (graphviz installed?). Run: bash scripts/render_dot.sh ./output/pipeline_runtime.dot
+[NatsAdapter] Connected to nats://127.0.0.1:4222 (client=aibox-pipeline-detection)
+[INFO] FrameEventPublisher started (NATS subject: detection.frame)
+[INFO] AnomalySnapshotService started media_dir=/home/ubuntu/workspace/IoT_pipeline0825/media encoder_ready=yes thumb_encoder_ready=yes
+[INFO] Setting pipeline to PLAYING (run-forever; Ctrl+C / SIGTERM to stop)...
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:38:dummy call to rpcmem_init, rpcmem APIs will be used from libxdsprpc
+[INFO] set_state(PLAYING) ret=2
+[RTSP] cam=cam-001 pad=recv_rtp_src_0_2453052941_96: linked H264 video RTP -> depay
+Wed Sep 16 2026 13:26:00.605780: INFO: GPU alignment: 64
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+PFP: 0x016dc112, ME: 0x00000000
+Pre-rotation disabled !!!
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+Pre-rotation disabled !!!
+Wed Sep 16 2026 13:26:00.611990: Initilized EGL display version: 1.5
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xffff0829c810, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xffff141d4360, Invalid argument
+
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[PIPELINE_READY] state=PLAYING
+[TERMINAL] seq=1 camera=cam-001 frame=1 rois=1 labels=Green
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xffff08398a40, Invalid argument
+
+mmap: Invalid argument
+Error!! getting bo cpu address failed. pCpuAddr: (nil), pMapData: (nil)
+
+MapGbmBufInfoAddress: Mmap failed for bo = 0xffff141759f0, Invalid argument
+
+[TERMINAL] seq=2 camera=cam-001 frame=2 rois=1 labels=Green
+[TERMINAL] seq=3 camera=cam-001 frame=3 rois=1 labels=Green
+[TERMINAL] seq=4 camera=cam-001 frame=4 rois=1 labels=Green
+[TERMINAL] seq=5 camera=cam-001 frame=5 rois=1 labels=Green
+[TERMINAL] seq=6 camera=cam-001 frame=6 rois=1 labels=Green
+[TERMINAL] seq=7 camera=cam-001 frame=7 rois=1 labels=Green
+[TERMINAL] seq=8 camera=cam-001 frame=8 rois=3 labels=Green,Green,Green
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=30 camera=cam-001 frame=30 rois=1 labels=Green
+[AGG] camera=cam-001 frame=30 detections=1 (cam_total=30 det_total=34 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=60 camera=cam-001 frame=60 rois=1 labels=Green
+[AGG] camera=cam-001 frame=60 detections=1 (cam_total=60 det_total=74 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=90 det_frame=0 age_ms=0 have_state=0 pts=0:00:11.020067629
+[TERMINAL] seq=90 camera=cam-001 frame=90 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=90 detections=2 (cam_total=90 det_total=127 qd=1 drop=0)
+
+** (aibox_stream_pipeline_demo:5994): WARNING **: 13:26:10.700: v4l2h264dec_cam_001: 10 initial frames were not dequeued: bug in decoder -- please file a bug
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=120 camera=cam-001 frame=121 rois=1 labels=Green
+[AGG] camera=cam-001 frame=121 detections=1 (cam_total=120 det_total=163 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[TERMINAL] seq=150 camera=cam-001 frame=151 rois=1 labels=Green
+[AGG] camera=cam-001 frame=151 detections=1 (cam_total=150 det_total=227 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:20.020067629
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=180 camera=cam-001 frame=181 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=181 detections=2 (cam_total=180 det_total=281 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=210 camera=cam-001 frame=211 rois=1 labels=Green
+[AGG] camera=cam-001 frame=211 detections=1 (cam_total=210 det_total=335 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=240 camera=cam-001 frame=241 rois=1 labels=Green
+[AGG] camera=cam-001 frame=241 detections=1 (cam_total=240 det_total=373 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=270 det_frame=0 age_ms=0 have_state=0 pts=0:00:29.020067629
+[TERMINAL] seq=270 camera=cam-001 frame=271 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=271 detections=2 (cam_total=270 det_total=416 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=300 camera=cam-001 frame=301 rois=1 labels=Green
+[AGG] camera=cam-001 frame=301 detections=1 (cam_total=300 det_total=450 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=330 camera=cam-001 frame=331 rois=1 labels=Green
+[AGG] camera=cam-001 frame=331 detections=1 (cam_total=330 det_total=483 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=360 det_frame=0 age_ms=0 have_state=0 pts=0:00:38.020067629
+[TERMINAL] seq=360 camera=cam-001 frame=361 rois=1 labels=Green
+[AGG] camera=cam-001 frame=361 detections=1 (cam_total=360 det_total=517 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=390 camera=cam-001 frame=391 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=391 detections=2 (cam_total=390 det_total=563 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=420 camera=cam-001 frame=422 rois=1 labels=Green
+[AGG] camera=cam-001 frame=422 detections=1 (cam_total=420 det_total=614 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:00:47.020067629
+[TERMINAL] seq=450 camera=cam-001 frame=452 rois=1 labels=Green
+[AGG] camera=cam-001 frame=452 detections=1 (cam_total=450 det_total=663 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=480 camera=cam-001 frame=482 rois=3 labels=Green,Green,Human
+[AGG] camera=cam-001 frame=482 detections=3 (cam_total=480 det_total=708 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=510 camera=cam-001 frame=512 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=512 detections=2 (cam_total=510 det_total=776 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:00:56.020067629
+[TERMINAL] seq=540 camera=cam-001 frame=542 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=542 detections=2 (cam_total=540 det_total=827 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=570 camera=cam-001 frame=572 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=572 detections=2 (cam_total=570 det_total=863 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=600 camera=cam-001 frame=602 rois=1 labels=Green
+[AGG] camera=cam-001 frame=602 detections=1 (cam_total=600 det_total=894 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=630 det_frame=0 age_ms=0 have_state=0 pts=0:01:05.020067629
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=630 camera=cam-001 frame=632 rois=1 labels=Green
+[AGG] camera=cam-001 frame=632 detections=1 (cam_total=630 det_total=929 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=660 camera=cam-001 frame=662 rois=1 labels=Green
+[AGG] camera=cam-001 frame=662 detections=1 (cam_total=660 det_total=966 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=690 camera=cam-001 frame=692 rois=1 labels=Green
+[AGG] camera=cam-001 frame=692 detections=1 (cam_total=690 det_total=1000 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=720 det_frame=0 age_ms=0 have_state=0 pts=0:01:14.020067629
+[TERMINAL] seq=720 camera=cam-001 frame=723 rois=1 labels=Green
+[AGG] camera=cam-001 frame=723 detections=1 (cam_total=720 det_total=1060 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[TERMINAL] seq=750 camera=cam-001 frame=753 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=753 detections=2 (cam_total=750 det_total=1100 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=780 camera=cam-001 frame=783 rois=1 labels=Green
+[AGG] camera=cam-001 frame=783 detections=1 (cam_total=780 det_total=1156 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=810 det_frame=0 age_ms=0 have_state=0 pts=0:01:23.020067629
+[TERMINAL] seq=810 camera=cam-001 frame=813 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=813 detections=2 (cam_total=810 det_total=1208 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=840 camera=cam-001 frame=843 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=843 detections=2 (cam_total=840 det_total=1266 qd=1 drop=0)
+[WebrtcSignaling] RX: webrtc.cam.cam-001.session.new payload=136b json={"camera_id":"cam-001","session_id":"multi-cam-001-1789565245642-08fd2503d7f4d8"
+[SessionManager] New session: sid='multi-cam-001-1789565245642-08fd2503d7f4d8' cam='cam-001' ice_srv=1 payload_sid='multi-cam-001-1789565245642-08fd2503d7f4d8'
+WRTC_TRACE mono_us=371740429 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e0 event=SESSION_NEW_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=-
+[CP05-R1B] encoder state cam-001 ABSENT→QUEUED pending=1
+[CP05-R1B] encoder state cam-001 QUEUED→BUILDING (await first frame)
+[ENC-CFG] cam=cam-001 io=auto
+[ENC-CFG] cam=cam-001 postq=off
+[SessionManager] P3b enc structure ready: cam-001 encbin(q→vscale→caps→enc→parse) ghost→tee(top) gen=1 (await first frame for READY)
+[CP05-R1B] encoder cam-001 gen=1 structure up; Init now (offer not gated on first frame) pending_init=1
+[CP05-R1B] DeferredSessionInit cam=cam-001 sessions=1 proceeding while another encoder is BUILDING
+WRTC_TRACE mono_us=371750661 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=0 gst_cur=void gst_pending=void result=ok detail=init
+WRTC_TRACE mono_us=371752750 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=0 gst_cur=void gst_pending=void result=begin detail=init
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] STUN: stun:stun.l.google.com:19302
+WRTC_TRACE mono_us=371766424 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=RTP_SINK_REQUESTED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=sink_%u
+WRTC_TRACE mono_us=371766492 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=RTP_LINKED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=rtp_to_webrtc
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] video→webrtcbin link: OK
+WRTC_TRACE mono_us=371766543 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=SENDONLY_CODEC_PREFS qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=sink_transceiver
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] sink transceiver SENDONLY + codec-preferences set
+WRTC_TRACE mono_us=371766799 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=TEE_LINKED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=tee_to_queue
+WRTC_TRACE mono_us=371766830 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=SIGNALS_CONNECTED qdepth=0 state=0 gst_cur=null gst_pending=void result=ok detail=before_state_sync
+WRTC_TRACE mono_us=371766839 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=STATE_SYNC_BEGIN qdepth=0 state=0 gst_cur=null gst_pending=void result=begin detail=session_elements
+WRTC_TRACE mono_us=371768042 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=NEGOTIATION_SIGNAL_RECEIVED qdepth=0 state=0 gst_cur=null gst_pending=playing result=ok detail=on_negotiation_needed
+WRTC_TRACE mono_us=371768077 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=0 gst_cur=playing gst_pending=void result=ok detail=negotiation_needed
+WRTC_TRACE mono_us=371768083 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=STATE_SYNC_RESULT qdepth=0 state=0 gst_cur=playing gst_pending=void result=ok detail=session_elements
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] Init complete; offer via on-negotiation-needed + direct create-offer (codec-preferences armed)
+[Preview] wait-idr sid=multi-cam-001-1789565245642-08fd2503d7f4d8 cam=cam-001 why=connect
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] init_offer → create-offer (sync after sync_state)
+WRTC_TRACE mono_us=371768153 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=INIT_CREATE_OFFER qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=sync_after_state
+WRTC_TRACE mono_us=371768182 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=CREATE_OFFER_INVOKED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=signal_or_renegotiate
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] Creating offer...
+WRTC_TRACE mono_us=371773473 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=negotiation_needed
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] on-negotiation-needed ignored (offer already started)
+[CP05-R1B] encoder state cam-001 BUILDING→READY gen=1 sessions=0 (first-frame; offer already decoupled)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[WebrtcSignaling] RX: webrtc.cam.cam-002.session.new payload=136b json={"camera_id":"cam-002","session_id":"multi-cam-002-1789565245914-dfd7e77a988778"
+[SessionManager] Ignoring session.new for unknown camera: cam-002 (rtsp=)
+WRTC_TRACE mono_us=372046798 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OFFER_PROMISE_REPLIED qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=offer_ready
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] Offer created (546 bytes)
+[SessionManager] OnSessionOffer: multi-cam-001-1789565245642-08fd2503d7f4d8 sdp=546b sig=ok
+[SessionManager] PublishOffer result: OK
+WRTC_TRACE mono_us=372046929 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OFFER_PUBLISHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=callback_returned
+WRTC_TRACE mono_us=372048435 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=SET_LOCAL_DESCRIPTION qdepth=0 state=1 gst_cur=playing gst_pending=void result=no_reply detail=promise_empty
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] set-local-description: no reply (not an error by itself)
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE gathering: gathering
+WRTC_TRACE mono_us=372048497 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=ICE_STATE qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=gathering
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE local: mline=0 cand=candidate:1 1 UDP 2015363327 192.168.50.
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE local: mline=0 cand=candidate:2 1 TCP 1015021823 192.168.50.
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE local: mline=0 cand=candidate:3 1 TCP 1010827519 192.168.50.
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE local: mline=0 cand=candidate:4 1 UDP 2015363583 fe80::211:2
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE local: mline=0 cand=candidate:5 1 TCP 1015022079 fe80::211:2
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE local: mline=0 cand=candidate:6 1 TCP 1010827775 fe80::211:2
+[WebrtcSignaling] RX: webrtc.cam.cam-001.session.multi-cam-001-1789565245642-08fd2503d7f4d8.answer payload=778b json={"camera_id":"cam-001","session_id":"multi-cam-001-1789565245642-08fd2503d7f4d8"
+WRTC_TRACE mono_us=372058551 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=ANSWER_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=answer_received
+WRTC_TRACE mono_us=372058581 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=1 gst_cur=playing gst_pending=void result=ok detail=remote_answer
+WRTC_TRACE mono_us=372059671 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=remote_answer
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] Setting remote description (answer)
+WRTC_TRACE mono_us=372059724 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=SET_REMOTE_INVOKED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=answer
+[WebrtcSignaling] RX: webrtc.cam.cam-001.session.multi-cam-001-1789565245642-08fd2503d7f4d8.ice.remote payload=268b json={"camera_id":"cam-001","session_id":"multi-cam-001-1789565245642-08fd2503d7f4d8"
+WRTC_TRACE mono_us=372060987 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=ICE_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=candidate_received
+WRTC_TRACE mono_us=372061036 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=1 gst_cur=playing gst_pending=void result=ok detail=remote_ice
+WRTC_TRACE mono_us=372062144 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=SET_REMOTE_REPLIED qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=replied_no_structure
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] Remote description set OK
+WRTC_TRACE mono_us=372062210 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=ICE_STATE qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=checking
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE connection: checking
+[WebrtcSignaling] TX: webrtc.cam.cam-001.session.multi-cam-001-1789565245642-08fd2503d7f4d8.state ice=checking peer=connecting ok=1
+WRTC_TRACE mono_us=372081368 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=remote_ice
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] Adding remote ICE: video0:0
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE local: mline=0 cand=(empty/end)
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE gathering: complete
+WRTC_TRACE mono_us=372111506 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=ICE_STATE qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=complete
+WRTC_TRACE mono_us=372111521 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=1 gst_cur=playing gst_pending=void result=ok detail=generic
+WRTC_TRACE mono_us=372122087 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=1 gst_cur=playing gst_pending=void result=begin detail=generic
+WRTC_TRACE mono_us=372128236 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=ICE_STATE qdepth=0 state=1 gst_cur=playing gst_pending=void result=ok detail=connected
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE connection: connected
+WRTC_TRACE mono_us=372128285 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=2 gst_cur=playing gst_pending=void result=ok detail=generic
+[WebrtcSignaling] TX: webrtc.cam.cam-001.session.multi-cam-001-1789565245642-08fd2503d7f4d8.state ice=connected peer=connected ok=1
+WRTC_TRACE mono_us=372128334 tid=281469453921664 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=ICE_STATE qdepth=0 state=2 gst_cur=playing gst_pending=void result=ok detail=completed
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] ICE connection: completed
+[WebrtcSignaling] TX: webrtc.cam.cam-001.session.multi-cam-001-1789565245642-08fd2503d7f4d8.state ice=completed peer=connected ok=1
+WRTC_TRACE mono_us=372142515 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=2 gst_cur=playing gst_pending=void result=begin detail=generic
+[Preview] ice-wait-idr sid=multi-cam-001-1789565245642-08fd2503d7f4d8 cam=cam-001
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] force-key-unit sent=1
+WRTC_TRACE mono_us=372175164 tid=281469462375808 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=2 gst_cur=playing gst_pending=void result=ok detail=generic
+WRTC_TRACE mono_us=372184144 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=2 gst_cur=playing gst_pending=void result=begin detail=generic
+[Preview] got-idr sid=multi-cam-001-1789565245642-08fd2503d7f4d8 cam=cam-001
+WRTC_TRACE mono_us=372184220 tid=281472980101824 ctx=owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=SESSION_MEDIA_FIRST qdepth=0 state=2 gst_cur=playing gst_pending=void result=ok detail=first_idr
+[WebrtcSignaling] RX: webrtc.cam.cam-003.session.new payload=136b json={"camera_id":"cam-003","session_id":"multi-cam-003-1789565246167-a1ada5322469f8"
+[SessionManager] Ignoring session.new for unknown camera: cam-003 (rtsp=)
+[Gate3] suppress trip (topology settling) live=1 prev=0 closing=0 pending_repl=0
+[OV-NATIVE] rois=3 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=17 enc_in=17 enc_out=17 parsed=17 age_ms raw/in/out/parsed=59/59/57/57 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=107 age_ms=56 stats_pkts=0 stats_age_ms=-1
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=870 camera=cam-001 frame=873 rois=1 labels=Green
+[AGG] camera=cam-001 frame=873 detections=1 (cam_total=870 det_total=1311 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=37 enc_in=37 enc_out=37 parsed=37 age_ms raw/in/out/parsed=61/60/59/59 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=202 age_ms=58 stats_pkts=117 stats_age_ms=1784
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=900 det_frame=0 age_ms=0 have_state=0 pts=0:01:32.020067629
+[TERMINAL] seq=900 camera=cam-001 frame=903 rois=1 labels=Green
+[AGG] camera=cam-001 frame=903 detections=1 (cam_total=900 det_total=1349 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=57 enc_in=57 enc_out=57 parsed=57 age_ms raw/in/out/parsed=81/81/79/79 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=281 age_ms=79 stats_pkts=209 stats_age_ms=1789
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=77 enc_in=77 enc_out=77 parsed=77 age_ms raw/in/out/parsed=84/84/82/82 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=363 age_ms=82 stats_pkts=285 stats_age_ms=1776
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=930 camera=cam-001 frame=933 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=933 detections=2 (cam_total=930 det_total=1383 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=97 enc_in=97 enc_out=97 parsed=97 age_ms raw/in/out/parsed=89/89/87/87 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=390 age_ms=87 stats_pkts=367 stats_age_ms=1759
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=960 camera=cam-001 frame=963 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=963 detections=2 (cam_total=960 det_total=1420 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=117 enc_in=117 enc_out=117 parsed=117 age_ms raw/in/out/parsed=99/99/98/98 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=413 age_ms=97 stats_pkts=394 stats_age_ms=1736
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=138 enc_in=138 enc_out=137 parsed=137 age_ms raw/in/out/parsed=0/0/103/103 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=496 age_ms=102 stats_pkts=417 stats_age_ms=1727
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=990 det_frame=0 age_ms=0 have_state=0 pts=0:01:41.020067629
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=990 camera=cam-001 frame=993 rois=1 labels=Green
+[AGG] camera=cam-001 frame=993 detections=1 (cam_total=990 det_total=1463 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=158 enc_in=158 enc_out=158 parsed=158 age_ms raw/in/out/parsed=23/22/21/21 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=610 age_ms=20 stats_pkts=522 stats_age_ms=1731
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=1020 camera=cam-001 frame=1023 rois=3 labels=Green,Green,Human
+[AGG] camera=cam-001 frame=1023 detections=3 (cam_total=1020 det_total=1510 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=178 enc_in=178 enc_out=178 parsed=178 age_ms raw/in/out/parsed=36/36/33/33 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=733 age_ms=33 stats_pkts=628 stats_age_ms=1713
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=197 enc_in=197 enc_out=197 parsed=197 age_ms raw/in/out/parsed=39/39/37/37 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=886 age_ms=37 stats_pkts=753 stats_age_ms=1710
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[TERMINAL] seq=1050 camera=cam-001 frame=1054 rois=1 labels=Green
+[AGG] camera=cam-001 frame=1054 detections=1 (cam_total=1050 det_total=1552 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=217 enc_in=217 enc_out=217 parsed=217 age_ms raw/in/out/parsed=66/65/64/64 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=963 age_ms=63 stats_pkts=898 stats_age_ms=1710
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1080 det_frame=0 age_ms=0 have_state=0 pts=0:01:50.020067629
+[TERMINAL] seq=1080 camera=cam-001 frame=1084 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1084 detections=2 (cam_total=1080 det_total=1593 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=237 enc_in=237 enc_out=237 parsed=237 age_ms raw/in/out/parsed=79/78/77/77 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=1015 age_ms=76 stats_pkts=974 stats_age_ms=1693
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[WebrtcSignaling] RX: webrtc.cam.cam-002.session.multi-cam-002-1789565245914-dfd7e77a988778.close payload=105b json={"camera_id":"cam-002","session_id":"multi-cam-002-1789565245914-dfd7e77a988778"
+[SessionManager] Close request: multi-cam-002-1789565245914-dfd7e77a988778 reason=real_timeout
+WRTC_TRACE mono_us=396998148 tid=281472980101824 ctx=owner cam=- sid=multi-cam-002-1789565245914-dfd7e77a988778 gen=s0/e0 event=CLOSE_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=close_received
+[WebrtcSignaling] RX: webrtc.cam.cam-003.session.multi-cam-003-1789565246167-a1ada5322469f8.close payload=105b json={"camera_id":"cam-003","session_id":"multi-cam-003-1789565246167-a1ada5322469f8"
+[SessionManager] Close request: multi-cam-003-1789565246167-a1ada5322469f8 reason=real_timeout
+WRTC_TRACE mono_us=397248828 tid=281472980101824 ctx=owner cam=- sid=multi-cam-003-1789565246167-a1ada5322469f8 gen=s0/e0 event=CLOSE_RX qdepth=0 state=manager gst_cur=void gst_pending=void result=ok detail=close_received
+[HEALTH] cam=cam-001 raw=257 enc_in=257 enc_out=257 parsed=257 age_ms raw/in/out/parsed=73/73/71/71 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=1103 age_ms=70 stats_pkts=1021 stats_age_ms=1694
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=1110 camera=cam-001 frame=1114 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1114 detections=2 (cam_total=1110 det_total=1655 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=277 enc_in=277 enc_out=277 parsed=277 age_ms raw/in/out/parsed=80/79/78/78 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=1135 age_ms=78 stats_pkts=1108 stats_age_ms=1674
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=1140 camera=cam-001 frame=1144 rois=2 labels=Green,Human
+[AGG] camera=cam-001 frame=1144 detections=2 (cam_total=1140 det_total=1717 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=297 enc_in=297 enc_out=297 parsed=297 age_ms raw/in/out/parsed=71/71/69/69 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=1157 age_ms=69 stats_pkts=1139 stats_age_ms=1633
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=317 enc_in=317 enc_out=317 parsed=317 age_ms raw/in/out/parsed=81/80/79/79 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=1300 age_ms=78 stats_pkts=1182 stats_age_ms=1614
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1170 det_frame=0 age_ms=0 have_state=0 pts=0:01:59.020067629
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=1170 camera=cam-001 frame=1174 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=1174 detections=2 (cam_total=1170 det_total=1760 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=337 enc_in=337 enc_out=337 parsed=337 age_ms raw/in/out/parsed=87/87/85/85 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=1378 age_ms=84 stats_pkts=1305 stats_age_ms=1611
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=2 faces=0 decision=0 (no property set)
+[TERMINAL] seq=1200 camera=cam-001 frame=1204 rois=2 labels=Green,Green
+[AGG] camera=cam-001 frame=1204 detections=2 (cam_total=1200 det_total=1795 qd=1 drop=0)
+[HEALTH] cam=cam-001 raw=357 enc_in=357 enc_out=357 parsed=357 age_ms raw/in/out/parsed=78/78/77/76 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=1460 age_ms=76 stats_pkts=1394 stats_age_ms=1597
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[HEALTH] cam=cam-001 raw=377 enc_in=377 enc_out=377 parsed=377 age_ms raw/in/out/parsed=97/97/95/95 postq_ov=0
+[HEALTH] rtp session=multi-cam-001-1789565245642-08fd2503d7f4d8 rtp_out=1573 age_ms=94 stats_pkts=1481 stats_age_ms=1594
+[TERMINAL] seq=1230 camera=cam-001 frame=1234 rois=1 labels=Green
+[AGG] camera=cam-001 frame=1234 detections=1 (cam_total=1230 det_total=1836 qd=1 drop=0)
+[INFO] Signal received, stopping pipeline...
+[INFO] Shutting down WebRTC sessions...
+[WebrtcSignaling] Stopped
+WRTC_TRACE mono_us=410455946 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_ENQUEUED qdepth=1 state=2 gst_cur=playing gst_pending=void result=ok detail=close
+[CP05-R1A] skip encoder teardown on last session close cam=cam-001 gen=1 (pipeline-owned until whole-pipeline NULL)
+WRTC_TRACE mono_us=410455973 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=OP_DISPATCHED qdepth=0 state=2 gst_cur=playing gst_pending=void result=begin detail=close
+[WebRtcSession:multi-cam-001-1789565245642-08fd2503d7f4d8] Closing (was 2)
+WRTC_TRACE mono_us=410455991 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=SESSION_CLOSE_BEGIN qdepth=0 state=3 gst_cur=playing gst_pending=void result=begin detail=close
+[Gate3] teardown begin sid=multi-cam-001-1789565245642-08fd2503d7f4d8 cam=cam-001
+[CP05-R2] idle-unlink sid=multi-cam-001-1789565245642-08fd2503d7f4d8 cam=cam-001 why=idle pads_before=2 pads_after=1 enc_gen=1
+WRTC_TRACE mono_us=410456122 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=PEER_IDLE_UNLINK qdepth=0 state=3 gst_cur=playing gst_pending=void result=ok detail=idle
+[Gate3] idle-probe armed sid=multi-cam-001-1789565245642-08fd2503d7f4d8 cam=cam-001 probe_id=0
+WRTC_TRACE mono_us=410456151 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=PEER_IDLE_PROBE_ARM qdepth=0 state=3 gst_cur=playing gst_pending=void result=ok detail=async
+[CP05-R2] private-null sid=multi-cam-001-1789565245642-08fd2503d7f4d8 elem=webrtcbin ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=1984
+WRTC_TRACE mono_us=410458222 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=webrtcbin
+[CP05-R2] private-null sid=multi-cam-001-1789565245642-08fd2503d7f4d8 elem=rtp_caps ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=19
+WRTC_TRACE mono_us=410458273 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=rtp_caps
+[CP05-R2] private-null sid=multi-cam-001-1789565245642-08fd2503d7f4d8 elem=pay ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=21
+WRTC_TRACE mono_us=410458324 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=pay
+[CP05-R2] private-null sid=multi-cam-001-1789565245642-08fd2503d7f4d8 elem=queue ret=SUCCESS waited=SUCCESS gst_cur=NULL gst_pend=VOID_PENDING wait_us=47
+WRTC_TRACE mono_us=410458403 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=PEER_PRIVATE_NULL qdepth=0 state=3 gst_cur=null gst_pending=void result=SUCCESS detail=queue
+[Gate3] teardown force-finish sid=multi-cam-001-1789565245642-08fd2503d7f4d8 cam=cam-001
+WRTC_TRACE mono_us=410458512 tid=281472980101824 ctx=not-owner cam=cam-001 sid=multi-cam-001-1789565245642-08fd2503d7f4d8 gen=s1/e1 event=SESSION_CLOSE_DONE qdepth=0 state=3 gst_cur=void gst_pending=void result=ok detail=force_finish
+[CP05-TD] Shutdown teardown begin cam=cam-001
+[CP05-TD] cam=cam-001 stage=begin
+[CP05-TD] cam=cam-001 stage=remove_enc_probe enter
+[CP05-TD] cam=cam-001 stage=remove_enc_probe exit
+[CP05-TD] cam=cam-001 stage=unlink_tee_perm enter
+[CP05-TD] cam=cam-001 stage=unlink_tee_perm exit
+[CP05-TD] cam=cam-001 stage=set_null enter
+[CP05-TD] cam=cam-001 stage=set_null exit
+[CP05-TD] cam=cam-001 stage=set_null enter
+[CP05-TD] cam=cam-001 stage=set_null exit
+[CP05-TD] cam=cam-001 stage=set_null enter
+[CP05-TD] cam=cam-001 stage=set_null exit
+[CP05-TD] cam=cam-001 stage=done
+[CP05-TD] Shutdown teardown done cam=cam-001
+[SessionManager] Shutdown complete
+[NatsAdapter] Disconnected.
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=1260 det_frame=0 age_ms=0 have_state=0 pts=0:02:08.020067629
+[TERMINAL] seq=1260 camera=cam-001 frame=1264 rois=1 labels=Green
+[AGG] camera=cam-001 frame=1264 detections=1 (cam_total=1260 det_total=1868 qd=1 drop=0)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[OV-NATIVE] rois=1 faces=0 decision=0 (no property set)
+[NatsAdapter] nats_CloseAndWait failed: TIMEOUT
+[WARN] NATS internal threads did not stop cleanly
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:42:dummy call to rpcmem_deinit, rpcmem APIs will be used from libxdsprpc
+[INFO] Pipeline reached NULL; VPU decode sessions released.
+[NatsAdapter] Connection close callback timed out; quarantining generation 1
+[NatsAdapter] Disconnected.
+[AGG] SUMMARY cameras=1 total_submitted=1281 total_dropped=0
+[AGG]   camera=cam-001 submitted=1281 detections=1890 dropped=0 last_frame=1285 queue_depth=0
+[INFO] FrameEventPublisher: published=1281 republished=0 build_failures=0 publish_failures=0
+[INFO] CaptureTimestampTracker records=1286 misses=0 regress_fixes=0
+[INFO] AnomalySnapshotService enqueued=33 written_ok=33 write_failures=0 published=58 dropped=0 publish_failures=0
+[INFO] Releasing 1 owned splitter request pad(s)...
+GEM Handle for BO=10 closed 
+GEM Handle for BO=9 closed 
+GEM Handle for BO=14 closed 
+GEM Handle for BO=13 closed 
+GEM Handle for BO=5 closed 
+GEM Handle for BO=12 closed 
+GEM Handle for BO=4 closed 
+GEM Handle for BO=11 closed 
+GEM Handle for BO=8 closed 
+GEM Handle for BO=3 closed 
+GEM Handle for BO=1 closed 
+GEM Handle for BO=15 closed 
+GEM Handle for BO=6 closed 
+GEM Handle for BO=7 closed 
+GEM Handle for BO=2 closed 
+
+=== Frame Count Summary ===
+Camera            IN       OUT     delta
+cam-001         1286         0      1286
+----------------------------------------
+TOTAL           1286         0      1286
+[INFO] Done.

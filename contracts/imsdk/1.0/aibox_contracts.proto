@@ -1,0 +1,52 @@
+syntax = "proto3";
+package aibox;
+
+// Frozen from imsdk-interface-bundle refs/proto/aibox_contracts.proto.
+// IR-DATA-001 uses only detection.frame -> FrameEvent.
+
+message Detection {
+  string event_id   = 1;  // UUID v4 string
+  float  confidence = 2;  // [0.0, 1.0]
+  string class_id   = 3;
+  float  x_min      = 4;
+  float  y_min      = 5;
+  float  x_max      = 6;
+  float  y_max      = 7;
+}
+
+message FrameEvent {
+  string  camera_id    = 1;
+  int64   timestamp_ms = 2;  // Unix millis
+  repeated Detection detections = 3;
+}
+
+message PipelineControlState {
+  enum State {
+    RUNNING = 0;
+    PAUSED  = 1;
+  }
+  State  state         = 1;
+  string model_version = 2;
+}
+
+message RequestPreviewParams {
+  string camera_id = 1;
+  uint32 width     = 2;
+  uint32 height    = 3;
+}
+
+enum ControlAction {
+  PAUSE        = 0;
+  RESUME       = 1;
+  RELOAD_MODEL = 2;
+}
+
+message ControlReq {
+  ControlAction action     = 1;
+  string        model_path = 2;
+}
+
+message ControlResp {
+  bool   ok    = 1;
+  string error = 2;
+}

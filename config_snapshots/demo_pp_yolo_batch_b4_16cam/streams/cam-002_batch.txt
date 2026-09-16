@@ -1,0 +1,19 @@
+[stream]
+camera_id=cam-002
+name=PP-YOLO Batch4 Camera 2
+enabled=1
+source_type=rtsp
+rtsp_url=rtsp://192.168.50.41:8554/cam1
+encoding=h264
+
+[decode]
+depay=rtph264depay
+parse=h264parse
+decoder=v4l2h264dec
+output_caps=video/x-raw,format=NV12
+
+[inference]
+algorithm=ppyoloe_batch_b4
+frequency=0
+thresh=0.5
+drop_policy=latest

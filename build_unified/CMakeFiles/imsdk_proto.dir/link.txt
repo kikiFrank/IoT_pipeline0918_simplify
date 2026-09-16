@@ -1,0 +1,2 @@
+/usr/bin/ar qc libimsdk_proto.a CMakeFiles/imsdk_proto.dir/aibox_contracts.pb.cc.o
+/usr/bin/ranlib libimsdk_proto.a

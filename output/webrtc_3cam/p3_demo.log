@@ -1,0 +1,109 @@
+============================================================
+  AIBox Stream Pipeline Demo  v1.0.0
+============================================================
+[INFO] RLIMIT_NOFILE soft=65536 hard=65536
+[INFO] GStreamer initialized (version 1.24.2)
+[INFO] snapshot : /home/ubuntu/workspace/IoT_pipeline0825/config_snapshots/demo_2stage_yolo_serial/pipeline_otm_3cam_webrtc.txt
+[INFO] dump_plan_only : no
+[INFO] build_only     : no
+[INFO] run_seconds    : 0
+[INFO] run_forever    : yes
+[INFO] Snapshot loaded: demo_otm_3cam_webrtc
+[INFO]   streams   : 3
+[INFO]   algorithms: 1
+[INFO]   models    : 1
+[INFO] ExecutionPlan  : plan_demo_otm_3cam_webrtc
+[INFO]   stream_plans : 3
+[INFO]   algo_groups  : 1
+[INFO]   time_mux_grps: 1
+[INFO]   stage_plans  : 2
+[INFO]   chain_plans  : 1
+[INFO] Exported: ./output/execution_plan.json
+[INFO] Exported: ./output/pipeline_structure.txt
+[INFO] WebRTC annotated preview enabled
+[BATCH_DISPATCH] path=time_mux groups=1
+[webrtc] VPU budget OK: 3 dec + 0 webrtc_enc(build) + 0 rec_enc = 3 / 32 (lazy enc unless MAX_ENC set)
+[init] GstAiboxFrameMeta registration triggered (aiboxframemeta)
+failed to get driver name for fd 18
+MESA-LOADER: failed to retrieve device information
+failed to get driver name for fd 18
+[HTP] stage=stage_yellow stage_index=1 -> backend-device-id=1 (n_htp=2)
+[DBG class-filter] stage=stage_yellow class-filter="Green"
+[DBG module] stage=stage_yellow nick=yolo26-otm gtype=187651206568432
+[DBG module] enum_class=0xaaaaf3a7dfd0 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[HTP] stage=stage_human stage_index=2 -> backend-device-id=0 (n_htp=2)
+[DBG class-filter] stage=stage_human class-filter="Human"
+[DBG module] stage=stage_human nick=yolo26-otm gtype=187651206568432
+[DBG module] enum_class=0xaaaaf3a7dfd0 n_values=5
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo26-otm value=1
+[DBG module]   nick[2]=yolo26-obb value=2
+[DBG module]   nick[3]=yolo-nas value=3
+[DBG module]   nick[4]=ppyoloe value=4
+[DBG module] final check=1
+[webrtc] overlay_tmux_group_0_0 before tee_post (writable DMA-BUF path)
+[webrtc lazy] tmux_group_0_0 slot0(cam-001): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_0 slot1(cam-002): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[webrtc lazy] tmux_group_0_0 slot2(cam-003): demux→tee_perm→q→fakesink stub (fakesink_only=0 max_enc=0)
+[INFO] GstPipeline built successfully (P1: mux + decode + fakesink)
+[pad-dump] disabled (set AIBOX_WEBRTC_PAD_DUMP=1 to enable)
+[NatsAdapter] Connected to nats://localhost:4222 (client=aibox-pipeline-webrtc)
+[SessionManager] Initialized
+[SessionManager] Registered camera: cam-003 (lazy stub)
+[SessionManager] Registered camera: cam-002 (lazy stub)
+[SessionManager] Registered camera: cam-001 (lazy stub)
+[WebrtcSignaling] Subscribed to 5 wildcard subjects
+[SessionManager] Signaling started
+[INFO] Registering 1 appsink callbacks...
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO] Exported: ./output/pipeline_runtime.dot
+bash: scripts/render_dot.sh: No such file or directory
+[WARN] Dot render failed (graphviz installed?). Run: bash scripts/render_dot.sh ./output/pipeline_runtime.dot
+[NatsAdapter] Connected to nats://127.0.0.1:4222 (client=aibox-pipeline-detection)
+[INFO] FrameEventPublisher started (NATS subject: detection.frame)
+[INFO] AnomalySnapshotService started media_dir=/home/ubuntu/workspace/IoT_pipeline0825/media encoder_ready=yes thumb_encoder_ready=yes
+[INFO] Setting pipeline to PLAYING (run-forever; Ctrl+C / SIGTERM to stop)...
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:38:dummy call to rpcmem_init, rpcmem APIs will be used from libxdsprpc
+[INFO] set_state(PLAYING) ret=2
+[RTSP] cam=cam-002 pad=recv_rtp_src_0_765979336_96: linked H264 video RTP -> depay
+[RTSP] cam=cam-001 pad=recv_rtp_src_0_2453052941_96: linked H264 video RTP -> depay
+Wed Sep 16 2026 10:01:09.901090: INFO: GPU alignment: 64
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+PFP: 0x016dc112, ME: 0x00000000
+Pre-rotation disabled !!!
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+Pre-rotation disabled !!!
+Wed Sep 16 2026 10:01:09.908375: Initilized EGL display version: 1.5
+[RTSP] cam=cam-003 pad=recv_rtp_src_0_841602716_96: linked H264 video RTP -> depay
+[OV-YOLO] rois_drawn=6 frame=640x480 bboxes={(structure)"Box0,position=<193,44>,dimensions=<14,28>,color=0x00FF00FF,enable=true;",(structure)"Box1,position=<336,101>,dimensions=<14,28>,color=0x00FF00FF,enable=true;",(structure)"Box2,position=<50,192>,dimensions=<23,38>,color=0x00FF00FF,enable=true;",(structure)"Box3,position=<486,51>,dimensions=<19,33>,color=0x00FF00FF,enable=true;",(structure)"Box4,position=<389,161>,dimensions=<109,119>,color=0xFF3333FF,enable=true;",(structure)"Box5,position=<2,325>,dimensions=<71,154>,color=0xFF3333FF,enable=true;"}
+[PIPELINE_READY] state=PLAYING
+[TERMINAL] seq=1 camera=cam-002 frame=1 rois=6 labels=Green,Green,Green,Green,Human,Human
+[TERMINAL] seq=2 camera=cam-002 frame=2 rois=6 labels=Green,Green,Green,Green,Human,Human

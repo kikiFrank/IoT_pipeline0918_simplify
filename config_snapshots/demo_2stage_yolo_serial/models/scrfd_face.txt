@@ -1,0 +1,10 @@
+[model]
+model_id=scrfd_2_5g
+name=SCRFD 2.5G Face Detector
+framework=qnn
+backend=htp
+element=qtifaceinfer
+model_path=../data/models/face/det_2.5g_qcs9075.bin
+config_path=../config_snapshots/demo_2stage_yolo_serial/face/face_config.json
+conf_threshold=0.5
+nms_threshold=0.4

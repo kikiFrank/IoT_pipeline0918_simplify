@@ -1,1 +1,0 @@
-srwxrwx--- 1 root video 0 Sep 16 10:48 /run/seatd.sock

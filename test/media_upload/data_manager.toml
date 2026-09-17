@@ -1,4 +1,0 @@
-# aibox-data_manager test config (IR-UPLOAD-001) — isolated DB, do not touch production.
-device_sn = "SN-TEST-UPLOAD-001"
-nats_url = "nats://127.0.0.1:4222"
-db_path = "/tmp/aibox_upload_test.db"

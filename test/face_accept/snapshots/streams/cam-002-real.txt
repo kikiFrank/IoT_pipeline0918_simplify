@@ -1,0 +1,19 @@
+[stream]
+camera_id=cam-002
+name=Real Camera 002 HIKVISION
+enabled=1
+source_type=rtsp
+rtsp_url=rtsp://127.0.0.1:8554/cam-002
+encoding=h265
+
+[decode]
+depay=rtph265depay
+parse=h265parse
+decoder=v4l2h265dec
+output_caps=video/x-raw,format=NV12
+
+[inference]
+algorithm=yolov26n_otm_serial
+frequency=200
+thresh=0.5
+drop_policy=latest

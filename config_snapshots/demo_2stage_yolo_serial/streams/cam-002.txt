@@ -3,7 +3,7 @@ camera_id=cam-002
 name=Demo Camera 002
 enabled=1
 source_type=rtsp
-rtsp_url=rtsp://192.168.100.113:8554/cam1
+rtsp_url=rtsp://192.168.50.41:8554/cam1
 encoding=h264
 
 [decode]

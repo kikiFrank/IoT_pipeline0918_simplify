@@ -3,7 +3,7 @@ camera_id=cam-012
 name=Demo Camera 012 OTM Two-Stage
 enabled=1
 source_type=rtsp
-rtsp_url=rtsp://192.168.100.113:8554/cam11
+rtsp_url=rtsp://192.168.50.41:8554/cam11
 encoding=h264
 
 [decode]

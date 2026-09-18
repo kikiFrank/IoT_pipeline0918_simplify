@@ -1,6 +1,0 @@
-ACCEPT N=3 ROUNDS=2 SECS=130 start=12:16:27
-R1 READY t=12:16:27 encoder_up_lines=0
-R1 RESULT alive=yes seq=4020 term=142 unref=0 heap=0 segv=0 ovnat=137 ovyolo=0 STOPPED_CLEAN secs=10 io=[cam-001 1397 0 1397;cam-002 1394 0 1394;cam-003 1391 0 1391;]
-R2 READY t=12:19:06 encoder_up_lines=0
-R2 RESULT alive=yes seq=3990 term=141 unref=0 heap=0 segv=0 ovnat=136 ovyolo=0 STOPPED_CLEAN secs=10 io=[cam-001 1387 0 1387;cam-002 1384 0 1384;cam-003 1381 0 1381;]
-ACCEPT_DONE 12:21:43

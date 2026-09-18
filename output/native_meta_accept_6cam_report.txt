@@ -1,6 +1,0 @@
-ACCEPT N=6 ROUNDS=2 SECS=130 start=12:21:57
-R1 READY t=12:21:57 encoder_up_lines=25
-R1 RESULT alive=yes seq=8040 term=276 unref=0 heap=0 segv=0 ovnat=139 ovyolo=0 STOPPED_CLEAN secs=10 io=[cam-001 1406 0 1406;cam-002 1404 0 1404;cam-003 1400 0 1400;cam-004 1397 0 1397;cam-005 1394 0 1394;cam-006 1391 0 1391;]
-R2 READY t=12:24:36 encoder_up_lines=0
-R2 RESULT alive=yes seq=8070 term=277 unref=0 heap=0 segv=0 ovnat=139 ovyolo=0 STOPPED_CLEAN secs=10 io=[cam-001 1396 0 1396;cam-002 1394 0 1394;cam-003 1390 0 1390;cam-004 1408 0 1408;cam-005 1404 0 1404;cam-006 1401 0 1401;]
-ACCEPT_DONE 12:27:16

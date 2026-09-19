@@ -1,5 +1,5 @@
 [global]
-demo_name=demo_otm_12cam_webrtc
+demo_name=demo_edgeyoloq_12cam_webrtc
 max_streams=16
 enabled_streams=12
 batch=1
@@ -48,10 +48,10 @@ include=streams/cam-011-otm2.txt
 include=streams/cam-012-otm2.txt
 
 [algorithms]
-include=algorithms/yolov26n_otm_serial.txt
+include=algorithms/edgeyoloq_10c_single.txt
 
 [models]
-include=models/yolov26n_factory_otm_conf075.txt
+include=models/edgeyoloq_s_u8s8.txt
 include=models/scrfd_face.txt
 
 [face]

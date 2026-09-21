@@ -1,0 +1,8 @@
+# aibox-media-upload test config (IR-UPLOAD-001) — uploads to local mock S3.
+device_sn = "SN-TEST-UPLOAD-001"
+nats_url = "nats://127.0.0.1:4222"
+s3_access_key = "test-access"
+s3_secret_key = "test-secret"
+s3_bucket = "test-bucket"
+s3_region = "us-east-1"
+s3_endpoint = "http://127.0.0.1:19000"

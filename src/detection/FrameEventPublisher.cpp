@@ -1,6 +1,7 @@
 #include "aibox/detection/FrameEventPublisher.hpp"
 
 #include <chrono>
+#include <iostream>
 
 namespace aibox::detection {
 
@@ -74,6 +75,20 @@ void FrameEventPublisher::Run() {
 
     aggregator::AggregatedResult result;
     if (!aggregator_.WaitPopNext(result, std::chrono::milliseconds(250))) continue;
+
+    // Normalized coordinates cannot be computed without frame dimensions.
+    // Refuse to publish rather than emit unbounded values.
+    if (result.frame_width == 0 || result.frame_height == 0) {
+      static std::atomic<uint64_t> dim_warn{0};
+      if ((dim_warn.fetch_add(1) % 300) == 0) {
+        std::cerr << "[FrameEventPublisher] skipping frame without dimensions"
+                  << " cam=" << (result.camera_id.empty() ? "?" : result.camera_id)
+                  << " w=" << result.frame_width << " h=" << result.frame_height
+                  << std::endl;
+      }
+      build_failures_.fetch_add(1);
+      continue;
+    }
 
     const std::vector<uint8_t> payload = builder_.Serialize(result);
     if (payload.empty()) {

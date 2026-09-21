@@ -3,21 +3,50 @@ package aibox;
 
 // Frozen from imsdk-interface-bundle refs/proto/aibox_contracts.proto.
 // IR-DATA-001 uses only detection.frame -> FrameEvent.
+//
+// v2 extension (tag numbers MUST match the Rust aibox-proto contract):
+//   Detection.normalized_bbox = 8
+//   FrameEvent.algorithm_code = 4 (string — wire type must stay string)
+//   FrameEvent.coordinate_space = 5
+//   FrameEvent.frame_width = 6, frame_height = 7
+//   FrameEvent.frame_id = 8
+//   FrameEvent.schema_version = 10   (tag 9 is a reserved gap on the Rust side)
+
+message NormalizedBBox {
+  float x_min = 1;
+  float y_min = 2;
+  float x_max = 3;
+  float y_max = 4;
+}
 
 message Detection {
   string event_id   = 1;  // UUID v4 string
   float  confidence = 2;  // [0.0, 1.0]
   string class_id   = 3;
-  float  x_min      = 4;
+  float  x_min      = 4;  // pixel-space (legacy); unused in NORMALIZED mode
   float  y_min      = 5;
   float  x_max      = 6;
   float  y_max      = 7;
+  NormalizedBBox normalized_bbox = 8;  // [0.0, 1.0], used when coordinate_space = NORMALIZED
+}
+
+enum CoordinateSpace {
+  COORDINATE_SPACE_UNSPECIFIED = 0;
+  PIXEL      = 1;
+  NORMALIZED = 2;
 }
 
 message FrameEvent {
   string  camera_id    = 1;
   int64   timestamp_ms = 2;  // Unix millis
   repeated Detection detections = 3;
+  string  algorithm_code = 4;  // string, per Rust contract
+  CoordinateSpace coordinate_space = 5;
+  uint32  frame_width  = 6;
+  uint32  frame_height = 7;
+  string  frame_id     = 8;
+  // tag 9 reserved
+  uint32  schema_version = 10;  // >=2 enables coordinate_space / normalized_bbox
 }
 
 message PipelineControlState {

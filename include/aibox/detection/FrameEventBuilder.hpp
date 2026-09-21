@@ -16,6 +16,7 @@ class FrameEventBuilder {
  private:
   static float NormalizeConfidence(float confidence);
   static float ClampCoordinate(float value, uint32_t limit);
+  static float ClampNorm(float value);  // clamp to [0,1], non-finite -> 0
 };
 
 }  // namespace aibox::detection

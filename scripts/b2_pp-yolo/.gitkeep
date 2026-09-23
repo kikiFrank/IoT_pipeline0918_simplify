@@ -1,6 +1,0 @@
-# Reserved for B2 PP-YOLOE pipeline start scripts (Phase 3+).
-# Mirror scripts/ppyolo and scripts/yolo26:
-#   webrtc_start{2,4,6,8}.sh  → source ../webrtc_start_common.sh
-#   run_noweb.sh              → noweb soak
-# Do not put monitors, dump-plan, gst-inspect, or Python helpers here.
-# Those live under test/b2_pp-yolo/.

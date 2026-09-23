@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -O3 -DNDEBUG -shared -Wl,-soname,libgstaiboxbatchgate.so -o libgstaiboxbatchgate.so CMakeFiles/gstaiboxbatchgate.dir/gstaiboxbatchgate.cpp.o  -Wl,-rpath,"\$ORIGIN:" -lgstreamer-1.0 -lgobject-2.0 -lglib-2.0 

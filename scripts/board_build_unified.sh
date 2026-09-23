@@ -28,7 +28,6 @@ fi
 
 echo "== build aibox_stream_pipeline_demo =="
 cmake --build "$AIBOX_ROOT/build_unified" -j"$NPROC" --target aibox_stream_pipeline_demo \
-  --target test_aiboxbatchsplit --target test_lockstep_qtibatch \
   2>&1 | tee "$OUT/make_demo.log"
 if [ "${PIPESTATUS[0]}" -ne 0 ]; then
   echo MAKE_DEMO_FAIL

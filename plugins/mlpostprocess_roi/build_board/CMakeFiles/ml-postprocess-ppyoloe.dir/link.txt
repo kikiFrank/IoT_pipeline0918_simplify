@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC  -Wall -Wno-missing-field-initializers -O3 -DNDEBUG -shared -Wl,-soname,libml-postprocess-ppyoloe.so -o libml-postprocess-ppyoloe.so "CMakeFiles/ml-postprocess-ppyoloe.dir/modules/object-detection/ml-postprocess-ppyoloe.cc.o" 

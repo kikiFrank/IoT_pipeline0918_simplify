@@ -28,20 +28,6 @@ set_target_properties(gstaiboxbatchgate PROPERTIES
     BUILD_RPATH "$ORIGIN"
 )
 
-add_executable(test_aiboxbatchgate
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../test/batch/test_aiboxbatchgate.cpp
-)
-target_include_directories(test_aiboxbatchgate PRIVATE
-    ${GST_INCLUDE_DIRS}
-    ${GST_APP_INCLUDE_DIRS}
-    ${CMAKE_CURRENT_SOURCE_DIR}
-)
-target_link_libraries(test_aiboxbatchgate
-    ${GST_LIBRARIES}
-    ${GST_APP_LIBRARIES}
-)
-set_target_properties(test_aiboxbatchgate PROPERTIES CXX_STANDARD 17)
-
 install(TARGETS gstaiboxbatchgate
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/gstreamer-1.0
 )

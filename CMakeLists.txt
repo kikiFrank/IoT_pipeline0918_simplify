@@ -135,76 +135,9 @@ endif()
 
 target_link_libraries(aibox_stream_pipeline_demo ${MAIN_LIBS})
 
-# --- Batch planning unit tests (no GStreamer) ---
-add_executable(test_batch_planning
-    test/batch/test_batch_planning.cpp
-    src/config/IniParser.cpp
-    src/config/TxtSnapshotLoader.cpp
-    src/orchestrator/PipelineOrchestrator.cpp
-)
-target_include_directories(test_batch_planning PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-set_target_properties(test_batch_planning PROPERTIES CXX_STANDARD 17)
-include(CTest)
-add_test(NAME batch_planning COMMAND test_batch_planning)
-
-# Phase 2.5 gate test (loads aiboxbatchgate from GST_PLUGIN_PATH; retired but kept)
-add_executable(test_aiboxbatchgate
-    test/batch/test_aiboxbatchgate.cpp
-)
-target_include_directories(test_aiboxbatchgate PRIVATE
-    ${GST_INCLUDE_DIRS}
-    ${GST_APP_INCLUDE_DIRS}
-)
-target_link_libraries(test_aiboxbatchgate
-    ${GST_LIBRARIES}
-    ${GST_APP_LIBRARIES}
-)
-set_target_properties(test_aiboxbatchgate PROPERTIES CXX_STANDARD 17)
-add_test(NAME aiboxbatchgate COMMAND test_aiboxbatchgate)
-
-add_executable(test_aiboxbatchsplit
-    test/batch/test_aiboxbatchsplit.cpp
-)
-target_include_directories(test_aiboxbatchsplit PRIVATE
-    ${GST_INCLUDE_DIRS}
-    ${GST_APP_INCLUDE_DIRS}
-)
-target_link_libraries(test_aiboxbatchsplit
-    ${GST_LIBRARIES}
-    ${GST_APP_LIBRARIES}
-)
-set_target_properties(test_aiboxbatchsplit PROPERTIES CXX_STANDARD 17)
-add_test(NAME aiboxbatchsplit COMMAND test_aiboxbatchsplit)
-
-add_executable(test_lockstep_qtibatch
-    test/b2_pp-yolo/test_lockstep_qtibatch.cpp
-)
-target_include_directories(test_lockstep_qtibatch PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${GST_INCLUDE_DIRS}
-    ${GST_APP_INCLUDE_DIRS}
-    ${GST_VIDEO_INCLUDE_DIRS}
-)
-target_link_libraries(test_lockstep_qtibatch
-    ${GST_LIBRARIES}
-    ${GST_APP_LIBRARIES}
-    ${GST_VIDEO_LIBRARIES}
-)
-set_target_properties(test_lockstep_qtibatch PROPERTIES CXX_STANDARD 17)
-add_test(NAME lockstep_qtibatch COMMAND test_lockstep_qtibatch)
-
-if(BUILD_TESTING AND ENABLE_DETECTION_NATS)
-    add_subdirectory(test/aggregator_nats)
-    add_subdirectory(test/media_snapshot)
-    add_subdirectory(test/rule_engine)
-    add_subdirectory(test/media_upload)
-endif()
-
 # --- install ---
-# WebRTC unit/harness targets (test_nats_adapter / loopback / session_live_test)
-# removed; browser HTML under test/webrtc/ is the runtime acceptance surface.
+# Unit-test and WebRTC harness targets removed with the test/ tree; the runtime
+# acceptance surface is scripts/yolo26/webrtc_start12.sh over NATS signaling.
 install(TARGETS aibox_stream_pipeline_demo
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )

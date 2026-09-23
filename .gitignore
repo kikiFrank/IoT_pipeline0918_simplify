@@ -1,0 +1,13 @@
+# Build artifacts (regenerated on board by scripts/board_build_unified.sh)
+build_unified/
+plugins/*/build_board/
+plugins/*.so
+plugins/ml_modules/
+runtime_plugins/
+runtime_plugins.bak_pre_phase2/
+
+# Runtime state
+runtime_registry/
+output/
+media/
+*.log

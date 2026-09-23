@@ -1,7 +1,9 @@
 #!/bin/bash
 # Shared WebRTC start body. Caller must set:
-#   R SNAP OUT HTML_NAME AGG_NEED LOG HTTP_LOG
+#   R SNAP OUT AGG_NEED LOG
 # and AIBOX_ROOT. No SIGKILL of a live pipeline.
+# Signaling is NATS-based (microservice peer); there is no static HTML page
+# and no :8080 web server in this package.
 set +e
 [ -n "${R:-}" ] || { echo COMMON_MISSING_R; exit 3; }
 cd "$R" || { echo ROOT_MISSING="$R"; exit 3; }
@@ -27,7 +29,6 @@ fi
 
 [ -x "$DEMO" ] || { echo MISSING_DEMO="$DEMO"; exit 11; }
 [ -f "$SNAP" ] || { echo MISSING_SNAP="$SNAP"; exit 11; }
-[ -f "$R/test/webrtc/$HTML_NAME" ] || { echo MISSING_HTML; exit 6; }
 echo "SHA=$(sha256sum "$DEMO" | awk '{print $1}')"
 echo "PLUGINS=$PLUGINS"
 echo "SNAP=$SNAP"
@@ -62,8 +63,6 @@ export AIBOX_WEBRTC_SPLITTER=demux
 # never trigger dynamic BuildEncoderChain.
 # shellcheck disable=SC1091
 . "$R/scripts/vpu_health.sh"
-# shellcheck disable=SC1091
-. "$R/scripts/webrtc_http.sh"
 
 if pgrep -f aibox_stream_pipeline_demo >/dev/null; then
   echo STOP_PREV
@@ -76,8 +75,6 @@ fi
 ss -ltn | grep -q ':4222 ' || { echo NATS_4222_FAIL; exit 5; }
 ss -ltn | grep -q ':8443 ' || { echo NATS_8443_FAIL; exit 5; }
 echo NATS_OK
-
-aibox_ensure_webrtc_http "$R" "$HTTP_LOG" || exit 6
 
 # Expert P0 gate (2026-09-06): graphics runtime fail-fast, see
 # scripts/aibox_graphics_gate.sh (shared with tmp A/B runs).
@@ -143,9 +140,6 @@ while [ "$i" -lt 80 ]; do
   n=$(grep -ac '\[AGG\]' "$LOG" 2>/dev/null || true); n=${n%%$'\n'*}
   if [ "${n:-0}" -ge "$AGG_NEED" ]; then
     echo "AGG_OK count=$n"
-    BOARD_IP="${AIBOX_BOARD_IP:-$(hostname -I 2>/dev/null | awk '{print $1}')}"
-    [ -n "$BOARD_IP" ] || BOARD_IP=127.0.0.1
-    echo "HTML=http://$BOARD_IP:8080/$HTML_NAME"
     echo READY_FOR_BROWSER
     exit 0
   fi

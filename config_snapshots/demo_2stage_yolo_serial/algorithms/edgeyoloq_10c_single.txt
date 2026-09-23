@@ -8,7 +8,7 @@ stage_count=1
 [grouping]
 group_by=algorithm_signature
 time_mux_enabled=1
-max_mux_group_size=4
+max_mux_group_size=6
 batch=1
 
 [stage.1]

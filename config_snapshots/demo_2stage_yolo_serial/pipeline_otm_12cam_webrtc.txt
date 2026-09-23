@@ -15,7 +15,7 @@ output_root=./output
 [timemux]
 enabled=1
 plugin=aiboxtimemux
-max_group_size=4
+max_group_size=6
 wait_timeout_ms=200
 drop_policy=latest
 pad_mode=request

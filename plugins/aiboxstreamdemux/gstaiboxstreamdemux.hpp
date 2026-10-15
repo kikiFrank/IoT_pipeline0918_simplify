@@ -30,6 +30,7 @@ typedef struct _GstAiboxDemuxQueueItem {
     GstBuffer *buffer;
     GstEvent  *event;
   } data;
+  GstCaps *source_caps;  /* only for BUFFER: source branch descriptive caps */
 } GstAiboxDemuxQueueItem;
 
 /* ------------------------------------------------------------------ */
@@ -59,6 +60,7 @@ typedef struct _GstAiboxStreamDemuxSrcPad {
   guint      max_queued;     /* drop-oldest when full (default 2) */
   guint64    dropped;
   guint64    stall_drops;    /* dropped before wrap while stalled */
+  GstCaps   *current_caps;   /* last CAPS emitted on this source pad */
 } GstAiboxStreamDemuxSrcPad;
 
 /* ------------------------------------------------------------------ */

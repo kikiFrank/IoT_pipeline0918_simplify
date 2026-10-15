@@ -130,6 +130,8 @@ std::string PipelineStructureDumper::SecTimeMux(const ExecutionPlan& p) const {
     s << "    drop_policy            : latest\n";
     s << "    pad_mode               : request\n";
     s << "    attach_meta            : true\n\n";
+    s << "    caps_mode              : " << tm.mux_scheduler.caps_mode << "\n";
+    s << "    group_caps             : " << tm.mux_scheduler.group_caps << "\n\n";
     s << "    inputs:\n";
     for (auto& inp : tm.stream_inputs)
       s << "      " << inp.camera_id << " -> " << inp.mux_sink_pad_name << "\n";

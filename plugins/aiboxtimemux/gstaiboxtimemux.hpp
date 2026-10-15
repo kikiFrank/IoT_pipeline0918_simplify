@@ -18,6 +18,13 @@ typedef enum {
 
 GType gst_aibox_time_mux_drop_policy_get_type (void);
 
+#define GST_TYPE_AIBOX_TIME_MUX_CAPS_MODE (gst_aibox_time_mux_caps_mode_get_type())
+typedef enum {
+  GST_AIBOX_TIME_MUX_CAPS_MODE_STRICT = 0,
+  GST_AIBOX_TIME_MUX_CAPS_MODE_CANONICAL_RAW = 1,
+} GstAiboxTimeMuxCapsMode;
+GType gst_aibox_time_mux_caps_mode_get_type (void);
+
 /* ------------------------------------------------------------------ */
 /* Type macros                                                         */
 /* ------------------------------------------------------------------ */
@@ -79,6 +86,9 @@ typedef struct _GstAiboxTimeMux {
   gchar       *algorithm_group_id;
 
   GstCaps     *negotiated_caps;
+  GstCaps     *group_caps;
+  GstCaps     *canonical_reference_caps;
+  gint         caps_mode;
 
   gboolean     running;
   GThread     *scheduler_thread;
@@ -92,6 +102,7 @@ typedef struct _GstAiboxTimeMux {
 
   /* segment tracking */
   gboolean     segment_sent;
+  gboolean     stream_start_sent;
 } GstAiboxTimeMux;
 
 typedef struct _GstAiboxTimeMuxClass {
@@ -111,6 +122,8 @@ enum {
   PROP_MUX_GROUP_ID,
   PROP_ALGORITHM_GROUP_ID,
   PROP_SILENT,
+  PROP_CAPS_MODE,
+  PROP_GROUP_CAPS,
 };
 
 GType gst_aibox_time_mux_get_type (void);

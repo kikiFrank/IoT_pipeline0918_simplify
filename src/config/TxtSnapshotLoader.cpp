@@ -155,6 +155,14 @@ Status TxtSnapshotLoader::ParseTimeMux(const IniSection& sec, TimeMuxConfig* cfg
   cfg->drop_policy     = ParseDropPolicy(GetEntryVal(sec, "drop_policy", "latest"));
   cfg->pad_mode        = PadMode::kRequest;
   cfg->attach_meta     = ParseBool(GetEntryVal(sec, "attach_meta", "1"));
+  cfg->caps_mode       = GetEntryVal(sec, "caps_mode", "strict");
+  cfg->group_caps      = GetEntryVal(sec, "group_caps");
+  if (cfg->caps_mode != "strict" && cfg->caps_mode != "canonical_raw")
+    return Status::Error("TIMEMUX_CAPS_MODE_INVALID",
+                         "caps_mode must be strict or canonical_raw");
+  if (cfg->caps_mode == "canonical_raw" && cfg->group_caps.empty())
+    return Status::Error("TIMEMUX_GROUP_CAPS_REQUIRED",
+                         "group_caps is required when caps_mode=canonical_raw");
   return Status::Ok();
 }
 
@@ -427,7 +435,10 @@ Result<SnapshotConfig> TxtSnapshotLoader::Load(const FilePath& snapshot_path) co
   if (sec) ParsePaths(*sec, &config.paths);
 
   sec = FindSection(ini, "timemux");
-  if (sec) ParseTimeMux(*sec, &config.timemux);
+  if (sec) {
+    Status st = ParseTimeMux(*sec, &config.timemux);
+    if (!st.ok) return {st, SnapshotConfig{}};
+  }
 
   sec = FindSection(ini, "batching");
   if (sec) {

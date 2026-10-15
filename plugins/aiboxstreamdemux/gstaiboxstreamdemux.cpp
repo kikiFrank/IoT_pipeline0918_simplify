@@ -8,7 +8,8 @@ static gboolean
 read_aibox_frame_meta (GstBuffer *buf,
                         guint     *slot_id_out,
                         gchar    **camera_id_out,
-                        guint64   *frame_id_out)
+                        guint64   *frame_id_out,
+                        GstCaps  **source_caps_out)
 {
   GstAiboxFrameMeta *fm = gst_buffer_get_aibox_frame_meta (buf);
   if (!fm) return FALSE;
@@ -16,6 +17,8 @@ read_aibox_frame_meta (GstBuffer *buf,
   if (slot_id_out)   *slot_id_out   = fm->mux_slot_id;
   if (camera_id_out) *camera_id_out = fm->camera_id;
   if (frame_id_out)  *frame_id_out  = fm->frame_id;
+  if (source_caps_out)
+    *source_caps_out = fm->source_raw_caps ? gst_caps_ref (fm->source_raw_caps) : nullptr;
   return TRUE;
 }
 
@@ -57,16 +60,18 @@ static void          gst_aibox_stream_demux_finalize     (GObject * object);
 static GstStateChangeReturn gst_aibox_stream_demux_change_state (GstElement * element, GstStateChange transition);
 
 static GstAiboxStreamDemuxSrcPad * find_src_by_camera_id (GstAiboxStreamDemux * self, const gchar *camera_id);
-static gboolean                    push_sticky_events (GstAiboxStreamDemux * self, GstAiboxStreamDemuxSrcPad * sp);
 static void                        src_loop (gpointer user_data);
 static void                        src_flush_queue (GstAiboxStreamDemuxSrcPad * sp);
-static void                        src_enqueue_buffer_leaky (GstAiboxStreamDemuxSrcPad * sp, GstBuffer * buf);
+static void                        src_enqueue_buffer_leaky (GstAiboxStreamDemuxSrcPad * sp, GstBuffer * buf, GstCaps * source_caps);
 static void                        src_enqueue_event (GstAiboxStreamDemuxSrcPad * sp, GstEvent * event);
 static GstBuffer *                 wrap_buffer_zerocopy_pts (GstBuffer * buf, GstClockTime pts, GstClockTime dur);
 static void                        queue_item_free (GstAiboxDemuxQueueItem * item);
 static void                        src_start_task (GstAiboxStreamDemuxSrcPad * sp);
 static void                        src_pause_task (GstAiboxStreamDemuxSrcPad * sp);
 static void                        src_stop_task (GstAiboxStreamDemuxSrcPad * sp);
+static GstCaps *                   make_output_caps (GstAiboxStreamDemux * self, const GstCaps * source_caps);
+static gboolean                     push_initial_events (GstAiboxStreamDemux * self, GstAiboxStreamDemuxSrcPad * sp, GstCaps * caps);
+static gboolean                     push_caps_if_changed (GstAiboxStreamDemux * self, GstAiboxStreamDemuxSrcPad * sp, GstCaps * caps);
 
 /* ================================================================== */
 /* GObject type                                                        */
@@ -224,6 +229,7 @@ gst_aibox_stream_demux_finalize (GObject * object)
       g_mutex_clear (&sp->qlock);
       g_cond_clear (&sp->qcond);
       g_rec_mutex_clear (&sp->task_lock);
+      if (sp->current_caps) gst_caps_unref (sp->current_caps);
       g_free (sp->camera_id);
       g_free (sp);
     }
@@ -251,6 +257,7 @@ queue_item_free (GstAiboxDemuxQueueItem * item)
     gst_buffer_unref (item->data.buffer);
   else if (item->type == GST_AIBOX_DEMUX_ITEM_EVENT && item->data.event)
     gst_event_unref (item->data.event);
+  if (item->source_caps) gst_caps_unref (item->source_caps);
   g_free (item);
 }
 
@@ -292,25 +299,34 @@ src_flush_queue (GstAiboxStreamDemuxSrcPad * sp)
 }
 
 static void
-src_enqueue_buffer_leaky (GstAiboxStreamDemuxSrcPad * sp, GstBuffer * buf)
+src_enqueue_buffer_leaky (GstAiboxStreamDemuxSrcPad * sp, GstBuffer * buf,
+                          GstCaps * source_caps)
 {
   g_mutex_lock (&sp->qlock);
   if (sp->flushing || !sp->running || sp->eos) {
     g_mutex_unlock (&sp->qlock);
     gst_buffer_unref (buf);
+    if (source_caps) gst_caps_unref (source_caps);
     return;
   }
   while (g_queue_get_length (sp->queue) >= sp->max_queued) {
-    GstAiboxDemuxQueueItem *old =
-        (GstAiboxDemuxQueueItem *) g_queue_pop_head (sp->queue);
-    if (old) {
-      queue_item_free (old);
-      sp->dropped++;
+    GList *link = sp->queue->head;
+    while (link) {
+      GstAiboxDemuxQueueItem *candidate =
+          (GstAiboxDemuxQueueItem *) link->data;
+      if (candidate && candidate->type == GST_AIBOX_DEMUX_ITEM_BUFFER) break;
+      link = link->next;
     }
+    if (!link) break;  /* control events are never discarded */
+    GstAiboxDemuxQueueItem *old = (GstAiboxDemuxQueueItem *) link->data;
+    g_queue_delete_link (sp->queue, link);
+    queue_item_free (old);
+    sp->dropped++;
   }
   GstAiboxDemuxQueueItem *item = g_new0 (GstAiboxDemuxQueueItem, 1);
   item->type = GST_AIBOX_DEMUX_ITEM_BUFFER;
   item->data.buffer = buf;
+  item->source_caps = source_caps;
   g_queue_push_tail (sp->queue, item);
   g_cond_signal (&sp->qcond);
   g_mutex_unlock (&sp->qlock);
@@ -373,8 +389,13 @@ src_loop (gpointer user_data)
   GstPad *target = GST_PAD (gst_object_ref (sp->pad));
   g_mutex_unlock (&self->lock);
 
-  if (item->type == GST_AIBOX_DEMUX_ITEM_BUFFER && need_sticky) {
-    if (!push_sticky_events (self, sp)) {
+  if (item->type == GST_AIBOX_DEMUX_ITEM_BUFFER) {
+    GstCaps *output_caps = make_output_caps (self, item->source_caps);
+    gboolean caps_ok = need_sticky
+        ? push_initial_events (self, sp, output_caps)
+        : push_caps_if_changed (self, sp, output_caps);
+    if (output_caps) gst_caps_unref (output_caps);
+    if (!caps_ok) {
       GST_ERROR_OBJECT (self, "failed to push sticky events on %s",
                         GST_PAD_NAME (sp->pad));
       queue_item_free (item);
@@ -400,6 +421,7 @@ src_loop (gpointer user_data)
   if (item->type == GST_AIBOX_DEMUX_ITEM_BUFFER) {
     GstBuffer *buf = item->data.buffer;
     item->data.buffer = nullptr;
+    if (item->source_caps) gst_caps_unref (item->source_caps);
     g_free (item);
     GstFlowReturn ret = gst_pad_push (target, buf);
     if (ret != GST_FLOW_OK && ret != GST_FLOW_EOS && ret != GST_FLOW_FLUSHING &&
@@ -547,6 +569,7 @@ gst_aibox_stream_demux_request_new_pad (GstElement * element,
   sp->push_in_flight = FALSE;
   sp->dropped = 0;
   sp->stall_drops = 0;
+  sp->current_caps = nullptr;
   sp->task = gst_task_new (src_loop, sp, nullptr);
   gst_task_set_lock (sp->task, &sp->task_lock);
 
@@ -590,6 +613,7 @@ gst_aibox_stream_demux_release_pad (GstElement * element, GstPad * pad)
     g_mutex_clear (&sp->qlock);
     g_cond_clear (&sp->qcond);
     g_rec_mutex_clear (&sp->task_lock);
+    if (sp->current_caps) gst_caps_unref (sp->current_caps);
     g_free (sp->camera_id);
     g_free (sp);
 
@@ -640,8 +664,36 @@ gst_aibox_stream_demux_change_state (GstElement * element,
 /* Sticky event push helper                                           */
 /* ================================================================== */
 
+static GstCaps *
+make_output_caps (GstAiboxStreamDemux * self, const GstCaps * source_caps)
+{
+  GstCaps *output = nullptr;
+  g_mutex_lock (&self->lock);
+  if (self->negotiated_caps)
+    output = gst_caps_copy (self->negotiated_caps);
+  g_mutex_unlock (&self->lock);
+  if (!output) return nullptr;
+
+  output = gst_caps_make_writable (output);
+  GstStructure *target = gst_caps_get_structure (output, 0);
+  const GstStructure *source = source_caps && gst_caps_get_size (source_caps) > 0
+      ? gst_caps_get_structure (source_caps, 0) : nullptr;
+  const gchar *colorimetry = source
+      ? gst_structure_get_string (source, "colorimetry") : nullptr;
+  if (colorimetry)
+    gst_structure_set (target, "colorimetry", G_TYPE_STRING, colorimetry, nullptr);
+  else
+    gst_structure_remove_field (target, "colorimetry");
+
+  if (self->output_fps > 0)
+    gst_structure_set (target, "framerate", GST_TYPE_FRACTION,
+                       (gint) self->output_fps, 1, nullptr);
+  return output;
+}
+
 static gboolean
-push_sticky_events (GstAiboxStreamDemux * self, GstAiboxStreamDemuxSrcPad * sp)
+push_initial_events (GstAiboxStreamDemux * self, GstAiboxStreamDemuxSrcPad * sp,
+                     GstCaps * caps)
 {
   if (sp->sticky_sent) return TRUE;
 
@@ -653,31 +705,8 @@ push_sticky_events (GstAiboxStreamDemux * self, GstAiboxStreamDemuxSrcPad * sp)
     if (!gst_pad_push_event (sp->pad, ev)) return FALSE;
   }
 
-  {
-    GstCaps *caps_to_push = nullptr;
-    if (self->negotiated_caps)
-      caps_to_push = gst_caps_copy (self->negotiated_caps);
-    else if (self->caps_ev) {
-      GstCaps *c = nullptr;
-      gst_event_parse_caps (self->caps_ev, &c);
-      if (c) caps_to_push = gst_caps_copy (c);
-    }
-
-    if (caps_to_push && self->output_fps > 0) {
-      caps_to_push = gst_caps_make_writable (caps_to_push);
-      gst_caps_set_simple (caps_to_push,
-                           "framerate", GST_TYPE_FRACTION,
-                           (gint) self->output_fps, 1, nullptr);
-      if (!gst_pad_push_event (sp->pad, gst_event_new_caps (caps_to_push)))
-        return FALSE;
-    } else if (caps_to_push) {
-      if (!gst_pad_push_event (sp->pad, gst_event_new_caps (caps_to_push)))
-        return FALSE;
-    } else if (self->caps_ev) {
-      if (!gst_pad_push_event (sp->pad, gst_event_ref (self->caps_ev)))
-        return FALSE;
-    }
-  }
+  if (!caps || !gst_pad_push_event (sp->pad, gst_event_new_caps (gst_caps_ref (caps))))
+    return FALSE;
 
   if (self->segment_ev) {
     if (!gst_pad_push_event (sp->pad, gst_event_ref (self->segment_ev)))
@@ -690,6 +719,22 @@ push_sticky_events (GstAiboxStreamDemux * self, GstAiboxStreamDemuxSrcPad * sp)
   }
 
   sp->sticky_sent = TRUE;
+  if (sp->current_caps) gst_caps_unref (sp->current_caps);
+  sp->current_caps = gst_caps_ref (caps);
+  return TRUE;
+}
+
+static gboolean
+push_caps_if_changed (GstAiboxStreamDemux * self,
+                      GstAiboxStreamDemuxSrcPad * sp, GstCaps * caps)
+{
+  (void) self;
+  if (!caps) return FALSE;
+  if (sp->current_caps && gst_caps_is_equal (sp->current_caps, caps)) return TRUE;
+  if (!gst_pad_push_event (sp->pad, gst_event_new_caps (gst_caps_ref (caps))))
+    return FALSE;
+  if (sp->current_caps) gst_caps_unref (sp->current_caps);
+  sp->current_caps = gst_caps_ref (caps);
   return TRUE;
 }
 
@@ -706,11 +751,14 @@ gst_aibox_stream_demux_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
   guint   slot_dummy = 0;
   gchar  *camera_id  = NULL;
   guint64 frame_id   = 0;
-  gboolean has_meta  = read_aibox_frame_meta (buf, &slot_dummy, &camera_id, &frame_id);
+  GstCaps *source_caps = nullptr;
+  gboolean has_meta  = read_aibox_frame_meta (buf, &slot_dummy, &camera_id,
+                                               &frame_id, &source_caps);
 
   if (!has_meta || !camera_id || camera_id[0] == '\0') {
     GST_WARNING_OBJECT (self, "buffer has no valid camera_id in GstAiboxFrameMeta, dropping");
     gst_buffer_unref (buf);
+    if (source_caps) gst_caps_unref (source_caps);
     return GST_FLOW_OK;
   }
 
@@ -722,12 +770,14 @@ gst_aibox_stream_demux_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
       GST_DEBUG_OBJECT (self, "no src pad for camera=%s, dropping buffer", camera_id);
     g_mutex_unlock (&self->lock);
     gst_buffer_unref (buf);
+    if (source_caps) gst_caps_unref (source_caps);
     return GST_FLOW_OK;
   }
 
   if (sp->eos) {
     g_mutex_unlock (&self->lock);
     gst_buffer_unref (buf);
+    if (source_caps) gst_caps_unref (source_caps);
     return GST_FLOW_OK;
   }
 
@@ -742,6 +792,7 @@ gst_aibox_stream_demux_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
   if (stalled) {
     g_mutex_unlock (&self->lock);
     gst_buffer_unref (buf);
+    if (source_caps) gst_caps_unref (source_caps);
     return GST_FLOW_OK;
   }
 
@@ -779,7 +830,7 @@ gst_aibox_stream_demux_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
     buf = wrapped;
   }
 
-  src_enqueue_buffer_leaky (sp, buf);
+  src_enqueue_buffer_leaky (sp, buf, source_caps);
   return GST_FLOW_OK;
 }
 

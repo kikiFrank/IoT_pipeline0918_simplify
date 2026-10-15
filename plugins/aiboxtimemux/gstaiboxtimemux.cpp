@@ -29,6 +29,22 @@ gst_aibox_time_mux_drop_policy_get_type (void)
   return type;
 }
 
+GType
+gst_aibox_time_mux_caps_mode_get_type (void)
+{
+  static GType type = 0;
+  if (g_once_init_enter (&type)) {
+    static const GEnumValue values[] = {
+      { GST_AIBOX_TIME_MUX_CAPS_MODE_STRICT, "Strict", "strict" },
+      { GST_AIBOX_TIME_MUX_CAPS_MODE_CANONICAL_RAW, "Canonical raw", "canonical_raw" },
+      { 0, nullptr, nullptr }
+    };
+    GType t = g_enum_register_static ("GstAiboxTimeMuxCapsMode", values);
+    g_once_init_leave (&type, t);
+  }
+  return type;
+}
+
 /* ================================================================== */
 /* Sink pad templates                                                  */
 /* ================================================================== */
@@ -66,6 +82,10 @@ static GstAiboxTimeMuxPad * find_pad_by_slot  (GstAiboxTimeMux * self, guint slo
 static guint                find_next_ready_slot (GstAiboxTimeMux * self, guint from_slot);
 static void                 clear_all_latest_buffers (GstAiboxTimeMux * self);
 static gboolean             all_sinks_eos      (GstAiboxTimeMux * self);
+static GstCaps *            normalize_allowed_source_differences (const GstCaps * caps);
+static GstCaps *            make_canonical_publish_caps (const GstCaps * admission_caps);
+static gboolean             caps_match_canonical (GstAiboxTimeMux * self,
+                                                   const GstCaps * caps);
 
 /* ================================================================== */
 /* GObject type registration                                           */
@@ -145,6 +165,18 @@ gst_aibox_time_mux_class_init (GstAiboxTimeMuxClass * klass)
           "Reduce runtime logging",
           FALSE,
           static_cast<GParamFlags>(G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS)));
+
+  g_object_class_install_property (gobject, PROP_CAPS_MODE,
+      g_param_spec_enum ("caps-mode", "CAPS Mode",
+          "strict uses the first input CAPS; canonical_raw uses group-caps",
+          GST_TYPE_AIBOX_TIME_MUX_CAPS_MODE,
+          GST_AIBOX_TIME_MUX_CAPS_MODE_STRICT,
+          static_cast<GParamFlags>(G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS)));
+  g_object_class_install_property (gobject, PROP_GROUP_CAPS,
+      g_param_spec_boxed ("group-caps", "Group CAPS",
+          "Fixed shared raw CAPS contract for canonical_raw mode",
+          GST_TYPE_CAPS,
+          static_cast<GParamFlags>(G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS)));
 }
 
 static void
@@ -170,11 +202,15 @@ gst_aibox_time_mux_init (GstAiboxTimeMux * self)
   self->algorithm_group_id = g_strdup ("");
 
   self->negotiated_caps    = nullptr;
+  self->group_caps         = nullptr;
+  self->canonical_reference_caps = nullptr;
+  self->caps_mode          = GST_AIBOX_TIME_MUX_CAPS_MODE_STRICT;
   self->running            = FALSE;
   self->scheduler_thread   = nullptr;
   self->next_slot          = 0;
   self->next_slot_id       = 0;
   self->segment_sent       = FALSE;
+  self->stream_start_sent  = FALSE;
 }
 
 /* ================================================================== */
@@ -211,6 +247,13 @@ gst_aibox_time_mux_set_property (GObject * object, guint prop_id,
     case PROP_SILENT:
       self->silent = g_value_get_boolean (value);
       break;
+    case PROP_CAPS_MODE:
+      self->caps_mode = g_value_get_enum (value);
+      break;
+    case PROP_GROUP_CAPS:
+      if (self->group_caps) gst_caps_unref (self->group_caps);
+      self->group_caps = (GstCaps *) g_value_dup_boxed (value);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -245,6 +288,12 @@ gst_aibox_time_mux_get_property (GObject * object, guint prop_id,
     case PROP_SILENT:
       g_value_set_boolean (value, self->silent);
       break;
+    case PROP_CAPS_MODE:
+      g_value_set_enum (value, self->caps_mode);
+      break;
+    case PROP_GROUP_CAPS:
+      g_value_set_boxed (value, self->group_caps);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -268,6 +317,8 @@ gst_aibox_time_mux_finalize (GObject * object)
     gst_caps_unref (self->negotiated_caps);
     self->negotiated_caps = nullptr;
   }
+  if (self->group_caps) gst_caps_unref (self->group_caps);
+  if (self->canonical_reference_caps) gst_caps_unref (self->canonical_reference_caps);
 
   g_mutex_clear (&self->lock);
   g_cond_clear  (&self->cond);
@@ -296,14 +347,19 @@ gst_aibox_time_mux_request_new_pad (GstElement * element,
     return nullptr;
   }
 
-  /* Monotonic allocator: never reuse a live slot_id. Pad removal leaves a
-   * gap in the array, so sinkpads->len would collide with an existing slot;
-   * next_slot_id (only incremented) is immune to that. */
-  guint slot_id = self->next_slot_id++;
-  if (self->next_slot_id >= self->max_sinks) {
-    GST_WARNING_OBJECT (self,
-        "next_slot_id wrapped past max-sinks (%u); slot_id reuse possible",
-        self->max_sinks);
+  guint slot_id = NO_SLOT;
+  for (guint i = 0; i < self->max_sinks; ++i) {
+    guint candidate = (self->next_slot_id + i) % self->max_sinks;
+    if (!find_pad_by_slot (self, candidate)) {
+      slot_id = candidate;
+      self->next_slot_id = (candidate + 1) % self->max_sinks;
+      break;
+    }
+  }
+  if (slot_id == NO_SLOT) {
+    g_mutex_unlock (&self->lock);
+    GST_ERROR_OBJECT (self, "no free slot below max-sinks (%u)", self->max_sinks);
+    return nullptr;
   }
   gchar *pad_name = g_strdup_printf ("sink_%u", slot_id);
 
@@ -441,29 +497,87 @@ gst_aibox_time_mux_sink_event (GstPad * pad, GstObject * parent,
 
       g_mutex_lock (&self->lock);
 
-      if (ctx->caps) gst_caps_unref (ctx->caps);
-      ctx->caps = gst_caps_ref (caps);
-
-      if (!self->negotiated_caps) {
+      gboolean push_caps = FALSE;
+      GstCaps *caps_to_push = nullptr;
+      if (self->caps_mode == GST_AIBOX_TIME_MUX_CAPS_MODE_CANONICAL_RAW) {
+        if (!self->group_caps || !caps_match_canonical (self, caps)) {
+          GST_ERROR_OBJECT (self, "[CAPS_REJECT] pad=%s does not satisfy canonical_raw contract",
+                            GST_PAD_NAME (pad));
+          g_mutex_unlock (&self->lock);
+          gst_event_unref (event);
+          return FALSE;
+        }
+        if (!ctx->caps) {
+          gchar *actual = gst_caps_to_string (caps);
+          GST_INFO_OBJECT (self, "[CAPS_INPUT] pad=%s actual=%s",
+                           GST_PAD_NAME (pad), actual ? actual : "(null)");
+          g_free (actual);
+        }
+        if (!self->canonical_reference_caps) {
+          self->canonical_reference_caps =
+              normalize_allowed_source_differences (caps);
+        }
+        if (!self->negotiated_caps) {
+          /* Sink-side admission contract stays group_caps (no framerate);
+           * the published src contract additionally declares framerate=0/1
+           * (variable) so strict in==out transforms (qtivoverlay) can start. */
+          GstCaps *published = make_canonical_publish_caps (self->group_caps);
+          if (published) {
+            gchar *admit = gst_caps_to_string (self->group_caps);
+            gchar *publish = gst_caps_to_string (published);
+            GST_INFO_OBJECT (self, "[CAPS_ADMIT] mode=canonical_raw input_contract=%s",
+                             admit ? admit : "(null)");
+            GST_INFO_OBJECT (self, "[CAPS_PUBLISH] src=%s",
+                             publish ? publish : "(null)");
+            g_free (admit);
+            g_free (publish);
+            self->negotiated_caps = gst_caps_ref (published);
+            caps_to_push = published;   /* owned ref, released after push */
+            push_caps = TRUE;
+          }
+        }
+      } else if (!self->negotiated_caps) {
         self->negotiated_caps = gst_caps_ref (caps);
-        gst_pad_push_event (self->srcpad, gst_event_new_caps (caps));
-        GST_INFO_OBJECT (self, "negotiated caps set from pad %s: %" GST_PTR_FORMAT,
-                         GST_PAD_NAME (pad), caps);
+        caps_to_push = gst_caps_ref (caps);
+        push_caps = TRUE;
       } else if (!gst_caps_can_intersect (self->negotiated_caps, caps)) {
         GST_ERROR_OBJECT (self, "caps incompatible on pad %s", GST_PAD_NAME (pad));
         g_mutex_unlock (&self->lock);
         gst_event_unref (event);
         return FALSE;
       }
+
+      if (ctx->caps) gst_caps_unref (ctx->caps);
+      ctx->caps = gst_caps_ref (caps);
+      if (ctx->latest_buffer) {
+        gst_buffer_unref (ctx->latest_buffer);
+        ctx->latest_buffer = nullptr;
+        ctx->has_buffer = FALSE;
+      }
       g_mutex_unlock (&self->lock);
+      if (push_caps) {
+        const gboolean pushed = gst_pad_push_event (self->srcpad,
+                                                    gst_event_new_caps (caps_to_push));
+        gst_caps_unref (caps_to_push);
+        if (!pushed) {
+          GST_WARNING_OBJECT (self,
+                              "[CAPS_PUSH_FAIL] downstream rejected src CAPS event");
+          gst_event_unref (event);
+          return FALSE;
+        }
+      }
       gst_event_unref (event);
       return TRUE;
     }
     case GST_EVENT_STREAM_START: {
       /* forward only once */
       g_mutex_lock (&self->lock);
-      if (!self->segment_sent) {
+      if (!self->stream_start_sent) {
+        self->stream_start_sent = TRUE;
+        g_mutex_unlock (&self->lock);
         gst_pad_push_event (self->srcpad, gst_event_ref (event));
+        gst_event_unref (event);
+        return TRUE;
       }
       g_mutex_unlock (&self->lock);
       break;
@@ -471,8 +585,11 @@ gst_aibox_time_mux_sink_event (GstPad * pad, GstObject * parent,
     case GST_EVENT_SEGMENT: {
       g_mutex_lock (&self->lock);
       if (!self->segment_sent) {
-        gst_pad_push_event (self->srcpad, gst_event_ref (event));
         self->segment_sent = TRUE;
+        g_mutex_unlock (&self->lock);
+        gst_pad_push_event (self->srcpad, gst_event_ref (event));
+        gst_event_unref (event);
+        return TRUE;
       }
       g_mutex_unlock (&self->lock);
       break;
@@ -480,11 +597,11 @@ gst_aibox_time_mux_sink_event (GstPad * pad, GstObject * parent,
     case GST_EVENT_EOS: {
       g_mutex_lock (&self->lock);
       ctx->eos = TRUE;
-      if (all_sinks_eos (self)) {
-        gst_pad_push_event (self->srcpad, gst_event_new_eos ());
-        GST_INFO_OBJECT (self, "all sinks EOS, forwarded to src");
-      }
+      gboolean all_eos = all_sinks_eos (self);
       g_mutex_unlock (&self->lock);
+      if (all_eos) gst_pad_push_event (self->srcpad, gst_event_new_eos ());
+      gst_event_unref (event);
+      return TRUE;
       break;
     }
     case GST_EVENT_FLUSH_START: {
@@ -496,17 +613,22 @@ gst_aibox_time_mux_sink_event (GstPad * pad, GstObject * parent,
         ctx->has_buffer = FALSE;
       }
       g_cond_broadcast (&self->cond);
-      gst_pad_push_event (self->srcpad, gst_event_ref (event));
       g_mutex_unlock (&self->lock);
+      gst_pad_push_event (self->srcpad, gst_event_ref (event));
+      gst_event_unref (event);
+      return TRUE;
       break;
     }
     case GST_EVENT_FLUSH_STOP: {
       g_mutex_lock (&self->lock);
       ctx->flushing = FALSE;
       self->segment_sent = FALSE;
+      self->stream_start_sent = FALSE;
       g_cond_broadcast (&self->cond);
-      gst_pad_push_event (self->srcpad, gst_event_ref (event));
       g_mutex_unlock (&self->lock);
+      gst_pad_push_event (self->srcpad, gst_event_ref (event));
+      gst_event_unref (event);
+      return TRUE;
       break;
     }
     default:
@@ -528,16 +650,20 @@ gst_aibox_time_mux_sink_query (GstPad * pad, GstObject * parent,
   GstAiboxTimeMux *self = GST_AIBOX_TIME_MUX (parent);
 
   switch (GST_QUERY_TYPE (query)) {
-    case GST_QUERY_CAPS:
-      gst_query_set_caps_result (query,
-          gst_pad_get_pad_template_caps (pad));
+    case GST_QUERY_CAPS: {
+      GstCaps *result = self->group_caps ? gst_caps_ref (self->group_caps) :
+          gst_pad_get_pad_template_caps (pad);
+      gst_query_set_caps_result (query, result);
+      gst_caps_unref (result);
       return TRUE;
+    }
     case GST_QUERY_ACCEPT_CAPS: {
       GstCaps *caps = nullptr;
       gst_query_parse_accept_caps (query, &caps);
       gst_query_set_accept_caps_result (query,
-          gst_caps_is_subset (caps,
-              gst_pad_get_pad_template_caps (pad)));
+          self->caps_mode == GST_AIBOX_TIME_MUX_CAPS_MODE_CANONICAL_RAW
+              ? caps_match_canonical (self, caps)
+              : gst_caps_is_subset (caps, gst_pad_get_pad_template_caps (pad)));
       return TRUE;
     }
     default:
@@ -554,14 +680,23 @@ gst_aibox_time_mux_src_query (GstPad * pad, GstObject * parent,
   GstAiboxTimeMux *self = GST_AIBOX_TIME_MUX (parent);
 
   switch (GST_QUERY_TYPE (query)) {
-    case GST_QUERY_CAPS:
+    case GST_QUERY_CAPS: {
+      GstCaps *result = nullptr;
+      g_mutex_lock (&self->lock);
       if (self->negotiated_caps) {
-        gst_query_set_caps_result (query, gst_caps_ref (self->negotiated_caps));
-      } else {
-        gst_query_set_caps_result (query,
-            gst_pad_get_pad_template_caps (pad));
+        result = gst_caps_ref (self->negotiated_caps);
+      } else if (self->caps_mode == GST_AIBOX_TIME_MUX_CAPS_MODE_CANONICAL_RAW) {
+        /* Before the first CAPS event, advertise the same published contract
+         * the first event will push: admission caps + framerate=0/1. */
+        result = make_canonical_publish_caps (self->group_caps);
       }
+      g_mutex_unlock (&self->lock);
+      if (!result)
+        result = gst_pad_get_pad_template_caps (pad);
+      gst_query_set_caps_result (query, result);
+      gst_caps_unref (result);
       return TRUE;
+    }
     default:
       break;
   }
@@ -691,6 +826,7 @@ gst_aibox_time_mux_scheduler_loop (gpointer data)
                                             ? self->mux_group_id : "");
           m->mux_slot_id = ctx->slot_id;
           m->pts         = GST_BUFFER_PTS (out);
+          gst_aibox_frame_meta_set_source_raw_caps (m, ctx->caps);
           /* camera_id and frame_id intentionally left untouched */
         } else {
           GST_ERROR_OBJECT (self,
@@ -704,6 +840,7 @@ gst_aibox_time_mux_scheduler_loop (gpointer data)
               self->mux_group_id ? self->mux_group_id : "",
               ctx->slot_id,
               GST_BUFFER_PTS (out));
+          gst_aibox_frame_meta_set_source_raw_caps (m, ctx->caps);
         }
 
         if (m) {
@@ -773,7 +910,7 @@ find_next_ready_slot (GstAiboxTimeMux * self, guint from_slot)
    * from_slot+1, scan exactly one full cycle (max_sinks steps) and return
    * the first non-EOS, non-flushing sink that has a pending buffer. This
    * skips empty sinks (no buffer) rather than blocking on them. */
-  for (guint i = 1; i <= self->max_sinks; i++) {
+  for (guint i = 0; i < self->max_sinks; i++) {
     guint candidate = (from_slot + i) % self->max_sinks;
     GstAiboxTimeMuxPad *ctx = find_pad_by_slot (self, candidate);
     if (ctx && !ctx->eos && !ctx->flushing && ctx->has_buffer)
@@ -781,6 +918,44 @@ find_next_ready_slot (GstAiboxTimeMux * self, guint from_slot)
   }
   /* all sinks empty or EOS — signal the scheduler to wait, not to pick */
   return NO_SLOT;
+}
+
+static GstCaps *
+make_canonical_publish_caps (const GstCaps * admission_caps)
+{
+  /* Published src contract: a copy of the admission caps (group_caps) with an
+   * explicit variable framerate. The admission caps themselves are never
+   * modified; sink-side validation keeps using the framerate-free contract. */
+  if (!admission_caps)
+    return nullptr;
+  GstCaps *out = gst_caps_copy (admission_caps);
+  gst_caps_set_simple (out, "framerate", GST_TYPE_FRACTION, 0, 1, nullptr);
+  return out;  /* caller owns one reference */
+}
+
+static GstCaps *
+normalize_allowed_source_differences (const GstCaps * caps)
+{
+  GstCaps *normalized = gst_caps_copy (caps);
+  for (guint i = 0; i < gst_caps_get_size (normalized); ++i) {
+    GstStructure *structure = gst_caps_get_structure (normalized, i);
+    gst_structure_remove_field (structure, "colorimetry");
+    gst_structure_remove_field (structure, "framerate");
+  }
+  return normalized;
+}
+
+static gboolean
+caps_match_canonical (GstAiboxTimeMux * self, const GstCaps * caps)
+{
+  if (!caps || !self->group_caps || !gst_caps_can_intersect (self->group_caps, caps))
+    return FALSE;
+  GstCaps *normalized = normalize_allowed_source_differences (caps);
+  gboolean equal = FALSE;
+  equal = !self->canonical_reference_caps ||
+          gst_caps_is_equal (self->canonical_reference_caps, normalized);
+  gst_caps_unref (normalized);
+  return equal;
 }
 
 static void

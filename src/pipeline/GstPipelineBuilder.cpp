@@ -1284,6 +1284,34 @@ Status GstPipelineBuilder::BuildMux(const TimeMuxGroupPlan& mux_plan,
     "algorithm-group-id", mux_plan.parent_algorithm_group_id.c_str(),
     nullptr);
   gst_util_set_object_arg(G_OBJECT(mux), "drop-policy", "latest");
+  gst_util_set_object_arg(G_OBJECT(mux), "caps-mode",
+                          mux_plan.mux_scheduler.caps_mode.c_str());
+  if (mux_plan.mux_scheduler.caps_mode == "canonical_raw") {
+    GstCaps* group_caps = gst_caps_from_string(
+        mux_plan.mux_scheduler.group_caps.c_str());
+    if (!group_caps || !gst_caps_is_fixed(group_caps) ||
+        gst_caps_get_size(group_caps) != 1) {
+      if (group_caps) gst_caps_unref(group_caps);
+      return Status::Error("TIMEMUX_GROUP_CAPS_INVALID",
+                           "group_caps must be one fixed video/x-raw caps");
+    }
+    const GstStructure* structure = gst_caps_get_structure(group_caps, 0);
+    const gchar* format = gst_structure_get_string(structure, "format");
+    const gchar* interlace = gst_structure_get_string(structure, "interlace-mode");
+    gint width = 0;
+    gint height = 0;
+    if (g_strcmp0(gst_structure_get_name(structure), "video/x-raw") != 0 ||
+        !format || !interlace ||
+        !gst_structure_get_int(structure, "width", &width) ||
+        !gst_structure_get_int(structure, "height", &height) ||
+        width <= 0 || height <= 0 || g_strcmp0(interlace, "progressive") != 0) {
+      gst_caps_unref(group_caps);
+      return Status::Error("TIMEMUX_GROUP_CAPS_INVALID",
+                           "group_caps requires video/x-raw format, positive width/height, and progressive interlace-mode");
+    }
+    g_object_set(mux, "group-caps", group_caps, nullptr);
+    gst_caps_unref(group_caps);
+  }
 
   gst_bin_add(GST_BIN(pipeline), mux);
 

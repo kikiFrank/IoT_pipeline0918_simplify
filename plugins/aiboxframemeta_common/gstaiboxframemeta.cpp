@@ -19,6 +19,7 @@ gst_aibox_frame_meta_init (GstMeta * meta, gpointer params, GstBuffer * buffer)
   fmeta->global_cam_index   = 0;
   fmeta->batch_group_id     = nullptr;
   fmeta->batch_stream_id    = GST_AIBOX_FRAME_META_BATCH_INVALID_STREAM_ID;
+  fmeta->source_raw_caps    = nullptr;
 
   return TRUE;
 }
@@ -33,11 +34,13 @@ gst_aibox_frame_meta_free (GstMeta * meta, GstBuffer * buffer)
   g_free (fmeta->algorithm_group_id);
   g_free (fmeta->time_mux_group_id);
   g_free (fmeta->batch_group_id);
+  if (fmeta->source_raw_caps) gst_caps_unref (fmeta->source_raw_caps);
 
   fmeta->camera_id          = nullptr;
   fmeta->algorithm_group_id = nullptr;
   fmeta->time_mux_group_id  = nullptr;
   fmeta->batch_group_id     = nullptr;
+  fmeta->source_raw_caps    = nullptr;
 }
 
 static gboolean
@@ -63,6 +66,7 @@ gst_aibox_frame_meta_transform (GstBuffer * dest, GstMeta * meta,
   g_free (dest_meta->batch_group_id);
   dest_meta->batch_group_id  = g_strdup (src->batch_group_id);
   dest_meta->batch_stream_id = src->batch_stream_id;
+  gst_aibox_frame_meta_set_source_raw_caps(dest_meta, src->source_raw_caps);
 
   return TRUE;
 }
@@ -132,6 +136,15 @@ gst_buffer_get_aibox_frame_meta (GstBuffer * buffer)
 {
   return (GstAiboxFrameMeta *) gst_buffer_get_meta (
       buffer, GST_AIBOX_FRAME_META_API_TYPE);
+}
+
+void
+gst_aibox_frame_meta_set_source_raw_caps (GstAiboxFrameMeta * meta,
+                                           const GstCaps * caps)
+{
+  if (!meta) return;
+  if (meta->source_raw_caps) gst_caps_unref(meta->source_raw_caps);
+  meta->source_raw_caps = caps ? gst_caps_ref((GstCaps *) caps) : nullptr;
 }
 
 static gboolean

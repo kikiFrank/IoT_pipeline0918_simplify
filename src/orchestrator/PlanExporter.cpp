@@ -122,6 +122,8 @@ std::string PlanExporter::BuildJson(const ExecutionPlan& plan) const {
     j << "      " << JsonStr("wait_timeout_ms") << ": " << tm.mux_scheduler.wait_timeout_ms << ",\n";
     j << "      " << JsonStr("drop_policy") << ": " << JsonStr(EnumStr(tm.mux_scheduler.drop_policy)) << ",\n";
     j << "      " << JsonStr("pad_mode") << ": " << JsonStr("request") << ",\n";
+    j << "      " << JsonStr("caps_mode") << ": " << JsonStr(tm.mux_scheduler.caps_mode) << ",\n";
+    j << "      " << JsonStr("group_caps") << ": " << JsonStr(tm.mux_scheduler.group_caps) << ",\n";
 
     j << "      " << JsonStr("stream_inputs") << ": [\n";
     for (size_t si = 0; si < tm.stream_inputs.size(); ++si) {

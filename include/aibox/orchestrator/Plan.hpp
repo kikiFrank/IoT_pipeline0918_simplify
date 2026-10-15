@@ -126,6 +126,8 @@ struct MuxSchedulerPlan {
   PadMode     pad_mode        = PadMode::kRequest;
   bool        attach_meta     = true;
   std::string scheduler_policy = "round_robin";
+  std::string caps_mode       = "strict";
+  CapsString  group_caps;
 
   std::vector<std::string> attach_meta_keys = {
     "camera_id", "frame_id", "pts",

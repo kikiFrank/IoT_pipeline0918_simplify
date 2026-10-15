@@ -72,6 +72,10 @@ struct TimeMuxConfig {
   DropPolicy  drop_policy      = DropPolicy::kLatest;
   PadMode     pad_mode         = PadMode::kRequest;
   bool        attach_meta      = true;
+  // strict preserves the historical first-input negotiation. canonical_raw
+  // uses group_caps as the shared output contract.
+  std::string caps_mode        = "strict";
+  CapsString  group_caps;
 };
 
 // ===================================================================

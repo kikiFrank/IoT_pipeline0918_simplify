@@ -230,6 +230,8 @@ std::vector<TimeMuxGroupPlan> PipelineOrchestrator::BuildTimeMuxGroups(
     tmux.mux_scheduler.drop_policy     = config.timemux.drop_policy;
     tmux.mux_scheduler.pad_mode        = config.timemux.pad_mode;
     tmux.mux_scheduler.attach_meta     = config.timemux.attach_meta;
+    tmux.mux_scheduler.caps_mode       = config.timemux.caps_mode;
+    tmux.mux_scheduler.group_caps      = config.timemux.group_caps;
 
     // Assign cameras to this mux group
     size_t end = std::min(offset + max_size, total);

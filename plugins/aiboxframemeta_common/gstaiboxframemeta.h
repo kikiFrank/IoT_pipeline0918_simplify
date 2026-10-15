@@ -36,6 +36,9 @@ typedef struct _GstAiboxFrameMeta {
   gchar    *batch_group_id;                                  /* NULL in legacy */
   guint     batch_stream_id;   /* 0xFFFFFFFF = not set */
 
+  /* Ref-counted caps observed on the source branch before time-mux. */
+  GstCaps   *source_raw_caps;
+
 } GstAiboxFrameMeta;
 
 /* --- GType / MetaInfo accessors --- */
@@ -58,5 +61,7 @@ GstAiboxFrameMeta * gst_buffer_add_aibox_frame_meta (
     GstClockTime     pts);
 
 GstAiboxFrameMeta * gst_buffer_get_aibox_frame_meta (GstBuffer * buffer);
+void gst_aibox_frame_meta_set_source_raw_caps (GstAiboxFrameMeta * meta,
+                                                const GstCaps * caps);
 
 G_END_DECLS

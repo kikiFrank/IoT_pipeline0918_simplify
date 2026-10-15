@@ -733,7 +733,7 @@ OnFrameTagProbe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
 
 static bool NowebFpsEnabled(const GstPipelineBuildOptions& opts) {
   return opts.enable_yolo_stages && !opts.enable_webrtc &&
-         !opts.enable_mosaic_recording;
+         !opts.enable_annotated_rtsp && !opts.enable_mosaic_recording;
 }
 
 static std::string FpsSafeName(const std::string& id) {
@@ -1778,10 +1778,13 @@ Result<GstPipelineBuildResult> GstPipelineBuilder::Build(
   // --- VPU budget validation (WebRTC encoders) ---
   // P3b lazy default: encoders are not created at build (count 0 here).
   // Static enc count only when AIBOX_CAMSPLIT_MAX_ENC is set.
-  if (opts_.enable_webrtc) {
+  if (opts_.enable_webrtc || opts_.enable_annotated_rtsp) {
     int dec_count = total_cams;
     int webrtc_enc_count = 0;
-    if (const char* me = g_getenv("AIBOX_CAMSPLIT_MAX_ENC")) {
+    if (opts_.enable_annotated_rtsp) {
+      // Continuous mode: one always-on encoder per camera (annotated RTSP).
+      webrtc_enc_count = total_cams;
+    } else if (const char* me = g_getenv("AIBOX_CAMSPLIT_MAX_ENC")) {
       int v = atoi(me);
       if (v < 0) v = 0;
       webrtc_enc_count = (v > total_cams) ? total_cams : v;
@@ -1805,7 +1808,7 @@ Result<GstPipelineBuildResult> GstPipelineBuilder::Build(
     }
     fprintf(stderr,
             "[webrtc] VPU budget OK: %d dec + %d webrtc_enc(build) + %d rec_enc = %d / 32"
-            " (lazy enc unless MAX_ENC set)\n",
+            " (annotated=continuous; otherwise lazy unless MAX_ENC set)\n",
             dec_count, webrtc_enc_count, rec_enc_count, total_vpu);
   }
 
@@ -1925,6 +1928,7 @@ Result<GstPipelineBuildResult> GstPipelineBuilder::Build(
 
       bool need_overlay =
           opts_.enable_mosaic_recording || opts_.enable_webrtc ||
+          opts_.enable_annotated_rtsp ||
           plan.face_plan.enabled;  // face whitening also needs overlay
       GstElement* tee_post = nullptr;
       GstElement* term_src = last_metamux;
@@ -2172,7 +2176,8 @@ Result<GstPipelineBuildResult> GstPipelineBuilder::Build(
       }
 
       // Branch C — WebRTC annotated preview (per-group demux + per-cam enc)
-      if (opts_.enable_webrtc && tee_post) {
+      // Also feeds the annotated RTSP server (shares the same encode chains).
+      if ((opts_.enable_webrtc || opts_.enable_annotated_rtsp) && tee_post) {
         Status st = BuildWebrtcAnnotatedBranch(
             result.pipeline, tee_post, tmux, reg);
         if (!st.ok) {
@@ -2654,6 +2659,11 @@ Status GstPipelineBuilder::BuildWebrtcAnnotatedBranch(
     if (v >= 0) max_enc = v;
   }
   if (fakesink_only) max_enc = 0;
+  // Annotated RTSP mode: the RTSP server consumes tee_webrtc without any
+  // WebRTC viewer session, so every camera in the group needs a persistent
+  // static encode chain. The diagnostic fakesink_only switch still wins.
+  if (opts_.enable_annotated_rtsp && !fakesink_only)
+    max_enc = cams_in_group;
 
   // Queue between tee_post and splitter
   GstElement* q_demux = MakeElement("queue", "q_demux_webrtc_" + group_id, &err);
@@ -2910,6 +2920,10 @@ Status GstPipelineBuilder::BuildWebrtcAnnotatedBranch(
     reg->webrtc_h264parse_by_camera[cam]   = parse;
     reg->webrtc_capsfilter_by_camera[cam]  = capsflt;
     reg->webrtc_videoscale_by_camera[cam]  = vscale;
+    // Builder-static chain: SessionManager::Shutdown must NOT tear this down
+    // (it is owned by the pipeline and released at pipeline NULL); only
+    // session-dynamic encoder chains are SessionManager-owned.
+    reg->builder_static_webrtc_cams[cam]   = true;
 
     fprintf(stderr, "[webrtc] %s slot%d(%s): %s→vscale→caps→enc→parse→tee_webrtc\n",
             group_id.c_str(), slot, cam.c_str(),

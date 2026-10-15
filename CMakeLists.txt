@@ -15,6 +15,7 @@ find_package(Threads REQUIRED)
 # --- WebRTC / NATS / detection.frame data plane ---
 option(ENABLE_WEBRTC "Build WebRTC support" OFF)
 option(ENABLE_DETECTION_NATS "Build IR-DATA-001 detection.frame Protobuf/NATS publisher" OFF)
+option(ENABLE_ANNOTATED_RTSP "Build annotated H.264 RTSP server output (needs ENABLE_WEBRTC for the shared GMainLoop)" OFF)
 
 if(ENABLE_WEBRTC OR ENABLE_DETECTION_NATS)
     pkg_check_modules(NATS REQUIRED libnats)
@@ -35,6 +36,13 @@ if(ENABLE_WEBRTC)
     pkg_check_modules(GST_WEBRTC gstreamer-webrtc-1.0>=1.16)
     pkg_check_modules(GST_SDP   gstreamer-sdp-1.0>=1.16)
     pkg_check_modules(GST_RTP   gstreamer-rtp-1.0>=1.16)
+endif()
+
+if(ENABLE_ANNOTATED_RTSP)
+    if(NOT ENABLE_WEBRTC)
+        message(FATAL_ERROR "ENABLE_ANNOTATED_RTSP requires ENABLE_WEBRTC (shares its default GMainContext)")
+    endif()
+    pkg_check_modules(GST_RTSP_SERVER REQUIRED gstreamer-rtsp-server-1.0>=1.16)
 endif()
 
 # --- main executable ---
@@ -85,6 +93,10 @@ if(ENABLE_WEBRTC)
         src/webrtc/WebrtcPadDump.cpp)
 endif()
 
+if(ENABLE_ANNOTATED_RTSP)
+    list(APPEND MAIN_SOURCES src/media/AnnotatedRtspServer.cpp)
+endif()
+
 add_executable(aibox_stream_pipeline_demo ${MAIN_SOURCES})
 
 target_include_directories(aibox_stream_pipeline_demo PRIVATE
@@ -131,6 +143,12 @@ if(ENABLE_DETECTION_NATS)
         ${Protobuf_INCLUDE_DIRS}
         ${CMAKE_CURRENT_BINARY_DIR})
     target_compile_definitions(aibox_stream_pipeline_demo PRIVATE HAVE_DETECTION_NATS=1)
+endif()
+
+if(ENABLE_ANNOTATED_RTSP)
+    list(APPEND MAIN_LIBS ${GST_RTSP_SERVER_LIBRARIES})
+    target_include_directories(aibox_stream_pipeline_demo PRIVATE ${GST_RTSP_SERVER_INCLUDE_DIRS})
+    target_compile_definitions(aibox_stream_pipeline_demo PRIVATE HAVE_ANNOTATED_RTSP=1)
 endif()
 
 target_link_libraries(aibox_stream_pipeline_demo ${MAIN_LIBS})

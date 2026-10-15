@@ -725,6 +725,9 @@ Result<ExecutionPlan> PipelineOrchestrator::BuildExecutionPlan(
   // --- webrtc_config (copy from global config) ---
   plan.webrtc_config = config.global.webrtc;
 
+  // --- annotated_media_config (copy from global config) ---
+  plan.annotated_media_config = config.global.annotated_media;
+
   // --- stream_plans (flat copy from config streams) ---
   for (auto& s : config.streams) {
     StreamPlan sp;

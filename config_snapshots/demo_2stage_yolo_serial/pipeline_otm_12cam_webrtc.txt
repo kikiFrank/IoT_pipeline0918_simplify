@@ -65,3 +65,10 @@ enabled=1
 ice_gathering_timeout_ms=10000
 max_sessions_per_camera=2
 offer_sla_ms=5000
+
+[annotated_media]
+enabled=0
+bind=127.0.0.1
+port=8555
+mount_prefix=/cam/
+pre_queue_buffers=30

@@ -31,6 +31,7 @@ class TxtSnapshotLoader {
   Status ParseStreamInference(const IniSection& sec, StreamInferenceConfig* cfg) const;
   Status ParseWebrtcGlobal(const IniSection& sec, WebrtcGlobalConfig* cfg) const;
   Status ParseWebrtcStream(const IniSection& sec, WebrtcStreamConfig* cfg) const;
+  Status ParseAnnotatedMediaGlobal(const IniSection& sec, AnnotatedMediaConfig* cfg) const;
   Status ParseAlgorithm(const IniSection& sec, AlgorithmConfig* cfg) const;
   Status ParseStage(const IniSection& sec, StageConfig* cfg) const;
   Status ParseStagePipeline(const IniSection& sec, StagePipelineConfig* cfg) const;

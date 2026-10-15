@@ -39,6 +39,21 @@ struct WebrtcGlobalConfig {
   int  offer_sla_ms              = 5000;
 };
 
+// ===================================================================
+// AnnotatedMediaConfig — [annotated_media] section, pipeline-wide
+// Publishes the per-camera encoded annotated H.264 over an in-process
+// RTSP server (rtsp://<bind>:<port><mount_prefix><camera_id>) fed by the
+// existing tee_webrtc encode chains. enabled=0 (default) keeps the legacy
+// behavior byte-identical.
+// ===================================================================
+struct AnnotatedMediaConfig {
+  bool        enabled           = false;
+  std::string bind_address      = "127.0.0.1";
+  int         port              = 8555;
+  std::string mount_prefix      = "/cam/";
+  int         pre_queue_buffers = 30;
+};
+
 struct GlobalConfig {
   std::string demo_name;
   int         max_streams     = 16;
@@ -50,6 +65,7 @@ struct GlobalConfig {
   int         interval_ms     = 200;
 
   WebrtcGlobalConfig webrtc;
+  AnnotatedMediaConfig annotated_media;
 };
 
 // ===================================================================

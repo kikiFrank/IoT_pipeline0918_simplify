@@ -31,6 +31,9 @@
 #include "aibox/webrtc/SessionManager.hpp"
 #include "aibox/webrtc/WebrtcPadDump.hpp"
 #endif
+#ifdef HAVE_ANNOTATED_RTSP
+#include "aibox/media/AnnotatedRtspServer.hpp"
+#endif
 #ifdef HAVE_DETECTION_NATS
 #include "aibox/detection/CaptureTimestampTracker.hpp"
 #include "aibox/detection/FrameEventPublisher.hpp"
@@ -658,6 +661,29 @@ int main(int argc, char** argv) {
     std::cout << "[INFO] WebRTC annotated preview enabled" << std::endl;
   }
 
+  // Annotated RTSP: enable if configured in [annotated_media] section
+#ifdef HAVE_ANNOTATED_RTSP
+  if (plan.annotated_media_config.enabled) {
+    if (plan.execution_mode ==
+        aibox::pipeline::ExecutionMode::kMultistreamBatch) {
+      std::cerr << "[ERROR] [annotated_media] is not supported in batch mode"
+                << std::endl;
+      return 1;
+    }
+    build_opts.enable_annotated_rtsp = true;
+    std::cout << "[INFO] Annotated RTSP output enabled ("
+              << plan.annotated_media_config.bind_address << ":"
+              << plan.annotated_media_config.port
+              << plan.annotated_media_config.mount_prefix << "{camera_id})"
+              << std::endl;
+  }
+#else
+  if (plan.annotated_media_config.enabled) {
+    std::cerr << "[WARN] [annotated_media] enabled but build lacks "
+                 "HAVE_ANNOTATED_RTSP" << std::endl;
+  }
+#endif
+
   // Phase 5: mosaic recording
   if (args.record) {
     build_opts.enable_mosaic_recording = true;
@@ -978,6 +1004,33 @@ int main(int argc, char** argv) {
       std::cout << "[PIPELINE_READY] state=PLAYING" << std::endl;
     }
 
+#ifdef HAVE_ANNOTATED_RTSP
+    // Annotated RTSP server: start after PLAYING so the static encode chains
+    // are live; it attaches to the default GMainContext the run loop below
+    // drives. Failure is non-fatal (warn + continue without the RTSP output).
+    std::unique_ptr<aibox::media::AnnotatedRtspServer> g_annotated_rtsp;
+    if (build_opts.enable_annotated_rtsp) {
+      g_annotated_rtsp = std::make_unique<aibox::media::AnnotatedRtspServer>();
+      aibox::media::AnnotatedRtspServer::Options artsp_opts;
+      artsp_opts.bind_address  = plan.annotated_media_config.bind_address;
+      artsp_opts.port          = plan.annotated_media_config.port;
+      artsp_opts.mount_prefix  = plan.annotated_media_config.mount_prefix;
+      artsp_opts.queue_buffers = plan.annotated_media_config.pre_queue_buffers;
+      auto artsp_st = g_annotated_rtsp->Start(build_result.value.pipeline,
+                                              &build_result.value.registry,
+                                              artsp_opts);
+      if (!artsp_st.ok) {
+        std::cerr << "[ANNOTATED_RTSP_DEGRADED] " << artsp_st.message
+                  << " — continuing without annotated RTSP output" << std::endl;
+        g_annotated_rtsp.reset();
+      } else {
+        std::cout << "[ANNOTATED_RTSP_READY] rtsp://"
+                  << artsp_opts.bind_address << ":" << artsp_opts.port
+                  << artsp_opts.mount_prefix << "{camera_id}" << std::endl;
+      }
+    }
+#endif
+
     GstBus* bus = gst_element_get_bus(build_result.value.pipeline);
     const gint64 deadline = args.run_forever
         ? 0
@@ -1022,6 +1075,17 @@ int main(int argc, char** argv) {
     } else {
       std::cout << "[INFO] Stopping pipeline..." << std::endl;
     }
+
+    // --- Shutdown the annotated RTSP server BEFORE WebRTC/pipeline teardown --
+    // Order (expert requirement): RTSP detach + branch unload → WebRTC
+    // sessions → pipeline teardown.
+#ifdef HAVE_ANNOTATED_RTSP
+    if (g_annotated_rtsp) {
+      std::cout << "[INFO] Stopping annotated RTSP server..." << std::endl;
+      g_annotated_rtsp->Stop();
+      g_annotated_rtsp.reset();
+    }
+#endif
 
     // --- Shutdown WebRTC sessions BEFORE pipeline teardown ---
 #ifdef HAVE_WEBRTC

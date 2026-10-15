@@ -26,6 +26,11 @@ struct GstPipelineBuildOptions {
 
   // WebRTC: add annotated preview branch (overlay→demux→per-cam enc→tee_webrtc)
   bool enable_webrtc = false;
+
+  // Annotated RTSP: keep one always-on encode chain per camera and publish
+  // the annotated H.264 over the in-process RTSP server (AnnotatedRtspServer).
+  // When false (default) the builder topology is byte-identical to legacy.
+  bool enable_annotated_rtsp = false;
 };
 
 struct GstPipelineBuildResult {

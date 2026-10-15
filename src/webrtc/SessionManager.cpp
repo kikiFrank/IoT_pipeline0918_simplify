@@ -1443,6 +1443,15 @@ void SessionManager::Shutdown() {
    * valid — the dynamic encoder chains must not be left to the pipeline
    * NULL phase (pad-mutex deadlock). GStreamer calls run outside mu_. */
   for (auto& cam : enc_cams) {
+    if (registry_ && registry_->builder_static_webrtc_cams.count(cam)) {
+      // Builder-static chain (e.g. annotated RTSP mode) — NOT SessionManager-
+      // owned: tearing it down here while the pipeline is still PLAYING makes
+      // the demux push into unlinked branches (not-linked spam). It is
+      // released together with the pipeline at the NULL transition.
+      std::cout << "[CP05-TD] Shutdown skip static builder chain cam=" << cam
+                << " (released at pipeline NULL)" << std::endl;
+      continue;
+    }
     std::cout << "[CP05-TD] Shutdown teardown begin cam=" << cam << std::endl;
     TeardownEncoderChain(cam);
     std::cout << "[CP05-TD] Shutdown teardown done cam=" << cam << std::endl;

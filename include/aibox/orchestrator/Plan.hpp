@@ -367,6 +367,7 @@ struct ExecutionPlan {
 
   FacePlan         face_plan;  // face detection overlay (optional)
   WebrtcGlobalConfig webrtc_config;  // copied from SnapshotConfig.global.webrtc
+  AnnotatedMediaConfig annotated_media_config;  // copied from SnapshotConfig.global.annotated_media
 };
 
 }  // namespace aibox::pipeline

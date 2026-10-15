@@ -9,5 +9,5 @@ runtime_plugins.bak_pre_phase2/
 # Runtime state
 runtime_registry/
 output/
-media/
+/media/
 *.log

@@ -98,6 +98,11 @@ struct RuntimeRegistry {
   // WebRTC: per-camera annotated preview elements (demux → enc → tee_webrtc)
   // Keyed by real camera_id (after aiboxstreamdemux / aiboxcamsplit split)
   std::unordered_map<CameraId, GstElement*> webrtc_tee_by_camera;
+  // Builder-created static annotated chains (full enc chain built at build
+  // time, e.g. annotated RTSP mode). SessionManager::Shutdown must skip these
+  // — they are owned by the pipeline and released at pipeline NULL; only
+  // session-dynamic chains are SessionManager-owned.
+  std::unordered_map<CameraId, bool> builder_static_webrtc_cams;
   std::unordered_map<CameraId, GstElement*> webrtc_encoder_by_camera;
   std::unordered_map<CameraId, GstElement*> webrtc_h264parse_by_camera;
   std::unordered_map<CameraId, GstElement*> webrtc_capsfilter_by_camera;

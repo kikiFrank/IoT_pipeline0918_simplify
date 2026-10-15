@@ -244,6 +244,34 @@ Status TxtSnapshotLoader::ParseWebrtcGlobal(const IniSection& sec, WebrtcGlobalC
   return Status::Ok();
 }
 
+Status TxtSnapshotLoader::ParseAnnotatedMediaGlobal(const IniSection& sec,
+                                                    AnnotatedMediaConfig* cfg) const {
+  cfg->enabled           = ParseBool(GetEntryVal(sec, "enabled", "0"));
+  cfg->bind_address      = GetEntryVal(sec, "bind", "127.0.0.1");
+  cfg->port              = ParseInt(GetEntryVal(sec, "port"), 8555);
+  cfg->mount_prefix      = GetEntryVal(sec, "mount_prefix", "/cam/");
+  cfg->pre_queue_buffers = ParseInt(GetEntryVal(sec, "pre_queue_buffers"), 30);
+  if (!cfg->enabled) return Status::Ok();  // disabled: keep parsing lenient
+  if (cfg->port < 1 || cfg->port > 65535)
+    return Status::Error("ANNOTATED_MEDIA_BAD_PORT",
+                         "port out of range: " + std::to_string(cfg->port));
+  if (cfg->pre_queue_buffers < 1 || cfg->pre_queue_buffers > 1000)
+    return Status::Error("ANNOTATED_MEDIA_BAD_QUEUE",
+                         "pre_queue_buffers out of range: " +
+                             std::to_string(cfg->pre_queue_buffers));
+  if (cfg->mount_prefix.size() < 2 || cfg->mount_prefix.front() != '/' ||
+      cfg->mount_prefix.back() != '/')
+    return Status::Error("ANNOTATED_MEDIA_BAD_PREFIX",
+                         "mount_prefix must start and end with '/': " +
+                             cfg->mount_prefix);
+  if (cfg->bind_address.rfind("127.", 0) != 0 &&
+      cfg->bind_address != "localhost")
+    return Status::Error("ANNOTATED_MEDIA_BAD_BIND",
+                         "bind must be loopback (127.x/localhost), got: " +
+                             cfg->bind_address);
+  return Status::Ok();
+}
+
 Status TxtSnapshotLoader::ParseWebrtcStream(const IniSection& sec, WebrtcStreamConfig* cfg) const {
   cfg->enabled      = ParseBool(GetEntryVal(sec, "enabled", "0"));
   cfg->max_sessions = ParseInt(GetEntryVal(sec, "max_sessions"), 2);
@@ -451,6 +479,12 @@ Result<SnapshotConfig> TxtSnapshotLoader::Load(const FilePath& snapshot_path) co
 
   sec = FindSection(ini, "webrtc");
   if (sec) ParseWebrtcGlobal(*sec, &config.global.webrtc);
+
+  sec = FindSection(ini, "annotated_media");
+  if (sec) {
+    Status st = ParseAnnotatedMediaGlobal(*sec, &config.global.annotated_media);
+    if (!st.ok) return {st, SnapshotConfig{}};
+  }
 
   // --- face detection (optional [face] section) ---
   sec = FindSection(ini, "face");

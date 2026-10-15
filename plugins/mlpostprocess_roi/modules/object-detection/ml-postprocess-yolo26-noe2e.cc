@@ -1,0 +1,315 @@
+/*
+ * YOLO26 No-E2E (raw head) post-processing module.
+ *
+ * Target model: yolo26s W8A16 HTP BIN (yolo26s_w8a16_1013.bin)
+ * Single output tensor:
+ *   output0  [1, 14, 8400]  FP16, channel-major
+ *     rows 0..3   : cx, cy, w, h in 640x640 input space
+ *     rows 4..13  : 10-class scores (sigmoid); class = argmax, conf = max
+ *
+ * NOTE: output0 is QNN_DATATYPE_FLOAT_16. The system qtimlqnn engine has no
+ * FLOAT16 branch in convert_to_float(), so the buffer is left as raw fp16
+ * bytes (and the negotiated caps type is forced to FLOAT32). We therefore
+ * read the data as __fp16 directly. dimensions[] are element counts
+ * (dtype-independent), so they stay [1,14,8400].
+ *
+ * NMS / TopK / region-transform logic is reused from
+ * ml-postprocess-yolo26-otm.cc.
+ */
+
+#include "ml-postprocess-yolo26-noe2e.h"
+
+#include <algorithm>
+#include <cmath>
+
+static const float    kDefaultThreshold      = 0.40;
+static const float    kDefaultNmsThreshold   = 0.45;
+static const uint32_t kDefaultMaxDetections  = 300;
+static const uint32_t kDefaultPreNmsTopK     = 3000;
+static const uint32_t kDefaultNumClasses     = 10;
+
+static const std::string kModuleCaps = R"(
+{
+  "type": "object-detection",
+  "tensors": [
+    {
+      "format": ["FLOAT32"],
+      "dimensions": [
+        [1, 14, 8400]
+      ]
+    }
+  ]
+}
+)";
+
+Module::Module(LogCallback cb)
+    : logger_(cb),
+      threshold_(kDefaultThreshold),
+      nms_threshold_(kDefaultNmsThreshold),
+      max_detections_(kDefaultMaxDetections),
+      pre_nms_topk_(kDefaultPreNmsTopK),
+      num_classes_(kDefaultNumClasses) {
+}
+
+void Module::TransformDimensions(ObjectDetection &box,
+                                 const Region& region) {
+  box.top    = (box.top    - region.y) / region.height;
+  box.bottom = (box.bottom - region.y) / region.height;
+  box.left   = (box.left   - region.x) / region.width;
+  box.right  = (box.right  - region.x) / region.width;
+}
+
+std::string Module::Caps() {
+  return kModuleCaps;
+}
+
+bool Module::Configure(const std::string& labels_file,
+                       const std::string& json_settings) {
+
+  if (!labels_parser_.LoadFromFile(labels_file)) {
+    LOG(logger_, kError, "Failed to parse labels");
+    return false;
+  }
+
+  // Class count follows the labels file (10 for this model); keeps the
+  // module generic if the label set ever changes.
+  const int32_t label_count = labels_parser_.Size();
+  if (label_count > 0)
+    num_classes_ = static_cast<uint32_t>(label_count);
+
+  if (!json_settings.empty()) {
+    auto root = JsonValue::Parse(json_settings);
+
+    if (!root || root->GetType() != JsonType::Object)
+      return false;
+
+    const auto& obj = root->GetObject();
+    if (obj.count("confidence"))     threshold_      = root->GetNumber("confidence") / 100.0;
+    if (obj.count("nms"))            nms_threshold_  = root->GetNumber("nms") / 100.0;
+    if (obj.count("max-detections")) max_detections_ = static_cast<uint32_t>(root->GetNumber("max-detections"));
+    if (obj.count("pre-nms-topk"))   pre_nms_topk_   = static_cast<uint32_t>(root->GetNumber("pre-nms-topk"));
+  }
+
+  LOG(logger_, kLog,
+      "YOLO26-NoE2E config: threshold=%.2f nms=%.2f max_det=%u topk=%u classes=%u",
+      threshold_, nms_threshold_, max_detections_, pre_nms_topk_, num_classes_);
+
+  return true;
+}
+
+bool Module::Process(const Tensors& tensors, Dictionary& mlparams,
+                     std::any& output) {
+
+  if (output.type() != typeid(ObjectDetections)) {
+    LOG(logger_, kError, "Unexpected output type!");
+    return false;
+  }
+
+  ObjectDetections& detections =
+      std::any_cast<ObjectDetections&>(output);
+
+  /* ----- Tensor validation ----- */
+  if (tensors.size() != 1) {
+    LOG(logger_, kError,
+        "YOLO26-NoE2E expects exactly 1 tensor (output0 [1,14,8400]), got %u",
+        static_cast<unsigned>(tensors.size()));
+    return false;
+  }
+
+  if (!MatchTensorShape(tensors[0], 4 + num_classes_, 8400)) {
+    LOG(logger_, kError,
+        "YOLO26-NoE2E: cannot identify output0 as [1,%u,8400] (dims[%u,%u,%u])",
+        static_cast<unsigned>(4 + num_classes_),
+        tensors[0].dimensions.size() > 0 ? tensors[0].dimensions[0] : 0,
+        tensors[0].dimensions.size() > 1 ? tensors[0].dimensions[1] : 0,
+        tensors[0].dimensions.size() > 2 ? tensors[0].dimensions[2] : 0);
+    return false;
+  }
+
+  /* ----- Read raw FP16 data ----- */
+  const __fp16* data = static_cast<const __fp16*>(tensors[0].data);
+
+  auto region_it = mlparams.find("input-tensor-region");
+  if (region_it == mlparams.end()) {
+    LOG(logger_, kError, "Missing 'input-tensor-region' in mlparams");
+    return false;
+  }
+  const auto* region_ptr = std::any_cast<Region>(&region_it->second);
+  if (!region_ptr) {
+    LOG(logger_, kError, "'input-tensor-region' is not a Region");
+    return false;
+  }
+  Region& region = const_cast<Region&>(*region_ptr);
+
+  constexpr uint32_t kNumPredictions = 8400;
+
+  /* ----- Parse candidates: argmax + xywh->xyxy + confidence filter ----- */
+  std::vector<Candidate> candidates;
+
+  for (uint32_t i = 0; i < kNumPredictions; i++) {
+    /* Channel-major single tensor [1,14,8400]:
+     * rows 0..3 = box (cx,cy,w,h), rows 4..(4+classes-1) = class scores. */
+    float cx = static_cast<float>(data[0 * kNumPredictions + i]);
+    float cy = static_cast<float>(data[1 * kNumPredictions + i]);
+    float w  = static_cast<float>(data[2 * kNumPredictions + i]);
+    float h  = static_cast<float>(data[3 * kNumPredictions + i]);
+
+    /* Class-major scores: argmax over num_classes_ */
+    uint32_t class_id = 0;
+    float confidence = static_cast<float>(data[(4 + 0) * kNumPredictions + i]);
+
+    for (uint32_t c = 1; c < num_classes_; c++) {
+      float value = static_cast<float>(data[(4 + c) * kNumPredictions + i]);
+      if (value > confidence) {
+        confidence = value;
+        class_id = c;
+      }
+    }
+
+    if (confidence < threshold_)
+      continue;
+
+    /* xywh -> xyxy */
+    float left   = cx - w / 2.0f;
+    float top    = cy - h / 2.0f;
+    float right  = cx + w / 2.0f;
+    float bottom = cy + h / 2.0f;
+
+    /* Discard invalid boxes */
+    if (right <= left || bottom <= top)
+      continue;
+    if (!std::isfinite(left) || !std::isfinite(top) ||
+        !std::isfinite(right) || !std::isfinite(bottom))
+      continue;
+
+    candidates.push_back({left, top, right, bottom, confidence, class_id});
+  }
+
+  LOG(logger_, kLog, "YOLO26-NoE2E: %u candidates above threshold %.2f",
+      static_cast<unsigned>(candidates.size()), threshold_);
+
+  if (candidates.empty())
+    return true;
+
+  /* ----- Sort by confidence descending, apply pre-NMS TopK ----- */
+  std::sort(candidates.begin(), candidates.end(),
+            [](const Candidate& a, const Candidate& b) {
+              return a.confidence > b.confidence;
+            });
+
+  if (candidates.size() > pre_nms_topk_)
+    candidates.resize(pre_nms_topk_);
+
+  /* ----- Class-wise NMS ----- */
+  candidates = NmsClassWise(std::move(candidates));
+
+  LOG(logger_, kLog, "YOLO26-NoE2E: %u candidates after NMS",
+      static_cast<unsigned>(candidates.size()));
+
+  /* ----- Final sort + limit ----- */
+  std::sort(candidates.begin(), candidates.end(),
+            [](const Candidate& a, const Candidate& b) {
+              return a.confidence > b.confidence;
+            });
+
+  if (candidates.size() > max_detections_)
+    candidates.resize(max_detections_);
+
+  /* ----- Convert to ObjectDetection with Region transform ----- */
+  for (const auto& c : candidates) {
+    ObjectDetection entry;
+    entry.left   = std::max(c.left,   static_cast<float>(region.x));
+    entry.top    = std::max(c.top,    static_cast<float>(region.y));
+    entry.right  = std::min(c.right,  static_cast<float>(region.x + region.width));
+    entry.bottom = std::min(c.bottom, static_cast<float>(region.y + region.height));
+
+    TransformDimensions(entry, region);
+
+    entry.left   = std::clamp(entry.left,   0.0f, 1.0f);
+    entry.top    = std::clamp(entry.top,    0.0f, 1.0f);
+    entry.right  = std::clamp(entry.right,  0.0f, 1.0f);
+    entry.bottom = std::clamp(entry.bottom, 0.0f, 1.0f);
+
+    if (entry.right <= entry.left || entry.bottom <= entry.top)
+      continue;
+
+    entry.confidence = c.confidence * 100.0f;
+    entry.name  = labels_parser_.GetLabel(c.class_id);
+    entry.color = labels_parser_.GetColor(c.class_id);
+
+    LOG(logger_, kTrace, "Label: %s Confidence: %.2f Box[%.3f, %.3f, %.3f, %.3f]",
+        entry.name.c_str(), entry.confidence,
+        entry.top, entry.left, entry.bottom, entry.right);
+
+    detections.emplace_back(std::move(entry));
+  }
+
+  return true;
+}
+
+/* ---- Private helpers ---- */
+
+float Module::IoU(const Candidate& a, const Candidate& b) const {
+  float w = std::min(a.right, b.right) - std::max(a.left, b.left);
+  if (w <= 0.0f) return 0.0f;
+  float h = std::min(a.bottom, b.bottom) - std::max(a.top, b.top);
+  if (h <= 0.0f) return 0.0f;
+  float inter = w * h;
+  float area_a = (a.right - a.left) * (a.bottom - a.top);
+  float area_b = (b.right - b.left) * (b.bottom - b.top);
+  return inter / (area_a + area_b - inter);
+}
+
+std::vector<Module::Candidate> Module::NmsClassWise(
+    std::vector<Candidate> candidates) const {
+  /* Candidates are already sorted by confidence descending.
+   * Group by class_id, then greedy NMS per class. */
+
+  // Find unique class IDs
+  std::vector<uint32_t> class_ids;
+  for (const auto& c : candidates) {
+    if (std::find(class_ids.begin(), class_ids.end(), c.class_id)
+        == class_ids.end()) {
+      class_ids.push_back(c.class_id);
+    }
+  }
+
+  std::vector<Candidate> kept_all;
+
+  for (uint32_t cls : class_ids) {
+    std::vector<Candidate> kept_cls;
+
+    for (const auto& c : candidates) {
+      if (c.class_id != cls)
+        continue;
+
+      bool suppress = false;
+      for (const auto& k : kept_cls) {
+        if (IoU(c, k) >= nms_threshold_) {
+          suppress = true;
+          break;
+        }
+      }
+
+      if (!suppress)
+        kept_cls.push_back(c);
+    }
+
+    kept_all.insert(kept_all.end(), kept_cls.begin(), kept_cls.end());
+  }
+
+  return kept_all;
+}
+
+bool Module::MatchTensorShape(const Tensor& tensor,
+                              uint32_t channels,
+                              uint32_t predictions) const {
+  return tensor.dimensions.size() == 3 &&
+         tensor.dimensions[0] == 1 &&
+         tensor.dimensions[1] == channels &&
+         tensor.dimensions[2] == predictions;
+}
+
+IModule* NewModule(LogCallback logger) {
+  return new Module(logger);
+}

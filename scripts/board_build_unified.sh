@@ -150,6 +150,12 @@ if ! gst-inspect-1.0 qtimlpostprocess_roi 2>/dev/null | grep -q 'yolo26-obb'; th
   exit 14
 fi
 echo INSPECT_roi_yolo26_obb=OK
+# yolo26-noe2e is dlopen'd from GST_ML_MODULES_DIR; gate on it explicitly.
+if ! gst-inspect-1.0 qtimlpostprocess_roi 2>/dev/null | grep -q 'yolo26-noe2e'; then
+  echo INSPECT_ROI_MISSING_YOLO26_NOE2E
+  exit 15
+fi
+echo INSPECT_roi_yolo26_noe2e=OK
 echo "RUNTIME_PLUGINS=$RP"
 echo "FRAMEMETA_STAGING=$STAGING"
 ls -la "$RP"/libgst*.so 2>/dev/null || true

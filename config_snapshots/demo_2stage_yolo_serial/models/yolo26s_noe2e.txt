@@ -1,0 +1,47 @@
+[model]
+model_id=yolo26s_noe2e
+name=YOLO26s 10-Class Detector (W8A16, no-e2e, HTP)
+framework=qnn
+backend=htp
+model_path=../data/models/yolo26s_w8a16_1013.bin
+labels_path=../config_snapshots/demo_2stage_yolo_serial/labels/edgeyoloq_10class_labels.json
+batch=1
+
+[input]
+name=images
+layout=NHWC
+width=640
+height=640
+channels=3
+dtype=float16
+
+[preprocess]
+type=yolov26n_letterbox
+converter=qtimlvconverter
+image_disposition=centre
+subpixel_layout=reverse
+mean=
+# qtimlvconverter (gles) already normalizes FLOAT tensors to [0,1] by default.
+# An explicit sigma=255,255,255 caused double normalization (near-black input)
+# and silenced the detector on the board (2026-10-13). Leave sigma empty.
+sigma=
+output_tensor_type=float16
+
+engine=gles
+
+[output]
+name=output0
+shape=1,14,8400
+format=x1,y1,x2,y2,confidence,class_id
+dtype=float16
+class_count=10
+
+[postprocess]
+type=yolov26n_noe2e
+plugin=qtimlpostprocess_roi
+module=yolo26-noe2e
+confidence_thresh=0.4
+results=300
+coordinate_restore=letterbox
+person_only_boxes=false
+hide_person_label=false

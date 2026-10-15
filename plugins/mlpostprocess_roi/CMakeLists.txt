@@ -254,6 +254,33 @@ install(
 )
 
 # -------------------------------------------------------------------
+# YOLO26 No-E2E (raw head, single [1,14,8400] tensor) post-processing module
+# Produces: libml-postprocess-yolo26-noe2e.so  →  <GST_ML_MODULES_DIR>/
+# -------------------------------------------------------------------
+set(YOLO26_NOE2E_MODULE ml-postprocess-yolo26-noe2e)
+
+add_library(${YOLO26_NOE2E_MODULE} SHARED
+  modules/object-detection/ml-postprocess-yolo26-noe2e.cc
+)
+
+target_include_directories(${YOLO26_NOE2E_MODULE} PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/modules
+)
+
+set_target_properties(${YOLO26_NOE2E_MODULE} PROPERTIES
+  PREFIX "lib"
+  OUTPUT_NAME "${YOLO26_NOE2E_MODULE}"
+)
+
+install(
+  TARGETS ${YOLO26_NOE2E_MODULE}
+  LIBRARY DESTINATION ${GST_ML_MODULES_DIR_LOCAL}
+  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+              GROUP_EXECUTE GROUP_READ
+              WORLD_EXECUTE WORLD_READ
+)
+
+# -------------------------------------------------------------------
 # YOLO26 OBB (oriented bbox -> AABB) post-processing module
 # Produces: libml-postprocess-yolo26-obb.so  →  <GST_ML_MODULES_DIR>/
 # -------------------------------------------------------------------

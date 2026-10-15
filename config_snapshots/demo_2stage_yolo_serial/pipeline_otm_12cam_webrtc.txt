@@ -48,10 +48,10 @@ include=streams/cam-011-otm2.txt
 include=streams/cam-012-otm2.txt
 
 [algorithms]
-include=algorithms/edgeyoloq_10c_single.txt
+include=algorithms/yolo26s_noe2e_10c_face.txt
 
 [models]
-include=models/edgeyoloq_s_u8s8.txt
+include=models/yolo26s_noe2e.txt
 include=models/scrfd_face.txt
 
 [face]

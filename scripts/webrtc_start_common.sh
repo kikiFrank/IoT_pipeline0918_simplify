@@ -1,9 +1,9 @@
 #!/bin/bash
-# Shared WebRTC start body. Caller must set:
+# Shared pipeline start body. Caller must set:
 #   R SNAP OUT AGG_NEED LOG
 # and AIBOX_ROOT. No SIGKILL of a live pipeline.
-# Signaling is NATS-based (microservice peer); there is no static HTML page
-# and no :8080 web server in this package.
+# Output is the in-process annotated RTSP server on :8555; detection events
+# go to NATS (detection.frame). There is no static HTML page or :8080 server.
 set +e
 [ -n "${R:-}" ] || { echo COMMON_MISSING_R; exit 3; }
 cd "$R" || { echo ROOT_MISSING="$R"; exit 3; }
@@ -58,9 +58,8 @@ export AIBOX_GFX_EINVAL_WARN="${AIBOX_GFX_EINVAL_WARN:-1}"
 export AIBOX_VPU_RESET_POLICY="${AIBOX_VPU_RESET_POLICY:-if-needed}"
 export AIBOX_WESTON_RESET_POLICY="${AIBOX_WESTON_RESET_POLICY:-never}"
 export AIBOX_WEBRTC_SPLITTER=demux
-# NOTE: do NOT unset AIBOX_CAMSPLIT_MAX_ENC — an explicitly-set value selects
-# the STATIC encoder path (all chains built before PLAYING); sessions must
-# never trigger dynamic BuildEncoderChain.
+# NOTE: AIBOX_CAMSPLIT_MAX_ENC is ignored in annotated RTSP mode; all cameras
+# get a persistent static encoder chain before PLAYING.
 # shellcheck disable=SC1091
 . "$R/scripts/vpu_health.sh"
 
@@ -73,7 +72,6 @@ if pgrep -f aibox_stream_pipeline_demo >/dev/null; then
 fi
 
 ss -ltn | grep -q ':4222 ' || { echo NATS_4222_FAIL; exit 5; }
-ss -ltn | grep -q ':8443 ' || { echo NATS_8443_FAIL; exit 5; }
 echo NATS_OK
 
 # Expert P0 gate (2026-09-06): graphics runtime fail-fast, see

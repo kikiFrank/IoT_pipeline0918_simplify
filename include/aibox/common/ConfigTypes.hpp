@@ -28,22 +28,10 @@ struct PipelineOutputConfig {
 // GlobalConfig
 // ===================================================================
 // ===================================================================
-// WebrtcGlobalConfig — [webrtc] section, pipeline-wide
-// NOTE: stun/turn are NOT here; they arrive per-session via
-//       session.new.ice_servers[] at runtime.
-// ===================================================================
-struct WebrtcGlobalConfig {
-  bool enabled                   = false;
-  int  ice_gathering_timeout_ms  = 10000;
-  int  max_sessions_per_camera   = 2;
-  int  offer_sla_ms              = 5000;
-};
-
-// ===================================================================
 // AnnotatedMediaConfig — [annotated_media] section, pipeline-wide
 // Publishes the per-camera encoded annotated H.264 over an in-process
 // RTSP server (rtsp://<bind>:<port><mount_prefix><camera_id>) fed by the
-// existing tee_webrtc encode chains. enabled=0 (default) keeps the legacy
+// builder's tee_webrtc encode chains. enabled=0 (default) keeps the legacy
 // behavior byte-identical.
 // ===================================================================
 struct AnnotatedMediaConfig {
@@ -64,7 +52,6 @@ struct GlobalConfig {
   int         soc_id          = 77;
   int         interval_ms     = 200;
 
-  WebrtcGlobalConfig webrtc;
   AnnotatedMediaConfig annotated_media;
 };
 
@@ -136,14 +123,6 @@ struct StreamInferenceConfig {
 };
 
 // ===================================================================
-// WebrtcStreamConfig — per-stream [webrtc] override
-// ===================================================================
-struct WebrtcStreamConfig {
-  bool enabled      = false;
-  int  max_sessions = 2;
-};
-
-// ===================================================================
 // StreamConfig
 // ===================================================================
 struct StreamConfig {
@@ -156,7 +135,6 @@ struct StreamConfig {
 
   DecodeConfig           decode;
   StreamInferenceConfig  inference;
-  WebrtcStreamConfig     webrtc;
 };
 
 // ===================================================================
@@ -328,9 +306,6 @@ struct SnapshotConfig {
     std::string attach     = "pre_overlay";
     std::string draw       = "mask_white";
   } face;
-
-  // Convenience: whether any stream has webrtc enabled (set by orchestrator)
-  bool has_any_webrtc_stream = false;
 };
 
 }  // namespace aibox::pipeline

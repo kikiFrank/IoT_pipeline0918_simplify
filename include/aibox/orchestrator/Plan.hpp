@@ -75,10 +75,6 @@ struct StreamPlan {
   int              batch_stream_id = -1;
 
   bool preview_enabled = false;
-
-  // WebRTC (copied from WebrtcStreamConfig)
-  bool webrtc_enabled     = false;
-  int  webrtc_max_sessions = 2;
 };
 
 // ===================================================================
@@ -366,7 +362,6 @@ struct ExecutionPlan {
   ReloadPlan reload_plan;
 
   FacePlan         face_plan;  // face detection overlay (optional)
-  WebrtcGlobalConfig webrtc_config;  // copied from SnapshotConfig.global.webrtc
   AnnotatedMediaConfig annotated_media_config;  // copied from SnapshotConfig.global.annotated_media
 };
 

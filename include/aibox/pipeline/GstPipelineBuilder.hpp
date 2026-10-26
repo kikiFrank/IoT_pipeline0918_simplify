@@ -24,9 +24,6 @@ struct GstPipelineBuildOptions {
   int         mosaic_cols             = 4;     // 4 columns → 4x4 grid for 16 cams
   int         mosaic_fps              = 10;    // aiboxstreamdemux output-fps (stable PTS)
 
-  // WebRTC: add annotated preview branch (overlay→demux→per-cam enc→tee_webrtc)
-  bool enable_webrtc = false;
-
   // Annotated RTSP: keep one always-on encode chain per camera and publish
   // the annotated H.264 over the in-process RTSP server (AnnotatedRtspServer).
   // When false (default) the builder topology is byte-identical to legacy.
@@ -96,8 +93,9 @@ class GstPipelineBuilder {
                                    const std::vector<std::string>& camera_ids,
                                    RuntimeRegistry* reg) const;
 
-  // WebRTC: attach a per-group annotated-preview branch from tee_post
+  // Annotated RTSP: attach a per-group encode branch from tee_post
   //   tee_post src → aiboxstreamdemux → per-cam(enc→h264parse→tee_webrtc→fakesink)
+  // (historical name kept to minimize churn)
   Status BuildWebrtcAnnotatedBranch(GstElement* pipeline,
                                     GstElement* tee_post,
                                     const TimeMuxGroupPlan& tmux,
@@ -129,7 +127,7 @@ class GstPipelineBuilder {
       GstElement* pipeline, RuntimeRegistry* reg,
       std::unordered_map<CameraId, GstElement*>* stage_outputs) const;
 
-  // no-WebRTC FPS: src_pad → q_fps(buffers=4) → fpsdisplaysink(video-sink=fakesink)
+  // non-annotated FPS: src_pad → q_fps(buffers=4) → fpsdisplaysink(video-sink=fakesink)
   Status AttachFpsDisplaySink(GstElement* pipeline, GstPad* src_pad,
                               const std::string& camera_id,
                               const std::string& elem_suffix,
@@ -147,8 +145,8 @@ void CloseFpsCsv();
 void SnapshotFrameCounters(RuntimeRegistry& reg);
 
 // Attaches the shared per-camera OUT frame counter to an encoder src pad.
-// SessionManager (src/webrtc) builds the WebRTC per-cam encoder chain, so the
-// counter must be registered from there; the context type and probe callback
+// The annotated RTSP branches build the per-cam encoder chains, so the
+// counter is registered from the builder; the context type and probe callback
 // stay in this translation unit next to the IN counters. Counts real encoded
 // frames (not RTP packets) and feeds the "Frame Count Summary" OUT column.
 void AttachFrameCountOutProbe(GstElement* elem, const std::string& camera_id,

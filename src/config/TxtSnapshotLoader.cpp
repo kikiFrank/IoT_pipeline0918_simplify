@@ -234,16 +234,6 @@ Status TxtSnapshotLoader::ParseStreamInference(const IniSection& sec, StreamInfe
   return Status::Ok();
 }
 
-Status TxtSnapshotLoader::ParseWebrtcGlobal(const IniSection& sec, WebrtcGlobalConfig* cfg) const {
-  cfg->enabled                  = ParseBool(GetEntryVal(sec, "enabled", "0"));
-  cfg->ice_gathering_timeout_ms = ParseInt(GetEntryVal(sec, "ice_gathering_timeout_ms"), 10000);
-  cfg->max_sessions_per_camera  = ParseInt(GetEntryVal(sec, "max_sessions_per_camera"), 2);
-  cfg->offer_sla_ms             = ParseInt(GetEntryVal(sec, "offer_sla_ms"), 5000);
-  // NOTE: no stun_server / turn_server — those arrive per-session via
-  //       session.new.ice_servers[] at runtime.
-  return Status::Ok();
-}
-
 Status TxtSnapshotLoader::ParseAnnotatedMediaGlobal(const IniSection& sec,
                                                     AnnotatedMediaConfig* cfg) const {
   cfg->enabled           = ParseBool(GetEntryVal(sec, "enabled", "0"));
@@ -269,12 +259,6 @@ Status TxtSnapshotLoader::ParseAnnotatedMediaGlobal(const IniSection& sec,
     return Status::Error("ANNOTATED_MEDIA_BAD_BIND",
                          "bind must be loopback (127.x/localhost), got: " +
                              cfg->bind_address);
-  return Status::Ok();
-}
-
-Status TxtSnapshotLoader::ParseWebrtcStream(const IniSection& sec, WebrtcStreamConfig* cfg) const {
-  cfg->enabled      = ParseBool(GetEntryVal(sec, "enabled", "0"));
-  cfg->max_sessions = ParseInt(GetEntryVal(sec, "max_sessions"), 2);
   return Status::Ok();
 }
 
@@ -477,9 +461,6 @@ Result<SnapshotConfig> TxtSnapshotLoader::Load(const FilePath& snapshot_path) co
   sec = FindSection(ini, "pipeline_output");
   if (sec) ParsePipelineOutput(*sec, &config.output);
 
-  sec = FindSection(ini, "webrtc");
-  if (sec) ParseWebrtcGlobal(*sec, &config.global.webrtc);
-
   sec = FindSection(ini, "annotated_media");
   if (sec) {
     Status st = ParseAnnotatedMediaGlobal(*sec, &config.global.annotated_media);
@@ -508,9 +489,6 @@ Result<SnapshotConfig> TxtSnapshotLoader::Load(const FilePath& snapshot_path) co
     } else if (s.name == "inference") {
       if (!config.streams.empty())
         ParseStreamInference(s, &config.streams.back().inference);
-    } else if (s.name == "webrtc") {
-      if (!config.streams.empty())
-        ParseWebrtcStream(s, &config.streams.back().webrtc);
     }
   }
 
@@ -580,11 +558,6 @@ Result<SnapshotConfig> TxtSnapshotLoader::Load(const FilePath& snapshot_path) co
   // Validate minimal required fields
   if (config.streams.empty())
     return {Status::Error("TXT_NO_STREAMS", "no stream configurations found"), SnapshotConfig{}};
-
-  // Compute has_any_webrtc_stream for fast lookup
-  for (const auto& s : config.streams) {
-    if (s.webrtc.enabled) { config.has_any_webrtc_stream = true; break; }
-  }
 
   return {Status::Ok(), std::move(config)};
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
-# Build aibox_stream_pipeline_demo (WebRTC + detection.frame/media_ready) and
-# core plugins into runtime_plugins/. Run on board under AIBOX_ROOT.
+# Build aibox_stream_pipeline_demo (annotated RTSP + detection.frame/media_ready)
+# and core plugins into runtime_plugins/. Run on board under AIBOX_ROOT.
 # Does not reset VPU/Weston.
 set +e
 set -u
@@ -17,8 +17,8 @@ echo "AIBOX_ROOT=$AIBOX_ROOT NPROC=$NPROC"
 echo "== cmake configure build_unified =="
 cmake -S "$AIBOX_ROOT" -B "$AIBOX_ROOT/build_unified" \
   -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-  -DENABLE_WEBRTC=ON \
   -DENABLE_DETECTION_NATS=ON \
+  -DENABLE_ANNOTATED_RTSP=ON \
   -DBUILD_TESTING=OFF \
   2>&1 | tee "$OUT/cmake.log"
 if [ "${PIPESTATUS[0]}" -ne 0 ]; then

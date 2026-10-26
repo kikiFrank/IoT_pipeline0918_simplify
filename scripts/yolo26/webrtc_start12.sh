@@ -1,6 +1,6 @@
 #!/bin/bash
-# Start 12cam WebRTC with YOLOv26n OTM (same feature set as the 6cam entry).
-# Signaling goes over NATS to the microservice (no static HTML page).
+# Start 12cam annotated RTSP + YOLO26 detection (historical script name).
+# Output is the in-process RTSP server on :8555; detection goes over NATS.
 #
 # Self-locating: the project root is found by walking up from this script's own
 # directory, so the tree can be renamed, copied to another board, or run

@@ -26,12 +26,12 @@ namespace aibox::adapter {
 //   - Connect / Disconnect with built-in auto-reconnect (nats.c native)
 //   - Wildcard Subscribe / Unsubscribe
 //   - Publish (string + binary)
-//   - Thread-safe state queries (SessionManager gates new-session on this)
+//   - Thread-safe state queries
 //   - Pending-publish buffer when disconnected (drop-oldest, bounded)
 //
 // Design constraints (per plan v3):
-//   - NO exit(1) on disconnect — WebRTC signalling uses "buffer + reject"
-//     rather than killing the process
+//   - NO exit(1) on disconnect — publishers use "buffer + reject" rather
+//     than killing the process
 //   - Callbacks fire on NATS internal threads — callers MUST marshal to
 //     their own thread/serial-queue before touching GStreamer objects
 // =========================================================================
@@ -94,15 +94,14 @@ class NatsAdapter {
 
   State GetState() const;
 
-  // IsAvailable — true when the adapter is in a state where it can accept
-  // new WebRTC sessions (kConnected). SessionManager gates OnNewSession on
-  // this before allocating resources.
+  // IsAvailable — true when the adapter is connected (kConnected) and can
+  // accept publishes.
   bool IsAvailable() const;
 
   // --- pub/sub ---
 
   // Subscribe to a subject with an optional wildcard.
-  //   subject — e.g. "webrtc.cam.*.session.new"
+  //   subject — e.g. "detection.frame"
   //   handler — called for every matching message (from NATS thread!)
   // Returns true on success.
   bool Subscribe(const std::string& subject, MessageHandler handler);

@@ -17,7 +17,7 @@ namespace aibox::media {
 // Threading / lifecycle:
 //  - Start() runs on the main thread after the pipeline reached PLAYING and
 //    attaches the server to the process' DEFAULT GMainContext, which the
-//    WebRTC run loop already iterates — no second loop/thread by design.
+//    main run loop already iterates — no second loop/thread by design.
 //  - Sample fan-out (tee branch → appsink → per-client appsrc) runs on
 //    GStreamer streaming threads and is mutex-guarded.
 //  - Stop() closes clients, detaches the server, then unloads every branch

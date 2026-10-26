@@ -60,14 +60,8 @@ model_id=scrfd_2_5g
 attach=pre_overlay
 draw=mask_white
 
-[webrtc]
-enabled=1
-ice_gathering_timeout_ms=10000
-max_sessions_per_camera=2
-offer_sla_ms=5000
-
 [annotated_media]
-enabled=0
+enabled=1
 bind=127.0.0.1
 port=8555
 mount_prefix=/cam/

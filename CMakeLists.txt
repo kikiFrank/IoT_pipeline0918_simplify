@@ -12,12 +12,17 @@ pkg_check_modules(UUID      REQUIRED uuid)
 
 find_package(Threads REQUIRED)
 
-# --- WebRTC / NATS / detection.frame data plane ---
-option(ENABLE_WEBRTC "Build WebRTC support" OFF)
+# --- NATS / detection.frame / annotated RTSP data plane ---
+# Deprecated: legacy P2P WebRTC was removed. Accepted for script compatibility.
+option(ENABLE_WEBRTC "Deprecated: ignored; P2P WebRTC has been removed" OFF)
 option(ENABLE_DETECTION_NATS "Build IR-DATA-001 detection.frame Protobuf/NATS publisher" OFF)
-option(ENABLE_ANNOTATED_RTSP "Build annotated H.264 RTSP server output (needs ENABLE_WEBRTC for the shared GMainLoop)" OFF)
+option(ENABLE_ANNOTATED_RTSP "Build annotated H.264 RTSP server output" OFF)
 
-if(ENABLE_WEBRTC OR ENABLE_DETECTION_NATS)
+if(ENABLE_WEBRTC)
+    message(WARNING "ENABLE_WEBRTC is ignored: legacy P2P WebRTC has been removed")
+endif()
+
+if(ENABLE_DETECTION_NATS)
     pkg_check_modules(NATS REQUIRED libnats)
 endif()
 
@@ -32,16 +37,7 @@ if(ENABLE_DETECTION_NATS)
     target_link_libraries(imsdk_proto PUBLIC ${Protobuf_LIBRARIES})
 endif()
 
-if(ENABLE_WEBRTC)
-    pkg_check_modules(GST_WEBRTC gstreamer-webrtc-1.0>=1.16)
-    pkg_check_modules(GST_SDP   gstreamer-sdp-1.0>=1.16)
-    pkg_check_modules(GST_RTP   gstreamer-rtp-1.0>=1.16)
-endif()
-
 if(ENABLE_ANNOTATED_RTSP)
-    if(NOT ENABLE_WEBRTC)
-        message(FATAL_ERROR "ENABLE_ANNOTATED_RTSP requires ENABLE_WEBRTC (shares its default GMainContext)")
-    endif()
     pkg_check_modules(GST_RTSP_SERVER REQUIRED gstreamer-rtsp-server-1.0>=1.16)
 endif()
 
@@ -81,18 +77,6 @@ if(ENABLE_DETECTION_NATS)
         src/media/AnomalySnapshotService.cpp)
 endif()
 
-if(ENABLE_WEBRTC)
-    if(NOT ENABLE_DETECTION_NATS)
-        list(APPEND MAIN_SOURCES src/adapter/NatsAdapter.cpp)
-    endif()
-    list(APPEND MAIN_SOURCES
-        src/webrtc/WebrtcPayload.cpp
-        src/webrtc/WebrtcSignaling.cpp
-        src/webrtc/WebRtcSession.cpp
-        src/webrtc/SessionManager.cpp
-        src/webrtc/WebrtcPadDump.cpp)
-endif()
-
 if(ENABLE_ANNOTATED_RTSP)
     list(APPEND MAIN_SOURCES src/media/AnnotatedRtspServer.cpp)
 endif()
@@ -116,26 +100,6 @@ set(MAIN_LIBS
     dl
 )
 
-if(ENABLE_WEBRTC)
-    if(NOT ENABLE_DETECTION_NATS)
-        list(APPEND MAIN_LIBS ${NATS_LIBRARIES})
-        target_include_directories(aibox_stream_pipeline_demo PRIVATE ${NATS_INCLUDE_DIRS})
-    endif()
-    if(GST_WEBRTC_FOUND)
-        list(APPEND MAIN_LIBS ${GST_WEBRTC_LIBRARIES})
-        target_include_directories(aibox_stream_pipeline_demo PRIVATE ${GST_WEBRTC_INCLUDE_DIRS})
-    endif()
-    if(GST_SDP_FOUND)
-        list(APPEND MAIN_LIBS ${GST_SDP_LIBRARIES})
-        target_include_directories(aibox_stream_pipeline_demo PRIVATE ${GST_SDP_INCLUDE_DIRS})
-    endif()
-    if(GST_RTP_FOUND)
-        list(APPEND MAIN_LIBS ${GST_RTP_LIBRARIES})
-        target_include_directories(aibox_stream_pipeline_demo PRIVATE ${GST_RTP_INCLUDE_DIRS})
-    endif()
-    target_compile_definitions(aibox_stream_pipeline_demo PRIVATE HAVE_WEBRTC=1)
-endif()
-
 if(ENABLE_DETECTION_NATS)
     list(APPEND MAIN_LIBS ${NATS_LIBRARIES} imsdk_proto)
     target_include_directories(aibox_stream_pipeline_demo PRIVATE
@@ -154,8 +118,8 @@ endif()
 target_link_libraries(aibox_stream_pipeline_demo ${MAIN_LIBS})
 
 # --- install ---
-# Unit-test and WebRTC harness targets removed with the test/ tree; the runtime
-# acceptance surface is scripts/yolo26/webrtc_start12.sh over NATS signaling.
+# Unit-test and P2P WebRTC harness targets were removed with the test/ tree;
+# the runtime acceptance surface is the annotated RTSP server on :8555.
 install(TARGETS aibox_stream_pipeline_demo
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )

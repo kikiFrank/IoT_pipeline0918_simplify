@@ -2,8 +2,10 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <cstdio>
 #include <functional>
 #include <sstream>
+#include <unordered_set>
 
 namespace aibox::pipeline {
 
@@ -24,14 +26,35 @@ Status PipelineOrchestrator::ValidateSnapshotConfig(
   if (config.algorithms.empty())
     return Status::Error("VAL_NO_ALGORITHMS", "no algorithms in config");
 
-  for (auto& s : config.streams) {
+  std::unordered_set<AlgorithmCode> known;
+  for (const auto& a : config.algorithms) known.insert(a.code);
+
+  int enabled_count = 0;
+  int offenders = 0;
+  std::ostringstream missing;
+  for (const auto& s : config.streams) {
+    if (!s.enabled) continue;
+    ++enabled_count;
     if (s.camera_id.empty())
       return Status::Error("VAL_EMPTY_CAMERA_ID", "empty camera_id");
     if (s.inference.algorithm.empty())
       return Status::Error("VAL_NO_ALGORITHM_REF",
                            "stream " + s.camera_id + " has no algorithm ref");
+    if (known.find(s.inference.algorithm) == known.end()) {
+      if (offenders++) missing << "; ";
+      missing << s.camera_id << " -> '" << s.inference.algorithm << "'";
+    }
   }
-
+  if (offenders > 0) {
+    return Status::Error(
+        "VAL_ALGO_REF_NOT_FOUND",
+        std::to_string(offenders) + " of " + std::to_string(enabled_count) +
+            " enabled stream(s) reference algorithm(s) not present in "
+            "included [algorithm] sections: " + missing.str());
+  }
+  if (enabled_count == 0)
+    return Status::Error("VAL_NO_ENABLED_STREAMS",
+                         "all streams are disabled; plan would be empty");
   return Status::Ok();
 }
 
@@ -144,6 +167,12 @@ std::vector<AlgorithmGroupPlan> PipelineOrchestrator::BuildAlgorithmGroups(
     auto sit = sig_map.find(s.inference.algorithm);
     if (sit != sig_map.end()) {
       sig_to_cameras[sit->second.signature_id].push_back(s.camera_id);
+    } else {
+      std::fprintf(stderr,
+                   "[Orchestrator] unresolved algorithm ref camera=%s "
+                   "algorithm=%s; stream dropped (validation should have "
+                   "rejected this)\n",
+                   s.camera_id.c_str(), s.inference.algorithm.c_str());
     }
   }
 
@@ -722,9 +751,6 @@ Result<ExecutionPlan> PipelineOrchestrator::BuildExecutionPlan(
                             ? ExecutionMode::kMultistreamBatch
                             : ExecutionMode::kTimeMux;
 
-  // --- webrtc_config (copy from global config) ---
-  plan.webrtc_config = config.global.webrtc;
-
   // --- annotated_media_config (copy from global config) ---
   plan.annotated_media_config = config.global.annotated_media;
 
@@ -745,15 +771,21 @@ Result<ExecutionPlan> PipelineOrchestrator::BuildExecutionPlan(
     sp.thresh         = s.inference.thresh;
     sp.drop_policy    = s.inference.drop_policy;
     sp.execution_mode = ExecutionMode::kTimeMux;
-    // WebRTC per-stream: inherit from global if not explicitly set per-stream.
-    // global.webrtc.enabled=1 implies all streams have webrtc unless overridden.
-    sp.webrtc_enabled      = s.webrtc.enabled || config.global.webrtc.enabled;
-    sp.webrtc_max_sessions = s.webrtc.max_sessions;
     plan.stream_plans.push_back(std::move(sp));
   }
 
   // --- algorithm_groups ---
   plan.algorithm_group_plans = BuildAlgorithmGroups(config, &plan.stream_plans);
+  const bool any_enabled = std::any_of(
+      config.streams.begin(), config.streams.end(),
+      [](const StreamConfig& s) { return s.enabled; });
+  if (any_enabled && plan.algorithm_group_plans.empty()) {
+    return {Status::Error(
+                "VAL_EMPTY_ALGORITHM_GROUPS",
+                "enabled streams produced zero algorithm groups; check stream "
+                "[inference].algorithm against included [algorithm].code"),
+            ExecutionPlan{}};
+  }
 
   // --- time_mux_groups + inference_chain + stage_plans ---
   std::unordered_map<AlgorithmCode, const AlgorithmConfig*> algo_map;

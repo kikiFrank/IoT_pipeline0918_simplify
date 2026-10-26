@@ -344,7 +344,7 @@ pipeline::Status AnnotatedRtspServer::Start(GstElement* pipeline,
   }
 
   self.server = server;
-  // Serve on the process' default GMainContext: the WebRTC run loop already
+  // Serve on the process' default GMainContext: the main run loop already
   // iterates it, so no second loop/thread is created (by design).
   self.server_source_id = gst_rtsp_server_attach(self.server, nullptr);
   if (self.server_source_id == 0) {

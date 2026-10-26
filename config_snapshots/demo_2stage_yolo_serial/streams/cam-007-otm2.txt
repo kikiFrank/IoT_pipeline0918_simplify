@@ -13,7 +13,7 @@ decoder=v4l2h264dec
 output_caps=video/x-raw,format=NV12
 
 [inference]
-algorithm=edgeyoloq_10c_single
+algorithm=yolo26s_noe2e_10c_face
 frequency=200
 thresh=0.5
 drop_policy=latest

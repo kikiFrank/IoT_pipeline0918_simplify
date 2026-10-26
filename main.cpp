@@ -24,12 +24,8 @@
 #include "aibox/publisher/JsonFileEventSink.hpp"
 #include "aibox/publisher/DetectionEventPublisher.hpp"
 
-#if defined(HAVE_WEBRTC) || defined(HAVE_DETECTION_NATS)
+#ifdef HAVE_DETECTION_NATS
 #include "aibox/adapter/NatsAdapter.hpp"
-#endif
-#ifdef HAVE_WEBRTC
-#include "aibox/webrtc/SessionManager.hpp"
-#include "aibox/webrtc/WebrtcPadDump.hpp"
 #endif
 #ifdef HAVE_ANNOTATED_RTSP
 #include "aibox/media/AnnotatedRtspServer.hpp"
@@ -243,24 +239,21 @@ static void PrintFrameCountSummary() {
   emit("TOTAL", tot_in, tot_out, (tot_in >= tot_out) ? (tot_in - tot_out) : 0);
 }
 
-#ifdef HAVE_WEBRTC
 // Phase C: runner/systemd maps these to Restart=on-failure.
 // 0 = clean (signal or --run-seconds deadline). Non-zero = supervised retry.
 enum class RunExitReason : int {
   kOk = 0,
-  kCircuitBreaker = 2,
+  kCircuitBreaker = 2,  // reserved: legacy P2P encoder breaker was removed
   kSoftRtsp = 3,
   kBusError = 4,
   kEos = 5,
 };
 
-// CP04: run WebRTC control-plane work from the default GLib main context.
-// GStreamer streaming threads still emit their own signals, but all queued
-// session mutations are drained only by this source while the context is owned.
-struct WebrtcRunLoopContext {
+// The default GLib main context drives the GStreamer bus watch and the
+// in-process annotated RTSP server (gst_rtsp_server_attach).
+struct RunLoopContext {
   GMainLoop* loop = nullptr;
   GstElement* pipeline = nullptr;
-  aibox::webrtc::SessionManager* session_mgr = nullptr;
   gint64 deadline_us = 0;  // 0 = --run-forever (no wall-clock stop)
   bool tick_active = true;
   bool terminal_bus_message = false;
@@ -274,8 +267,8 @@ struct WebrtcRunLoopContext {
   gint64 last_soft_rtsp_mono_us = 0;
 };
 
-static gboolean WebrtcRunTick(gpointer user_data) {
-  auto* ctx = static_cast<WebrtcRunLoopContext*>(user_data);
+static gboolean RunLoopTick(gpointer user_data) {
+  auto* ctx = static_cast<RunLoopContext*>(user_data);
   if (g_interrupted) {
     ctx->tick_active = false;
     g_main_loop_quit(ctx->loop);
@@ -286,29 +279,12 @@ static gboolean WebrtcRunTick(gpointer user_data) {
     g_main_loop_quit(ctx->loop);
     return G_SOURCE_REMOVE;
   }
-  if (ctx->session_mgr) {
-    // Per-cam offer: always drain session queues. DoInit is capped at 1/tick
-    // inside ProcessAllQueues so a serial Venus first-frame wait is not
-    // starved, and READY cameras are not blocked behind another BUILDING cam.
-    ctx->session_mgr->ProcessAllQueues();
-    ctx->session_mgr->TickWatchdog();
-    // CP05-R1A: encoder stall circuit-breaker → orderly exit for runner.
-    if (ctx->session_mgr->ConsumeCircuitBreakerTrip()) {
-      std::cerr << "[ERROR] Encoder circuit-breaker tripped; quitting main "
-                   "loop for runner retry (no VPU reset)\n";
-      ctx->terminal_bus_message = true;
-      ctx->exit_reason = RunExitReason::kCircuitBreaker;
-      ctx->tick_active = false;
-      g_main_loop_quit(ctx->loop);
-      return G_SOURCE_REMOVE;
-    }
-  }
   return G_SOURCE_CONTINUE;
 }
 
-static gboolean WebrtcRunBusWatch(GstBus* /*bus*/, GstMessage* msg,
-                                  gpointer user_data) {
-  auto* ctx = static_cast<WebrtcRunLoopContext*>(user_data);
+static gboolean RunLoopBusWatch(GstBus* /*bus*/, GstMessage* msg,
+                                gpointer user_data) {
+  auto* ctx = static_cast<RunLoopContext*>(user_data);
   const GstMessageType type = GST_MESSAGE_TYPE(msg);
   const gchar* src_name = GST_MESSAGE_SRC(msg)
       ? GST_OBJECT_NAME(GST_MESSAGE_SRC(msg)) : nullptr;
@@ -431,38 +407,6 @@ static gboolean WebrtcRunBusWatch(GstBus* /*bus*/, GstMessage* msg,
   g_main_loop_quit(ctx->loop);
   return G_SOURCE_CONTINUE;
 }
-#endif
-
-/* Request pads obtained by the builder carry an owned reference.  Releasing
- * them explicitly, while the pipeline still owns the splitter and its children,
- * keeps teardown independent of GstElement's fallback dispose ordering. */
-static void ReleaseSplitterRequestPads(
-    aibox::pipeline::RuntimeRegistry& registry) {
-  const size_t count = registry.webrtc_splitter_src_by_camera.size();
-  if (count == 0) return;
-
-  std::cout << "[INFO] Releasing " << count
-            << " owned splitter request pad(s)..." << std::endl;
-  for (auto& kv : registry.webrtc_splitter_src_by_camera) {
-    GstPad* pad = kv.second;
-    if (!pad) continue;
-
-    GstPad* peer = gst_pad_get_peer(pad);
-    if (peer) {
-      gst_pad_unlink(pad, peer);
-      gst_object_unref(peer);
-    }
-    GstObject* parent = gst_object_get_parent(GST_OBJECT(pad));
-    if (parent && GST_IS_ELEMENT(parent))
-      gst_element_release_request_pad(GST_ELEMENT(parent), pad);
-    else
-      std::cerr << "[WARN] splitter request pad for " << kv.first
-                << " has no live element parent" << std::endl;
-    if (parent) gst_object_unref(parent);
-    gst_object_unref(pad);
-  }
-  registry.webrtc_splitter_src_by_camera.clear();
-}
 
 static void PrintBatchRuntimeStats(
     const aibox::pipeline::RuntimeRegistry& registry) {
@@ -516,8 +460,9 @@ static void ReleaseBatchRuntime(
   aibox::pipeline::ReleaseAllRequestPads(registry);
 }
 
-// Raise RLIMIT_NOFILE early: 9x webrtcbin + pipeline baseline exceeds
-// the default soft limit (1024) and aborts with GLib "Too many open files".
+// Raise RLIMIT_NOFILE early: 12 decoders + 12 annotated H.264 encoders +
+// RTSP clients exceed the default soft limit (1024) and would abort with
+// GLib "Too many open files".
 static void RaiseNofileLimit() {
   constexpr rlim_t kWant = 65536;
   struct rlimit rl {};
@@ -602,7 +547,8 @@ int main(int argc, char** argv) {
   aibox::pipeline::PipelineOrchestrator orchestrator;
   auto plan_result = orchestrator.BuildExecutionPlan(config);
   if (!plan_result.ok()) {
-    std::cerr << "[ERROR] Orchestrator failed: "
+    std::cerr << "[ERROR] Orchestrator failed ["
+              << plan_result.status.error_code << "]: "
               << plan_result.status.message << std::endl;
     return 1;
   }
@@ -655,12 +601,6 @@ int main(int argc, char** argv) {
   aibox::pipeline::GstPipelineBuildOptions build_opts;
   build_opts.enable_yolo_stages = true;  // P2/P3: YOLO stages enabled
 
-  // WebRTC: enable if configured in [webrtc] section
-  if (plan.webrtc_config.enabled) {
-    build_opts.enable_webrtc = true;
-    std::cout << "[INFO] WebRTC annotated preview enabled" << std::endl;
-  }
-
   // Annotated RTSP: enable if configured in [annotated_media] section
 #ifdef HAVE_ANNOTATED_RTSP
   if (plan.annotated_media_config.enabled) {
@@ -703,74 +643,6 @@ int main(int argc, char** argv) {
     return 1;
   }
   std::cout << "[INFO] GstPipeline built successfully (P1: mux + decode + fakesink)" << std::endl;
-
-  // --- WebRTC SessionManager (Phase 3+4) ---
-#ifdef HAVE_WEBRTC
-  std::unique_ptr<aibox::adapter::NatsAdapter> g_nats_adapter;
-  std::unique_ptr<aibox::webrtc::SessionManager> g_session_mgr;
-  bool nats_library_opened = false;
-  auto ShutdownWebrtcAndNats = [&] {
-    aibox::webrtc::UninstallWebrtcPadDumps();
-    if (g_session_mgr) {
-      g_session_mgr->Shutdown();
-      g_session_mgr.reset();
-    }
-    if (g_nats_adapter) {
-      g_nats_adapter->Disconnect();
-      g_nats_adapter.reset();
-    }
-    if (nats_library_opened) {
-      if (!aibox::adapter::NatsAdapter::CloseLibraryAndWait()) {
-        std::cerr << "[WARN] NATS internal threads did not stop cleanly"
-                  << std::endl;
-      }
-      nats_library_opened = false;
-    }
-  };
-
-  // Diagnostic pad dump (AIBOX_WEBRTC_PAD_DUMP=1); default OFF.
-  if (build_opts.enable_webrtc) {
-    aibox::webrtc::MaybeInstallWebrtcPadDumps(
-        build_result.value.pipeline, build_result.value.registry,
-        "./output/webrtc_pad_dump");
-  }
-
-  if (build_opts.enable_webrtc) {
-    // Init NATS adapter
-    g_nats_adapter.reset(new aibox::adapter::NatsAdapter());
-    aibox::adapter::NatsAdapter::Config nats_cfg;
-    nats_cfg.nats_url    = "nats://localhost:4222";
-    nats_cfg.client_name = "aibox-pipeline-webrtc";
-    nats_library_opened = true;
-    if (g_nats_adapter->Connect(nats_cfg)) {
-      // Init SessionManager
-      g_session_mgr.reset(new aibox::webrtc::SessionManager());
-      auto& reg = build_result.value.registry;
-      g_session_mgr->Init(build_result.value.pipeline, g_nats_adapter.get(),
-                          &reg);
-
-      // Register cameras: ready tees and/or lazy stubs
-      for (auto& kv : reg.webrtc_tee_by_camera) {
-        g_session_mgr->RegisterCamera(kv.first, kv.second);
-      }
-      for (auto& kv : reg.webrtc_stub_queue_by_camera) {
-        if (reg.webrtc_tee_by_camera.count(kv.first) == 0)
-          g_session_mgr->RegisterCamera(kv.first, nullptr);
-      }
-
-      // Subscribe NATS wildcards before PLAYING
-      if (!g_session_mgr->StartSignaling()) {
-        std::cerr << "[WARN] WebRTC signaling start failed — sessions disabled"
-                  << std::endl;
-        ShutdownWebrtcAndNats();
-      }
-    } else {
-      std::cerr << "[WARN] NATS connect failed — WebRTC sessions disabled"
-                << std::endl;
-      ShutdownWebrtcAndNats();
-    }
-  }
-#endif
 
   // --- Result aggregator: receives fused per-frame results from the terminal
   //     appsink and demultiplexes by camera_id (no C++ cross-stage join). ---
@@ -824,9 +696,6 @@ int main(int argc, char** argv) {
   // --- build-only early exit ---
   if (args.build_only) {
     std::cout << "[INFO] --build-only: pipeline built, cleaning up." << std::endl;
-#ifdef HAVE_WEBRTC
-    ShutdownWebrtcAndNats();
-#endif
     GstStateChangeReturn scr =
         gst_element_set_state(build_result.value.pipeline, GST_STATE_NULL);
     if (scr == GST_STATE_CHANGE_FAILURE)
@@ -834,12 +703,10 @@ int main(int argc, char** argv) {
     GstState st_cur = GST_STATE_VOID_PENDING;
     GstState st_pend = GST_STATE_VOID_PENDING;
     // NOTE: the 10s get_state timeout here CANNOT protect against a
-    // synchronously BLOCKING gst_element_set_state(NULL) above — get_state
-    // is never reached while set_state is wedged (e.g. on a pad mutex held
-    // by a live dynamic chain). Reliable teardown therefore depends on
-    // SessionManager::Shutdown() tearing down the dynamic encoder chains
-    // BEFORE the pipeline NULL phase; an out-of-process supervisor remains
-    // the final timeout guard against permanently-blocked vendor calls.
+    // synchronously BLOCKING gst_element_set_state(NULL) above. Annotated
+    // RTSP is not started in build-only mode; the static encode chains are
+    // pipeline-owned and released at pipeline NULL. An out-of-process
+    // supervisor remains the final timeout guard against blocked vendor calls.
     GstStateChangeReturn gsr = gst_element_get_state(
         build_result.value.pipeline, &st_cur, &st_pend, 10 * GST_SECOND);
     if (gsr != GST_STATE_CHANGE_SUCCESS || st_cur != GST_STATE_NULL)
@@ -850,7 +717,6 @@ int main(int argc, char** argv) {
 #ifdef HAVE_DETECTION_NATS
     aibox::detection::CaptureTimestampTracker::SetProcessInstance(nullptr);
 #endif
-    ReleaseSplitterRequestPads(build_result.value.registry);
     ReleaseBatchRuntime(build_result.value.registry);
     gst_object_unref(build_result.value.pipeline);
     return 0;
@@ -884,14 +750,10 @@ int main(int argc, char** argv) {
     if (!detection_nats.Connect(detection_nats_cfg)) {
       std::cerr << "[ERROR] Detection NATS connect failed: "
                 << detection_nats_cfg.nats_url << std::endl;
-#ifdef HAVE_WEBRTC
-      ShutdownWebrtcAndNats();
-#endif
       gst_element_set_state(build_result.value.pipeline, GST_STATE_NULL);
       PrintBatchRuntimeStats(build_result.value.registry);
       aibox::pipeline::PrepareBatchTeardown(build_result.value.registry);
       aibox::detection::CaptureTimestampTracker::SetProcessInstance(nullptr);
-      ReleaseSplitterRequestPads(build_result.value.registry);
       ReleaseBatchRuntime(build_result.value.registry);
       gst_object_unref(build_result.value.pipeline);
       return 23;
@@ -928,9 +790,11 @@ int main(int argc, char** argv) {
               << std::endl;
 #endif
 
-    const bool noweb_fps =
-        !build_opts.enable_webrtc && !args.record;
-    if (noweb_fps) {
+    // Must match GstPipelineBuilder's NowebFpsEnabled(): annotated RTSP and
+    // mosaic recording do not create the fpsdisplay branch.
+    const bool fps_csv_enabled =
+        !build_opts.enable_annotated_rtsp && !args.record;
+    if (fps_csv_enabled) {
       aibox::pipeline::OpenFpsCsv("./output/fps_per_camera.csv");
       std::cout << "[INFO] FPS CSV: ./output/fps_per_camera.csv" << std::endl;
     }
@@ -1036,61 +900,39 @@ int main(int argc, char** argv) {
         ? 0
         : g_get_monotonic_time() + (gint64)args.run_seconds * G_TIME_SPAN_SECOND;
 
-    int webrtc_exit = 0;
-#ifdef HAVE_WEBRTC
-    WebrtcRunLoopContext loop_ctx;
+    RunLoopContext loop_ctx;
     loop_ctx.loop = g_main_loop_new(nullptr, FALSE);
     loop_ctx.pipeline = build_result.value.pipeline;
-    loop_ctx.session_mgr = g_session_mgr.get();
     loop_ctx.deadline_us = deadline;
-    const guint bus_watch = gst_bus_add_watch(bus, &WebrtcRunBusWatch, &loop_ctx);
-    const guint tick_source = g_timeout_add(20, &WebrtcRunTick, &loop_ctx);
+    const guint bus_watch = gst_bus_add_watch(bus, &RunLoopBusWatch, &loop_ctx);
+    const guint tick_source = g_timeout_add(20, &RunLoopTick, &loop_ctx);
     g_main_loop_run(loop_ctx.loop);
     if (loop_ctx.tick_active) g_source_remove(tick_source);
     if (bus_watch) gst_bus_remove_watch(bus);
     g_main_loop_unref(loop_ctx.loop);
-    webrtc_exit = static_cast<int>(loop_ctx.exit_reason);
-#else
-    // Non-WebRTC builds retain a small bus poll loop for --run-seconds.
-    while (!g_interrupted &&
-           (deadline == 0 || g_get_monotonic_time() < deadline)) {
-      GstMessage* msg = gst_bus_timed_pop_filtered(
-          bus, 200 * GST_MSECOND,
-          (GstMessageType)(GST_MESSAGE_ERROR | GST_MESSAGE_EOS));
-      if (!msg) continue;
-      gst_message_unref(msg);
-      break;
-    }
-#endif
+    const int run_exit = static_cast<int>(loop_ctx.exit_reason);
     gst_object_unref(bus);
 
     int exit_code = 0;
     if (g_interrupted) {
       std::cout << "[INFO] Signal received, stopping pipeline..." << std::endl;
       exit_code = 0;
-    } else if (webrtc_exit != 0) {
-      exit_code = webrtc_exit;
+    } else if (run_exit != 0) {
+      exit_code = run_exit;
       std::cout << "[INFO] Stopping pipeline (exit_reason=" << exit_code
                 << ")..." << std::endl;
     } else {
       std::cout << "[INFO] Stopping pipeline..." << std::endl;
     }
 
-    // --- Shutdown the annotated RTSP server BEFORE WebRTC/pipeline teardown --
-    // Order (expert requirement): RTSP detach + branch unload → WebRTC
-    // sessions → pipeline teardown.
+    // --- Shutdown the annotated RTSP server BEFORE pipeline teardown ---
+    // Order: RTSP detach + branch unload → pipeline NULL.
 #ifdef HAVE_ANNOTATED_RTSP
     if (g_annotated_rtsp) {
       std::cout << "[INFO] Stopping annotated RTSP server..." << std::endl;
       g_annotated_rtsp->Stop();
       g_annotated_rtsp.reset();
     }
-#endif
-
-    // --- Shutdown WebRTC sessions BEFORE pipeline teardown ---
-#ifdef HAVE_WEBRTC
-    std::cout << "[INFO] Shutting down WebRTC sessions..." << std::endl;
-    ShutdownWebrtcAndNats();
 #endif
 
     // Send EOS so the recording muxer/filesink can finalize the MKV before
@@ -1170,7 +1012,7 @@ int main(int argc, char** argv) {
               << " build_failures=" << publisher.BuildFailures()
               << " sink_written=" << event_sink.Written() << std::endl;
 #endif
-#if defined(HAVE_DETECTION_NATS) && !defined(HAVE_WEBRTC)
+#ifdef HAVE_DETECTION_NATS
     if (!aibox::adapter::NatsAdapter::CloseLibraryAndWait()) {
       std::cerr << "[WARN] NATS internal threads did not stop cleanly"
                 << std::endl;
@@ -1180,7 +1022,6 @@ int main(int argc, char** argv) {
     aibox::detection::CaptureTimestampTracker::SetProcessInstance(nullptr);
 #endif
 
-    ReleaseSplitterRequestPads(build_result.value.registry);
     ReleaseBatchRuntime(build_result.value.registry);
     gst_object_unref(build_result.value.pipeline);
     PrintFrameCountSummary();
@@ -1191,9 +1032,6 @@ int main(int argc, char** argv) {
   }
 
   std::cout << "[INFO] AIBox Stream Pipeline Demo — all modules loaded." << std::endl;
-#ifdef HAVE_WEBRTC
-  ShutdownWebrtcAndNats();
-#endif
   gst_element_set_state(build_result.value.pipeline, GST_STATE_NULL);
   gst_element_get_state(build_result.value.pipeline, nullptr, nullptr,
                         10 * GST_SECOND);
@@ -1202,7 +1040,6 @@ int main(int argc, char** argv) {
 #ifdef HAVE_DETECTION_NATS
   aibox::detection::CaptureTimestampTracker::SetProcessInstance(nullptr);
 #endif
-  ReleaseSplitterRequestPads(build_result.value.registry);
   ReleaseBatchRuntime(build_result.value.registry);
   gst_object_unref(build_result.value.pipeline);
   return 0;

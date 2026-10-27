@@ -333,3 +333,61 @@ install(
               GROUP_EXECUTE GROUP_READ
               WORLD_EXECUTE WORLD_READ
 )
+
+# -------------------------------------------------------------------
+# SigLIP2 image-only embedding post-processing module
+# Produces: libml-postprocess-siglip2-image.so  →  <GST_ML_MODULES_DIR>/
+# -------------------------------------------------------------------
+set(SIGLIP2_IMAGE_MODULE ml-postprocess-siglip2-image)
+
+add_library(${SIGLIP2_IMAGE_MODULE} SHARED
+  modules/vision-language/ml-postprocess-siglip2-image.cc
+)
+
+target_include_directories(${SIGLIP2_IMAGE_MODULE} PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/modules
+)
+
+set_target_properties(${SIGLIP2_IMAGE_MODULE} PROPERTIES
+  PREFIX "lib"
+  OUTPUT_NAME "${SIGLIP2_IMAGE_MODULE}"
+)
+
+set_property(TARGET ${SIGLIP2_IMAGE_MODULE} PROPERTY CXX_STANDARD 17)
+
+install(
+  TARGETS ${SIGLIP2_IMAGE_MODULE}
+  LIBRARY DESTINATION ${GST_ML_MODULES_DIR_LOCAL}
+  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+              GROUP_EXECUTE GROUP_READ
+              WORLD_EXECUTE WORLD_READ
+)
+
+# -------------------------------------------------------------------
+# SigLIP2 text-encoder embedding post-processing module
+# Produces: libml-postprocess-siglip2-text.so  →  <GST_ML_MODULES_DIR>/
+# -------------------------------------------------------------------
+set(SIGLIP2_TEXT_MODULE ml-postprocess-siglip2-text)
+
+add_library(${SIGLIP2_TEXT_MODULE} SHARED
+  modules/vision-language/ml-postprocess-siglip2-text.cc
+)
+
+target_include_directories(${SIGLIP2_TEXT_MODULE} PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/modules
+)
+
+set_target_properties(${SIGLIP2_TEXT_MODULE} PROPERTIES
+  PREFIX "lib"
+  OUTPUT_NAME "${SIGLIP2_TEXT_MODULE}"
+)
+
+set_property(TARGET ${SIGLIP2_TEXT_MODULE} PROPERTY CXX_STANDARD 17)
+
+install(
+  TARGETS ${SIGLIP2_TEXT_MODULE}
+  LIBRARY DESTINATION ${GST_ML_MODULES_DIR_LOCAL}
+  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+              GROUP_EXECUTE GROUP_READ
+              WORLD_EXECUTE WORLD_READ
+)

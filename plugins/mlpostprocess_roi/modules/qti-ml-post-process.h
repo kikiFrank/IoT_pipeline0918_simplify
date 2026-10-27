@@ -444,6 +444,13 @@ typedef std::vector<ObjectDetection> ObjectDetections;
 // Information describing a group of prediction results from the same tensor batch.
 typedef std::vector<ObjectDetections> DetectionPrediction;
 
+// SigLIP2 image-only embedding output.
+struct ImageEmbedding {
+    std::vector<float> values;  // always 768, FP32, L2 normalized
+    float raw_l2_norm = 0.0f;
+};
+typedef std::vector<ImageEmbedding> EmbeddingPrediction;
+
 /** IModule
  *
  * ML post-processing module interface.

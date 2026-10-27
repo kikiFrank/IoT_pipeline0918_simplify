@@ -43,6 +43,9 @@
 #include <stdlib.h>
 #include <numeric>
 #include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <utility>
 
 #include <gst/ml/gstmlpool.h>
 #include <gst/ml/gstmlmeta.h>
@@ -99,6 +102,14 @@ G_DEFINE_TYPE (GstMLPostProcess, gst_ml_post_process,
     (type == g_quark_from_static_string (GST_TEXT_GENERATION_TYPE))
 #define GST_IS_TENSOR_TYPE(type) \
     (type == g_quark_from_static_string (GST_TENSOR_TYPE))
+
+#define GST_EMBEDDING_TYPE           "image-embedding"
+#define GST_TEXT_EMBEDDING_TYPE      "text-embedding"
+
+#define GST_IS_EMBEDDING_TYPE(type) \
+    (type == g_quark_from_static_string (GST_EMBEDDING_TYPE))
+#define GST_IS_TEXT_EMBEDDING_TYPE(type) \
+    (type == g_quark_from_static_string (GST_TEXT_EMBEDDING_TYPE))
 
 #define GST_ML_POST_PROCESS_TEXT_FORMATS \
     "{ utf8 }"
@@ -475,6 +486,45 @@ gst_ml_post_process_module_execute (GstMLPostProcess * postprocess,
 
   n_batch = gst_ml_post_process_effective_batch (postprocess);
 
+  if (GST_IS_EMBEDDING_TYPE (postprocess->type) ||
+      GST_IS_TEXT_EMBEDDING_TYPE (postprocess->type)) {
+    if (n_batch != 1 ||
+        GST_ML_FRAME_N_TENSORS (&mlframe) != 1 ||
+        GST_ML_FRAME_N_DIMENSIONS (&mlframe, 0) != 2 ||
+        GST_ML_FRAME_DIM (&mlframe, 0, 0) != 1 ||
+        GST_ML_FRAME_DIM (&mlframe, 0, 1) != 768) {
+      GST_ERROR_OBJECT (postprocess, "SigLIP2 requires one tensor [1,768]");
+      goto cleanup;
+    }
+
+    gsize bytes_per_element = 0;
+    switch (GST_ML_FRAME_TYPE (&mlframe)) {
+      case GST_ML_TYPE_FLOAT32:
+        bytes_per_element = 4;
+        break;
+      case GST_ML_TYPE_FLOAT16:
+      case GST_ML_TYPE_UINT16:
+      case GST_ML_TYPE_INT16:
+        bytes_per_element = 2;
+        break;
+      case GST_ML_TYPE_UINT8:
+      case GST_ML_TYPE_INT8:
+        bytes_per_element = 1;
+        break;
+      default:
+        break;
+    }
+
+    const gsize available = gst_buffer_get_size (buffer);
+    if (bytes_per_element == 0 || available < 768 * bytes_per_element) {
+      GST_ERROR_OBJECT (postprocess,
+          "SigLIP2 output storage truncated or dtype mismatch: "
+          "available=%" G_GSIZE_FORMAT " expected>=%" G_GSIZE_FORMAT,
+          available, 768 * bytes_per_element);
+      goto cleanup;
+    }
+  }
+
   // Iterate all batches and execute the process
   for (idx = 0; idx < n_batch; ++idx) {
     Tensors tensors;
@@ -498,6 +548,9 @@ gst_ml_post_process_module_execute (GstMLPostProcess * postprocess,
       predictions = PoseEstimations();
     } else if (GST_IS_TEXT_GENERATION_TYPE (postprocess->type)) {
       predictions = TextGenerations();
+    } else if (GST_IS_EMBEDDING_TYPE (postprocess->type) ||
+        GST_IS_TEXT_EMBEDDING_TYPE (postprocess->type)) {
+      predictions = ImageEmbedding();
     } else if (GST_IS_TENSOR_TYPE (postprocess->type)) {
       tensors = std::any_cast<Tensors>(output);
 
@@ -543,6 +596,10 @@ gst_ml_post_process_module_execute (GstMLPostProcess * postprocess,
       gst_ml_pose_estimation_sort_and_push (output, predictions);
     } else if (GST_IS_TEXT_GENERATION_TYPE (postprocess->type)) {
       gst_ml_text_generation_sort_and_push (output, predictions);
+    } else if (GST_IS_EMBEDDING_TYPE (postprocess->type) ||
+        GST_IS_TEXT_EMBEDDING_TYPE (postprocess->type)) {
+      std::any_cast<EmbeddingPrediction&>(output).push_back (
+          std::any_cast<ImageEmbedding>(std::move (predictions)));
     }
   }
 
@@ -2548,6 +2605,67 @@ gst_ml_video_post_process_change_state (GstElement * element,
   return ret;
 }
 
+static gboolean
+gst_ml_embedding_fill_text_output (GstMLPostProcess * postprocess,
+    std::any& output, GstBuffer * buffer)
+{
+  if (output.type() != typeid (EmbeddingPrediction)) {
+    GST_ERROR_OBJECT (postprocess, "Unexpected embedding output type");
+    return FALSE;
+  }
+
+  const auto& batches = std::any_cast<const EmbeddingPrediction&>(output);
+  if (batches.size() != 1 || batches[0].values.size() != 768) {
+    GST_ERROR_OBJECT (postprocess, "Expected exactly one 768D embedding");
+    return FALSE;
+  }
+
+  const auto& embedding = batches[0];
+  const gboolean is_text =
+      GST_IS_TEXT_EMBEDDING_TYPE (postprocess->type);
+  GString *string = g_string_sized_new (16384);
+  g_string_append_printf (string,
+      "{\"type\":\"%s\",\"schema\":\"%s\",\"dim\":768,",
+      is_text ? "text-embedding" : "image-embedding",
+      is_text ? "siglip2.text_embedding.v1" : "siglip2.image_embedding.v1");
+
+  if (GST_CLOCK_TIME_IS_VALID (GST_BUFFER_PTS (buffer))) {
+    g_string_append_printf (string, "\"pts_ns\":%" G_GUINT64_FORMAT ",",
+        GST_BUFFER_PTS (buffer));
+  } else {
+    g_string_append (string, "\"pts_ns\":null,");
+  }
+
+  gchar value[64];
+  g_ascii_dtostr (value, sizeof (value), (gdouble) embedding.raw_l2_norm);
+  g_string_append_printf (string, "\"raw_l2_norm\":%s,\"embedding\":[", value);
+
+  for (size_t i = 0; i < embedding.values.size(); ++i) {
+    if (!std::isfinite (embedding.values[i])) {
+      GST_ERROR_OBJECT (postprocess, "Non-finite embedding value");
+      g_string_free (string, TRUE);
+      return FALSE;
+    }
+    if (i != 0)
+      g_string_append_c (string, ',');
+    g_ascii_dtostr (value, sizeof (value), (gdouble) embedding.values[i]);
+    g_string_append (string, value);
+  }
+  g_string_append (string, "]}");
+
+  gchar *serialized = g_string_free (string, FALSE);
+  const gsize length = strlen (serialized) + 1;
+  GstMemory *memory = gst_memory_new_wrapped ((GstMemoryFlags) 0, serialized,
+      length, 0, length, serialized, g_free);
+  if (memory == NULL) {
+    g_free (serialized);
+    return FALSE;
+  }
+
+  gst_buffer_append_memory (buffer, memory);
+  return TRUE;
+}
+
 static GstFlowReturn
 gst_ml_post_process_transform (GstBaseTransform * base, GstBuffer * inbuffer,
     GstBuffer * outbuffer)
@@ -2574,6 +2692,9 @@ gst_ml_post_process_transform (GstBaseTransform * base, GstBuffer * inbuffer,
     output = PosePrediction ();
   } else if (GST_IS_TEXT_GENERATION_TYPE (postprocess->type)) {
     output = TextPrediction ();
+  } else if (GST_IS_EMBEDDING_TYPE (postprocess->type) ||
+      GST_IS_TEXT_EMBEDDING_TYPE (postprocess->type)) {
+    output = EmbeddingPrediction ();
   } else {
     GST_ERROR_OBJECT (postprocess, "Metadata-only output is unsupported for module type");
     return GST_FLOW_NOT_NEGOTIATED;
@@ -2594,6 +2715,9 @@ gst_ml_post_process_transform (GstBaseTransform * base, GstBuffer * inbuffer,
     success = gst_ml_audio_classification_fill_text_output (postprocess, output, outbuffer);
   } else if (GST_IS_POSE_TYPE (postprocess->type)) {
     success = gst_ml_video_pose_fill_text_output (postprocess, output, outbuffer);
+  } else if (GST_IS_EMBEDDING_TYPE (postprocess->type) ||
+      GST_IS_TEXT_EMBEDDING_TYPE (postprocess->type)) {
+    success = gst_ml_embedding_fill_text_output (postprocess, output, outbuffer);
   } else {
     success = gst_ml_text_generation_fill_text_output (postprocess, output, outbuffer);
   }

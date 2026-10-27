@@ -11,3 +11,6 @@ runtime_registry/
 output/
 /media/
 *.log
+
+# Local model artifacts
+data/models/siglip2/

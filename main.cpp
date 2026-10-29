@@ -21,16 +21,9 @@
 #include "aibox/pipeline/GstDotDumper.hpp"
 #include "aibox/pipeline/AppSinkCallbacks.hpp"
 #include "aibox/aggregator/ResultAggregator.hpp"
-#include "aibox/publisher/JsonFileEventSink.hpp"
-#include "aibox/publisher/DetectionEventPublisher.hpp"
 
-#ifdef HAVE_DETECTION_NATS
 #include "aibox/adapter/NatsAdapter.hpp"
-#endif
-#ifdef HAVE_ANNOTATED_RTSP
 #include "aibox/media/AnnotatedRtspServer.hpp"
-#endif
-#ifdef HAVE_DETECTION_NATS
 #include "aibox/detection/CaptureTimestampTracker.hpp"
 #include "aibox/detection/FrameEventPublisher.hpp"
 #include "aibox/detection/NatsFrameTransport.hpp"
@@ -41,7 +34,6 @@
 #include "aibox/media/NatsMediaReadyTransport.hpp"
 #include "aibox/media/SnapshotEncoder.hpp"
 #include "aibox/media/ThumbnailEncoder.hpp"
-#endif
 
 // ===================================================================
 // Argument parsing (simple, no external library)
@@ -154,7 +146,6 @@ static std::string GetExecutableDir() {
   return (slash == std::string::npos) ? std::string(".") : p.substr(0, slash);
 }
 
-#ifdef HAVE_DETECTION_NATS
 static std::string ResolveMediaDir(const std::string& arg_dir) {
   std::string dir = arg_dir;
   if (dir.empty()) {
@@ -174,7 +165,6 @@ static std::string ResolveMediaDir(const std::string& arg_dir) {
   if (realpath(dir.c_str(), resolved) != nullptr) return std::string(resolved);
   return dir;
 }
-#endif
 
 // 若 path 为相对路径, 以 base 为锚点解析为绝对路径; 已是绝对路径则原样返回。
 static std::string ResolveAgainstDir(const std::string& base,
@@ -609,7 +599,6 @@ int main(int argc, char** argv) {
   build_opts.enable_yolo_stages = true;  // P2/P3: YOLO stages enabled
 
   // Annotated RTSP: enable if configured in [annotated_media] section
-#ifdef HAVE_ANNOTATED_RTSP
   if (plan.annotated_media_config.enabled) {
     if (plan.execution_mode ==
         aibox::pipeline::ExecutionMode::kMultistreamBatch) {
@@ -624,12 +613,6 @@ int main(int argc, char** argv) {
               << plan.annotated_media_config.mount_prefix << "{camera_id})"
               << std::endl;
   }
-#else
-  if (plan.annotated_media_config.enabled) {
-    std::cerr << "[WARN] [annotated_media] enabled but build lacks "
-                 "HAVE_ANNOTATED_RTSP" << std::endl;
-  }
-#endif
 
   // Phase 5: mosaic recording
   if (args.record) {
@@ -655,10 +638,8 @@ int main(int argc, char** argv) {
   //     appsink and demultiplexes by camera_id (no C++ cross-stage join). ---
   static aibox::aggregator::ResultAggregator g_aggregator(
       aibox::aggregator::ResultAggregator::Options{});
-#ifdef HAVE_DETECTION_NATS
   aibox::detection::CaptureTimestampTracker capture_tracker;
   aibox::detection::CaptureTimestampTracker::SetProcessInstance(&capture_tracker);
-#endif
 
   // --- Register appsink callbacks ---
   auto& appsinks = build_result.value.registry.appsinks;
@@ -721,9 +702,7 @@ int main(int argc, char** argv) {
                 << std::endl;
     PrintBatchRuntimeStats(build_result.value.registry);
     aibox::pipeline::PrepareBatchTeardown(build_result.value.registry);
-#ifdef HAVE_DETECTION_NATS
     aibox::detection::CaptureTimestampTracker::SetProcessInstance(nullptr);
-#endif
     ReleaseBatchRuntime(build_result.value.registry);
     gst_object_unref(build_result.value.pipeline);
     return 0;
@@ -745,7 +724,6 @@ int main(int argc, char** argv) {
     std::signal(SIGHUP, HandleSignal);
 
     // --- Downstream publisher ---
-#ifdef HAVE_DETECTION_NATS
     aibox::adapter::NatsAdapter detection_nats;
     aibox::adapter::NatsAdapter::Config detection_nats_cfg;
     detection_nats_cfg.nats_url = "nats://127.0.0.1:4222";
@@ -818,13 +796,6 @@ int main(int argc, char** argv) {
               << " thumb_encoder_ready="
               << (thumbnail_encoder.IsReady() ? "yes" : "no")
               << std::endl;
-#else
-    aibox::publisher::JsonFileEventSink event_sink("./output/events.jsonl");
-    aibox::publisher::DetectionEventPublisher publisher(g_aggregator, event_sink);
-    publisher.Start();
-    std::cout << "[INFO] DetectionEventPublisher started (sink: ./output/events.jsonl)"
-              << std::endl;
-#endif
 
     // Must match GstPipelineBuilder's NowebFpsEnabled(): annotated RTSP and
     // mosaic recording do not create the fpsdisplay branch.
@@ -859,9 +830,7 @@ int main(int argc, char** argv) {
         PrintBatchRuntimeStats(build_result.value.registry);
         aibox::pipeline::PrepareBatchTeardown(build_result.value.registry);
         gst_object_unref(build_result.value.pipeline);
-#ifdef HAVE_DETECTION_NATS
         stop_snapshot_services();
-#endif
         return 24;
       }
       if (pscr == GST_STATE_CHANGE_ASYNC || pscr == GST_STATE_CHANGE_NO_PREROLL) {
@@ -901,19 +870,15 @@ int main(int argc, char** argv) {
           PrintBatchRuntimeStats(build_result.value.registry);
           aibox::pipeline::PrepareBatchTeardown(build_result.value.registry);
           gst_object_unref(build_result.value.pipeline);
-#ifdef HAVE_DETECTION_NATS
           stop_snapshot_services();
-#endif
           return 24;
         }
       }
-      std::cout << "[PIPELINE_READY] state=PLAYING" << std::endl;
     }
 
-#ifdef HAVE_ANNOTATED_RTSP
     // Annotated RTSP server: start after PLAYING so the static encode chains
     // are live; it attaches to the default GMainContext the run loop below
-    // drives. Failure is non-fatal (warn + continue without the RTSP output).
+    // drives. A configured annotated output is required for readiness.
     std::unique_ptr<aibox::media::AnnotatedRtspServer> g_annotated_rtsp;
     if (build_opts.enable_annotated_rtsp) {
       g_annotated_rtsp = std::make_unique<aibox::media::AnnotatedRtspServer>();
@@ -927,15 +892,27 @@ int main(int argc, char** argv) {
                                               artsp_opts);
       if (!artsp_st.ok) {
         std::cerr << "[ANNOTATED_RTSP_DEGRADED] " << artsp_st.message
-                  << " — continuing without annotated RTSP output" << std::endl;
+                  << " — stopping pipeline" << std::endl;
         g_annotated_rtsp.reset();
+        gst_element_set_state(build_result.value.pipeline, GST_STATE_NULL);
+        gst_element_get_state(build_result.value.pipeline, nullptr, nullptr, 10 * GST_SECOND);
+        stop_snapshot_services();
+        publisher.Stop();
+        detection_nats.Disconnect();
+        aibox::detection::CaptureTimestampTracker::SetProcessInstance(nullptr);
+        PrintBatchRuntimeStats(build_result.value.registry);
+        aibox::pipeline::PrepareBatchTeardown(build_result.value.registry);
+        ReleaseBatchRuntime(build_result.value.registry);
+        gst_object_unref(build_result.value.pipeline);
+        return 25;
       } else {
         std::cout << "[ANNOTATED_RTSP_READY] rtsp://"
                   << artsp_opts.bind_address << ":" << artsp_opts.port
                   << artsp_opts.mount_prefix << "{camera_id}" << std::endl;
       }
     }
-#endif
+
+    std::cout << "[PIPELINE_READY] state=PLAYING" << std::endl;
 
     GstBus* bus = gst_element_get_bus(build_result.value.pipeline);
     const gint64 deadline = args.run_forever
@@ -969,13 +946,11 @@ int main(int argc, char** argv) {
 
     // --- Shutdown the annotated RTSP server BEFORE pipeline teardown ---
     // Order: RTSP detach + branch unload → pipeline NULL.
-#ifdef HAVE_ANNOTATED_RTSP
     if (g_annotated_rtsp) {
       std::cout << "[INFO] Stopping annotated RTSP server..." << std::endl;
       g_annotated_rtsp->Stop();
       g_annotated_rtsp.reset();
     }
-#endif
 
     // Send EOS so the recording muxer/filesink can finalize the MKV before
     // we tear down the pipeline (important for matroskamux seeking table).
@@ -1023,7 +998,6 @@ int main(int argc, char** argv) {
         std::cout << "[INFO] Pipeline reached NULL; VPU decode sessions released."
                   << std::endl;
     }
-#ifdef HAVE_DETECTION_NATS
     std::cout << "[INFO] FrameSnapshotCache frames=" << frame_cache.Frames()
               << " bytes=" << frame_cache.Bytes()
               << " dropped=" << frame_cache.Dropped() << std::endl;
@@ -1034,15 +1008,11 @@ int main(int argc, char** argv) {
               << " alarm_published=" << snapshot_service.AlarmPublished()
               << " alarm_dropped=" << snapshot_service.AlarmDropped()
               << std::endl;
-#endif
     publisher.Stop();
-#ifdef HAVE_DETECTION_NATS
     detection_nats.Disconnect();
-#endif
 
     // Report what the aggregator collected + what was published.
     g_aggregator.LogSummary();
-#ifdef HAVE_DETECTION_NATS
     std::cout << "[INFO] FrameEventPublisher: published=" << publisher.Published()
               << " republished=" << publisher.Republished()
               << " build_failures=" << publisher.BuildFailures()
@@ -1057,20 +1027,11 @@ int main(int argc, char** argv) {
               << " dropped=" << snapshot_service.Dropped()
               << " publish_failures=" << snapshot_service.PublishFailures()
               << std::endl;
-#else
-    std::cout << "[INFO] Publisher: published=" << publisher.Published()
-              << " build_failures=" << publisher.BuildFailures()
-              << " sink_written=" << event_sink.Written() << std::endl;
-#endif
-#ifdef HAVE_DETECTION_NATS
     if (!aibox::adapter::NatsAdapter::CloseLibraryAndWait()) {
       std::cerr << "[WARN] NATS internal threads did not stop cleanly"
                 << std::endl;
     }
-#endif
-#ifdef HAVE_DETECTION_NATS
     aibox::detection::CaptureTimestampTracker::SetProcessInstance(nullptr);
-#endif
 
     ReleaseBatchRuntime(build_result.value.registry);
     gst_object_unref(build_result.value.pipeline);
@@ -1087,9 +1048,7 @@ int main(int argc, char** argv) {
                         10 * GST_SECOND);
   PrintBatchRuntimeStats(build_result.value.registry);
   aibox::pipeline::PrepareBatchTeardown(build_result.value.registry);
-#ifdef HAVE_DETECTION_NATS
   aibox::detection::CaptureTimestampTracker::SetProcessInstance(nullptr);
-#endif
   ReleaseBatchRuntime(build_result.value.registry);
   gst_object_unref(build_result.value.pipeline);
   return 0;

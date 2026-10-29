@@ -14,10 +14,10 @@ class SiglipPipelineBuilder {
   SiglipPipelineBuilder& operator=(const SiglipPipelineBuilder&) = delete;
   Embedding Infer(const std::vector<std::uint8_t>& png, int timeout_ms,
                   const std::function<void()>& heartbeat);
-  void Selfcheck();
+  void WaitReady();
+  void CheckBus();
   void Stop();
  private:
-  void CheckBus();
   const WorkerConfig& config_;
   GstElement* pipeline_ = nullptr;
   GstElement* source_ = nullptr;

@@ -266,12 +266,11 @@ Status TxtSnapshotLoader::ParseStreamInference(const IniSection& sec, StreamInfe
 
 Status TxtSnapshotLoader::ParseAnnotatedMediaGlobal(const IniSection& sec,
                                                     AnnotatedMediaConfig* cfg) const {
-  cfg->enabled           = ParseBool(GetEntryVal(sec, "enabled", "0"));
+  cfg->enabled           = true;  // Annotated output is required.
   cfg->bind_address      = GetEntryVal(sec, "bind", "127.0.0.1");
   cfg->port              = ParseInt(GetEntryVal(sec, "port"), 8555);
   cfg->mount_prefix      = GetEntryVal(sec, "mount_prefix", "/cam/");
   cfg->pre_queue_buffers = ParseInt(GetEntryVal(sec, "pre_queue_buffers"), 30);
-  if (!cfg->enabled) return Status::Ok();  // disabled: keep parsing lenient
   if (cfg->port < 1 || cfg->port > 65535)
     return Status::Error("ANNOTATED_MEDIA_BAD_PORT",
                          "port out of range: " + std::to_string(cfg->port));

@@ -105,14 +105,12 @@ WorkerConfig LoadConfig(const std::string& path, bool verify_model_assets) {
   c.model_version = Required(fields, "model", "model_version");
   if (c.model_version.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_") != std::string::npos)
     throw std::runtime_error("unsafe [model] model_version");
-  c.manifest_path = Path(base, Required(fields, "model", "preprocess_manifest"));
   c.postprocess_module = Required(fields, "model", "postprocess_module");
   if (c.postprocess_module != "siglip2-image") throw std::runtime_error("unsupported postprocess_module");
   if (Number(fields, "model", "expected_embedding_dim", 768, 768) != 768) throw std::runtime_error("dim");
   RequireEqual(fields, "model", "input_dtype", "uint16");
   RequireEqual(fields, "model", "input_layout", "NHWC");
   RequireEqual(fields, "model", "input_dims", "1,224,224,3");
-  c.selfcheck_jpeg = Path(base, Required(fields, "model", "selfcheck_jpeg"));
   RequireEqual(fields, "accelerator", "backend", "qnn");
   c.htp_device_id = Number(fields, "accelerator", "htp_device_id", 0, 1);
   c.require_device_id = Number(fields, "accelerator", "require_device_id", 0, 1) != 0;
@@ -145,29 +143,9 @@ WorkerConfig LoadConfig(const std::string& path, bool verify_model_assets) {
       c.request_timeout_ms > c.shutdown_grace_ms || c.fetch_timeout_ms > c.shutdown_grace_ms)
     throw std::runtime_error("processing wait exceeds shutdown grace");
   if (!verify_model_assets) return c;
-  for (const auto& file : {c.model_path, c.manifest_path, c.selfcheck_jpeg,
-                           c.backend_library, c.system_library})
+  for (const auto& file : {c.model_path, c.backend_library, c.system_library})
     if (!fs::is_regular_file(file)) throw std::runtime_error("missing file: " + file);
   if (Sha256File(c.model_path) != c.model_sha256) throw std::runtime_error("model SHA256 mismatch");
-  c.manifest_sha256 = Sha256File(c.manifest_path);
-  std::ifstream manifest_file(c.manifest_path);
-  const std::string manifest_text(std::istreambuf_iterator<char>{manifest_file}, {});
-  const auto manifest = ParseJson(manifest_text);
-  JsonObject* root = RootObject(manifest.get());
-  if (String(root, "schema") != "aibox.siglip_preprocess.v1" ||
-      String(root, "model_sha256") != c.model_sha256 ||
-      String(root, "selfcheck_jpeg_sha256") != Sha256File(c.selfcheck_jpeg))
-    throw std::runtime_error("preprocess manifest identity mismatch");
-  c.reference_vector_path = Path(fs::path(c.manifest_path).parent_path(),
-                                 String(root, "selfcheck_reference_vector"));
-  if (Sha256File(c.reference_vector_path) != String(root, "selfcheck_reference_sha256"))
-    throw std::runtime_error("selfcheck reference SHA256 mismatch");
-  JsonNode* threshold = json_object_get_member(root, "selfcheck_min_cosine");
-  if (!threshold || !JSON_NODE_HOLDS_VALUE(threshold))
-    throw std::runtime_error("manifest selfcheck_min_cosine missing");
-  c.selfcheck_min_cosine = Numeric(threshold);
-  if (c.selfcheck_min_cosine < 0.99 || c.selfcheck_min_cosine > 1)
-    throw std::runtime_error("manifest selfcheck_min_cosine invalid");
   return c;
 }
 }  // namespace aibox::siglip

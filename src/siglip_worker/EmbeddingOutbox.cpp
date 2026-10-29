@@ -104,7 +104,7 @@ bool EmbeddingOutbox::HasSuccess(const AlarmTask& task) const {
       Integer(root, "ready_published_at_ms") != task.ready_published_at_ms ||
       String(root, "model_version") != config_.model_version ||
       String(root, "model_sha256") != config_.model_sha256 ||
-      String(root, "preprocess_sha256") != config_.manifest_sha256 ||
+      String(root, "preprocess_sha256") != config_.preprocess_sha256 ||
       String(root, "image_sha256").empty() ||
       Integer(root, "vector_dim") != 768 ||
       !Boolean(root, "l2_normalized") || !values_finite)
@@ -125,7 +125,7 @@ void EmbeddingOutbox::WriteSuccess(const AlarmTask& task, const PreparedImage& i
   builder.I("processed_at_ms", NowMs());
   builder.S("model_version", config_.model_version);
   builder.S("model_sha256", config_.model_sha256);
-  builder.S("preprocess_sha256", config_.manifest_sha256);
+  builder.S("preprocess_sha256", config_.preprocess_sha256);
   builder.S("image_file_path", task.image_file_path);
   builder.S("image_sha256", image.source_sha256);
   builder.S("inference_input_sha256", image.inference_sha256);

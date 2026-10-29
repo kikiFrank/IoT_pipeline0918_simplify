@@ -17,9 +17,6 @@ echo "AIBOX_ROOT=$AIBOX_ROOT NPROC=$NPROC"
 echo "== cmake configure build_unified =="
 cmake -S "$AIBOX_ROOT" -B "$AIBOX_ROOT/build_unified" \
   -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-  -DENABLE_DETECTION_NATS=ON \
-  -DENABLE_SIGLIP_WORKER=ON \
-  -DENABLE_ANNOTATED_RTSP=ON \
   -DBUILD_TESTING=OFF \
   2>&1 | tee "$OUT/cmake.log"
 if [ "${PIPESTATUS[0]}" -ne 0 ]; then

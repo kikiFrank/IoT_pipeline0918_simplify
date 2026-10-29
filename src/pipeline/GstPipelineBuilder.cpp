@@ -10,9 +10,7 @@
 
 #include <gst/video/video.h>
 #include <gst/gsttask.h>  // GstTaskState / gst_pad_get_task_state (diagq)
-#ifdef HAVE_DETECTION_NATS
 #include "aibox/detection/CaptureTimestampTracker.hpp"
-#endif
 
 #include <algorithm>
 #include <array>
@@ -722,12 +720,10 @@ OnFrameTagProbe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
     m->batch_group_id  = g_strdup(ctx->batch_group_id);
     m->batch_stream_id = ctx->batch_stream_id;
   }
-#ifdef HAVE_DETECTION_NATS
   if (auto* tracker = aibox::detection::CaptureTimestampTracker::GetProcessInstance()) {
     tracker->Record(ctx->camera_id ? ctx->camera_id : "", ctx->frame_counter,
                     static_cast<uint64_t>(g_get_real_time() / 1000));
   }
-#endif
   return GST_PAD_PROBE_OK;
 }
 

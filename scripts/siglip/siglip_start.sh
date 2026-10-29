@@ -40,7 +40,7 @@ for ((i=0;i<startup_seconds;i++)); do
     tail -n 40 "$log"
     exit 8
   fi
-  if grep -Fq '[SIGLIP_READY] state=PLAYING consumer=READY model=READY' "$log"; then
+  if grep -Fq '[SIGLIP_READY] state=PLAYING consumer=READY model=AWAITING_FIRST_INFERENCE' "$log"; then
     echo "SIGLIP_START_OK pid=$pid log=$log"
     exit 0
   fi

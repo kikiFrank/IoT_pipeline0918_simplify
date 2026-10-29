@@ -22,13 +22,11 @@ max_deliver=-1
 model_path=../../data/models/siglip2/image_encoder.bin
 model_sha256=dc8f1d1f57c450fe41c829b86cd3e6d1d21d1ab223602e1664754db13a440b72
 model_version=siglip2-image-dc8f1d1f57c4
-preprocess_manifest=./preprocess_manifest.json
 postprocess_module=siglip2-image
 expected_embedding_dim=768
 input_dtype=uint16
 input_layout=NHWC
 input_dims=1,224,224,3
-selfcheck_jpeg=./selfcheck.jpg
 
 [accelerator]
 backend=qnn

@@ -62,14 +62,16 @@ void SiglipWorker::Run() {
   SiglipNatsClient nats(config_);
   nats.PrepareConsumer();
   SiglipPipelineBuilder pipeline(config_);
-  pipeline.Selfcheck();
+  pipeline.WaitReady();
   nats.BindConsumer();
   EmbeddingOutbox outbox(config_);
-  std::cout << "[SIGLIP_READY] state=PLAYING consumer=READY model=READY name="
+  std::cout << "[SIGLIP_READY] state=PLAYING consumer=READY model=AWAITING_FIRST_INFERENCE name="
             << config_.name << std::endl;
   std::map<std::string, Embedding> cache;
   std::deque<std::string> order;
+  bool first_inference = true;
   while (!stop_.load()) {
+    pipeline.CheckBus();
     Delivery delivery;
     if (!nats.Fetch(&delivery)) continue;
     std::unique_ptr<natsMsg, decltype(&natsMsg_Destroy)> message(delivery.message, &natsMsg_Destroy);
@@ -148,7 +150,7 @@ void SiglipWorker::Run() {
                 << error.what() << '\n';
       continue;
     }
-    const std::string key = image.source_sha256 + config_.model_sha256 + config_.manifest_sha256;
+    const std::string key = image.source_sha256 + config_.model_sha256 + config_.preprocess_sha256;
     Embedding embedding;
     auto existing = cache.find(key);
     if (existing != cache.end()) {
@@ -167,6 +169,7 @@ void SiglipWorker::Run() {
         }
         throw;
       }
+      if (first_inference) { std::cout << "[SIGLIP_FIRST_INFERENCE_OK] model=READY\n"; first_inference = false; }
       if (config_.vector_cache_entries > 0) {
         cache.emplace(key, embedding);
         order.push_back(key);

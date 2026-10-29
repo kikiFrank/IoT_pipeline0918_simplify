@@ -8,14 +8,14 @@
 #include <thread>
 
 int main(int argc, char** argv) {
-  if (argc != 2) return 2;
+  if (argc != 3) return 2;
   try {
     const auto config = aibox::siglip::LoadConfig(argv[1]);
-    std::ifstream file(config.selfcheck_jpeg, std::ios::binary);
+    std::ifstream file(argv[2], std::ios::binary);
     const std::vector<std::uint8_t> jpeg(std::istreambuf_iterator<char>{file}, {});
     const auto image = aibox::siglip::PrepareImage(jpeg);
     aibox::siglip::SiglipPipelineBuilder pipeline(config);
-    pipeline.Selfcheck();
+    pipeline.WaitReady();
     std::vector<double> latency;
     for (int i = 0; i < 60; ++i) {
       const auto begin = std::chrono::steady_clock::now();

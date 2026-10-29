@@ -36,7 +36,7 @@ struct PipelineOutputConfig {
 // behavior byte-identical.
 // ===================================================================
 struct AnnotatedMediaConfig {
-  bool        enabled           = false;
+  bool        enabled           = true;
   std::string bind_address      = "127.0.0.1";
   int         port              = 8555;
   std::string mount_prefix      = "/cam/";

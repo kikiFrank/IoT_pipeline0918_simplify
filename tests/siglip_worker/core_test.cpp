@@ -47,7 +47,7 @@ int main() {
   config.failure_dir = (root / "failures").string();
   config.model_version = "siglip-test";
   config.model_sha256 = "model-sha";
-  config.manifest_sha256 = "preprocess-sha";
+  config.preprocess_sha256 = "preprocess-sha";
   aibox::siglip::EmbeddingOutbox outbox(config);
   aibox::siglip::AlarmTask task;
   task.alarm_id = "alarm-1";

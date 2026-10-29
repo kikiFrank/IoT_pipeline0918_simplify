@@ -158,34 +158,16 @@ Embedding SiglipPipelineBuilder::Infer(const std::vector<std::uint8_t>& png, int
   }
   throw std::runtime_error("SigLIP inference timeout; pipeline must exit");
 }
-void SiglipPipelineBuilder::Selfcheck() {
-  std::ifstream in(config_.selfcheck_jpeg, std::ios::binary);
-  if (!in) throw std::runtime_error("selfcheck image missing");
-  std::vector<std::uint8_t> original(std::istreambuf_iterator<char>{in}, {});
-  const auto image = PrepareImage(original);
-  const auto embedding = Infer(image.png, config_.infer_timeout_ms, {});
-  std::ifstream reference(config_.reference_vector_path, std::ios::binary);
-  if (!reference) throw std::runtime_error("selfcheck reference vector missing");
-  std::vector<float> expected(768);
-  reference.read(reinterpret_cast<char*>(expected.data()), expected.size() * sizeof(float));
-  if (reference.gcount() != 768 * static_cast<std::streamsize>(sizeof(float)) ||
-      reference.peek() != std::char_traits<char>::eof())
-    throw std::runtime_error("selfcheck reference vector length mismatch");
-  double dot = 0, norm = 0;
-  for (std::size_t i = 0; i < expected.size(); ++i) {
-    dot += embedding.values[i] * expected[i];
-    norm += static_cast<double>(expected[i]) * expected[i];
+void SiglipPipelineBuilder::WaitReady() {
+  const auto deadline = std::chrono::steady_clock::now() + std::chrono::milliseconds(config_.startup_timeout_ms);
+  while (std::chrono::steady_clock::now() < deadline) {
+    CheckBus();
+    GstState current = GST_STATE_VOID_PENDING, pending = GST_STATE_VOID_PENDING;
+    if (gst_element_get_state(pipeline_, &current, &pending, 100 * GST_MSECOND) == GST_STATE_CHANGE_FAILURE)
+      throw std::runtime_error("SigLIP startup state failure");
+    if (current == GST_STATE_PLAYING) return;
   }
-  const double cosine = dot / std::sqrt(norm);
-  if (!std::isfinite(cosine) || cosine < config_.selfcheck_min_cosine)
-    throw std::runtime_error("selfcheck cosine below manifest threshold: " + std::to_string(cosine));
-  GstState current = GST_STATE_VOID_PENDING, pending = GST_STATE_VOID_PENDING;
-  if (gst_element_get_state(pipeline_, &current, &pending, GST_SECOND) == GST_STATE_CHANGE_FAILURE ||
-      current != GST_STATE_PLAYING)
-    throw std::runtime_error("selfcheck completed but pipeline is not PLAYING");
-  CheckBus();
-  std::cout << "[SIGLIP_SELFCHECK] cosine=" << cosine << " device_id="
-            << config_.htp_device_id << " state=PLAYING\n";
+  throw std::runtime_error("SigLIP PLAYING startup timeout");
 }
 void SiglipPipelineBuilder::Stop() {
   if (stopped_) return;

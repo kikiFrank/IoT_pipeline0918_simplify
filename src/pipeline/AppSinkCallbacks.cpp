@@ -9,12 +9,10 @@
 #include <gst/video/video.h>
 
 #include "aibox/aggregator/ResultAggregator.hpp"
-#ifdef HAVE_DETECTION_NATS
 #include "aibox/detection/CaptureTimestampTracker.hpp"
 #include "aibox/detection/Uuid.hpp"
 #include "aibox/media/AnomalySnapshotService.hpp"
 #include "aibox/media/FrameSnapshotCache.hpp"
-#endif
 #include "../../plugins/aiboxframemeta_common/gstaiboxframemeta.h"
 
 namespace aibox::pipeline {
@@ -161,7 +159,6 @@ GstFlowReturn OnTerminalSampleToAggregator(GstAppSink* sink, gpointer user_data)
   res.mux_slot_id        = fm.mux_slot_id;
   res.assembled_at_ms    = (uint64_t)(g_get_monotonic_time() / 1000);
 
-#ifdef HAVE_DETECTION_NATS
   if (auto* tracker = aibox::detection::CaptureTimestampTracker::GetProcessInstance()) {
     res.capture_timestamp_ms = tracker->Take(res.camera_id, res.frame_id);
   } else {
@@ -175,7 +172,6 @@ GstFlowReturn OnTerminalSampleToAggregator(GstAppSink* sink, gpointer user_data)
       res.frame_height = GST_VIDEO_INFO_HEIGHT(&info);
     }
   }
-#endif
 
   gpointer state = nullptr;
   GstMeta* m;
@@ -189,9 +185,7 @@ GstFlowReturn OnTerminalSampleToAggregator(GstAppSink* sink, gpointer user_data)
     det.w = roi->w;
     det.h = roi->h;
     fill_detection_params(roi, &det);
-#ifdef HAVE_DETECTION_NATS
     det.event_id = aibox::detection::UuidV4();
-#endif
     res.detections.emplace_back(std::move(det));
   }
 
@@ -224,7 +218,6 @@ GstFlowReturn OnTerminalSampleToAggregator(GstAppSink* sink, gpointer user_data)
     return GST_FLOW_ERROR;
   }
 
-#ifdef HAVE_DETECTION_NATS
   // 每个终端帧都会被短暂保留，无论它是否产生了
   // 检测：状态类告警（占位退出、状态恢复）没有检测框，
   // 但同样需要它所依据的那一帧。拷贝在此处完成，
@@ -251,7 +244,6 @@ GstFlowReturn OnTerminalSampleToAggregator(GstAppSink* sink, gpointer user_data)
                              static_cast<int64_t>(res.capture_timestamp_ms),
                              res.detections, now_mono_ms, sample);
   }
-#endif
 
   agg->Submit(std::move(res));
 

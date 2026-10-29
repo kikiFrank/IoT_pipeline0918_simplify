@@ -8,7 +8,7 @@ BIN="$S/build-review-siglip/aibox_siglip_worker"
 HARNESS="$S/build-review-siglip/siglip_isolated_harness"
 URL="nats://127.0.0.1:45223"
 mkdir -p "$T/media" "$T/outbox" "$T/failures" "$T/logs"
-cp "$S/config_snapshots/siglip_worker/selfcheck.jpg" "$T/media/test.jpg"
+cp "${SIGLIP_TEST_JPEG:-/mnt/workspace/1027siglips/data/images/000000161978.jpg}" "$T/media/test.jpg"
 server_pid=""; mock_pid=""; worker_pid=""
 cleanup() {
   for pid in "$worker_pid" "$mock_pid" "$server_pid"; do
@@ -46,8 +46,6 @@ changes = {
     'max_file_wait_ms=30000': 'max_file_wait_ms=1000',
     'infer_timeout_ms=30000': 'infer_timeout_ms=1000',
     'model_path=../../data/models/siglip2/image_encoder.bin': f'model_path={s}/data/models/siglip2/image_encoder.bin',
-    'preprocess_manifest=./preprocess_manifest.json': f'preprocess_manifest={s}/config_snapshots/siglip_worker/preprocess_manifest.json',
-    'selfcheck_jpeg=./selfcheck.jpg': f'selfcheck_jpeg={s}/config_snapshots/siglip_worker/selfcheck.jpg',
     'allowed_media_root=/mnt/workspace/0924/aibox_pipeline/media': f'allowed_media_root={t}/media',
     'outbox_dir=../../output/siglip_worker/outbox': f'outbox_dir={t}/outbox',
     'failure_dir=../../output/siglip_worker/failures': f'failure_dir={t}/failures',
@@ -67,11 +65,11 @@ export GST_REGISTRY="$R/runtime_registry/gst_registry_siglip_isolated.bin"
 "$BIN" --config "$T/worker_test.txt" --prepare-consumer >"$T/prepare.log"
 SIGLIP_TEST_CRASH_AFTER_OUTBOX=1 "$BIN" --config "$T/worker_test.txt" >"$T/worker_crash.log" 2>&1 & worker_pid=$!
 for ((i=0;i<45;i++)); do
-  if grep -Fq '[SIGLIP_READY] state=PLAYING consumer=READY model=READY' "$T/worker_crash.log"; then break; fi
+  if grep -Fq '[SIGLIP_READY] state=PLAYING consumer=READY model=AWAITING_FIRST_INFERENCE' "$T/worker_crash.log"; then break; fi
   kill -0 "$worker_pid" 2>/dev/null || { tail -30 "$T/worker_crash.log"; exit 1; }
   sleep 1
 done
-grep -Fq '[SIGLIP_READY] state=PLAYING consumer=READY model=READY' "$T/worker_crash.log"
+grep -Fq '[SIGLIP_READY] state=PLAYING consumer=READY model=AWAITING_FIRST_INFERENCE' "$T/worker_crash.log"
 "$HARNESS" publish "$URL"
 set +e
 wait "$worker_pid"; crash_code=$?
@@ -93,7 +91,7 @@ grep -Fq '[SIGLIP_SHUTDOWN_OK] state=NULL' "$T/worker_recovery.log"
 "$HARNESS" status "$URL" | tee "$T/status.log"
 grep -Fq 'ACK_FLOOR=1' "$T/status.log"
 # Publish while stopped: durable must retain a new alarm sharing the same JPEG.
-cp "$S/config_snapshots/siglip_worker/selfcheck.jpg" "$T/media/test.jpg"
+cp "${SIGLIP_TEST_JPEG:-/mnt/workspace/1027siglips/data/images/000000161978.jpg}" "$T/media/test.jpg"
 "$HARNESS" publish "$URL" test-alarm-2
 "$HARNESS" status "$URL" | tee "$T/stopped_status.log"
 grep -Fq 'PENDING=1' "$T/stopped_status.log"

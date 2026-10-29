@@ -66,3 +66,7 @@ bind=127.0.0.1
 port=8555
 mount_prefix=/cam/
 pre_queue_buffers=30
+
+[frame_cache]
+min_interval_ms=150
+max_total_bytes=536870912

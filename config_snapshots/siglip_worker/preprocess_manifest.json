@@ -1,0 +1,17 @@
+{
+  "schema": "aibox.siglip_preprocess.v1",
+  "model_sha256": "dc8f1d1f57c450fe41c829b86cd3e6d1d21d1ab223602e1664754db13a440b72",
+  "reference_source": "10-26/test_siglips2/scripts/prepare.py; 250-image QNN board_001 run",
+  "reference_preprocess": "PIL RGB BILINEAR 224x224 /255 NHWC FP32",
+  "worker_preprocess": "libjpeg RGB; Pillow bilinear coefficients; 224x224 RGB; lossless PNG; qtivtransform RGB DMA; qtimlvconverter GLes stretch regular UINT16",
+  "input_tensor": {"name":"image","dtype":"UINT16","shape":[1,224,224,3],"scale":0.000015259021893143655,"offset":0},
+  "output_tensor": {"name":"image_embeds","dtype":"UINT16","shape":[1,768],"scale":0.0000111501485662302,"offset":-15780},
+  "selfcheck_jpeg_sha256": "e63efa78dc3ef4bc5490566bfac5a21b3669e1ec12f3dc700462cd6c196d46ef",
+  "selfcheck_reference_vector": "selfcheck_image_embeds.raw",
+  "selfcheck_reference_sha256": "6d9bf83533b98d9eb4d4f86992770a5aae9090d6557316f3dba9643bf463e6db",
+  "selfcheck_min_cosine": 0.995,
+  "five_image_preprocess_max_channel_error": 1,
+  "five_image_min_cosine_observed": 0.999876388,
+  "verified_board": "192.168.50.165",
+  "verified_date": "2026-10-28"
+}

@@ -18,6 +18,7 @@ echo "== cmake configure build_unified =="
 cmake -S "$AIBOX_ROOT" -B "$AIBOX_ROOT/build_unified" \
   -DCMAKE_BUILD_TYPE=RelWithDebInfo \
   -DENABLE_DETECTION_NATS=ON \
+  -DENABLE_SIGLIP_WORKER=ON \
   -DENABLE_ANNOTATED_RTSP=ON \
   -DBUILD_TESTING=OFF \
   2>&1 | tee "$OUT/cmake.log"
@@ -37,6 +38,15 @@ fi
 DEMO="$AIBOX_ROOT/build_unified/aibox_stream_pipeline_demo"
 [ -x "$DEMO" ] || { echo MISSING_DEMO; exit 9; }
 sha256sum "$DEMO" | tee "$OUT/demo.sha256"
+
+echo "== build aibox_siglip_worker =="
+cmake --build "$AIBOX_ROOT/build_unified" -j"$NPROC" --target aibox_siglip_worker \
+  2>&1 | tee "$OUT/make_siglip_worker.log"
+if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+  echo MAKE_SIGLIP_WORKER_FAIL
+  exit 16
+fi
+[ -x "$AIBOX_ROOT/build_unified/aibox_siglip_worker" ] || { echo MISSING_SIGLIP_WORKER; exit 16; }
 
 # Plugins are separate CMake projects (not add_subdirectory of root).
 # FrameMeta ABI unit: common MUST be built before timemux/camsplit/demux.
@@ -156,6 +166,11 @@ if ! gst-inspect-1.0 qtimlpostprocess_roi 2>/dev/null | grep -q 'yolo26-noe2e'; 
   exit 15
 fi
 echo INSPECT_roi_yolo26_noe2e=OK
+if ! gst-inspect-1.0 qtimlpostprocess_roi 2>/dev/null | grep -q 'siglip2-image'; then
+  echo INSPECT_ROI_MISSING_SIGLIP2_IMAGE
+  exit 17
+fi
+echo INSPECT_roi_siglip2_image=OK
 echo "RUNTIME_PLUGINS=$RP"
 echo "FRAMEMETA_STAGING=$STAGING"
 ls -la "$RP"/libgst*.so 2>/dev/null || true

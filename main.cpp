@@ -35,6 +35,8 @@
 #include "aibox/detection/FrameEventPublisher.hpp"
 #include "aibox/detection/NatsFrameTransport.hpp"
 #include "aibox/media/AnomalySnapshotService.hpp"
+#include "aibox/media/FrameSnapshotCache.hpp"
+#include "aibox/media/SnapshotRequestSubscriber.hpp"
 #include "aibox/media/MediaFileWriter.hpp"
 #include "aibox/media/NatsMediaReadyTransport.hpp"
 #include "aibox/media/SnapshotEncoder.hpp"
@@ -534,7 +536,8 @@ int main(int argc, char** argv) {
   aibox::pipeline::TxtSnapshotLoader loader;
   auto config_result = loader.Load(args.snapshot_path);
   if (!config_result.ok()) {
-    std::cerr << "[ERROR] Failed to load snapshot: "
+    std::cerr << "[ERROR] Failed to load snapshot ["
+              << config_result.status.error_code << "]: "
               << config_result.status.message << std::endl;
     return 1;
   }
@@ -543,6 +546,10 @@ int main(int argc, char** argv) {
   std::cout << "[INFO]   streams   : " << config.streams.size() << std::endl;
   std::cout << "[INFO]   algorithms: " << config.algorithms.size() << std::endl;
   std::cout << "[INFO]   models    : " << config.models.size() << std::endl;
+  std::cout << "[INFO] frame_cache min_interval_ms="
+            << config.frame_cache.min_interval_ms
+            << " max_total_bytes=" << config.frame_cache.max_total_bytes
+            << std::endl;
   // --- Step 3: PipelineOrchestrator ---
   aibox::pipeline::PipelineOrchestrator orchestrator;
   auto plan_result = orchestrator.BuildExecutionPlan(config);
@@ -775,7 +782,36 @@ int main(int argc, char** argv) {
     aibox::media::AnomalySnapshotService snapshot_service(
         snapshot_encoder, thumbnail_encoder, media_writer, media_transport);
     aibox::media::AnomalySnapshotService::SetProcessInstance(&snapshot_service);
+
+    // 短期帧缓存 + 告警触发的抓拍路径。缓存在服务启动之前
+    // 就已安装好，因此请求不可能在还没有任何数据
+    // 可供服务时到达。采样间隔与全局预算来自 [frame_cache]。
+    aibox::media::FrameSnapshotCache frame_cache(config.frame_cache);
+    aibox::media::FrameSnapshotCache::SetProcessInstance(&frame_cache);
+    snapshot_service.SetFrameCache(&frame_cache);
+    aibox::media::SnapshotRequestSubscriber snapshot_requests(detection_nats,
+                                                             snapshot_service);
     snapshot_service.Start();
+    if (!snapshot_requests.Start()) {
+      std::cerr << "[WARN] alarm snapshot requests disabled (subscribe failed)"
+                << std::endl;
+    }
+
+    // 针对下方提前退出路径的逆依赖拆除。否则，
+    // 仍在运行的 worker 可能会在 subscriber（其 failure sink
+    // 捕获了自身）或帧缓存析构之后仍去访问它们。
+    auto stop_snapshot_services = [&]() {
+      // 先停服务：它的 Stop() 会排空队列中的告警请求并通过
+      // sink 上报，而该 sink 此时仍属于存活的 subscriber。
+      // 若先停 subscriber，就会清掉这个 sink，使
+      // 被排空的请求悄无声息地消失。
+      snapshot_service.Stop();
+      snapshot_requests.Stop();
+      aibox::media::AnomalySnapshotService::SetProcessInstance(nullptr);
+      aibox::media::FrameSnapshotCache::SetProcessInstance(nullptr);
+      frame_cache.Clear();
+    };
+
     std::cout << "[INFO] AnomalySnapshotService started media_dir="
               << media_writer.Directory()
               << " encoder_ready=" << (snapshot_encoder.IsReady() ? "yes" : "no")
@@ -823,6 +859,9 @@ int main(int argc, char** argv) {
         PrintBatchRuntimeStats(build_result.value.registry);
         aibox::pipeline::PrepareBatchTeardown(build_result.value.registry);
         gst_object_unref(build_result.value.pipeline);
+#ifdef HAVE_DETECTION_NATS
+        stop_snapshot_services();
+#endif
         return 24;
       }
       if (pscr == GST_STATE_CHANGE_ASYNC || pscr == GST_STATE_CHANGE_NO_PREROLL) {
@@ -862,6 +901,9 @@ int main(int argc, char** argv) {
           PrintBatchRuntimeStats(build_result.value.registry);
           aibox::pipeline::PrepareBatchTeardown(build_result.value.registry);
           gst_object_unref(build_result.value.pipeline);
+#ifdef HAVE_DETECTION_NATS
+          stop_snapshot_services();
+#endif
           return 24;
         }
       }
@@ -982,8 +1024,16 @@ int main(int argc, char** argv) {
                   << std::endl;
     }
 #ifdef HAVE_DETECTION_NATS
-    snapshot_service.Stop();
-    aibox::media::AnomalySnapshotService::SetProcessInstance(nullptr);
+    std::cout << "[INFO] FrameSnapshotCache frames=" << frame_cache.Frames()
+              << " bytes=" << frame_cache.Bytes()
+              << " dropped=" << frame_cache.Dropped() << std::endl;
+    stop_snapshot_services();
+    std::cout << "[INFO] SnapshotRequestSubscriber received="
+              << snapshot_requests.Received()
+              << " rejected=" << snapshot_requests.Rejected()
+              << " alarm_published=" << snapshot_service.AlarmPublished()
+              << " alarm_dropped=" << snapshot_service.AlarmDropped()
+              << std::endl;
 #endif
     publisher.Stop();
 #ifdef HAVE_DETECTION_NATS

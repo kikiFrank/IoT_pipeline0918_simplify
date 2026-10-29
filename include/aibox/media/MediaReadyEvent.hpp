@@ -15,6 +15,12 @@ struct MediaReadyEvent {
   std::string thumbnail_path;
   std::string camera_id;
   int64_t timestamp_ms = 0;
+  // 该帧所对应的业务告警。旧的检测触发路径下为空；
+  // 老消费者会直接忽略该字段。
+  std::string alarm_id;
+  // 帧标识，便于消费者核验画面确实属于
+  // 告警发生的那一刻。未知时为空。
+  std::string frame_id;
 
   static std::string EscapeJson(const std::string& value) {
     std::string out;
@@ -51,8 +57,9 @@ struct MediaReadyEvent {
 
   std::string ToJson() const {
     std::string json;
-    json.reserve(160 + event_id.size() + file_path.size() +
-                 thumbnail_path.size() + camera_id.size());
+    json.reserve(200 + event_id.size() + file_path.size() +
+                 thumbnail_path.size() + camera_id.size() + alarm_id.size() +
+                 frame_id.size());
     json += "{\"event_id\":\"";
     json += EscapeJson(event_id);
     json += "\",\"file_path\":\"";
@@ -65,7 +72,11 @@ struct MediaReadyEvent {
     json += EscapeJson(camera_id);
     json += "\",\"timestamp_ms\":";
     json += std::to_string(timestamp_ms);
-    json += "}";
+    json += ",\"alarm_id\":\"";
+    json += EscapeJson(alarm_id);
+    json += "\",\"frame_id\":\"";
+    json += EscapeJson(frame_id);
+    json += "\"}";
     return json;
   }
 };

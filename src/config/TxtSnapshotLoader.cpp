@@ -1,9 +1,12 @@
 #include "aibox/config/TxtSnapshotLoader.hpp"
 #include "aibox/config/IniParser.hpp"
 
+#include <charconv>
+#include <cstddef>
 #include <cstdint>
 #include <sstream>
 #include <stdexcept>
+#include <system_error>
 
 namespace aibox::pipeline {
 
@@ -43,9 +46,36 @@ static std::string GetEntryVal(const IniSection& sec,
 // ===================================================================
 // numeric / bool parsers
 // ===================================================================
+static bool TryParseInt(const std::string& s, int* out,
+                        std::size_t* consumed) {
+  if (s.empty() || out == nullptr) return false;
+  const char* begin = s.data();
+  const char* end = begin + s.size();
+  if (*begin == '+') {
+    ++begin;
+    if (begin < end && (*begin == '+' || *begin == '-')) return false;
+  }
+  int value = 0;
+  const auto result = std::from_chars(begin, end, value);
+  if (result.ec != std::errc{}) return false;
+  *out = value;
+  if (consumed != nullptr) {
+    *consumed = static_cast<std::size_t>(result.ptr - s.data());
+  }
+  return true;
+}
+
 int TxtSnapshotLoader::ParseInt(const std::string& s, int def) {
-  if (s.empty()) return def;
-  try { return std::stoi(s); } catch (...) { return def; }
+  int value = 0;
+  std::size_t consumed = 0;
+  return TryParseInt(s, &value, &consumed) ? value : def;
+}
+bool TxtSnapshotLoader::ParseIntStrict(const std::string& s, int* out) {
+  int value = 0;
+  std::size_t consumed = 0;
+  if (!TryParseInt(s, &value, &consumed) || consumed != s.size()) return false;
+  *out = value;
+  return true;
 }
 bool TxtSnapshotLoader::ParseBool(const std::string& s) {
   return (s == "1" || s == "true" || s == "yes");
@@ -262,6 +292,33 @@ Status TxtSnapshotLoader::ParseAnnotatedMediaGlobal(const IniSection& sec,
   return Status::Ok();
 }
 
+Status TxtSnapshotLoader::ParseFrameCache(
+    const IniSection& sec, aibox::media::FrameCacheConfig* cfg) const {
+  const auto read = [&](const char* key, int64_t lo, int64_t hi,
+                        const char* range, const char* code,
+                        int64_t* out) -> Status {
+    auto* raw = GetEntryPtr(sec, key);
+    if (raw == nullptr) return Status::Ok();
+    int value = 0;
+    if (!ParseIntStrict(*raw, &value) || value < lo || value > hi)
+      return Status::Error(code, std::string(key) + " must be " + range +
+                                     ", got: " + *raw);
+    *out = value;
+    return Status::Ok();
+  };
+
+  Status st = read("min_interval_ms", 0, 1000, "0..1000",
+                   "FRAME_CACHE_BAD_INTERVAL", &cfg->min_interval_ms);
+  if (!st.ok) return st;
+
+  int64_t max_bytes = static_cast<int64_t>(cfg->max_total_bytes);
+  st = read("max_total_bytes", 4 * 1024 * 1024, 1024LL * 1024 * 1024,
+            "4 MiB..1 GiB", "FRAME_CACHE_BAD_BYTES", &max_bytes);
+  if (!st.ok) return st;
+  cfg->max_total_bytes = static_cast<size_t>(max_bytes);
+  return Status::Ok();
+}
+
 Status TxtSnapshotLoader::ParseAlgorithm(const IniSection& sec, AlgorithmConfig* cfg) const {
   cfg->code        = GetEntryVal(sec, "code");
   cfg->name        = GetEntryVal(sec, "name");
@@ -464,6 +521,12 @@ Result<SnapshotConfig> TxtSnapshotLoader::Load(const FilePath& snapshot_path) co
   sec = FindSection(ini, "annotated_media");
   if (sec) {
     Status st = ParseAnnotatedMediaGlobal(*sec, &config.global.annotated_media);
+    if (!st.ok) return {st, SnapshotConfig{}};
+  }
+
+  sec = FindSection(ini, "frame_cache");
+  if (sec) {
+    Status st = ParseFrameCache(*sec, &config.frame_cache);
     if (!st.ok) return {st, SnapshotConfig{}};
   }
 

@@ -13,6 +13,7 @@
 #include "aibox/detection/CaptureTimestampTracker.hpp"
 #include "aibox/detection/Uuid.hpp"
 #include "aibox/media/AnomalySnapshotService.hpp"
+#include "aibox/media/FrameSnapshotCache.hpp"
 #endif
 #include "../../plugins/aiboxframemeta_common/gstaiboxframemeta.h"
 
@@ -224,6 +225,25 @@ GstFlowReturn OnTerminalSampleToAggregator(GstAppSink* sink, gpointer user_data)
   }
 
 #ifdef HAVE_DETECTION_NATS
+  // 每个终端帧都会被短暂保留，无论它是否产生了
+  // 检测：状态类告警（占位退出、状态恢复）没有检测框，
+  // 但同样需要它所依据的那一帧。拷贝在此处完成，
+  // 此时 buffer 仍处于映射状态；本线程不做任何编码。
+  if (auto* cache = aibox::media::FrameSnapshotCache::GetProcessInstance()) {
+    const std::string frame_id = std::to_string(res.frame_id);
+    if (cache->ShouldAccept(res.camera_id, frame_id,
+                            static_cast<int64_t>(res.capture_timestamp_ms))) {
+      aibox::media::CachedFrame cached;
+      if (aibox::media::AnomalySnapshotService::CopySampleToPackedNv12(
+              sample, cached.packed_nv12, cached.width, cached.height)) {
+        cached.camera_id = res.camera_id;
+        cached.frame_id = frame_id;
+        cached.timestamp_ms = static_cast<int64_t>(res.capture_timestamp_ms);
+        cache->Put(std::move(cached));
+      }
+    }
+  }
+
   if (auto* svc = aibox::media::AnomalySnapshotService::GetProcessInstance()) {
     const int64_t now_mono_ms =
         static_cast<int64_t>(g_get_monotonic_time() / 1000);

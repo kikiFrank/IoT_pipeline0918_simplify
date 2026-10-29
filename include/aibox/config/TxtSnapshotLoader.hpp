@@ -30,6 +30,7 @@ class TxtSnapshotLoader {
   Status ParseDecode(const IniSection& sec, DecodeConfig* cfg) const;
   Status ParseStreamInference(const IniSection& sec, StreamInferenceConfig* cfg) const;
   Status ParseAnnotatedMediaGlobal(const IniSection& sec, AnnotatedMediaConfig* cfg) const;
+  Status ParseFrameCache(const IniSection& sec, aibox::media::FrameCacheConfig* cfg) const;
   Status ParseAlgorithm(const IniSection& sec, AlgorithmConfig* cfg) const;
   Status ParseStage(const IniSection& sec, StageConfig* cfg) const;
   Status ParseStagePipeline(const IniSection& sec, StagePipelineConfig* cfg) const;
@@ -41,6 +42,7 @@ class TxtSnapshotLoader {
 
   // value parsers
   static int           ParseInt(const std::string& s, int def = 0);
+  static bool          ParseIntStrict(const std::string& s, int* out);
   static bool          ParseBool(const std::string& s);
   static float         ParseFloat(const std::string& s, float def = 0.0f);
   static BackendType   ParseBackend(const std::string& s);

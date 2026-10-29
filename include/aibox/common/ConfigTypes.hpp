@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "aibox/common/Types.hpp"
+#include "aibox/media/FrameSnapshotCache.hpp"
 
 namespace aibox::pipeline {
 
@@ -294,6 +295,7 @@ struct SnapshotConfig {
   TimeMuxConfig         timemux;
   BatchConfig           batch;
   PipelineOutputConfig  output;
+  aibox::media::FrameCacheConfig frame_cache;
 
   std::vector<StreamConfig>    streams;
   std::vector<AlgorithmConfig> algorithms;

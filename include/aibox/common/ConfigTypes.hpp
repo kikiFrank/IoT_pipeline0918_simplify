@@ -212,6 +212,8 @@ struct ModelInputConfig {
   int            height   = 640;
   int            channels = 3;
   TensorDataType dtype    = TensorDataType::kRuntimeInferred;
+  double quant_scale = 0.0;
+  int quant_offset = 0;
 };
 
 // ===================================================================

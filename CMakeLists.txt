@@ -100,6 +100,12 @@ target_include_directories(aibox_stream_pipeline_demo PRIVATE ${GST_RTSP_SERVER_
 
 target_link_libraries(aibox_stream_pipeline_demo ${MAIN_LIBS})
 
+if(QTI_SOURCE_ROOT)
+    target_include_directories(aibox_stream_pipeline_demo PRIVATE ${QTI_SOURCE_ROOT})
+    target_compile_definitions(aibox_stream_pipeline_demo PRIVATE HAVE_QTI_CLASSIFICATION_META=1)
+    target_link_libraries(aibox_stream_pipeline_demo /usr/lib/aarch64-linux-gnu/libgstqtivideobase.so.1)
+endif()
+
 pkg_check_modules(JSONGLIB REQUIRED json-glib-1.0)
 pkg_check_modules(JPEG REQUIRED libjpeg)
 pkg_check_modules(PNG REQUIRED libpng)

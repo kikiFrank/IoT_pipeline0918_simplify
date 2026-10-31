@@ -1,0 +1,42 @@
+[model]
+model_id=mobilenet_v2_color_w8a16
+name=MobileNetV2 Color HTP
+framework=qnn
+backend=htp
+model_path=../data/models/andon/mobilenet_v2_color_w8a16.bin
+labels_path=../config_snapshots/andon_4cam/labels/color_labels.txt
+batch=1
+[input]
+name=images
+layout=NHWC
+width=128
+height=128
+channels=3
+dtype=uint16
+quant_scale=7.260096026584506e-05
+quant_offset=-29172
+[preprocess]
+type=color_rgb_imagenet_quantized
+converter=qtimlvconverter
+engine=gles
+image_disposition=centre
+subpixel_layout=regular
+# Official converter handles ROI geometry and RGB U16; existing Builder
+# applies ImageNet normalization and actual BIN quantization in place.
+mean=
+sigma=
+output_tensor_type=uint16
+[output]
+name=logits
+shape=1,8
+format=logits
+dtype=uint16
+class_count=8
+[postprocess]
+type=image_classification
+plugin=qtimlpostprocess_roi
+module=mobilenet-softmax
+confidence_thresh=0
+results=1
+person_only_boxes=false
+hide_person_label=false

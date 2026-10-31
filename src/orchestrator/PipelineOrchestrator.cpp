@@ -28,6 +28,17 @@ Status PipelineOrchestrator::ValidateSnapshotConfig(
 
   std::unordered_set<AlgorithmCode> known;
   for (const auto& a : config.algorithms) known.insert(a.code);
+  for (const auto& algorithm : config.algorithms) {
+    for (size_t i = 0; i < algorithm.stages.size(); ++i) {
+      const auto& stage = algorithm.stages[i];
+      if (stage.input_crop != InputCropType::kBBox) continue;
+      if (i == 0 || stage.input_source_type != InputSourceType::kStage ||
+          stage.input_source_stage_id != algorithm.stages[i - 1].stage_id ||
+          algorithm.stages[i - 1].role != StageRole::kDetector)
+        return Status::Error("ROI_STAGE_DEPENDENCY",
+            stage.stage_id + " requires the immediately preceding detector stage");
+    }
+  }
 
   int enabled_count = 0;
   int offenders = 0;
@@ -556,6 +567,7 @@ std::vector<StagePlan> PipelineOrchestrator::BuildBatchStagePlans(
       sp.converter_engine  = mit->second.preprocess.engine;
       sp.converter_mean    = mit->second.preprocess.mean;
       sp.converter_sigma   = mit->second.preprocess.sigma;
+      sp.converter_output_tensor_type = mit->second.preprocess.output_tensor_type;
     }
 
     sp.input_source_type     = sc.input_source_type;
@@ -637,6 +649,7 @@ std::vector<StagePlan> PipelineOrchestrator::BuildStagePlans(
       sp.converter_engine  = mit->second.preprocess.engine;
       sp.converter_mean    = mit->second.preprocess.mean;
       sp.converter_sigma   = mit->second.preprocess.sigma;
+      sp.converter_output_tensor_type = mit->second.preprocess.output_tensor_type;
     }
 
     sp.input_source_type     = sc.input_source_type;

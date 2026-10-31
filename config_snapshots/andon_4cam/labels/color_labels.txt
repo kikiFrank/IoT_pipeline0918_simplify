@@ -1,0 +1,8 @@
+Blue
+Green
+Green-Yellow
+None
+Red
+Red-green
+Yellow
+Yellow-Blue

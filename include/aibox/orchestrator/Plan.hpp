@@ -217,6 +217,7 @@ struct StagePlan {
   // CSV form, e.g. "255.0,255.0,255.0". sigma divides, mean subtracts.
   std::string converter_mean;
   std::string converter_sigma;
+  TensorDataType converter_output_tensor_type = TensorDataType::kRuntimeInferred;
 };
 
 // ===================================================================

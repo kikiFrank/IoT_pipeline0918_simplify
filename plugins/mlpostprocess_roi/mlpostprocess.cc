@@ -62,6 +62,17 @@ gboolean gst_query_parse_video_alignment (GstQuery *query, GstVideoAlignment *al
 #include <gst/video/gstvideometa.h>
 #include <gst/memory/gstmempool.h>
 #include <gst/utils/common-utils.h>
+#ifndef EXTRACT_RED_COLOR
+// Legacy wrapper colour helpers, removed from the current SDK headers.
+#define EXTRACT_RED_COLOR(c) (((c) >> 24) & 0xFF)
+#define EXTRACT_GREEN_COLOR(c) (((c) >> 16) & 0xFF)
+#define EXTRACT_BLUE_COLOR(c) (((c) >> 8) & 0xFF)
+#define EXTRACT_ALPHA_COLOR(c) ((c) & 0xFF)
+#define EXTRACT_FLOAT_RED_COLOR(c) (EXTRACT_RED_COLOR(c) / 255.0)
+#define EXTRACT_FLOAT_GREEN_COLOR(c) (EXTRACT_GREEN_COLOR(c) / 255.0)
+#define EXTRACT_FLOAT_BLUE_COLOR(c) (EXTRACT_BLUE_COLOR(c) / 255.0)
+#define EXTRACT_FLOAT_ALPHA_COLOR(c) (EXTRACT_ALPHA_COLOR(c) / 255.0)
+#endif
 #include <gst/utils/batch-utils.h>
 #include <cairo/cairo.h>
 

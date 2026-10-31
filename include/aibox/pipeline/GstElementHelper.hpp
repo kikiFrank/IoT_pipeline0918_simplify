@@ -23,4 +23,9 @@ bool SetEnumPropertyByNick(GstElement* elem, const char* prop,
 bool SetFlagsPropertyByNick(GstElement* elem, const char* prop,
                             const char* nick, std::string* out_error);
 
+// MobileNetV2 color: RGB U16 [0,65535] -> ImageNet-normalized QNN UFIXED16.
+// Retains the converter's writable DMA allocation and all ROI/frame metadata.
+bool EncodeColorInputInPlace(GstBuffer* buffer, double quant_scale,
+                             int quant_offset, std::string* out_error);
+
 }  // namespace aibox::pipeline

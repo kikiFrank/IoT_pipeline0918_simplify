@@ -334,6 +334,8 @@ Status TxtSnapshotLoader::ParseStage(const IniSection& sec, StageConfig* cfg) co
   cfg->model_id      = GetEntryVal(sec, "model_id");
   cfg->input_source_type = ParseInputSource(GetEntryVal(sec, "input_source", "frame"));
   cfg->input_source_stage_id = GetEntryVal(sec, "input_source");  // raw value
+  if (cfg->input_source_stage_id.rfind("stage:", 0) == 0)
+    cfg->input_source_stage_id.erase(0, 6);
   cfg->input_crop    = ParseInputCrop(GetEntryVal(sec, "input_crop", "full"));
   cfg->preprocess    = GetEntryVal(sec, "preprocess");
   cfg->postprocess   = GetEntryVal(sec, "postprocess");
@@ -386,6 +388,8 @@ Status TxtSnapshotLoader::ParseModelInput(const IniSection& sec, ModelInputConfi
   cfg->height   = ParseInt(GetEntryVal(sec, "height"), 640);
   cfg->channels = ParseInt(GetEntryVal(sec, "channels"), 3);
   cfg->dtype    = ParseTensorDtype(GetEntryVal(sec, "dtype"));
+  cfg->quant_scale = std::strtod(GetEntryVal(sec, "quant_scale", "0").c_str(), nullptr);
+  cfg->quant_offset = ParseInt(GetEntryVal(sec, "quant_offset"), 0);
   return Status::Ok();
 }
 
@@ -417,12 +421,10 @@ std::vector<int> TxtSnapshotLoader::ParseShape(const std::string& s,
 Status TxtSnapshotLoader::ParseModelOutput(const IniSection& sec, ModelOutputConfig* cfg) const {
   const bool is_indexed = (sec.name.rfind("output.", 0) == 0);
 
-  // Legacy [output]: keep original B1/time-mux semantics. Builder still
-  // feeds qtimlqnn "tensors" from ModelOutputConfig.name; shape stays the
-  // historical hard-coded {1,300,6}. Indexed [output.N] is B2-only.
+  // Legacy [output] still feeds the single qtimlqnn "tensors" property.
+  // Keep its public fields in sync with the TensorSpec parsed below.
   if (!is_indexed) {
     cfg->name        = GetEntryVal(sec, "name", "output0");
-    cfg->shape       = {1, 300, 6};
     cfg->format      = GetEntryVal(sec, "format",
                                    "x1,y1,x2,y2,confidence,class_id");
     cfg->dtype       = ParseTensorDtype(GetEntryVal(sec, "dtype"));
@@ -448,6 +450,11 @@ Status TxtSnapshotLoader::ParseModelOutput(const IniSection& sec, ModelOutputCon
                          "output section missing tensor shape: " + ts.name);
 
   cfg->tensors.push_back(ts);
+
+  if (!is_indexed) {
+    cfg->shape = ts.shape;
+    cfg->dtype = ts.dtype;
+  }
 
   if (is_indexed) {
     if (cfg->tensors.size() == 1) {

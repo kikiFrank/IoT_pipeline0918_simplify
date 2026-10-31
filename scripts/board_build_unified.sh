@@ -18,6 +18,7 @@ echo "== cmake configure build_unified =="
 cmake -S "$AIBOX_ROOT" -B "$AIBOX_ROOT/build_unified" \
   -DCMAKE_BUILD_TYPE=RelWithDebInfo \
   -DBUILD_TESTING=OFF \
+  -DQTI_SOURCE_ROOT="${QTI_SOURCE_ROOT:-}" \
   2>&1 | tee "$OUT/cmake.log"
 if [ "${PIPESTATUS[0]}" -ne 0 ]; then
   echo CMAKE_FAIL
@@ -64,7 +65,9 @@ for p in aiboxframemeta_common aiboxtimemux aiboxstreamdemux aiboxcamsplit mlpos
   fi
   echo "== build plugin $p =="
   BLD="$SRC/build_board"
-  cmake -S "$SRC" -B "$BLD" -DCMAKE_BUILD_TYPE=Release 2>&1 | tee "$OUT/cmake_$p.log"
+  SDK_ARGS=()
+  [ -z "${QTI_SOURCE_ROOT:-}" ] || SDK_ARGS+=("-DQTI_SOURCE_ROOT=$QTI_SOURCE_ROOT")
+  cmake -S "$SRC" -B "$BLD" -DCMAKE_BUILD_TYPE=Release "${SDK_ARGS[@]}" 2>&1 | tee "$OUT/cmake_$p.log"
   if [ "${PIPESTATUS[0]}" -ne 0 ]; then
     echo "PLUGIN_CMAKE_FAIL=$p"
     exit 10
@@ -149,6 +152,21 @@ if ! gst-inspect-1.0 qtimlpostprocess_roi 2>/dev/null | grep -q 'ppyoloe'; then
   echo INSPECT_ROI_MISSING_PPYOLOE
   exit 12
 fi
+if ! gst-inspect-1.0 qtimlpostprocess_roi 2>/dev/null | grep -q 'yolox-ppe'; then
+  echo INSPECT_ROI_MISSING_YOLOX_PPE
+  exit 18
+fi
+echo INSPECT_roi_yolox_ppe=OK
+if ! gst-inspect-1.0 qtimlpostprocess_roi 2>/dev/null | grep -q 'yolox-stacklight'; then
+  echo INSPECT_ROI_MISSING_YOLOX_STACKLIGHT
+  exit 20
+fi
+echo INSPECT_roi_yolox_stacklight=OK
+if ! gst-inspect-1.0 qtimlpostprocess_roi 2>/dev/null | grep -q 'mobilenet-softmax'; then
+  echo INSPECT_ROI_MISSING_MOBILENET_SOFTMAX
+  exit 19
+fi
+echo INSPECT_roi_mobilenet_softmax=OK
 echo INSPECT_roi_ppyoloe=OK
 # yolo26-obb is dlopen'd from GST_ML_MODULES_DIR; a missing .so fails silently
 # (the nick simply never appears), so gate on it explicitly.

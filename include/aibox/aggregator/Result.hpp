@@ -18,6 +18,8 @@ struct Detection {
   uint32_t    h = 0;
   bool        has_color = false;
   uint32_t    color = 0;
+  std::string classification_label;
+  float classification_confidence = 0.0f;
 };
 
 // Per-frame result. Because qtimetamux already fuses ALL inference stages'

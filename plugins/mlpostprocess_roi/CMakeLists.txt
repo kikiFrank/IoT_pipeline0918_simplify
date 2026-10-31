@@ -205,6 +205,39 @@ install(
 # -------------------------------------------------------------------
 set(YOLO26_MODULE ml-postprocess-yolo-nas)
 
+# PPE YOLOX decoded row-major output; independent of the YOLO26 nick above.
+set(YOLOX_PPE_MODULE ml-postprocess-yolox-ppe)
+add_library(${YOLOX_PPE_MODULE} SHARED
+  modules/object-detection/ml-postprocess-yolox-ppe.cc
+)
+target_include_directories(${YOLOX_PPE_MODULE} PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/modules
+)
+set_target_properties(${YOLOX_PPE_MODULE} PROPERTIES
+  PREFIX "lib"
+  OUTPUT_NAME "${YOLOX_PPE_MODULE}"
+)
+install(TARGETS ${YOLOX_PPE_MODULE}
+  LIBRARY DESTINATION ${GST_ML_MODULES_DIR_LOCAL}
+  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+              GROUP_EXECUTE GROUP_READ WORLD_EXECUTE WORLD_READ
+)
+
+# Separate public module and fixed one-class contract; share the parser source.
+set(YOLOX_STACKLIGHT_MODULE ml-postprocess-yolox-stacklight)
+add_library(${YOLOX_STACKLIGHT_MODULE} SHARED
+  modules/object-detection/ml-postprocess-yolox-ppe.cc
+)
+target_include_directories(${YOLOX_STACKLIGHT_MODULE} PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/modules
+)
+target_compile_definitions(${YOLOX_STACKLIGHT_MODULE} PRIVATE AIBOX_YOLOX_STACKLIGHT=1)
+install(TARGETS ${YOLOX_STACKLIGHT_MODULE}
+  LIBRARY DESTINATION ${GST_ML_MODULES_DIR_LOCAL}
+  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+              GROUP_EXECUTE GROUP_READ WORLD_EXECUTE WORLD_READ
+)
+
 add_library(${YOLO26_MODULE} SHARED
   modules/object-detection/ml-postprocess-yolo26.cc
 )
@@ -391,3 +424,9 @@ install(
               GROUP_EXECUTE GROUP_READ
               WORLD_EXECUTE WORLD_READ
 )
+
+# Official Qualcomm classification module, source kept unmodified.
+add_library(ml-postprocess-mobilenet-softmax SHARED
+  modules/image-classification/ml-postprocess-mobilenet-softmax.cc)
+target_include_directories(ml-postprocess-mobilenet-softmax PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/modules)
+install(TARGETS ml-postprocess-mobilenet-softmax LIBRARY DESTINATION ${GST_ML_MODULES_DIR_LOCAL})

@@ -559,6 +559,21 @@ OnFaceOverlaySinkProbe(GstPad* pad, GstPadProbeInfo* info, gpointer user_data) {
 
   auto* ctx = static_cast<FaceOverlayProbeCtx*>(user_data);
   GstElement* ov = ctx->overlay;
+  if (g_object_get_data(G_OBJECT(ov), "aibox-ppe-filter-empty-roi") &&
+      gst_buffer_is_writable(buf)) {
+    // qtimetamux converts normalized coordinates to integer pixel ROIs.
+    // A positive subpixel box can become width/height=0; qtivoverlay then
+    // divides by zero while calculating its aspect ratio. Filter at this
+    // integer boundary, preserving the PPE tensor parser and NMS unchanged.
+    std::vector<GstMeta*> empty_rois;
+    gpointer state = nullptr;
+    while (GstMeta* meta = gst_buffer_iterate_meta(buf, &state)) {
+      if (meta->info->api != GST_VIDEO_REGION_OF_INTEREST_META_API_TYPE) continue;
+      const auto* roi = reinterpret_cast<const GstVideoRegionOfInterestMeta*>(meta);
+      if (roi->w == 0 || roi->h == 0) empty_rois.push_back(meta);
+    }
+    for (GstMeta* meta : empty_rois) gst_buffer_remove_meta(buf, meta);
+  }
   LogFaceSyncTriple("qtivoverlay.sink", buf);
   DiagOverlaySinkTick(ctx->diag_group);  // ctx group, NOT the global
 
@@ -1923,6 +1938,14 @@ Result<GstPipelineBuildResult> GstPipelineBuilder::Build(
           return {Status::Error("TERMINAL_TEE_FAILED", err),
                   GstPipelineBuildResult{}};
         gst_bin_add_many(GST_BIN(result.pipeline), overlay, tee_post, nullptr);
+        for (const auto& stage : plan.stage_plans) {
+          if (stage.time_mux_group_id == tmux.time_mux_group_id &&
+              (stage.model_id == "yolox_ppe_w8a16" || stage.model_id == "yolox_light_w8a16")) {
+            g_object_set_data(G_OBJECT(overlay), "aibox-ppe-filter-empty-roi",
+                              GINT_TO_POINTER(1));
+            break;
+          }
+        }
 
         // --- Face detection INLINE (same-buffer meta → overlay masks) ---
         // Topology: term_src → q_face_in(max=1,leaky=downstream)
@@ -2105,6 +2128,11 @@ Result<GstPipelineBuildResult> GstPipelineBuilder::Build(
       ConfigureBoundedQueue(q_out, 10);
       g_object_set(appsink, "sync", FALSE, "max-buffers", (guint)8,
                    "emit-signals", TRUE, nullptr);
+      for (const auto& stage : plan.stage_plans) {
+        if (stage.time_mux_group_id == tmux.time_mux_group_id &&
+            stage.model_id == "mobilenet_v2_color_w8a16")
+          g_object_set_data(G_OBJECT(appsink), "aibox-andon-color", GINT_TO_POINTER(1));
+      }
       gst_bin_add_many(GST_BIN(result.pipeline), q_out, appsink, nullptr);
       if (!gst_element_link_many(term_src, q_out, appsink, nullptr))
         return {Status::Error("LINK_FAILED", "metamux -> q_out -> appsink"),
@@ -2219,14 +2247,54 @@ Status GstPipelineBuilder::ConfigQtimlVConverter(GstElement* conv,
   if (!SetEnumPropertyByNick(conv, "engine", stage.converter_engine.c_str(), &err))
     return Status::Error("CONV_ENGINE_FAILED", err);
 
-  gst_util_set_object_arg(G_OBJECT(conv), "mode", "image-batch-non-cumulative");
-  gst_util_set_object_arg(G_OBJECT(conv), "image-disposition",
-                          stage.image_disposition.c_str());
-  gst_util_set_object_arg(G_OBJECT(conv), "subpixel-layout",
-                          stage.subpixel_layout.c_str());
+  const bool roi_input = stage.input_crop == InputCropType::kBBox &&
+                         stage.input_source_type == InputSourceType::kStage;
+  if (!SetEnumPropertyByNick(conv, "mode", roi_input
+          // Batch=1 cumulative mode emits one tensor for every ROI in the
+          // same frame. Non-cumulative mode would silently keep only ROI #1.
+          ? "roi-batch-cumulative" : "image-batch-non-cumulative", &err))
+    return Status::Error("CONV_MODE_FAILED", err);
+  if (!SetEnumPropertyByNick(conv, "image-disposition",
+                             stage.image_disposition.c_str(), &err))
+    return Status::Error("CONV_DISPOSITION_FAILED", err);
+  if (!SetEnumPropertyByNick(conv, "subpixel-layout",
+                             stage.subpixel_layout.c_str(), &err))
+    return Status::Error("CONV_LAYOUT_FAILED", err);
 
-  // mean/sigma are GstValueArray of gdouble and only affect FLOAT tensors
-  // (sigma divides, mean subtracts). An empty config string means "leave the
+  if (stage.model_id == "yolox_ppe_w8a16") {
+    const auto& in = stage.model_input;
+    if (in.name != "images" || in.layout != "NHWC" || in.width != 640 ||
+        in.height != 640 || in.channels != 3 ||
+        in.dtype != TensorDataType::kUInt16 ||
+        stage.converter_output_tensor_type != TensorDataType::kUInt16 ||
+        stage.image_disposition != "centre" ||
+        stage.subpixel_layout != "reverse") {
+      return Status::Error("PPE_INPUT_CONFIG_MISMATCH",
+          "requires images UINT16 NHWC [1,640,640,3], centre, reverse");
+    }
+    for (const auto& item : {std::pair<const char*, const char*>{"image-disposition", "centre"},
+                             {"subpixel-layout", "reverse"}}) {
+      gint value = -1;
+      g_object_get(conv, item.first, &value, nullptr);
+      GParamSpec* spec = g_object_class_find_property(
+          G_OBJECT_GET_CLASS(conv), item.first);
+      if (!spec || !G_IS_PARAM_SPEC_ENUM(spec))
+        return Status::Error("PPE_CONVERTER_READBACK", item.first);
+      auto* klass = G_ENUM_CLASS(g_type_class_ref(G_PARAM_SPEC_VALUE_TYPE(spec)));
+      const GEnumValue* applied = klass ? g_enum_get_value(klass, value) : nullptr;
+      const bool match = applied && applied->value_nick &&
+          std::strcmp(applied->value_nick, item.second) == 0;
+      if (klass) g_type_class_unref(klass);
+      if (!match) return Status::Error("PPE_CONVERTER_READBACK", item.first);
+    }
+    fprintf(stderr,
+        "[PPE_INPUT] model=%s path=%s name=images shape=[1,640,640,3] "
+        "requested_dtype=UINT16 disposition=centre layout=reverse readback=OK\n",
+        stage.model_id.c_str(), stage.model_path.c_str());
+  }
+
+  // mean/sigma are GstValueArray of gdouble; numerical behavior depends on
+  // the vendor engine and tensor type. An empty config string means "leave the
   // vendor default untouched", which keeps every pre-existing model
   // bit-for-bit identical. Any parse / finiteness / readback failure is a
   // hard error: silently building a pipeline with the wrong normalisation
@@ -2261,7 +2329,7 @@ Status GstPipelineBuilder::ConfigQtimlVConverter(GstElement* conv,
       return Status::Error("CONV_ARRAY_SIZE",
                            std::string(prop) + " expects 3 entries (R,G,B), got "
                            + std::to_string(vals.size()));
-    // A zero sigma would divide by zero downstream - always a config bug.
+    // A zero normalization scale is always a config bug.
     if (std::string(prop) == "sigma") {
       for (double v : vals)
         if (v == 0.0)
@@ -2349,9 +2417,54 @@ Status GstPipelineBuilder::ConfigQtimlSnpe(GstElement* snpe,
 // ===================================================================
 // ConfigQtimlQnn
 // ===================================================================
+namespace {
+struct ColorEncodingContext {
+  double scale;
+  int offset;
+  bool logged = false;
+};
+
+GstPadProbeReturn EncodeColorTensor(GstPad* pad, GstPadProbeInfo* info, gpointer data) {
+  auto& ctx = *static_cast<ColorEncodingContext*>(data);
+  GstBuffer* buffer = GST_PAD_PROBE_INFO_BUFFER(info);
+  if (!buffer || GST_BUFFER_FLAG_IS_SET(buffer, GST_BUFFER_FLAG_GAP))
+    return GST_PAD_PROBE_OK;
+  std::string error;
+  if (!EncodeColorInputInPlace(buffer, ctx.scale, ctx.offset, &error)) {
+    GstElement* owner = gst_pad_get_parent_element(pad);
+    if (owner) {
+      GST_ELEMENT_ERROR(owner, STREAM, FORMAT, ("Color input encoding failed"),
+                        ("%s", error.c_str()));
+      gst_object_unref(owner);
+    }
+    return GST_PAD_PROBE_DROP;
+  }
+  if (!ctx.logged) {
+    fprintf(stderr, "[COLOR_INPUT_ENCODING] RGB U16 -> ImageNet QNN scale=%.17g offset=%d bytes=%zu in_place=1\n",
+            ctx.scale, ctx.offset, gst_buffer_get_size(buffer));
+    ctx.logged = true;
+  }
+  return GST_PAD_PROBE_OK;
+}
+}  // namespace
+
 Status GstPipelineBuilder::ConfigQtimlQnn(GstElement* qnn,
                                            const StagePlan& stage) const {
   int htp_id = ResolveHtpDeviceId(stage.stage_index);
+  if (stage.model_id == "mobilenet_v2_color_w8a16") {
+    const auto& input = stage.model_input;
+    if (input.width != 128 || input.height != 128 || input.channels != 3 ||
+        input.dtype != TensorDataType::kUInt16 || input.quant_scale <= 0.0 ||
+        !std::isfinite(input.quant_scale) || !stage.converter_mean.empty() ||
+        !stage.converter_sigma.empty())
+      return Status::Error("COLOR_INPUT_CONFIG", "requires raw RGB U16 converter and actual BIN quantization parameters");
+    GstPad* sink = gst_element_get_static_pad(qnn, "sink");
+    if (!sink) return Status::Error("COLOR_INPUT_PAD", "missing QNN sink pad");
+    gst_pad_add_probe(sink, GST_PAD_PROBE_TYPE_BUFFER, EncodeColorTensor,
+        new ColorEncodingContext{input.quant_scale, input.quant_offset},
+        [](gpointer p) { delete static_cast<ColorEncodingContext*>(p); });
+    gst_object_unref(sink);
+  }
   fprintf(stderr, "[HTP] stage=%s stage_index=%d -> backend-device-id=%d (n_htp=%d)\n",
           stage.stage_id.c_str(), stage.stage_index, htp_id, DetectHtpCount());
 
@@ -2490,6 +2603,9 @@ Status GstPipelineBuilder::BuildStage(const StagePlan& stage,
                                        RuntimeRegistry* reg,
                                        StageElements* out) const {
   std::string err;
+  fprintf(stderr, "[STAGE_CONFIG] stage=%s model=%s crop=%d input=%d module=%s\n",
+          stage.stage_id.c_str(),stage.model_id.c_str(),static_cast<int>(stage.input_crop),
+          static_cast<int>(stage.input_source_type),stage.postprocess_module.c_str());
 
   GstElement* conv = MakeElement(stage.converter_factory, stage.converter_name, &err);
   GstElement* qnn  = MakeElement(stage.inference_factory, stage.inference_name, &err);
@@ -2512,7 +2628,16 @@ Status GstPipelineBuilder::BuildStage(const StagePlan& stage,
   if (!st.ok) return st;
 
   gst_bin_add_many(GST_BIN(pipeline), conv, qnn, post, nullptr);
-  if (!gst_element_link_many(conv, qnn, post, nullptr))
+  bool linked = false;
+  if (stage.model_input.dtype == TensorDataType::kUInt16) {
+    GstCaps* required = gst_caps_from_string("neural-network/tensors,type=UINT16");
+    linked = required && gst_element_link_filtered(conv, qnn, required) &&
+             gst_element_link(qnn, post);
+    if (required) gst_caps_unref(required);
+  } else {
+    linked = gst_element_link_many(conv, qnn, post, nullptr);
+  }
+  if (!linked)
     return Status::Error("STAGE_LINK_FAILED", stage.stage_id);
 
   AttachStageLatProbes(conv, stage.converter_name, reg);

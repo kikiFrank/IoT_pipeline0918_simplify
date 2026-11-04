@@ -10,7 +10,7 @@
 
 namespace aibox::media {
 
-// Publishes each camera's *encoded annotated* H.264 (the existing
+// Publishes each camera's *encoded annotated* H.264/H.265 (the existing
 // tee_webrtc_<cam> chain output) over an in-process gst-rtsp-server:
 //   rtsp://<bind>:<port><mount_prefix><camera_id>   (default :8555/cam/{id})
 //

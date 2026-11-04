@@ -140,6 +140,20 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include(CheckIncludeFile)
 check_include_file("linux/dma-buf.h" HAVE_LINUX_DMA_BUF_H)
 
+# QTI SDK compatibility: newer QIM SDK defines GST_META_ID with a leading
+# stream_id argument; older gst-plugin-base defines the 3-argument form.
+include(CheckCXXSourceCompiles)
+set(CMAKE_REQUIRED_INCLUDES ${GST_INCLUDE_DIRS} ${QTI_INCLUDE_DIRS})
+check_cxx_source_compiles("
+#include <gst/gst.h>
+#include <gst/utils/common-utils.h>
+int main() { guint32 id = GST_META_ID(0, 0, 0, 0); (void)id; return 0; }
+" AIBOX_GST_META_ID_HAS_STREAM)
+unset(CMAKE_REQUIRED_INCLUDES)
+if(AIBOX_GST_META_ID_HAS_STREAM)
+  add_definitions(-DAIBOX_GST_META_ID_HAS_STREAM=1)
+endif()
+
 # Precompiler definitions
 add_definitions(-DHAVE_CONFIG_H)
 
@@ -233,6 +247,21 @@ target_include_directories(${YOLOX_STACKLIGHT_MODULE} PRIVATE
 )
 target_compile_definitions(${YOLOX_STACKLIGHT_MODULE} PRIVATE AIBOX_YOLOX_STACKLIGHT=1)
 install(TARGETS ${YOLOX_STACKLIGHT_MODULE}
+  LIBRARY DESTINATION ${GST_ML_MODULES_DIR_LOCAL}
+  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+              GROUP_EXECUTE GROUP_READ WORLD_EXECUTE WORLD_READ
+)
+
+# One-stage eight-colour YOLOX; keep PPE and one-class contracts independent.
+set(YOLOX_COLOR8_MODULE ml-postprocess-yolox-color8)
+add_library(${YOLOX_COLOR8_MODULE} SHARED
+  modules/object-detection/ml-postprocess-yolox-ppe.cc
+)
+target_include_directories(${YOLOX_COLOR8_MODULE} PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/modules
+)
+target_compile_definitions(${YOLOX_COLOR8_MODULE} PRIVATE AIBOX_YOLOX_COLOR8=1)
+install(TARGETS ${YOLOX_COLOR8_MODULE}
   LIBRARY DESTINATION ${GST_ML_MODULES_DIR_LOCAL}
   PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
               GROUP_EXECUTE GROUP_READ WORLD_EXECUTE WORLD_READ

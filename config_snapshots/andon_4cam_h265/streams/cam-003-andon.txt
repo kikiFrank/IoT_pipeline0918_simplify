@@ -1,0 +1,20 @@
+[stream]
+camera_id=cam-003
+name=Andon Camera 003
+enabled=1
+source_type=rtsp
+rtsp_url=rtsp://192.168.50.41:8556/cam-004
+encoding=h265
+
+[decode]
+depay=rtph265depay
+parse=h265parse
+decoder=v4l2h265dec
+output_caps=video/x-raw,format=NV12
+colorimetry_override=bt709
+
+[inference]
+algorithm=andon_light_color
+frequency=200
+thresh=0.5
+drop_policy=latest

@@ -1,3 +1,4 @@
+#include "aibox/common/CodecProfile.hpp"
 #include "aibox/pipeline/GstPipelineBuilder.hpp"
 #include "aibox/pipeline/GstElementHelper.hpp"
 #include "aibox/pipeline/GstLinkHelper.hpp"
@@ -9,6 +10,7 @@
 #include "aibox/pipeline/FaceOcOverlay.hpp"
 
 #include <gst/video/video.h>
+#include <gst/rtsp/gstrtsptransport.h>
 #include <gst/gsttask.h>  // GstTaskState / gst_pad_get_task_state (diagq)
 #include "aibox/detection/CaptureTimestampTracker.hpp"
 
@@ -113,6 +115,57 @@ struct RtspPadCtx {
 
 static bool IsV4l2HwDecoder(const std::string& name) {
   return name == "v4l2h264dec" || name == "v4l2h265dec";
+}
+
+// Set one allowed media transport. RTSP control may still use TCP in UDP mode.
+static Status ConfigureRtspTransport(GstElement* source, const std::string& camera,
+                                     const std::string& transport) {
+  if (transport != "tcp" && transport != "udp")
+    return Status::Error("RTSP_TRANSPORT_INVALID", camera + ": " + transport);
+  std::string error;
+  if (!SetFlagsPropertyByNick(source, "protocols", transport.c_str(), &error))
+    return Status::Error("RTSP_TRANSPORT_SET_FAILED", camera + ": " + error);
+  if (transport == "udp")
+    g_object_set(source, "timeout", static_cast<guint64>(0), nullptr);
+  guint actual = 0;
+  guint64 udp_retry_timeout = 0;
+  g_object_get(source, "protocols", &actual, "timeout", &udp_retry_timeout, nullptr);
+  const guint expected = transport == "tcp" ? GST_RTSP_LOWER_TRANS_TCP
+                                             : GST_RTSP_LOWER_TRANS_UDP;
+  if (actual != expected || (transport == "udp" && udp_retry_timeout != 0))
+    return Status::Error("RTSP_TRANSPORT_READBACK_FAILED", camera);
+  fprintf(stderr, "[RTSP_TRANSPORT] camera=%s requested=%s flags=%u udp_retry_timeout_us=%llu readback=OK\n",
+          camera.c_str(), transport.c_str(), actual,
+          static_cast<unsigned long long>(udp_retry_timeout));
+  return Status::Ok();
+}
+
+// Override the encoded caps declaration, preserving compressed bytes and memory.
+static Status ConfigureEncodedColorCaps(GstElement* element, CodecType codec,
+                                        const std::string& color) {
+  const auto* profile = GetCodecProfile(codec);
+  if (!profile || color != "bt709")
+    return Status::Error("DECODE_COLORIMETRY_INVALID", color);
+  GstCaps* caps = gst_caps_new_simple(profile->caps_name, "colorimetry",
+                                     G_TYPE_STRING, color.c_str(), nullptr);
+  g_object_set(element, "caps", caps, nullptr);
+  gst_caps_unref(caps);
+  fprintf(stderr, "[DECODE_COLOR_CAPS] element=%s codec=%s override=%s\n",
+          GST_ELEMENT_NAME(element), profile->name, color.c_str());
+  return Status::Ok();
+}
+
+// Only set optional recovery properties when requested and supported.
+static Status ConfigureRtpRecovery(GstElement* depay, bool wait, bool request) {
+  for (const auto& setting : {std::pair<const char*, bool>{"wait-for-keyframe", wait},
+                              {"request-keyframe", request}}) {
+    if (!setting.second) continue;
+    if (!g_object_class_find_property(G_OBJECT_GET_CLASS(depay), setting.first))
+      return Status::Error("DEPAY_PROPERTY_UNSUPPORTED",
+          std::string(GST_ELEMENT_NAME(depay)) + ": " + setting.first);
+    g_object_set(depay, setting.first, TRUE, nullptr);
+  }
+  return Status::Ok();
 }
 
 static bool IsRtspVideoCodec(const gchar* encoding) {
@@ -1245,8 +1298,17 @@ Status GstPipelineBuilder::ValidateFactories(const ExecutionPlan& plan) const {
       const char* sp = g_getenv("AIBOX_WEBRTC_SPLITTER");
       const bool use_camsplit = (sp && g_strcmp0(sp, "camsplit") == 0);
       static const std::vector<std::string> kWebrtcBase = {
-        "qtivoverlay", "videoscale", "v4l2h264enc", "h264parse"
+        "qtivoverlay", "videoscale"
       };
+      for (const auto& group : plan.time_mux_group_plans) {
+        for (const auto& input : group.stream_inputs) {
+          const auto* profile = GetCodecProfile(input.encoding);
+          if (!profile) return Status::Error("WEBRTC_CODEC_UNKNOWN", input.camera_id);
+          for (const char* factory : {profile->hw_encoder, profile->parse, profile->rtp_pay})
+            if (!FactoryExists(factory))
+              return Status::Error("WEBRTC_FACTORY_NOT_FOUND", factory);
+        }
+      }
       const std::string splitter =
           use_camsplit ? "aiboxcamsplit" : "aiboxstreamdemux";
       if (!FactoryExists(splitter))
@@ -1351,6 +1413,8 @@ Status GstPipelineBuilder::BuildDecodeBranch(
   GstElement* src    = MakeElement(input.source_element, input.source_name, &err);
   GstElement* depay  = MakeElement(input.depay_element,  input.depay_name, &err);
   GstElement* parse  = MakeElement(input.parse_element,  input.parse_name, &err);
+  GstElement* color_caps = input.colorimetry_override.empty() ? nullptr
+      : MakeElement("capssetter", "decode_color_caps_" + input.camera_id, &err);
   GstElement* decoder= MakeElement(input.decoder_element,input.decoder_name,&err);
   GstElement* conv   = is_hw_decoder ? nullptr
                                      : MakeElement("videoconvert", "conv_" + input.camera_id, &err);
@@ -1358,29 +1422,37 @@ Status GstPipelineBuilder::BuildDecodeBranch(
   GstElement* queue  = MakeElement(input.queue_element,  input.queue_name, &err);
 
   if (!src || !depay || !parse || !decoder || !caps || !queue ||
+      (!input.colorimetry_override.empty() && !color_caps) ||
       (!is_hw_decoder && !conv))
     return Status::Error("ELEMENT_CREATE_FAILED", err);
 
+  if (color_caps) {
+    const Status color_status = ConfigureEncodedColorCaps(
+        color_caps, input.encoding, input.colorimetry_override);
+    if (!color_status.ok) return color_status;
+  }
+
   // --- depay tuning (E3: configurable per snapshot) ---
   // rtph264depay defaults are FALSE; apply only when config enables them.
-  if (input.rtp_wait_for_keyframe)
-    g_object_set(depay, "wait-for-keyframe", TRUE, nullptr);
-  if (input.rtp_request_keyframe)
-    g_object_set(depay, "request-keyframe", TRUE, nullptr);
+  const Status recovery = ConfigureRtpRecovery(depay, input.rtp_wait_for_keyframe,
+                                                input.rtp_request_keyframe);
+  if (!recovery.ok) return recovery;
 
   ConfigureBoundedQueue(queue, 10);
 
   // --- rtspsrc properties ---
   // latency=0 is too aggressive on hotspot RTSP (TCP glitches → bus ERROR).
   // 200ms jitter buffer improves multi-cam stability without large delay.
-  // timeout=60s: HIKVISION via mediamtx can stall >5s; the old 5s value
-  // posted GstRTSPSrcTimeout → EOS and killed the whole pipeline process.
+  // timeout controls UDP-to-TCP retry, not TCP socket timeout. Preserve the
+  // legacy TCP value; ConfigureRtspTransport disables retry in strict UDP mode.
   g_object_set(src, "location", input.rtsp_url.c_str(),
                     "latency", (gint)200,
                     "drop-on-latency", TRUE,
                     "timeout", (guint64)60000000,
                     nullptr);
-  SetFlagsPropertyByNick(src, "protocols", "tcp", &err);
+  const Status transport_status = ConfigureRtspTransport(
+      src, input.camera_id, input.rtsp_transport);
+  if (!transport_status.ok) return transport_status;
 
   // --- decoder io-mode (E3: was hardcoded "dmabuf"; now snapshot-driven) ---
   if (IsV4l2HwDecoder(input.decoder_element)) {
@@ -1397,10 +1469,12 @@ Status GstPipelineBuilder::BuildDecodeBranch(
 
   // --- add to pipeline ---
   gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, decoder, caps, queue, nullptr);
+  if (color_caps) gst_bin_add(GST_BIN(pipeline), color_caps);
   if (conv) gst_bin_add(GST_BIN(pipeline), conv);
 
   // --- link: 硬解 depay->parse->decoder->caps->queue; 软解插入 videoconvert ---
   std::vector<GstElement*> chain = {depay, parse};
+  if (color_caps) chain.push_back(color_caps);
   chain.push_back(decoder);
   if (!is_hw_decoder && conv) chain.push_back(conv);
   chain.push_back(caps);
@@ -1940,7 +2014,9 @@ Result<GstPipelineBuildResult> GstPipelineBuilder::Build(
         gst_bin_add_many(GST_BIN(result.pipeline), overlay, tee_post, nullptr);
         for (const auto& stage : plan.stage_plans) {
           if (stage.time_mux_group_id == tmux.time_mux_group_id &&
-              (stage.model_id == "yolox_ppe_w8a16" || stage.model_id == "yolox_light_w8a16")) {
+              (stage.postprocess_module == "yolox-ppe" ||
+               stage.postprocess_module == "yolox-stacklight" ||
+               stage.postprocess_module == "yolox-color8")) {
             g_object_set_data(G_OBJECT(overlay), "aibox-ppe-filter-empty-roi",
                               GINT_TO_POINTER(1));
             break;
@@ -2130,8 +2206,11 @@ Result<GstPipelineBuildResult> GstPipelineBuilder::Build(
                    "emit-signals", TRUE, nullptr);
       for (const auto& stage : plan.stage_plans) {
         if (stage.time_mux_group_id == tmux.time_mux_group_id &&
-            stage.model_id == "mobilenet_v2_color_w8a16")
+            stage.preprocess_type == "color_rgb_imagenet_quantized")
           g_object_set_data(G_OBJECT(appsink), "aibox-andon-color", GINT_TO_POINTER(1));
+        if (stage.time_mux_group_id == tmux.time_mux_group_id &&
+            stage.preprocess_type == "rgb_imagenet_quantized")
+          g_object_set_data(G_OBJECT(appsink), "aibox-roi-classification", GINT_TO_POINTER(1));
       }
       gst_bin_add_many(GST_BIN(result.pipeline), q_out, appsink, nullptr);
       if (!gst_element_link_many(term_src, q_out, appsink, nullptr))
@@ -2238,6 +2317,54 @@ int GstPipelineBuilder::ResolveHtpDeviceId(int stage_index) {
 // ===================================================================
 // ConfigQtimlVConverter
 // ===================================================================
+namespace {
+struct RoiExpandContext {
+  double ratio;
+  unsigned samples = 0;
+};
+
+GstPadProbeReturn ExpandClassifierRois(GstPad* pad, GstPadProbeInfo* info, gpointer data) {
+  GstBuffer* original = GST_PAD_PROBE_INFO_BUFFER(info);
+  if (!original || GST_BUFFER_FLAG_IS_SET(original, GST_BUFFER_FLAG_GAP))
+    return GST_PAD_PROBE_OK;
+  auto& context = *static_cast<RoiExpandContext*>(data);
+  GstCaps* caps = gst_pad_get_current_caps(pad);
+  GstVideoInfo video;
+  const bool valid = caps && gst_video_info_from_caps(&video, caps);
+  if (caps) gst_caps_unref(caps);
+  GstBuffer* copy = valid ? gst_buffer_copy(original) : nullptr;
+  if (!copy) {
+    GstElement* owner = gst_pad_get_parent_element(pad);
+    if (owner) {
+      GST_ELEMENT_ERROR(owner, STREAM, FORMAT, ("Cannot prepare ROI expansion"),
+                        ("requires video caps and copied buffer metadata"));
+      gst_object_unref(owner);
+    }
+    return GST_PAD_PROBE_DROP;
+  }
+  gpointer state = nullptr;
+  while (GstMeta* meta = gst_buffer_iterate_meta_filtered(
+             copy, &state, GST_VIDEO_REGION_OF_INTEREST_META_API_TYPE)) {
+    auto* roi = reinterpret_cast<GstVideoRegionOfInterestMeta*>(meta);
+    const GstVideoRectangle before{static_cast<int>(roi->x), static_cast<int>(roi->y),
+                                   static_cast<int>(roi->w), static_cast<int>(roi->h)};
+    const auto after = ExpandRoiRectangle(before, GST_VIDEO_INFO_WIDTH(&video),
+                                          GST_VIDEO_INFO_HEIGHT(&video), context.ratio);
+    roi->x = after.x; roi->y = after.y; roi->w = after.w; roi->h = after.h;
+    if (++context.samples <= 12 || context.samples % 300 == 0)
+      fprintf(stderr, "[ROI_EXPAND] ratio=%.6f id=%d before=%d,%d,%d,%d after=%d,%d,%d,%d frame=%d,%d header_copy=1\n",
+          context.ratio, roi->id, before.x, before.y, before.w, before.h,
+          after.x, after.y, after.w, after.h,
+          GST_VIDEO_INFO_WIDTH(&video), GST_VIDEO_INFO_HEIGHT(&video));
+  }
+  // Clone metadata only. DMA memory and ROI IDs remain shared/unchanged;
+  // the passthrough/overlay branch retains its original detection boxes.
+  GST_PAD_PROBE_INFO_DATA(info) = copy;
+  gst_buffer_unref(original);
+  return GST_PAD_PROBE_OK;
+}
+}  // namespace
+
 Status GstPipelineBuilder::ConfigQtimlVConverter(GstElement* conv,
                                                   const StagePlan& stage) const {
   std::string err;
@@ -2261,7 +2388,19 @@ Status GstPipelineBuilder::ConfigQtimlVConverter(GstElement* conv,
                              stage.subpixel_layout.c_str(), &err))
     return Status::Error("CONV_LAYOUT_FAILED", err);
 
-  if (stage.model_id == "yolox_ppe_w8a16") {
+  if (stage.roi_expand_ratio > 0.0) {
+    if (!roi_input || stage.role != StageRole::kClassifier || !std::isfinite(stage.roi_expand_ratio))
+      return Status::Error("ROI_EXPAND_CONFIG", "requires a bbox classifier and finite ratio");
+    GstPad* sink = gst_element_get_static_pad(conv, "sink");
+    if (!sink) return Status::Error("ROI_EXPAND_PAD", "missing converter sink pad");
+    gst_pad_add_probe(sink, GST_PAD_PROBE_TYPE_BUFFER, ExpandClassifierRois,
+        new RoiExpandContext{stage.roi_expand_ratio},
+        [](gpointer value) { delete static_cast<RoiExpandContext*>(value); });
+    gst_object_unref(sink);
+  }
+
+  if (stage.model_id == "yolox_ppe_w8a16" ||
+      stage.postprocess_module == "yolox-color8") {
     const auto& in = stage.model_input;
     if (in.name != "images" || in.layout != "NHWC" || in.width != 640 ||
         in.height != 640 || in.channels != 3 ||
@@ -2422,6 +2561,7 @@ struct ColorEncodingContext {
   double scale;
   int offset;
   bool logged = false;
+  bool generic = false;
 };
 
 GstPadProbeReturn EncodeColorTensor(GstPad* pad, GstPadProbeInfo* info, gpointer data) {
@@ -2440,7 +2580,8 @@ GstPadProbeReturn EncodeColorTensor(GstPad* pad, GstPadProbeInfo* info, gpointer
     return GST_PAD_PROBE_DROP;
   }
   if (!ctx.logged) {
-    fprintf(stderr, "[COLOR_INPUT_ENCODING] RGB U16 -> ImageNet QNN scale=%.17g offset=%d bytes=%zu in_place=1\n",
+    fprintf(stderr, "[%s] RGB U16 -> ImageNet QNN scale=%.17g offset=%d bytes=%zu in_place=1\n",
+            ctx.generic ? "RGB_INPUT_ENCODING" : "COLOR_INPUT_ENCODING",
             ctx.scale, ctx.offset, gst_buffer_get_size(buffer));
     ctx.logged = true;
   }
@@ -2451,7 +2592,8 @@ GstPadProbeReturn EncodeColorTensor(GstPad* pad, GstPadProbeInfo* info, gpointer
 Status GstPipelineBuilder::ConfigQtimlQnn(GstElement* qnn,
                                            const StagePlan& stage) const {
   int htp_id = ResolveHtpDeviceId(stage.stage_index);
-  if (stage.model_id == "mobilenet_v2_color_w8a16") {
+  if (stage.preprocess_type == "color_rgb_imagenet_quantized" ||
+      stage.preprocess_type == "rgb_imagenet_quantized") {
     const auto& input = stage.model_input;
     if (input.width != 128 || input.height != 128 || input.channels != 3 ||
         input.dtype != TensorDataType::kUInt16 || input.quant_scale <= 0.0 ||
@@ -2461,7 +2603,8 @@ Status GstPipelineBuilder::ConfigQtimlQnn(GstElement* qnn,
     GstPad* sink = gst_element_get_static_pad(qnn, "sink");
     if (!sink) return Status::Error("COLOR_INPUT_PAD", "missing QNN sink pad");
     gst_pad_add_probe(sink, GST_PAD_PROBE_TYPE_BUFFER, EncodeColorTensor,
-        new ColorEncodingContext{input.quant_scale, input.quant_offset},
+        new ColorEncodingContext{input.quant_scale, input.quant_offset, false,
+            stage.preprocess_type == "rgb_imagenet_quantized"},
         [](gpointer p) { delete static_cast<ColorEncodingContext*>(p); });
     gst_object_unref(sink);
   }
@@ -2588,8 +2731,19 @@ Status GstPipelineBuilder::ConfigQtimlPostProcess(GstElement* post,
   // 参考 gst-ai-parallel-inference 样例: {"confidence": 40.0}
   double conf = stage.model_postprocess.confidence_thresh;
   if (conf <= 1.0) conf *= 100.0;  // 0-1 小数 -> 百分制
-  char settings[64];
-  std::snprintf(settings, sizeof(settings), "{\"confidence\": %.1f}", conf);
+  char settings[128];
+  if (stage.postprocess_module == "yolox-ppe" ||
+      stage.postprocess_module == "yolox-color8") {
+    const float nms = stage.model_postprocess.nms_iou_thresh;
+    if (!std::isfinite(nms) || nms <= 0.0f || nms > 1.0f)
+      return Status::Error("PPE_NMS_RANGE", "nms_iou_thresh must be in (0,1]");
+    std::snprintf(settings, sizeof(settings),
+        "{\"confidence\": %.1f, \"nms-iou\": %.6f}", conf, nms);
+    fprintf(stderr, "[PPE_POSTPROCESS] confidence=%.6f nms_iou=%.3f results=%d\n",
+        stage.model_postprocess.confidence_thresh, nms, stage.model_postprocess.results);
+  } else {
+    std::snprintf(settings, sizeof(settings), "{\"confidence\": %.1f}", conf);
+  }
   gst_util_set_object_arg(G_OBJECT(post), "settings", settings);
 
   return Status::Ok();
@@ -2934,12 +3088,17 @@ Status GstPipelineBuilder::BuildWebrtcAnnotatedBranch(
       continue;
     }
 
+    const auto* profile = GetCodecProfile(input.encoding);
+    if (!profile) {
+      gst_object_unref(demux_src);
+      return Status::Error("WEBRTC_CODEC_UNKNOWN", cam);
+    }
     // Full chain: queue → videoscale → capsfilter → enc → parse → tee → fakesink
     GstElement* q      = MakeElement("queue",        "q_webrtc_"      + cam, &err);
     GstElement* vscale = MakeElement("videoscale",   "vscale_webrtc_" + cam, &err);
     GstElement* capsflt= MakeElement("capsfilter",   "caps_webrtc_"   + cam, &err);
-    GstElement* enc    = MakeElement("v4l2h264enc",  "enc_webrtc_"    + cam, &err);
-    GstElement* parse  = MakeElement("h264parse",    "parse_webrtc_"  + cam, &err);
+    GstElement* enc    = MakeElement(profile->hw_encoder, "enc_webrtc_"    + cam, &err);
+    GstElement* parse  = MakeElement(profile->parse, "parse_webrtc_"  + cam, &err);
     GstElement* tee    = MakeElement("tee",          "tee_webrtc_"    + cam, &err);
     GstElement* fsink  = MakeElement("fakesink",     "fakesink_webrtc_" + cam, &err);
 
@@ -3012,9 +3171,10 @@ Status GstPipelineBuilder::BuildWebrtcAnnotatedBranch(
 
     // The annotated RTSP server consumes only the per-camera encoded tee.
     reg->webrtc_tee_by_camera[cam] = tee;
+    reg->annotated_codec_by_camera[cam] = input.encoding;
 
-    fprintf(stderr, "[annotated] %s slot%d(%s): %s→vscale→caps→enc→parse→tee_webrtc\n",
-            group_id.c_str(), slot, cam.c_str(),
+    fprintf(stderr, "[annotated] %s slot%d(%s) codec=%s: %s→vscale→caps→enc→parse→tee_webrtc\n",
+            group_id.c_str(), slot, cam.c_str(), profile->name,
             use_camsplit ? "camsplit" : "demux");
   }
 
@@ -3150,6 +3310,8 @@ Status GstPipelineBuilder::BuildBatchDecodeStream(
                                    sp.decode.depay + "_batch_" + sp.camera_id, &err);
   GstElement* parse  = MakeElement(sp.decode.parse,
                                    sp.decode.parse + "_batch_" + sp.camera_id, &err);
+  GstElement* color_caps = sp.decode.colorimetry_override.empty() ? nullptr
+      : MakeElement("capssetter", "batch_color_caps_" + sp.camera_id, &err);
   GstElement* dec    = MakeElement(sp.decode.decoder,
                                    sp.decode.decoder + "_batch_" + sp.camera_id, &err);
   GstElement* conv   = is_hw ? nullptr
@@ -3159,16 +3321,23 @@ Status GstPipelineBuilder::BuildBatchDecodeStream(
                                     "batch_ingress_caps_" + sp.camera_id, &err);
   GstElement* q_out  = MakeElement("queue", "queue_batch_dec_" + sp.camera_id, &err);
   if (!src || !depay || !parse || !dec || !capsflt || !q_out ||
+      (!sp.decode.colorimetry_override.empty() && !color_caps) ||
       (!is_hw && !conv))
     return Status::Error("BATCH_DECODE_CREATE_FAILED", sp.camera_id + ": " + err);
 
+  if (color_caps) {
+    const Status color_status = ConfigureEncodedColorCaps(
+        color_caps, sp.encoding, sp.decode.colorimetry_override);
+    if (!color_status.ok) return color_status;
+  }
   g_object_set(src, "location", sp.rtsp_url.c_str(),
                "latency", (gint)200,
                "drop-on-latency", TRUE,
                "timeout", (guint64)5000000,
                nullptr);
-  if (!SetFlagsPropertyByNick(src, "protocols", "tcp", &err))
-    return Status::Error("BATCH_RTSP_PROTOCOL_FAILED", err);
+  const Status transport_status = ConfigureRtspTransport(
+      src, sp.camera_id, sp.rtsp_transport);
+  if (!transport_status.ok) return transport_status;
 
   if (is_hw) {
     if (!SetEnumPropertyByNick(dec, "capture-io-mode",
@@ -3178,10 +3347,9 @@ Status GstPipelineBuilder::BuildBatchDecodeStream(
                                sp.decode.output_io_mode.c_str(), &err))
       return Status::Error("DECODER_DMABUF_FAILED", err);
   }
-  if (sp.decode.rtp_wait_for_keyframe)
-    g_object_set(depay, "wait-for-keyframe", TRUE, nullptr);
-  if (sp.decode.rtp_request_keyframe)
-    g_object_set(depay, "request-keyframe", TRUE, nullptr);
+  const Status recovery = ConfigureRtpRecovery(depay, sp.decode.rtp_wait_for_keyframe,
+                                                sp.decode.rtp_request_keyframe);
+  if (!recovery.ok) return recovery;
 
   const CapsString caps_str = !ingress_caps.empty()
       ? ingress_caps : CapsString("video/x-raw,format=NV12");
@@ -3193,8 +3361,11 @@ Status GstPipelineBuilder::BuildBatchDecodeStream(
   gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, capsflt, q_out,
                    nullptr);
   if (conv) gst_bin_add(GST_BIN(pipeline), conv);
+  if (color_caps) gst_bin_add(GST_BIN(pipeline), color_caps);
 
-  std::vector<GstElement*> chain = {depay, parse, dec};
+  std::vector<GstElement*> chain = {depay, parse};
+  if (color_caps) chain.push_back(color_caps);
+  chain.push_back(dec);
   if (!is_hw && conv) chain.push_back(conv);
   chain.push_back(capsflt);
   chain.push_back(q_out);

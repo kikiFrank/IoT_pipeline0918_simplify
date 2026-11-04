@@ -1,3 +1,4 @@
+#include "aibox/common/CodecProfile.hpp"
 #include "aibox/orchestrator/PlanExporter.hpp"
 
 #include <fstream>
@@ -72,6 +73,8 @@ std::string PlanExporter::BuildJson(const ExecutionPlan& plan) const {
     auto& s = plan.stream_plans[i];
     j << "    {\n";
     j << "      " << JsonStr("camera_id") << ": " << JsonStr(s.camera_id) << ",\n";
+    j << "      " << JsonStr("rtsp_transport") << ": " << JsonStr(s.rtsp_transport) << ",\n";
+    j << "      " << JsonStr("encoding") << ": " << JsonStr(CodecName(s.encoding)) << ",\n";
     j << "      " << JsonStr("rtsp_url") << ": " << JsonStr(s.rtsp_url) << ",\n";
     j << "      " << JsonStr("algorithm_code") << ": " << JsonStr(s.algorithm_code) << ",\n";
     j << "      " << JsonStr("assigned_algorithm_group_id") << ": " << JsonStr(s.assigned_algorithm_group_id) << ",\n";
@@ -195,6 +198,7 @@ std::string PlanExporter::BuildJson(const ExecutionPlan& plan) const {
     j << "      " << JsonStr("batch_group_id") << ": " << JsonStr(st.batch_group_id) << ",\n";
     j << "      " << JsonStr("model_path") << ": " << JsonStr(st.model_path) << ",\n";
 
+    j << "      " << JsonStr("roi_expand_ratio") << ": " << st.roi_expand_ratio << ",\n";
     j << "      " << JsonStr("class_filter") << ": [";
     for (size_t ci = 0; ci < st.class_filter.size(); ++ci)
       j << JsonStr(st.class_filter[ci]) << (ci+1 < st.class_filter.size() ? ", " : "");

@@ -15,15 +15,16 @@
 
 namespace {
 constexpr uint32_t kPredictions = 8400;
-#ifdef AIBOX_YOLOX_STACKLIGHT
+#if defined(AIBOX_YOLOX_COLOR8)
+constexpr uint32_t kClasses = 8;
+constexpr const char* kModuleName = "YOLOX-COLOR8";
+#elif defined(AIBOX_YOLOX_STACKLIGHT)
 constexpr uint32_t kClasses = 1;
 constexpr const char* kModuleName = "YOLOX-STACKLIGHT";
 #else
 constexpr uint32_t kClasses = 3;
 constexpr const char* kModuleName = "YOLOX-PPE";
 #endif
-
-constexpr float kNmsIou = 0.65f;
 
 const std::string kModuleCaps = R"(
 {
@@ -61,8 +62,18 @@ bool Module::Configure(const std::string& labels_file,
       return false;
     }
     threshold_ = confidence / 100.0f;
+    const auto option = root->GetObject().find("nms-iou");
+    if (option != root->GetObject().end()) {
+      if (option->second->GetType() != JsonType::Number) return false;
+      const double nms = option->second->AsNumber();
+      if (!std::isfinite(nms) || nms <= 0.0 || nms > 1.0) {
+        LOG(logger_, kError, "%s invalid NMS IoU threshold", kModuleName);
+        return false;
+      }
+      nms_iou_ = static_cast<float>(nms);
+    }
   }
-  LOG(logger_, kLog, "%s threshold=%f nms=%f", kModuleName, threshold_, kNmsIou);
+  LOG(logger_, kLog, "%s threshold=%f nms=%f", kModuleName, threshold_, nms_iou_);
   return true;
 }
 
@@ -171,7 +182,7 @@ bool Module::Process(const Tensors& tensors, Dictionary& mlparams,
     bool suppressed = false;
     for (const auto& selected : kept) {
       if (candidate.class_id == selected.class_id &&
-          IntersectionScore(candidate, selected) > kNmsIou) {
+          IntersectionScore(candidate, selected) > nms_iou_) {
         suppressed = true;
         break;
       }

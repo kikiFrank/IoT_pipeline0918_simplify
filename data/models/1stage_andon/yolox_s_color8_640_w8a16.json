@@ -1,0 +1,704 @@
+{
+  "date": "2026-11-03",
+  "source_onnx": "/mnt/g/Visteon/Nov_26/daily_record/11-3/one_stage_yolox_quantized/model/yolox_s_color8_640.onnx",
+  "source_sha256": "fc1caf74c10359e8eb665eda9b7090ef4fc00db842e17c6d75a0c1176d6b3e2d",
+  "bin": "/mnt/g/Visteon/Nov_26/daily_record/11-3/one_stage_yolox_quantized/bin_model_output/yolox_s_color8_640_w8a16.bin",
+  "bin_sha256": "fd9fa95e7346b132f7f213a8d0258a3781bd4d1d5c6393e45bd54ecbbbdc26d3",
+  "bin_bytes": 9670656,
+  "dlc": "/mnt/g/Visteon/Nov_26/daily_record/11-3/one_stage_yolox_quantized/bin_model_output/yolox_s_color8_640_w8a16.dlc",
+  "dlc_sha256": "60c324ca015522e088ba3c081bb4903f16a9260b0bd7ed91083280d6d2d748b5",
+  "dlc_bytes": 9949540,
+  "sdk": "QAIRT 2.46.0.260424121129",
+  "target": {
+    "dsp_arch": "v73",
+    "soc_id": 77
+  },
+  "selected_variant": "pcq_legacy",
+  "selection": {
+    "selection_basis": "Calibration split only, primary metric COCO mAP50:95, choose highest observed value; no statistical significance claimed",
+    "selected": "pcq_legacy",
+    "metrics": {
+      "baseline": {
+        "n": 128,
+        "mAP50_95": 0.4128582400473832,
+        "mAP50": 0.7200578579392723,
+        "mAP75": 0.4286677732276182,
+        "AR100": 0.46195687337615127,
+        "detections": 2875,
+        "per_class": {
+          "Green": {
+            "AP50_95": 0.5352293821292647,
+            "AP50": 0.9368778613591442
+          },
+          "Green-Yellow": {
+            "AP50_95": 0.27712271227122715,
+            "AP50": 0.4473447344734474
+          },
+          "None": {
+            "AP50_95": 0.3845423435924421,
+            "AP50": 0.6801567082546892
+          },
+          "Red": {
+            "AP50_95": 0.4844510212016499,
+            "AP50": 0.8254379284082254
+          },
+          "Red-green": {
+            "AP50_95": 0.24099009900990095,
+            "AP50": 0.45544554455445546
+          },
+          "Yellow": {
+            "AP50_95": 0.5548138820798142,
+            "AP50": 0.9750843705856719
+          },
+          "Blue": {
+            "AP50_95": null,
+            "AP50": null
+          },
+          "Yellow-Blue": {
+            "AP50_95": null,
+            "AP50": null
+          }
+        }
+      },
+      "pcq_legacy": {
+        "n": 128,
+        "mAP50_95": 0.414176448089546,
+        "mAP50": 0.7185993145777636,
+        "mAP75": 0.4304481860637609,
+        "AR100": 0.465331795206491,
+        "detections": 2816,
+        "per_class": {
+          "Green": {
+            "AP50_95": 0.5453080588049546,
+            "AP50": 0.9320775379741908
+          },
+          "Green-Yellow": {
+            "AP50_95": 0.29862909367859863,
+            "AP50": 0.48923353873848924
+          },
+          "None": {
+            "AP50_95": 0.38542970975273555,
+            "AP50": 0.6809710080208424
+          },
+          "Red": {
+            "AP50_95": 0.4724661828082252,
+            "AP50": 0.7939482277140182
+          },
+          "Red-green": {
+            "AP50_95": 0.24455445544554455,
+            "AP50": 0.45544554455445546
+          },
+          "Yellow": {
+            "AP50_95": 0.5386711880472175,
+            "AP50": 0.959920030464585
+          },
+          "Blue": {
+            "AP50_95": null,
+            "AP50": null
+          },
+          "Yellow-Blue": {
+            "AP50_95": null,
+            "AP50": null
+          }
+        }
+      }
+    }
+  },
+  "source_onnx_unchanged": true,
+  "weights_bitwidth": 8,
+  "activation_bitwidth": 16,
+  "bias_bitwidth": 32,
+  "io": {
+    "images": {
+      "dtype": "uFxp_16",
+      "shape": [
+        1,
+        640,
+        640,
+        3
+      ],
+      "direction": "APP_WRITE"
+    },
+    "output": {
+      "dtype": "uFxp_16",
+      "shape": [
+        1,
+        8400,
+        13
+      ],
+      "direction": "APP_READ"
+    }
+  },
+  "io_encodings": {
+    "images": {
+      "bitwidth": 16,
+      "min": 0.0,
+      "max": 255.0,
+      "scale_rounded_dlc_info": 0.003891050583,
+      "offset": 0
+    },
+    "output": {
+      "bitwidth": 16,
+      "min": -48.206115722656,
+      "max": 639.321105957031,
+      "scale_rounded_dlc_info": 0.010490993038,
+      "offset": -4595
+    }
+  },
+  "all_native_activation_types": [
+    "uFxp_16"
+  ],
+  "classes": {
+    "Green": 0,
+    "Green-Yellow": 1,
+    "None": 2,
+    "Red": 3,
+    "Red-green": 4,
+    "Yellow": 5,
+    "Blue": 6,
+    "Yellow-Blue": 7
+  },
+  "dataset": {
+    "source_summary": {
+      "source": "E:\\datasets2\\yolox_merged_dataset_v2",
+      "split": "original validation split",
+      "images": 286,
+      "annotations": 2568,
+      "removed_categories": [
+        "Gesture",
+        "Human"
+      ],
+      "class_mapping": {
+        "0": "Green",
+        "1": "Green-Yellow",
+        "2": "None",
+        "3": "Red",
+        "4": "Red-green",
+        "5": "Yellow",
+        "6": "Blue",
+        "7": "Yellow-Blue"
+      },
+      "annotation_counts": {
+        "Green": 1830,
+        "Green-Yellow": 49,
+        "None": 369,
+        "Red": 68,
+        "Red-green": 24,
+        "Yellow": 228,
+        "Blue": 0,
+        "Yellow-Blue": 0
+      }
+    },
+    "source_images": 286,
+    "unique_pixel_groups": 286,
+    "pixel_disjoint": true,
+    "splits": {
+      "calibration": {
+        "images": 128,
+        "boxes_per_class": {
+          "Green": 838,
+          "Green-Yellow": 22,
+          "None": 171,
+          "Red": 31,
+          "Red-green": 11,
+          "Yellow": 103,
+          "Blue": 0,
+          "Yellow-Blue": 0
+        },
+        "boxes": 1176
+      },
+      "evaluation": {
+        "images": 158,
+        "boxes_per_class": {
+          "Green": 992,
+          "Green-Yellow": 27,
+          "None": 198,
+          "Red": 37,
+          "Red-green": 13,
+          "Yellow": 125,
+          "Blue": 0,
+          "Yellow-Blue": 0
+        },
+        "boxes": 1392
+      }
+    },
+    "classes_without_samples": [
+      "Blue",
+      "Yellow-Blue"
+    ]
+  },
+  "baseline_onnx": {
+    "n": 158,
+    "mAP50_95": 0.45468498852217903,
+    "mAP50": 0.7687372286396914,
+    "mAP75": 0.4720541597171865,
+    "AR100": 0.5064987599233567,
+    "detections": 4176,
+    "per_class": {
+      "Green": {
+        "AP50_95": 0.5628313309314574,
+        "AP50": 0.9303841187645431
+      },
+      "Green-Yellow": {
+        "AP50_95": 0.3607443769587042,
+        "AP50": 0.5497961560861969
+      },
+      "None": {
+        "AP50_95": 0.36340698318372483,
+        "AP50": 0.6985797306507746
+      },
+      "Red": {
+        "AP50_95": 0.4372136596250718,
+        "AP50": 0.7801980198019803
+      },
+      "Red-green": {
+        "AP50_95": 0.438943894389439,
+        "AP50": 0.693069306930693
+      },
+      "Yellow": {
+        "AP50_95": 0.5649696860446768,
+        "AP50": 0.9603960396039604
+      },
+      "Blue": {
+        "AP50_95": null,
+        "AP50": null
+      },
+      "Yellow-Blue": {
+        "AP50_95": null,
+        "AP50": null
+      }
+    }
+  },
+  "float_dlc": {
+    "n": 158,
+    "mAP50_95": 0.45468498852217903,
+    "mAP50": 0.7687372286396914,
+    "mAP75": 0.4720541597171865,
+    "AR100": 0.5064987599233567,
+    "detections": 4176,
+    "per_class": {
+      "Green": {
+        "AP50_95": 0.5628313309314574,
+        "AP50": 0.9303841187645431
+      },
+      "Green-Yellow": {
+        "AP50_95": 0.3607443769587042,
+        "AP50": 0.5497961560861969
+      },
+      "None": {
+        "AP50_95": 0.36340698318372483,
+        "AP50": 0.6985797306507746
+      },
+      "Red": {
+        "AP50_95": 0.4372136596250718,
+        "AP50": 0.7801980198019803
+      },
+      "Red-green": {
+        "AP50_95": 0.438943894389439,
+        "AP50": 0.693069306930693
+      },
+      "Yellow": {
+        "AP50_95": 0.5649696860446768,
+        "AP50": 0.9603960396039604
+      },
+      "Blue": {
+        "AP50_95": null,
+        "AP50": null
+      },
+      "Yellow-Blue": {
+        "AP50_95": null,
+        "AP50": null
+      }
+    }
+  },
+  "initial_quantized_board": {
+    "n": 158,
+    "mAP50_95": 0.4452266110955043,
+    "mAP50": 0.7713471029135028,
+    "mAP75": 0.4608867921657248,
+    "AR100": 0.49421073861100745,
+    "detections": 3446,
+    "per_class": {
+      "Green": {
+        "AP50_95": 0.5494746753281591,
+        "AP50": 0.9340609399236262
+      },
+      "Green-Yellow": {
+        "AP50_95": 0.36269094766619525,
+        "AP50": 0.551980198019802
+      },
+      "None": {
+        "AP50_95": 0.35494631505320323,
+        "AP50": 0.6786112655484482
+      },
+      "Red": {
+        "AP50_95": 0.43063599739981095,
+        "AP50": 0.8099648674544875
+      },
+      "Red-green": {
+        "AP50_95": 0.4119636963696369,
+        "AP50": 0.693069306930693
+      },
+      "Yellow": {
+        "AP50_95": 0.5616480347560209,
+        "AP50": 0.9603960396039604
+      },
+      "Blue": {
+        "AP50_95": null,
+        "AP50": null
+      },
+      "Yellow-Blue": {
+        "AP50_95": null,
+        "AP50": null
+      }
+    }
+  },
+  "final_quantized_board": {
+    "n": 158,
+    "mAP50_95": 0.44892972736312886,
+    "mAP50": 0.7651654039593284,
+    "mAP75": 0.4674248997936688,
+    "AR100": 0.49811065828498624,
+    "detections": 3371,
+    "per_class": {
+      "Green": {
+        "AP50_95": 0.5635943074093238,
+        "AP50": 0.9300379282411467
+      },
+      "Green-Yellow": {
+        "AP50_95": 0.359977050226031,
+        "AP50": 0.5497961560861969
+      },
+      "None": {
+        "AP50_95": 0.3523541427577787,
+        "AP50": 0.6774949730919937
+      },
+      "Red": {
+        "AP50_95": 0.43722105659597743,
+        "AP50": 0.7801980198019803
+      },
+      "Red-green": {
+        "AP50_95": 0.4235973597359736,
+        "AP50": 0.693069306930693
+      },
+      "Yellow": {
+        "AP50_95": 0.5568344474536887,
+        "AP50": 0.9603960396039604
+      },
+      "Blue": {
+        "AP50_95": null,
+        "AP50": null
+      },
+      "Yellow-Blue": {
+        "AP50_95": null,
+        "AP50": null
+      }
+    }
+  },
+  "delta_vs_onnx_pp": {
+    "mAP50": -0.35718246803629894,
+    "mAP50_95": -0.5755261159050173,
+    "mAP75": -0.46292599235177034,
+    "AR100": -0.8388101638370449
+  },
+  "delta_vs_initial_quantized_pp": {
+    "mAP50": -0.6181698954174419,
+    "mAP50_95": 0.370311626762454,
+    "mAP75": 0.653810762794399,
+    "AR100": 0.3899919673978791
+  },
+  "timing": {
+    "baseline": {
+      "NETRUN:Graph 0: model_float": {
+        "n": 158,
+        "mean_ms": 9.603702531645569,
+        "p50_ms": 9.6795,
+        "p95_ms": 10.1684
+      },
+      "BACKEND:RPC (execute) time": {
+        "n": 158,
+        "mean_ms": 9.257658227848102,
+        "p50_ms": 9.3555,
+        "p95_ms": 9.7888
+      },
+      "BACKEND:QNN accelerator (execute) time": {
+        "n": 158,
+        "mean_ms": 7.818348101265823,
+        "p50_ms": 7.806,
+        "p95_ms": 7.838
+      },
+      "BACKEND:Accelerator (execute) time": {
+        "n": 158,
+        "mean_ms": 7.730588607594937,
+        "p50_ms": 7.718,
+        "p95_ms": 7.74535
+      },
+      "BACKEND:Accelerator (execute excluding wait) time": {
+        "n": 158,
+        "mean_ms": 7.644462025316456,
+        "p50_ms": 7.646,
+        "p95_ms": 7.664149999999999
+      },
+      "BACKEND:QNN (execute) time": {
+        "n": 158,
+        "mean_ms": 9.576101265822784,
+        "p50_ms": 9.6535,
+        "p95_ms": 10.139950000000002
+      }
+    },
+    "pcq_legacy": {
+      "NETRUN:Graph 0: model_float": {
+        "n": 158,
+        "mean_ms": 10.273063291139241,
+        "p50_ms": 10.084,
+        "p95_ms": 11.00905
+      },
+      "BACKEND:RPC (execute) time": {
+        "n": 158,
+        "mean_ms": 9.882613924050633,
+        "p50_ms": 9.690999999999999,
+        "p95_ms": 10.59705
+      },
+      "BACKEND:QNN accelerator (execute) time": {
+        "n": 158,
+        "mean_ms": 7.975506329113923,
+        "p50_ms": 7.9625,
+        "p95_ms": 7.98715
+      },
+      "BACKEND:Accelerator (execute) time": {
+        "n": 158,
+        "mean_ms": 7.885848101265823,
+        "p50_ms": 7.874,
+        "p95_ms": 7.89715
+      },
+      "BACKEND:Accelerator (execute excluding wait) time": {
+        "n": 158,
+        "mean_ms": 7.801462025316455,
+        "p50_ms": 7.801,
+        "p95_ms": 7.819
+      },
+      "BACKEND:QNN (execute) time": {
+        "n": 158,
+        "mean_ms": 10.240316455696204,
+        "p50_ms": 10.051,
+        "p95_ms": 10.97775
+      }
+    }
+  },
+  "actual_board_run": {
+    "variant": "pcq_legacy",
+    "split": "evaluation",
+    "n": 158,
+    "all_outputs_finite": true,
+    "bin_sha256": "fd9fa95e7346b132f7f213a8d0258a3781bd4d1d5c6393e45bd54ecbbbdc26d3",
+    "backend": "/usr/lib/libQnnHtp.so",
+    "board_metadata": {
+      "board_ip": "192.168.50.165",
+      "platform": "Linux-6.8.0-1084-qcom-aarch64-with-glibc2.39",
+      "architecture": "aarch64",
+      "qnn_version": "QNN SDK v2.46.0.260424121129",
+      "machine": "QCS9075",
+      "soc_id": "676",
+      "family": "Snapdragon",
+      "boot_id": "85680c69-f9cc-446f-9449-44929f1be380",
+      "time_utc": "2026-11-03T04:13:18Z"
+    },
+    "argv": [
+      "/usr/bin/qnn-net-run",
+      "--retrieve_context=/home/ubuntu/codex_color8_eval_20261103_fc1caf74/models/pcq_legacy.bin",
+      "--backend=/usr/lib/libQnnHtp.so",
+      "--input_list=/home/ubuntu/codex_color8_eval_20261103_fc1caf74/runs/pcq_legacy/evaluation/inputs.txt",
+      "--output_dir=/home/ubuntu/codex_color8_eval_20261103_fc1caf74/runs/pcq_legacy/evaluation/outputs",
+      "--profiling_level=basic",
+      "--log_level=error"
+    ],
+    "wall_seconds_including_startup_and_io": 5.076382863015169,
+    "input_image_ids": [
+      1,
+      2,
+      7,
+      9,
+      10,
+      11,
+      14,
+      16,
+      17,
+      18,
+      23,
+      26,
+      27,
+      28,
+      29,
+      31,
+      32,
+      33,
+      35,
+      36,
+      41,
+      43,
+      45,
+      48,
+      50,
+      51,
+      52,
+      53,
+      54,
+      56,
+      57,
+      58,
+      60,
+      61,
+      62,
+      66,
+      67,
+      69,
+      71,
+      73,
+      74,
+      75,
+      79,
+      80,
+      81,
+      82,
+      84,
+      86,
+      87,
+      88,
+      90,
+      92,
+      93,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      114,
+      115,
+      117,
+      119,
+      121,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      130,
+      134,
+      135,
+      137,
+      138,
+      139,
+      141,
+      142,
+      144,
+      145,
+      146,
+      147,
+      149,
+      151,
+      152,
+      154,
+      160,
+      161,
+      162,
+      163,
+      169,
+      170,
+      172,
+      173,
+      174,
+      175,
+      177,
+      178,
+      179,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      190,
+      191,
+      193,
+      194,
+      195,
+      196,
+      199,
+      200,
+      201,
+      203,
+      205,
+      206,
+      208,
+      210,
+      217,
+      218,
+      220,
+      221,
+      222,
+      224,
+      226,
+      227,
+      228,
+      233,
+      234,
+      237,
+      238,
+      241,
+      242,
+      243,
+      248,
+      249,
+      251,
+      259,
+      262,
+      268,
+      274,
+      275,
+      276,
+      278,
+      281,
+      282,
+      284,
+      286
+    ]
+  },
+  "board_tested": true,
+  "accuracy_evaluated": true,
+  "pipeline_tested": false,
+  "recipe": {
+    "variant": "pcq_legacy",
+    "quantizer_argv": [
+      "qairt-quantizer",
+      "--input_dlc",
+      "/mnt/g/Visteon/Nov_26/daily_record/11-3/one_stage_yolox_quantized/model_float.dlc",
+      "--input_list",
+      "/mnt/g/Visteon/Nov_26/daily_record/11-3/one_stage_yolox_quantized/calibration/input_list.txt",
+      "--output_dlc",
+      "/mnt/g/Visteon/Nov_26/daily_record/11-3/one_stage_yolox_quantized/variants/pcq_legacy/model_w8a16.dlc",
+      "--target_backend",
+      "HTP",
+      "--weights_bitwidth",
+      "8",
+      "--act_bitwidth",
+      "16",
+      "--bias_bitwidth",
+      "32",
+      "--use_per_channel_quantization",
+      "--adjust_bias_encoding"
+    ],
+    "calibration_count": 128,
+    "selection_split": "calibration only"
+  }
+}

@@ -93,9 +93,10 @@ struct RuntimeRegistry {
   GstElement* recording_filesink   = nullptr;
   int         recording_sink_idx   = 0;  // next free compositor sink index
 
-  // Annotated media: per-camera encoded H.264 tee (tee_webrtc_<cam>)
+  // Annotated media: per-camera encoded H.264/H.265 tee (tee_webrtc_<cam>)
   // consumed by the in-process RTSP server.
   std::unordered_map<CameraId, GstElement*> webrtc_tee_by_camera;
+  std::unordered_map<CameraId, CodecType> annotated_codec_by_camera;
 
   // =================================================================
   // Batch (multistream) — filled only on the 0.1 B2 dispatch branch

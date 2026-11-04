@@ -198,7 +198,9 @@ GstFlowReturn OnTerminalSampleToAggregator(GstAppSink* sink, gpointer user_data)
       det.classification_confidence = static_cast<float>(label.confidence);
       static guint64 color_count = 0;
       if (++color_count <= 12 || color_count % 60 == 0)
-        fprintf(stderr, "[ANDON_COLOR] camera=%s frame=%llu roi_id=%d label=%s confidence=%.3f box=%u,%u,%u,%u\n",
+        fprintf(stderr, "[%s] camera=%s frame=%llu roi_id=%d label=%s confidence=%.3f box=%u,%u,%u,%u\n",
+                g_object_get_data(G_OBJECT(sink), "aibox-roi-classification")
+                    ? "ROI_CLASSIFICATION" : "ANDON_COLOR",
                 fm.camera_id, static_cast<unsigned long long>(fm.frame_id), roi->id,
                 det.classification_label.c_str(), det.classification_confidence,
                 roi->x, roi->y, roi->w, roi->h);
@@ -212,14 +214,18 @@ GstFlowReturn OnTerminalSampleToAggregator(GstAppSink* sink, gpointer user_data)
 
   static guint64 term_seq = 0;
   const guint64 n = ++term_seq;
-  if (g_object_get_data(G_OBJECT(sink), "aibox-andon-color")) {
+  const bool generic_classification =
+      g_object_get_data(G_OBJECT(sink), "aibox-roi-classification") != nullptr;
+  if (generic_classification || g_object_get_data(G_OBJECT(sink), "aibox-andon-color")) {
     size_t classified = 0;
     for (const auto& detection : res.detections)
       if (!detection.classification_label.empty()) ++classified;
     const bool mismatch = classified != res.detections.size();
     if (mismatch || n <= 12 || n % 30 == 0)
       fprintf(stderr, "[%s] camera=%s frame=%llu rois=%zu classified=%zu\n",
-          mismatch ? "ANDON_BINDING_ERROR" : "ANDON_FRAME", res.camera_id.c_str(),
+          generic_classification
+              ? (mismatch ? "ROI_CLASSIFICATION_BINDING_ERROR" : "ROI_CLASSIFICATION_FRAME")
+              : (mismatch ? "ANDON_BINDING_ERROR" : "ANDON_FRAME"), res.camera_id.c_str(),
           static_cast<unsigned long long>(res.frame_id), res.detections.size(), classified);
   }
   if (n <= 8 || (n % 30) == 0) {

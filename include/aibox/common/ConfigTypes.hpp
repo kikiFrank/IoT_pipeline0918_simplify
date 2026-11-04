@@ -99,16 +99,19 @@ struct BatchConfig {
 // DecodeConfig
 // ===================================================================
 struct DecodeConfig {
-  ElementFactory depay       = "rtph264depay";
-  ElementFactory parse       = "h264parse";
-  ElementFactory decoder     = "v4l2h264dec";
+  ElementFactory depay;
+  ElementFactory parse;
+  ElementFactory decoder;
   CapsString     output_caps = "video/x-raw,format=NV12";
+  // Optional encoded caps declaration override; this does not convert pixels.
+  std::string colorimetry_override;
+  bool legacy_h264_colorimetry_override = false;
 
   // --- E3 fix: per-snapshot decode tuning. Defaults == legacy behavior. ---
   // v4l2h264dec GstV4l2IOMode nicks: auto|rw|mmap|userptr|dmabuf|dmabuf-import.
   std::string capture_io_mode = "dmabuf";
   std::string output_io_mode  = "dmabuf";
-  // rtph264depay bools; element defaults are FALSE == legacy behavior.
+  // RTP depayloader bools; element defaults are FALSE == legacy behavior.
   bool rtp_wait_for_keyframe = false;
   bool rtp_request_keyframe  = false;
 };
@@ -132,6 +135,7 @@ struct StreamConfig {
   bool        enabled     = true;
   SourceType  source_type = SourceType::kRtsp;
   std::string rtsp_url;
+  std::string rtsp_transport = "tcp";
   CodecType   encoding    = CodecType::kH264;
 
   DecodeConfig           decode;
@@ -161,6 +165,7 @@ struct StageConfig {
   InputSourceType input_source_type      = InputSourceType::kUnknown;
   StageId         input_source_stage_id;  // 当 input_source_type=kStage
   InputCropType   input_crop             = InputCropType::kFull;
+  double         roi_expand_ratio       = 0.0;  // Per side; classification input only.
 
   std::string              preprocess;
   std::string              postprocess;
@@ -261,6 +266,7 @@ struct ModelPostprocessConfig {
   ElementFactory plugin              = "qtimlpostprocess_roi";
   std::string    module              = "yolo-nas";
   float          confidence_thresh   = 0.5f;
+  float          nms_iou_thresh      = 0.65f;  // Decoded YOLOX module setting.
   int            results             = 50;
   std::string    coordinate_restore  = "letterbox";
   bool           person_only_boxes   = false;

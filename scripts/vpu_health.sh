@@ -15,6 +15,8 @@ aibox_latest_demo_log() {
   [ -n "$root" ] || root="$(cd "$_AIBOX_VPU_HEALTH_DIR/.." && pwd)"
   local best="" best_m=0 cand m
   for cand in \
+    "$root/output/raisehands_4cam/raisehands_demo.log" \
+    "$root/output/1stage_andon_4cam/1stage_andon_demo.log" \
     "$root/output/andon_4cam/andon_demo.log" \
     "$root/output/ppe_4cam/ppe_demo.log" \
     "$root/output/webrtc_12cam/p12_demo.log" \

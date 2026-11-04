@@ -94,7 +94,7 @@ class GstPipelineBuilder {
                                    RuntimeRegistry* reg) const;
 
   // Annotated RTSP: attach a per-group encode branch from tee_post
-  //   tee_post src → aiboxstreamdemux → per-cam(enc→h264parse→tee_webrtc→fakesink)
+  //   tee_post src → aiboxstreamdemux → per-cam(enc→h26xparse→tee_webrtc→fakesink)
   // (historical name kept to minimize churn)
   Status BuildWebrtcAnnotatedBranch(GstElement* pipeline,
                                     GstElement* tee_post,

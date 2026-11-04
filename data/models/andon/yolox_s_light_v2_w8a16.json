@@ -1,0 +1,124 @@
+{
+  "source_onnx": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/new_models/yolox_s_light_v2.onnx",
+  "source_sha256": "e4701dc317758612ce0c12a98e847a3b39920aba639832913a5ebb8c973ddcc2",
+  "model_family": "YOLOX-S",
+  "same_onnx_as_20261030": false,
+  "bin": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/bin_model_output/yolox_s_light_v2_w8a16.bin",
+  "bin_sha256": "ed37bd1e934ddf66e889c31ceffba0237034f4aa040e57814ce995183f7444e6",
+  "bin_bytes": 9674752,
+  "quantized_dlc": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/light/model_w8a16.dlc",
+  "quantized_dlc_sha256": "67e1225f3307a4beb00d91a53d8872e53409e39f798a8eb1623531e767f4673f",
+  "sdk_root": "/mnt/e/W_space/Ubuntu_22_04/qairt/2.46.0.260424",
+  "target": {
+    "dsp_arch": "v73",
+    "soc_id": 77
+  },
+  "weights_bitwidth": 8,
+  "activation_bitwidth": 16,
+  "bias_bitwidth": 32,
+  "quantize_v2": false,
+  "per_channel_weights": true,
+  "calibration_count": 128,
+  "calibration_class_counts": {
+    "detection": 128
+  },
+  "calibration_pixels_verified": true,
+  "io": {
+    "images": {
+      "dtype": "uFxp_16",
+      "shape": [
+        1,
+        640,
+        640,
+        3
+      ],
+      "direction": "APP_WRITE"
+    },
+    "output": {
+      "dtype": "uFxp_16",
+      "shape": [
+        1,
+        8400,
+        6
+      ],
+      "direction": "APP_READ"
+    }
+  },
+  "io_encodings": {
+    "images": {
+      "bitwidth": 16,
+      "min": 0.0,
+      "max": 255.0,
+      "scale_rounded_dlc_info": 0.003891050583,
+      "offset": 0
+    },
+    "output": {
+      "bitwidth": 16,
+      "min": -64.0,
+      "max": 959.984375,
+      "scale_rounded_dlc_info": 0.015625,
+      "offset": -4096
+    }
+  },
+  "classes": {
+    "Stacklight": 0
+  },
+  "learned_layers": 83,
+  "weight_tensor_types": {
+    "uFxp_8": 83
+  },
+  "encoding_audit_passed": true,
+  "smoke_test": {
+    "backend": "QnnHtp host emulation",
+    "count": 1,
+    "finite_output": true,
+    "output_shape": [
+      1,
+      8400,
+      6
+    ]
+  },
+  "accuracy_evaluated": true,
+  "board_tested": true,
+  "repair_variant": "bounded_pcq_legacy",
+  "repair_candidate_path": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/light/repair_candidates/bounded_pcq_legacy",
+  "encoding_overrides": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/light/repair_candidates/bounded_pcq_legacy/encoding_overrides.json",
+  "bias_encoding_adjusted": true,
+  "board_ip": "192.168.50.165",
+  "board_metrics": {
+    "n": 158,
+    "mAP50_95": 0.6025303166096092,
+    "mAP50": 0.9637372677721868,
+    "mAP75": 0.6279365711238861,
+    "AR100": 0.659453781512605,
+    "detections": 1893,
+    "per_class": {
+      "Stacklight": {
+        "AP50_95": 0.6025303166096092,
+        "AP50": 0.9637372677721868
+      }
+    }
+  },
+  "board_run_summary": {
+    "task": "light",
+    "variant": "bounded_pcq_legacy",
+    "split": "evaluation",
+    "n": 158,
+    "output_elements": 50400,
+    "bin_sha256": "ed37bd1e934ddf66e889c31ceffba0237034f4aa040e57814ce995183f7444e6",
+    "backend": "/usr/lib/libQnnHtp.so",
+    "board_ip": "192.168.50.165",
+    "argv": [
+      "/usr/bin/qnn-net-run",
+      "--retrieve_context=/home/ubuntu/codex_model_eval_20261102_3models_5209f75e/repair_models/light_bounded_pcq_legacy.bin",
+      "--backend=/usr/lib/libQnnHtp.so",
+      "--input_list=/home/ubuntu/codex_model_eval_20261102_3models_5209f75e/repair_runs/light/bounded_pcq_legacy/evaluation/inputs.txt",
+      "--output_dir=/home/ubuntu/codex_model_eval_20261102_3models_5209f75e/repair_runs/light/bounded_pcq_legacy/evaluation/outputs",
+      "--profiling_level=basic",
+      "--log_level=error"
+    ],
+    "wall_seconds": 4.403119724011049,
+    "all_outputs_finite": true
+  },
+  "original_delivery_bin_sha256": "083f3f147430b97f1deb14433301dc499fbef93fc158206dc8e1486da87f3b5a"
+}

@@ -4,6 +4,7 @@
  *
  * Shared decoded YOLOX implementation. Default build is PPE [1,8400,8];
  * AIBOX_YOLOX_STACKLIGHT builds the separate stacklight [1,8400,6] module.
+ * AIBOX_YOLOX_COLOR8 builds the separate eight-colour [1,8400,13] module.
  */
 #pragma once
 
@@ -41,5 +42,6 @@ class Module : public IModule {
   LogCallback logger_;
   LabelsParser labels_parser_;
   float threshold_ = 0.001f;
+  float nms_iou_ = 0.65f;
   bool logged_tensor_ = false;
 };

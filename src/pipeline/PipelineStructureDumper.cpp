@@ -1,3 +1,4 @@
+#include "aibox/common/CodecProfile.hpp"
 #include "aibox/pipeline/PipelineStructureDumper.hpp"
 #include <fstream>
 #include <sstream>
@@ -80,7 +81,8 @@ std::string PipelineStructureDumper::SecStreams(const ExecutionPlan& p) const {
     s << "    enabled                : " << (sp.enabled ? "true" : "false") << "\n";
     s << "    source_type            : rtsp\n";
     s << "    rtsp_url               : " << RedactUrl(sp.rtsp_url) << "\n";
-    s << "    encoding               : h264\n";
+    s << "    rtsp_transport         : " << sp.rtsp_transport << "\n";
+    s << "    encoding               : " << CodecName(sp.encoding) << "\n";
     s << "    algorithm              : " << sp.algorithm_code << "\n";
     s << "    frequency_ms           : " << sp.frequency_ms << "\n";
     s << "    assigned_algorithm_grp : " << sp.assigned_algorithm_group_id << "\n";
@@ -88,7 +90,11 @@ std::string PipelineStructureDumper::SecStreams(const ExecutionPlan& p) const {
     s << "    mux_slot_id            : " << sp.mux_slot_id << "\n";
     s << "    assigned_batch_grp     : " << sp.assigned_batch_group_id << "\n";
     s << "    batch_stream_id        : " << sp.batch_stream_id << "\n";
-    s << "    decode_chain           : rtspsrc -> rtph264depay -> h264parse -> v4l2h264dec -> capsfilter(video/x-raw,format=NV12) -> queue\n\n";
+    s << "    decode_chain           : rtspsrc -> " << sp.decode.depay << " -> "
+      << sp.decode.parse
+      << (sp.decode.colorimetry_override.empty() ? "" : " -> capssetter")
+      << " -> " << sp.decode.decoder << " -> capsfilter("
+      << sp.decode.output_caps << ") -> queue\n\n";
   }
   return s.str();
 }
@@ -188,14 +194,15 @@ std::string PipelineStructureDumper::SecStages(const ExecutionPlan& p) const {
   for (auto& st : p.stage_plans) {
     s << "  " << st.stage_id << "\n";
     s << "    index                  : " << st.stage_index << "\n";
-    s << "    role                   : detector\n";
+    s << "    role                   : " << (st.role == StageRole::kClassifier ? "classifier" : "detector") << "\n";
     s << "    model_id               : " << st.model_id << "\n";
     s << "    model_batch            : " << st.model_batch << "\n";
     s << "    batch_group_id         : " << st.batch_group_id << "\n";
     s << "    model_path             : " << st.model_path << "\n";
     s << "    labels_path            : " << st.labels_path << "\n";
     s << "    input_source           : " << (st.input_source_type == InputSourceType::kFrame ? "frame" : st.input_source_stage_id) << "\n";
-    s << "    input_crop             : full\n";
+    s << "    input_crop             : " << (st.input_crop == InputCropType::kBBox ? "bbox" : "full") << "\n";
+    s << "    roi_expand_ratio       : " << st.roi_expand_ratio << "\n";
     s << "    class_filter           : ";
     for (size_t i = 0; i < st.class_filter.size(); ++i)
       s << st.class_filter[i] << (i+1 < st.class_filter.size() ? ", " : "");
@@ -234,7 +241,10 @@ std::string PipelineStructureDumper::SecExpectedGst(const ExecutionPlan& p) cons
   for (auto& tm : p.time_mux_group_plans) {
     for (auto& inp : tm.stream_inputs) {
       s << "  " << inp.camera_id << ":\n";
-      s << "    rtspsrc -> rtph264depay -> h264parse -> v4l2h264dec -> capsfilter(NV12) -> queue -> " << tm.mux_name << "." << inp.mux_sink_pad_name << "\n\n";
+      s << "    rtspsrc -> " << inp.depay_element << " -> " << inp.parse_element
+        << (inp.colorimetry_override.empty() ? "" : " -> capssetter")
+        << " -> " << inp.decoder_element << " -> capsfilter(" << inp.decode_output_caps
+        << ") -> queue -> " << tm.mux_name << "." << inp.mux_sink_pad_name << "\n\n";
     }
 
     s << "  " << tm.mux_name << ".src:\n";

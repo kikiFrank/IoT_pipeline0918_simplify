@@ -5,12 +5,15 @@ R=/mnt/workspace/0924/aibox_pipeline
 # All running pipelines are stopped through the unified lifecycle entry.
 AIBOX_ROOT="$R" bash "$R/scripts/webrtc_stop.sh"
 mkdir -p "$R/output/andon_4cam" "$R/scripts/andon" "$R/plugins/ml_modules" "$R/config_snapshots/andon_4cam"
-tar -czf "$R/output/andon_4cam/runtime_before_andon.tgz" -C "$R" \
- build_unified/aibox_stream_pipeline_demo runtime_plugins scripts
+# Replace runtime products directly; old model files retain their own names.
 cp "$S/build_unified/aibox_stream_pipeline_demo" "$R/build_unified/"
 cp "$S/runtime_plugins/"libgst*.so "$R/runtime_plugins/"
 cp "$S/plugins/ml_modules/"libml-postprocess-*.so "$R/plugins/ml_modules/"
 cp -a "$S/config_snapshots/andon_4cam/." "$R/config_snapshots/andon_4cam/"
+if [ -d "$S/config_snapshots/andon_4cam_h265" ]; then
+ mkdir -p "$R/config_snapshots/andon_4cam_h265"
+ cp -a "$S/config_snapshots/andon_4cam_h265/." "$R/config_snapshots/andon_4cam_h265/"
+fi
 mkdir -p "$R/data/models/andon"
 cp "$S/data/models/andon/"*.bin "$R/data/models/andon/"
 cp "$S/scripts/andon/"*.sh "$R/scripts/andon/"

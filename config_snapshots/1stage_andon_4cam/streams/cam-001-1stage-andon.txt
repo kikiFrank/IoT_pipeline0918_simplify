@@ -1,0 +1,20 @@
+[stream]
+camera_id=cam-001
+name=1stage Andon Camera 001
+enabled=1
+source_type=rtsp
+rtsp_transport=tcp
+rtsp_url=rtsp://192.168.50.41:8556/cam-005
+encoding=h265
+
+[decode]
+depay=rtph265depay
+parse=h265parse
+decoder=v4l2h265dec
+output_caps=video/x-raw,format=NV12
+
+[inference]
+algorithm=1stage_andon
+frequency=200
+thresh=0.5
+drop_policy=latest

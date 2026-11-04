@@ -58,6 +58,7 @@ struct StreamPlan {
 
   SourceType  source_type = SourceType::kRtsp;
   std::string rtsp_url;
+  std::string rtsp_transport = "tcp";
   CodecType   encoding    = CodecType::kH264;
 
   DecodeConfig decode;
@@ -83,15 +84,18 @@ struct StreamPlan {
 struct StreamInputPlan {
   CameraId camera_id;
   std::string rtsp_url;
+  std::string rtsp_transport = "tcp";
+  CodecType encoding = CodecType::kUnknown;
 
   ElementFactory source_element     = "rtspsrc";
-  ElementFactory depay_element      = "rtph264depay";
-  ElementFactory parse_element      = "h264parse";
-  ElementFactory decoder_element    = "v4l2h264dec";
+  ElementFactory depay_element;
+  ElementFactory parse_element;
+  ElementFactory decoder_element;
   ElementFactory capsfilter_element = "capsfilter";
   ElementFactory queue_element      = "queue";
 
   CapsString decode_output_caps = "video/x-raw,format=NV12";
+  std::string colorimetry_override;
 
   // E3 fix: decoder io-mode + depay tuning (copied from DecodeConfig).
   std::string capture_io_mode = "dmabuf";
@@ -180,6 +184,7 @@ struct StagePlan {
   InputSourceType input_source_type = InputSourceType::kFrame;
   StageId         input_source_stage_id;
   InputCropType   input_crop        = InputCropType::kFull;
+  double         roi_expand_ratio  = 0.0;
 
   std::string              preprocess_type;
   std::string              postprocess_type;

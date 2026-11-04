@@ -28,6 +28,7 @@ class TxtSnapshotLoader {
   Status ParsePipelineOutput(const IniSection& sec, PipelineOutputConfig* cfg) const;
   Status ParseStream(const IniSection& sec, StreamConfig* cfg) const;
   Status ParseDecode(const IniSection& sec, DecodeConfig* cfg) const;
+  Status ResolveDecodeForCodec(StreamConfig* cfg) const;
   Status ParseStreamInference(const IniSection& sec, StreamInferenceConfig* cfg) const;
   Status ParseAnnotatedMediaGlobal(const IniSection& sec, AnnotatedMediaConfig* cfg) const;
   Status ParseFrameCache(const IniSection& sec, aibox::media::FrameCacheConfig* cfg) const;

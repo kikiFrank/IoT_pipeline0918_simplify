@@ -43,8 +43,8 @@ include=streams/cam-004-andon.txt
 include=algorithms/andon_light_color.txt
 
 [models]
-include=models/yolox_light_w8a16.txt
-include=models/mobilenet_v2_color_w8a16.txt
+include=models/yolox_s_light_v2_w8a16.txt
+include=models/mobilenetv3_light_w8a16.txt
 
 [annotated_media]
 enabled=1

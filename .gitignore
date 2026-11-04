@@ -14,3 +14,7 @@ output/
 
 # Local model artifacts
 data/models/siglip2/
+
+# Local documentation and validation notes
+/docs/
+/tests/

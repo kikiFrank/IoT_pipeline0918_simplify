@@ -1,4 +1,6 @@
+#include "aibox/common/CodecProfile.hpp"
 #include "aibox/config/TxtSnapshotLoader.hpp"
+#include <cmath>
 #include "aibox/config/IniParser.hpp"
 
 #include <charconv>
@@ -238,21 +240,58 @@ Status TxtSnapshotLoader::ParseStream(const IniSection& sec, StreamConfig* cfg) 
   cfg->enabled     = ParseBool(GetEntryVal(sec, "enabled", "1"));
   cfg->source_type = ParseSourceType(GetEntryVal(sec, "source_type"));
   cfg->rtsp_url    = GetEntryVal(sec, "rtsp_url");
-  cfg->encoding    = ParseCodec(GetEntryVal(sec, "encoding"));
+  cfg->rtsp_transport = GetEntryVal(sec, "rtsp_transport", "tcp");
+  if (cfg->rtsp_transport != "tcp" && cfg->rtsp_transport != "udp")
+    return Status::Error("RTSP_TRANSPORT_INVALID",
+                         cfg->camera_id + ": " + cfg->rtsp_transport);
+  const auto raw = GetEntryVal(sec, "encoding", "h264");
+  cfg->encoding = ParseCodec(raw);
+  if (cfg->encoding == CodecType::kUnknown)
+    return Status::Error("STREAM_ENCODING_INVALID", cfg->camera_id + ": " + raw);
   return Status::Ok();
 }
 
 Status TxtSnapshotLoader::ParseDecode(const IniSection& sec, DecodeConfig* cfg) const {
-  cfg->depay       = GetEntryVal(sec, "depay", "rtph264depay");
-  cfg->parse       = GetEntryVal(sec, "parse", "h264parse");
-  cfg->decoder     = GetEntryVal(sec, "decoder", "v4l2h264dec");
+  cfg->depay       = GetEntryVal(sec, "depay");
+  cfg->parse       = GetEntryVal(sec, "parse");
+  cfg->decoder     = GetEntryVal(sec, "decoder");
   cfg->output_caps = GetEntryVal(sec, "output_caps", "video/x-raw,format=NV12");
+  const auto legacy_color = GetEntryVal(sec, "h264_colorimetry_override");
+  const auto color = GetEntryVal(sec, "colorimetry_override");
+  if (!legacy_color.empty() && !color.empty() && legacy_color != color)
+    return Status::Error("STREAM_COLORIMETRY_CONFLICT", "colorimetry override keys disagree");
+  cfg->colorimetry_override = color.empty() ? legacy_color : color;
+  cfg->legacy_h264_colorimetry_override = !legacy_color.empty();
 
   // E3 fix: optional per-stream tuning (absent entries keep legacy defaults).
   cfg->capture_io_mode = GetEntryVal(sec, "decoder_capture_io_mode", "dmabuf");
   cfg->output_io_mode  = GetEntryVal(sec, "decoder_output_io_mode", "dmabuf");
   cfg->rtp_wait_for_keyframe = ParseBool(GetEntryVal(sec, "rtp_wait_for_keyframe", "0"));
   cfg->rtp_request_keyframe  = ParseBool(GetEntryVal(sec, "rtp_request_keyframe", "0"));
+  return Status::Ok();
+}
+
+Status TxtSnapshotLoader::ResolveDecodeForCodec(StreamConfig* cfg) const {
+  const auto* profile = GetCodecProfile(cfg->encoding);
+  if (!profile)
+    return Status::Error("STREAM_ENCODING_INVALID", cfg->camera_id);
+  auto& decode = cfg->decode;
+  if (decode.depay.empty()) decode.depay = profile->depay;
+  if (decode.parse.empty()) decode.parse = profile->parse;
+  if (decode.decoder.empty()) decode.decoder = profile->hw_decoder;
+  const bool software_h264 = cfg->encoding == CodecType::kH264 &&
+                             decode.decoder == "openh264dec";
+  if (decode.depay != profile->depay || decode.parse != profile->parse ||
+      (decode.decoder != profile->hw_decoder && !software_h264))
+    return Status::Error("STREAM_DECODE_CODEC_MISMATCH", cfg->camera_id +
+        ": encoding=" + profile->name + " decode=" + decode.depay + "/" +
+        decode.parse + "/" + decode.decoder);
+  if (cfg->encoding != CodecType::kH264 && decode.legacy_h264_colorimetry_override)
+    return Status::Error("STREAM_COLORIMETRY_CODEC_MISMATCH", cfg->camera_id +
+        ": h264_colorimetry_override requires encoding=h264; use colorimetry_override");
+  if (!decode.colorimetry_override.empty() && decode.colorimetry_override != "bt709")
+    return Status::Error("STREAM_COLORIMETRY_INVALID", cfg->camera_id +
+        ": supported override is bt709");
   return Status::Ok();
 }
 
@@ -337,6 +376,19 @@ Status TxtSnapshotLoader::ParseStage(const IniSection& sec, StageConfig* cfg) co
   if (cfg->input_source_stage_id.rfind("stage:", 0) == 0)
     cfg->input_source_stage_id.erase(0, 6);
   cfg->input_crop    = ParseInputCrop(GetEntryVal(sec, "input_crop", "full"));
+  const auto expand = GetEntryVal(sec, "roi_expand_ratio", "0");
+  try {
+    size_t used = 0;
+    cfg->roi_expand_ratio = std::stod(expand, &used);
+    if (used != expand.size() || !std::isfinite(cfg->roi_expand_ratio) ||
+        cfg->roi_expand_ratio < 0.0)
+      return Status::Error("ROI_EXPAND_INVALID", cfg->stage_id + ": " + expand);
+  } catch (...) {
+    return Status::Error("ROI_EXPAND_INVALID", cfg->stage_id + ": " + expand);
+  }
+  if (cfg->roi_expand_ratio > 0.0 &&
+      (cfg->input_crop != InputCropType::kBBox || cfg->role != StageRole::kClassifier))
+    return Status::Error("ROI_EXPAND_STAGE", "roi_expand_ratio requires a bbox classifier");
   cfg->preprocess    = GetEntryVal(sec, "preprocess");
   cfg->postprocess   = GetEntryVal(sec, "postprocess");
 
@@ -474,6 +526,7 @@ Status TxtSnapshotLoader::ParseModelPostprocess(const IniSection& sec, ModelPost
   cfg->plugin             = GetEntryVal(sec, "plugin", "qtimlpostprocess_roi");
   cfg->module             = GetEntryVal(sec, "module", "yolo-nas");
   cfg->confidence_thresh  = ParseFloat(GetEntryVal(sec, "confidence_thresh"), 0.5f);
+  cfg->nms_iou_thresh     = ParseFloat(GetEntryVal(sec, "nms_iou_thresh"), 0.65f);
   cfg->results            = ParseInt(GetEntryVal(sec, "results"), 50);
   cfg->coordinate_restore = GetEntryVal(sec, "coordinate_restore", "letterbox");
   cfg->person_only_boxes  = ParseBool(GetEntryVal(sec, "person_only_boxes", "false"));
@@ -550,15 +603,23 @@ Result<SnapshotConfig> TxtSnapshotLoader::Load(const FilePath& snapshot_path) co
   for (auto& s : ini.sections) {
     if (s.name == "stream") {
       StreamConfig sc;
-      ParseStream(s, &sc);
+      const Status st = ParseStream(s, &sc);
+      if (!st.ok) return {st, SnapshotConfig{}};
       config.streams.push_back(std::move(sc));
     } else if (s.name == "decode") {
-      if (!config.streams.empty())
-        ParseDecode(s, &config.streams.back().decode);
+      if (!config.streams.empty()) {
+        const Status st = ParseDecode(s, &config.streams.back().decode);
+        if (!st.ok) return {st, SnapshotConfig{}};
+      }
     } else if (s.name == "inference") {
       if (!config.streams.empty())
         ParseStreamInference(s, &config.streams.back().inference);
     }
+  }
+
+  for (auto& stream : config.streams) {
+    const Status st = ResolveDecodeForCodec(&stream);
+    if (!st.ok) return {st, SnapshotConfig{}};
   }
 
   // --- algorithms ---

@@ -7,6 +7,17 @@
 
 namespace aibox::pipeline {
 
+GstVideoRectangle ExpandRoiRectangle(const GstVideoRectangle& box,
+                                    int frame_width, int frame_height, double ratio) {
+  if (box.w <= 0 || box.h <= 0 || frame_width <= 0 || frame_height <= 0 ||
+      !std::isfinite(ratio) || ratio < 0.0) return {0, 0, 0, 0};
+  const int left = static_cast<int>(std::clamp(std::floor(box.x - box.w * ratio), 0.0, double(frame_width)));
+  const int top = static_cast<int>(std::clamp(std::floor(box.y - box.h * ratio), 0.0, double(frame_height)));
+  const int right = static_cast<int>(std::clamp(std::ceil(double(box.x) + box.w + box.w * ratio), 0.0, double(frame_width)));
+  const int bottom = static_cast<int>(std::clamp(std::ceil(double(box.y) + box.h + box.h * ratio), 0.0, double(frame_height)));
+  return {left, top, std::max(0, right - left), std::max(0, bottom - top)};
+}
+
 bool EncodeColorInputInPlace(GstBuffer* buffer, double quant_scale,
                              int quant_offset, std::string* out_error) {
   constexpr gsize kBytes = 128 * 128 * 3 * sizeof(std::uint16_t);

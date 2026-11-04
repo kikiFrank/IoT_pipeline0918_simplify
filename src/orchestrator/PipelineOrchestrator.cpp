@@ -96,6 +96,8 @@ AlgorithmSignature PipelineOrchestrator::BuildAlgorithmSignature(
   for (auto& stage : algorithm.stages) {
     sig.model_ids.push_back(stage.model_id);
     sig.preprocess_types.push_back(stage.preprocess);
+    if (stage.roi_expand_ratio > 0.0)
+      sig.preprocess_types.back() += ":roi_expand=" + std::to_string(stage.roi_expand_ratio);
     sig.postprocess_types.push_back(stage.postprocess);
 
     auto it = model_map.find(stage.model_id);
@@ -287,13 +289,16 @@ std::vector<TimeMuxGroupPlan> PipelineOrchestrator::BuildTimeMuxGroups(
       for (auto& sp : stream_plans) {
         if (sp.camera_id == cam_id) {
           sip.rtsp_url = sp.rtsp_url;
+          sip.rtsp_transport = sp.rtsp_transport;
+          sip.encoding = sp.encoding;
 
           // 关键: 把每路配置中的解码链(depay/parse/decoder/caps)传入 InputPlan,
-          // 确保各路按 config 快照使用正确解码器; 当前 16 路均配置 v4l2h264dec 全硬解。
+          // 确保各路按 config 快照使用正确解码器; 按每路 encoding 校验解码链。
           sip.depay_element     = sp.decode.depay;
           sip.parse_element     = sp.decode.parse;
           sip.decoder_element   = sp.decode.decoder;
           sip.decode_output_caps= sp.decode.output_caps;
+          sip.colorimetry_override = sp.decode.colorimetry_override;
           sip.capture_io_mode        = sp.decode.capture_io_mode;
           sip.output_io_mode         = sp.decode.output_io_mode;
           sip.rtp_wait_for_keyframe  = sp.decode.rtp_wait_for_keyframe;
@@ -573,6 +578,7 @@ std::vector<StagePlan> PipelineOrchestrator::BuildBatchStagePlans(
     sp.input_source_type     = sc.input_source_type;
     sp.input_source_stage_id = sc.input_source_stage_id;
     sp.input_crop            = sc.input_crop;
+    sp.roi_expand_ratio      = sc.roi_expand_ratio;
     sp.preprocess_type       = sc.preprocess;
     sp.postprocess_type      = sc.postprocess;
     sp.class_filter          = sc.class_filter;
@@ -655,6 +661,7 @@ std::vector<StagePlan> PipelineOrchestrator::BuildStagePlans(
     sp.input_source_type     = sc.input_source_type;
     sp.input_source_stage_id = sc.input_source_stage_id;
     sp.input_crop            = sc.input_crop;
+    sp.roi_expand_ratio      = sc.roi_expand_ratio;
     sp.preprocess_type       = sc.preprocess;
     sp.postprocess_type      = sc.postprocess;
     sp.class_filter          = sc.class_filter;
@@ -775,6 +782,7 @@ Result<ExecutionPlan> PipelineOrchestrator::BuildExecutionPlan(
     sp.enabled        = s.enabled;
     sp.source_type    = s.source_type;
     sp.rtsp_url       = s.rtsp_url;
+    sp.rtsp_transport = s.rtsp_transport;
     sp.encoding       = s.encoding;
     sp.decode         = s.decode;
     sp.algorithm_code = s.inference.algorithm;

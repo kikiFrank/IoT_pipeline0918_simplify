@@ -62,6 +62,19 @@ gboolean gst_query_parse_video_alignment (GstQuery *query, GstVideoAlignment *al
 #include <gst/video/gstvideometa.h>
 #include <gst/memory/gstmempool.h>
 #include <gst/utils/common-utils.h>
+
+// QTI SDK compatibility: older gst-plugin-base defines
+// GST_META_ID(stage, sequence, entry); the newer QIM SDK adds a leading
+// stream_id. This plugin is single-stream, so stream_id=0 preserves the
+// original meta-ID layout on both SDK versions.
+#ifdef AIBOX_GST_META_ID_HAS_STREAM
+#define AIBOX_META_ID(stage_id, sequence_id, entry_id) \
+  GST_META_ID (0, stage_id, sequence_id, entry_id)
+#else
+#define AIBOX_META_ID(stage_id, sequence_id, entry_id) \
+  GST_META_ID (stage_id, sequence_id, entry_id)
+#endif
+
 #ifndef EXTRACT_RED_COLOR
 // Legacy wrapper colour helpers, removed from the current SDK headers.
 #define EXTRACT_RED_COLOR(c) (((c) >> 24) & 0xFF)
@@ -981,7 +994,7 @@ gst_ml_video_detection_fill_text_output (GstMLPostProcess * postprocess,
     for (num = 0; num < n_entries; num++) {
       ObjectDetection& entry = detections[num];
 
-      id = GST_META_ID (postprocess->stage_id, sequence_idx, num);
+      id = AIBOX_META_ID (postprocess->stage_id, sequence_idx, num);
 
       x = entry.left;
       y = entry.top;
@@ -1226,7 +1239,7 @@ gst_ml_video_classification_fill_text_output (GstMLPostProcess * postprocess,
     if (gst_structure_has_field (info, "sequence-index"))
         gst_structure_get_uint (info, "sequence-index", &sequence_idx);
 
-    id = GST_META_ID (postprocess->stage_id, sequence_idx, 0);
+    id = AIBOX_META_ID (postprocess->stage_id, sequence_idx, 0);
 
     for (num = 0; num < n_entries; num++) {
       ImageClassification& entry = classifications[num];
@@ -1419,7 +1432,7 @@ gst_ml_audio_classification_fill_text_output (GstMLPostProcess * postprocess,
     if (gst_structure_has_field (info, "sequence-index"))
         gst_structure_get_uint (info, "sequence-index", &sequence_idx);
 
-    id = GST_META_ID (postprocess->stage_id, sequence_idx, 0);
+    id = AIBOX_META_ID (postprocess->stage_id, sequence_idx, 0);
 
     for (num = 0; num < n_entries; num++) {
       AudioClassification& entry = classifications[num];
@@ -1717,7 +1730,7 @@ gst_ml_video_pose_fill_text_output (GstMLPostProcess * postprocess,
         g_value_reset (&link);
       }
 
-      id = GST_META_ID (postprocess->stage_id, sequence_idx, num);
+      id = AIBOX_META_ID (postprocess->stage_id, sequence_idx, num);
 
       structure = gst_structure_new ("pose", "id", G_TYPE_UINT, id,
           "confidence", G_TYPE_DOUBLE, entry.confidence, NULL);
@@ -1911,7 +1924,7 @@ gst_ml_text_generation_fill_text_output (GstMLPostProcess * postprocess,
     for (num = 0; num < n_entries; num++) {
       TextGeneration& entry = entries[num];
 
-      id = GST_META_ID (postprocess->stage_id, idx, num);
+      id = AIBOX_META_ID (postprocess->stage_id, idx, num);
 
       GST_TRACE_OBJECT (postprocess, "Batch: %u, ID: %X, "
           "Contents: %s,  Confidence: %.1f%%", idx, id,

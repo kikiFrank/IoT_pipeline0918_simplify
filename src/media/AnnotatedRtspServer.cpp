@@ -1,6 +1,7 @@
+#include "aibox/common/CodecProfile.hpp"
 // ===================================================================
 // AnnotatedRtspServer — in-process RTSP publication of the per-camera
-// annotated H.264 stream (tee_webrtc_<cam>), consumed by MediaMTX and
+// annotated H.264/H.265 stream (tee_webrtc_<cam>), consumed by MediaMTX and
 // other local consumers. See the header for the lifecycle contract.
 // ===================================================================
 
@@ -230,6 +231,13 @@ pipeline::Status AnnotatedRtspServer::Start(GstElement* pipeline,
   if (!pipeline || !registry)
     return pipeline::Status::Error("ARTSP_BAD_ARGS", "pipeline/registry is null");
 
+  for (const auto& entry : registry->webrtc_tee_by_camera) {
+    const auto codec = registry->annotated_codec_by_camera.find(entry.first);
+    if (codec == registry->annotated_codec_by_camera.end() ||
+        !pipeline::GetCodecProfile(codec->second))
+      return pipeline::Status::Error("ARTSP_CODEC_UNKNOWN", entry.first);
+  }
+
   self.options  = options;
   self.pipeline = pipeline;
 
@@ -254,6 +262,8 @@ pipeline::Status AnnotatedRtspServer::Start(GstElement* pipeline,
     const pipeline::CameraId& cam = entry.first;
     GstElement* tee = entry.second;
     if (!tee) continue;
+    const auto* profile = pipeline::GetCodecProfile(
+        registry->annotated_codec_by_camera.at(cam));
 
     auto feed      = std::make_unique<CameraFeed>();
     feed->cam      = cam;
@@ -314,22 +324,22 @@ pipeline::Status AnnotatedRtspServer::Start(GstElement* pipeline,
     gst_element_sync_state_with_parent(as);
 
     // RTSP media factory: one media per client (not shared). The launch
-    // pipeline pulls from our fan-out appsrc; H.264 byte-stream AU in,
-    // RTP/H.264 out on pay0.
+    // pipeline pulls from our fan-out appsrc; H.264/H.265 byte-stream AU in,
+    // RTP/H.264 or RTP/H.265 out on pay0.
     GstRTSPMediaFactory* factory = gst_rtsp_media_factory_new();
-    gst_rtsp_media_factory_set_launch(factory,
-        "( appsrc name=src is-live=true format=time "
-        "caps=video/x-h264,stream-format=byte-stream,alignment=au "
-        "max-buffers=8 leaky-type=downstream ! "
-        "h264parse config-interval=-1 ! rtph264pay name=pay0 pt=96 )");
+    const std::string launch = std::string("( appsrc name=src is-live=true format=time caps=") +
+        profile->caps_name + ",stream-format=byte-stream,alignment=au " +
+        "max-buffers=8 leaky-type=downstream ! " + profile->parse +
+        " config-interval=-1 ! " + profile->rtp_pay + " name=pay0 pt=96 )";
+    gst_rtsp_media_factory_set_launch(factory, launch.c_str());
     gst_rtsp_media_factory_set_shared(factory, FALSE);
     g_signal_connect(factory, "media-configure", G_CALLBACK(OnMediaConfigure),
                      feed.get());
     const std::string path = self.options.mount_prefix + cam;
     gst_rtsp_mount_points_add_factory(mounts, path.c_str(), factory);  // takes the ref
 
-    fprintf(stderr, "[annotated-rtsp] %s mounted at rtsp://%s:%d%s\n",
-            cam.c_str(), self.options.bind_address.c_str(), self.options.port,
+    fprintf(stderr, "[annotated-rtsp] %s codec=%s mounted at rtsp://%s:%d%s\n",
+            cam.c_str(), profile->name, self.options.bind_address.c_str(), self.options.port,
             path.c_str());
     self.feeds.emplace(cam, std::move(feed));
   }

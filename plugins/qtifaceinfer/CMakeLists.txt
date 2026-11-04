@@ -58,6 +58,13 @@ target_include_directories(${PLUGIN_TARGET} PRIVATE
   ${GST_JSON_INCLUDE_DIRS}
 )
 
+# QNN SDK headers: the QIM SDK installs them under /usr/include/QNN, while
+# older board images place them directly in /usr/include.
+find_path(AIBOX_QNN_INCLUDE_DIR NAMES QnnInterface.h PATHS /usr/include /usr/include/QNN)
+if(AIBOX_QNN_INCLUDE_DIR)
+  target_include_directories(${PLUGIN_TARGET} PRIVATE ${AIBOX_QNN_INCLUDE_DIR})
+endif()
+
 target_compile_definitions(${PLUGIN_TARGET} PRIVATE
   PACKAGE="qtifaceinfer"
 )

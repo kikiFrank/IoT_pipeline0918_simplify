@@ -2,6 +2,7 @@
 
 #include <string>
 #include <gst/gst.h>
+#include <gst/video/video.h>
 #include "aibox/common/Types.hpp"
 
 namespace aibox::pipeline {
@@ -27,5 +28,9 @@ bool SetFlagsPropertyByNick(GstElement* elem, const char* prop,
 // Retains the converter's writable DMA allocation and all ROI/frame metadata.
 bool EncodeColorInputInPlace(GstBuffer* buffer, double quant_scale,
                              int quant_offset, std::string* out_error);
+
+// Expand each side, round outwards and clip to the source frame.
+GstVideoRectangle ExpandRoiRectangle(const GstVideoRectangle& box,
+                                    int frame_width, int frame_height, double ratio);
 
 }  // namespace aibox::pipeline

@@ -1,0 +1,242 @@
+{
+  "source_onnx": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/new_models/mobilenetv3_light.onnx",
+  "source_sha256": "1c50a5b3a3a2c65f981105953d5ed94cf2e2593ce5bca83d191e010a6519556f",
+  "model_family": "MobileNetV3",
+  "same_onnx_as_20261030": false,
+  "bin": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/bin_model_output/mobilenetv3_light_w8a16.bin",
+  "bin_sha256": "cadc28720845eefbae0acd3afcdfb782fcd088cc2ad61fd891a0ccac2a5b9e0e",
+  "bin_bytes": 2129920,
+  "quantized_dlc": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/color/model_w8a16.dlc",
+  "quantized_dlc_sha256": "dd97a2f2823053260111bd597e5e60fcae85404ab6f8e414e39cca8693f6de4d",
+  "sdk_root": "/mnt/e/W_space/Ubuntu_22_04/qairt/2.46.0.260424",
+  "target": {
+    "dsp_arch": "v73",
+    "soc_id": 77
+  },
+  "weights_bitwidth": 8,
+  "activation_bitwidth": 16,
+  "bias_bitwidth": 32,
+  "quantize_v2": false,
+  "per_channel_weights": true,
+  "calibration_count": 190,
+  "calibration_class_counts": {
+    "Green": 40,
+    "Green-Yellow": 24,
+    "None": 40,
+    "Red": 34,
+    "Red-green": 12,
+    "Yellow": 40
+  },
+  "calibration_pixels_verified": true,
+  "io": {
+    "input": {
+      "dtype": "uFxp_16",
+      "shape": [
+        1,
+        128,
+        128,
+        3
+      ],
+      "direction": "APP_WRITE"
+    },
+    "logits": {
+      "dtype": "uFxp_16",
+      "shape": [
+        1,
+        8
+      ],
+      "direction": "APP_READ"
+    }
+  },
+  "io_encodings": {
+    "input": {
+      "bitwidth": 16,
+      "min": -2.117915153503,
+      "max": 2.639988899231,
+      "scale_rounded_dlc_info": 7.260096e-05,
+      "offset": -29172
+    },
+    "logits": {
+      "bitwidth": 16,
+      "min": -40.021507263184,
+      "max": 30.421634674072,
+      "scale_rounded_dlc_info": 0.0010748934,
+      "offset": -37233
+    }
+  },
+  "classes": {
+    "Blue": 0,
+    "Green": 1,
+    "Green-Yellow": 2,
+    "None": 3,
+    "Red": 4,
+    "Red-green": 5,
+    "Yellow": 6,
+    "Yellow-Blue": 7
+  },
+  "learned_layers": 54,
+  "weight_tensor_types": {
+    "sFxp_8": 52,
+    "uFxp_8": 2
+  },
+  "encoding_audit_passed": true,
+  "smoke_test": {
+    "backend": "QnnHtp host emulation",
+    "count": 1,
+    "finite_output": true,
+    "output_shape": [
+      1,
+      8
+    ]
+  },
+  "accuracy_evaluated": true,
+  "board_tested": true,
+  "repair_variant": "stable_legacy",
+  "repair_candidate_path": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/color/repair_candidates/stable_legacy",
+  "encoding_overrides": "/mnt/g/Visteon/Nov_26/daily_record/11-2/3models_quantized/color/repair_candidates/stable_legacy/encoding_overrides.json",
+  "bias_encoding_adjusted": true,
+  "board_ip": "192.168.50.165",
+  "board_metrics": {
+    "n": 2378,
+    "accuracy": 0.9524810765349033,
+    "balanced_accuracy": 0.8239085219253517,
+    "per_class": {
+      "Blue": {
+        "n": 0,
+        "accuracy": null
+      },
+      "Green": {
+        "n": 1790,
+        "accuracy": 0.9770949720670391
+      },
+      "Green-Yellow": {
+        "n": 25,
+        "accuracy": 0.56
+      },
+      "None": {
+        "n": 329,
+        "accuracy": 0.8541033434650456
+      },
+      "Red": {
+        "n": 34,
+        "accuracy": 0.8235294117647058
+      },
+      "Red-green": {
+        "n": 12,
+        "accuracy": 0.75
+      },
+      "Yellow": {
+        "n": 188,
+        "accuracy": 0.9787234042553191
+      },
+      "Yellow-Blue": {
+        "n": 0,
+        "accuracy": null
+      }
+    },
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1749,
+        0,
+        22,
+        3,
+        16,
+        0,
+        0
+      ],
+      [
+        0,
+        10,
+        14,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        47,
+        0,
+        281,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        6,
+        28,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        3,
+        0,
+        0,
+        0,
+        9,
+        0,
+        0
+      ],
+      [
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        184,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "board_run_summary": {
+    "task": "color",
+    "variant": "stable_legacy",
+    "split": "evaluation",
+    "n": 2378,
+    "output_elements": 8,
+    "bin_sha256": "cadc28720845eefbae0acd3afcdfb782fcd088cc2ad61fd891a0ccac2a5b9e0e",
+    "backend": "/usr/lib/libQnnHtp.so",
+    "board_ip": "192.168.50.165",
+    "argv": [
+      "/usr/bin/qnn-net-run",
+      "--retrieve_context=/home/ubuntu/codex_model_eval_20261102_3models_5209f75e/repair_models/color_stable_legacy.bin",
+      "--backend=/usr/lib/libQnnHtp.so",
+      "--input_list=/home/ubuntu/codex_model_eval_20261102_3models_5209f75e/repair_runs/color/stable_legacy/evaluation/inputs.txt",
+      "--output_dir=/home/ubuntu/codex_model_eval_20261102_3models_5209f75e/repair_runs/color/stable_legacy/evaluation/outputs",
+      "--profiling_level=basic",
+      "--log_level=error"
+    ],
+    "wall_seconds": 3.5309246219985653,
+    "all_outputs_finite": true
+  },
+  "original_delivery_bin_sha256": "5209f75e9844e163d9e7f657c983b6b64a510790481ff880525b856cbaa7421d"
+}

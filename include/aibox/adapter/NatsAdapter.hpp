@@ -116,6 +116,17 @@ class NatsAdapter {
   // Publish binary payload.
   bool Publish(const std::string& subject, const std::vector<uint8_t>& payload);
 
+  // Publish a request with an explicit reply subject (NATS req/rep).
+  // Unlike Publish, this is NOT buffered while disconnected: a request is
+  // synchronous and the caller must see the failure immediately.
+  bool PublishRequest(const std::string& subject, const std::string& reply,
+                      const std::vector<uint8_t>& payload);
+
+  // Round-trip to the server so prior SUB/UNSUB operations are visible to
+  // other clients. Without this, a publish issued immediately after Subscribe
+  // can race ahead of the subscription and be dropped.
+  bool Flush(int64_t timeout_ms = 2000);
+
   // --- diagnostics ---
 
   // Number of publishes currently buffered (waiting for reconnect).

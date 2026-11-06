@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <utility>
 
 #include <climits>
 #include <sys/resource.h>
@@ -23,6 +24,7 @@
 #include "aibox/aggregator/ResultAggregator.hpp"
 
 #include "aibox/adapter/NatsAdapter.hpp"
+#include "aibox/control/PipelineControlServer.hpp"
 #include "aibox/media/AnnotatedRtspServer.hpp"
 #include "aibox/detection/CaptureTimestampTracker.hpp"
 #include "aibox/detection/FrameEventPublisher.hpp"
@@ -914,6 +916,22 @@ int main(int argc, char** argv) {
 
     std::cout << "[PIPELINE_READY] state=PLAYING" << std::endl;
 
+    // Pipeline control: commands are drained by the default GLib context.
+    // Keep this after all readiness/annotated-RTSP early failure paths.
+    std::string model_version;
+    for (const auto& model : config.models) {
+      if (!model_version.empty()) model_version += ",";
+      model_version += model.model_id;
+    }
+    if (model_version.empty()) model_version = "unknown";
+
+    aibox::control::PipelineControlServer control_server(
+        detection_nats, build_result.value.pipeline, std::move(model_version));
+    if (!control_server.Start()) {
+      std::cerr << "[WARN] pipeline control disabled (subscribe failed)"
+                << std::endl;
+    }
+
     GstBus* bus = gst_element_get_bus(build_result.value.pipeline);
     const gint64 deadline = args.run_forever
         ? 0
@@ -926,6 +944,7 @@ int main(int argc, char** argv) {
     const guint bus_watch = gst_bus_add_watch(bus, &RunLoopBusWatch, &loop_ctx);
     const guint tick_source = g_timeout_add(20, &RunLoopTick, &loop_ctx);
     g_main_loop_run(loop_ctx.loop);
+    control_server.Stop();
     if (loop_ctx.tick_active) g_source_remove(tick_source);
     if (bus_watch) gst_bus_remove_watch(bus);
     g_main_loop_unref(loop_ctx.loop);

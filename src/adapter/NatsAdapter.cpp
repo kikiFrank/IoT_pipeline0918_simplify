@@ -243,6 +243,42 @@ bool NatsAdapter::Publish(const std::string& subject,
   return true;
 }
 
+bool NatsAdapter::PublishRequest(const std::string& subject,
+                                 const std::string& reply,
+                                 const std::vector<uint8_t>& payload) {
+  std::lock_guard<std::mutex> lifecycle_lock(lifecycle_mu_);
+  const State state = state_.load(std::memory_order_acquire);
+  if (!conn_ || disconnecting_ || state != State::kConnected) {
+    std::cerr << "[NatsAdapter] PublishRequest failed: not connected"
+              << std::endl;
+    return false;
+  }
+  const natsStatus s = natsConnection_PublishRequest(
+      conn_, subject.c_str(), reply.c_str(), payload.data(),
+      static_cast<int>(payload.size()));
+  if (s != NATS_OK) {
+    std::cerr << "[NatsAdapter] PublishRequest failed: " << NatsStatusStr(s)
+              << " subject=" << subject << std::endl;
+    return false;
+  }
+  return true;
+}
+
+bool NatsAdapter::Flush(int64_t timeout_ms) {
+  std::lock_guard<std::mutex> lifecycle_lock(lifecycle_mu_);
+  const State state = state_.load(std::memory_order_acquire);
+  if (!conn_ || disconnecting_ || state != State::kConnected) {
+    return false;
+  }
+  const natsStatus s = natsConnection_FlushTimeout(conn_, timeout_ms);
+  if (s != NATS_OK) {
+    std::cerr << "[NatsAdapter] Flush failed: " << NatsStatusStr(s)
+              << std::endl;
+    return false;
+  }
+  return true;
+}
+
 size_t NatsAdapter::PendingCount() const {
   std::lock_guard<std::mutex> lock(mu_);
   return pending_.size();

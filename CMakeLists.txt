@@ -60,7 +60,8 @@ list(APPEND MAIN_SOURCES
     src/media/NatsMediaReadyTransport.cpp
     src/media/SnapshotTriggerPolicy.cpp
     src/media/AnomalySnapshotService.cpp
-    src/media/SnapshotRequestSubscriber.cpp)
+    src/media/SnapshotRequestSubscriber.cpp
+    src/control/PipelineControlServer.cpp)
 
 list(APPEND MAIN_SOURCES src/media/AnnotatedRtspServer.cpp)
 
@@ -175,6 +176,23 @@ if(BUILD_TESTING)
     add_executable(siglip_worker_core_test tests/siglip_worker/core_test.cpp)
     target_link_libraries(siglip_worker_core_test PRIVATE aibox_siglip_core)
     add_test(NAME siglip_worker_core_test COMMAND siglip_worker_core_test)
+endif()
+
+# --- pipeline control contract test (dummy GStreamer pipeline + real NATS) ---
+if(BUILD_TESTING)
+    add_executable(pipeline_control_test
+        tests/pipeline_control_test.cpp
+        src/control/PipelineControlServer.cpp
+        src/adapter/NatsAdapter.cpp)
+    target_include_directories(pipeline_control_test PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${GST_INCLUDE_DIRS}
+        ${NATS_INCLUDE_DIRS}
+        ${Protobuf_INCLUDE_DIRS}
+        ${CMAKE_CURRENT_BINARY_DIR})
+    target_link_libraries(pipeline_control_test PRIVATE
+        ${GST_LIBRARIES} ${NATS_LIBRARIES} imsdk_proto Threads::Threads)
+    add_test(NAME pipeline_control_test COMMAND pipeline_control_test)
 endif()
 
 # --- install ---

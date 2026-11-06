@@ -25,7 +25,13 @@ fi
 # ubuntu re-run cannot truncate it (silent launch failure). Never reuse it.
 WESTON_LOG="$OUTDIR/weston_$(date +%m%d_%H%M%S).log"
 CFGDIR=/tmp/weston_cfg_aibox
-mkdir -p "$CFGDIR"
+# A historical root-run can leave this dir root-owned; ubuntu then cannot write
+# weston.ini into it (fatal: error opening config file ... Permission denied).
+mkdir -p "$CFGDIR" 2>/dev/null || sudo -n mkdir -p "$CFGDIR"
+if [ "$(stat -c '%U' "$CFGDIR" 2>/dev/null)" != "ubuntu" ]; then
+  sudo -n chown ubuntu:ubuntu "$CFGDIR" 2>/dev/null || {
+    echo "CFGDIR_CHOWN_FAIL owner=$(stat -c %U "$CFGDIR" 2>/dev/null) (needs sudo)"; exit 1; }
+fi
 
 # ---- run as ubuntu (re-exec if invoked via sudo/root) ----
 if [ "$(id -u)" = "0" ]; then

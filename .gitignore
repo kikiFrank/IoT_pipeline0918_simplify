@@ -14,6 +14,10 @@ output/
 
 # Local model artifacts
 data/models/siglip2/
+data/models/1stage_andon/*.bin
+data/models/andon/mobilenetv3_light_w8a16.bin
+data/models/andon/yolox_s_light_v2_w8a16.bin
+data/models/raisehands/*.bin
 
 # Local documentation and validation notes
 /docs/

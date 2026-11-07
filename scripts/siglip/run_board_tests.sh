@@ -6,7 +6,7 @@ mkdir -p "$S/output/siglip_worker/tests"
 cmake -S "$S" -B "$S/build-review-siglip" -DCMAKE_BUILD_TYPE=RelWithDebInfo \
   -DBUILD_TESTING=ON >"$S/output/siglip_worker/tests/configure.log"
 cmake --build "$S/build-review-siglip" -j3 --target aibox_siglip_worker \
-  aibox_stream_pipeline_demo frame_cache_policy_test snapshot_service_test siglip_worker_core_test siglip_preprocess_probe siglip_isolated_harness \
+  aibox_stream_pipeline_demo frame_cache_policy_test snapshot_service_test pipeline_control_test color8_postprocess_test ppe_postprocess_test stacklight_postprocess_test gesture_postprocess_test siglip_worker_core_test siglip_preprocess_probe siglip_isolated_harness \
   >"$S/output/siglip_worker/tests/build.log" 2>&1
 ctest --test-dir "$S/build-review-siglip" --output-on-failure \
   | tee "$S/output/siglip_worker/tests/ctest.log"

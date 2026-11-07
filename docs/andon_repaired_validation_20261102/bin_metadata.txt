@@ -1,6 +1,0 @@
-data/models/andon/yolox_s_light_v2_w8a16.bin
-input images dtype=1046 shape=1,640,640,3, scale=0.0038910505827516317 offset=0
-output output dtype=1046 shape=1,8400,6, scale=0.015625 offset=-4096
-data/models/andon/mobilenetv3_light_w8a16.bin
-input input dtype=1046 shape=1,128,128,3, scale=7.260096026584506e-05 offset=-29172
-output logits dtype=1046 shape=1,8, scale=0.0010748934000730515 offset=-37233

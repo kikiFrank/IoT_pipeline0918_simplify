@@ -155,11 +155,11 @@ endif()
 
 # --- frame cache unit test ---
 if(BUILD_TESTING)
-    add_executable(frame_cache_policy_test tests/frame_cache_policy_test.cpp)
+    add_executable(frame_cache_policy_test tests/unit/frame_cache_policy_test.cpp)
     target_link_libraries(frame_cache_policy_test PRIVATE aibox_frame_cache)
     add_test(NAME frame_cache_policy_test COMMAND frame_cache_policy_test)
     add_executable(snapshot_service_test
-        tests/snapshot_service_test.cpp
+        tests/unit/snapshot_service_test.cpp
         src/media/AnomalySnapshotService.cpp
         src/media/MediaFileWriter.cpp
         src/media/SnapshotTriggerPolicy.cpp)
@@ -181,7 +181,7 @@ endif()
 # --- pipeline control contract test (dummy GStreamer pipeline + real NATS) ---
 if(BUILD_TESTING)
     add_executable(pipeline_control_test
-        tests/pipeline_control_test.cpp
+        tests/unit/pipeline_control_test.cpp
         src/control/PipelineControlServer.cpp
         src/adapter/NatsAdapter.cpp)
     target_include_directories(pipeline_control_test PRIVATE
@@ -193,6 +193,37 @@ if(BUILD_TESTING)
     target_link_libraries(pipeline_control_test PRIVATE
         ${GST_LIBRARIES} ${NATS_LIBRARIES} imsdk_proto Threads::Threads)
     add_test(NAME pipeline_control_test COMMAND pipeline_control_test)
+endif()
+
+# --- deterministic model postprocess regression tests ---
+if(BUILD_TESTING)
+    add_executable(color8_postprocess_test tests/1stage_andon/test_color8_postprocess.cpp)
+    target_compile_definitions(color8_postprocess_test PRIVATE AIBOX_YOLOX_COLOR8=1)
+    add_executable(ppe_postprocess_test tests/ppe/test_yolox_ppe_postprocess.cpp)
+    add_executable(stacklight_postprocess_test tests/ppe/test_yolox_ppe_postprocess.cpp)
+    target_compile_definitions(stacklight_postprocess_test PRIVATE AIBOX_YOLOX_STACKLIGHT=1)
+    add_executable(gesture_postprocess_test
+        tests/raisehands/test_gesture.cpp src/pipeline/GstElementHelper.cpp)
+    foreach(test_target color8_postprocess_test ppe_postprocess_test
+                        stacklight_postprocess_test gesture_postprocess_test)
+        target_include_directories(${test_target} PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/plugins/mlpostprocess_roi/modules)
+    endforeach()
+    target_include_directories(gesture_postprocess_test PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include ${GST_INCLUDE_DIRS})
+    target_link_libraries(gesture_postprocess_test PRIVATE ${GST_LIBRARIES})
+    set(TEST_LABEL_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/config_snapshots)
+    add_test(NAME color8_postprocess_test COMMAND color8_postprocess_test
+        ${TEST_LABEL_ROOT}/1stage_andon_4cam/labels/classes_color8.txt
+        ${TEST_LABEL_ROOT}/ppe_4cam/labels/ppe_labels.txt)
+    add_test(NAME ppe_postprocess_test COMMAND ppe_postprocess_test
+        ${TEST_LABEL_ROOT}/ppe_4cam/labels/ppe_labels.txt
+        ${TEST_LABEL_ROOT}/andon_4cam/labels/stacklight.txt)
+    add_test(NAME stacklight_postprocess_test COMMAND stacklight_postprocess_test
+        ${TEST_LABEL_ROOT}/ppe_4cam/labels/ppe_labels.txt
+        ${TEST_LABEL_ROOT}/andon_4cam/labels/stacklight.txt)
+    add_test(NAME gesture_postprocess_test COMMAND gesture_postprocess_test
+        ${TEST_LABEL_ROOT}/raisehands_4cam/labels/gesture_labels.txt)
 endif()
 
 # --- install ---

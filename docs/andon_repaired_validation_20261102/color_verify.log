@@ -1,5 +1,0 @@
-COLOR_ENCODING_OK pattern=black center=(0, 1132, 4318) padding=(0, 1132, 4318) logits=8finite
-COLOR_ENCODING_OK pattern=white center=(60148, 62623, 65535) padding=(0, 1132, 4318) logits=8finite
-COLOR_ENCODING_OK pattern=red center=(60148, 1132, 4318) padding=(0, 1132, 4318) logits=8finite
-COLOR_ENCODING_OK pattern=green center=(0, 62623, 4318) padding=(0, 1132, 4318) logits=8finite
-COLOR_ENCODING_OK pattern=blue center=(0, 1132, 65535) padding=(0, 1132, 4318) logits=8finite

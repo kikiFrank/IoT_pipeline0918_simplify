@@ -1,0 +1,83 @@
+camera_id: "cam-003"
+timestamp_ms: 1793680603968
+detections {
+  event_id: "2b0e76bd-ccbe-4a3c-8a50-fafcffe30f61"
+  confidence: 0.888742089
+  class_id: "Green"
+  x_min: 406
+  y_min: 141
+  x_max: 454
+  y_max: 208
+  normalized_bbox {
+    x_min: 0.21145834
+    y_min: 0.130555555
+    x_max: 0.236458331
+    y_max: 0.192592591
+  }
+}
+detections {
+  event_id: "f32676c6-6da5-4d19-9c97-c6bedb2c10d7"
+  confidence: 0.878286183
+  class_id: "None"
+  x_min: 221
+  y_min: 148
+  x_max: 260
+  y_max: 266
+  normalized_bbox {
+    x_min: 0.115104169
+    y_min: 0.137037039
+    x_max: 0.135416672
+    y_max: 0.246296301
+  }
+}
+detections {
+  event_id: "564acf38-a2d7-4a8a-82d5-96c371666ceb"
+  confidence: 0.867830455
+  class_id: "Green"
+  x_min: 1235
+  y_min: 18
+  x_max: 1262
+  y_max: 62
+  normalized_bbox {
+    x_min: 0.643229187
+    y_min: 0.0166666675
+    x_max: 0.657291651
+    y_max: 0.057407409
+  }
+}
+detections {
+  event_id: "ccf0cc30-665f-466b-a086-d003a3bf4a0b"
+  confidence: 0.84956032
+  class_id: "None"
+  x_min: 1393
+  y_min: 44
+  x_max: 1414
+  y_max: 81
+  normalized_bbox {
+    x_min: 0.725520849
+    y_min: 0.0407407396
+    x_max: 0.736458361
+    y_max: 0.075
+  }
+}
+detections {
+  event_id: "8899bda2-c978-493b-8742-644569ff1fe4"
+  confidence: 0.731024802
+  class_id: "Red"
+  x_min: 915
+  y_min: 113
+  x_max: 954
+  y_max: 154
+  normalized_bbox {
+    x_min: 0.4765625
+    y_min: 0.104629628
+    x_max: 0.496875
+    y_max: 0.142592594
+  }
+}
+algorithm_code: "alg_group_0"
+coordinate_space: NORMALIZED
+frame_width: 1920
+frame_height: 1080
+frame_id: "167"
+schema_version: 2

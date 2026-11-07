@@ -1,0 +1,39 @@
+AIBOX_STACK_PROFILE=compat (gstreamer1.0-plugins-qcom=1:1.8.1+ubuntu3-0ubuntu1)
+EGL_ICD_OK json=/usr/share/glvnd/egl_vendor.d/10_adreno.json lib=/usr/lib/aarch64-linux-gnu/libEGL_adreno.so.1.0.0
+EGL_VENDOR_JSONS=10_adreno.json 50_mesa.json 
+EGL_VENDOR_PIN=/usr/share/glvnd/egl_vendor.d/10_adreno.json
+	libgbm.so.1 (libc6,AArch64) => /lib/aarch64-linux-gnu/libgbm.so.1
+	libgbm.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libgbm.so
+	libGLESv2_adreno.so.2 (libc6,AArch64) => /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+	libGLESv2_adreno.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libGLESv2_adreno.so
+	libGLESv2.so.2 (libc6,AArch64) => /lib/aarch64-linux-gnu/libGLESv2.so.2
+	libGLESv2.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libGLESv2.so
+	libEGL_mesa.so.0 (libc6,AArch64) => /lib/aarch64-linux-gnu/libEGL_mesa.so.0
+	libEGL.so.1 (libc6,AArch64) => /lib/aarch64-linux-gnu/libEGL.so.1
+	libEGL.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libEGL.so
+GST_REGISTRY=/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_registry/gst_registry_compat.bin
+output/andon_4cam/color_black_source caps=video/x-raw, format=(string)RGB, width=(int)320, height=(int)240, framerate=(fraction)30/1, multiview-mode=(string)mono, pixel-aspect-ratio=(fraction)1/1, interlace-mode=(string)progressive bytes=307200 memories=1
+output/andon_4cam/color_black_input caps=neural-network/tensors, type=(string)UINT16, rate=(fraction)30/1, dimensions=(int)< < (int)1, (int)128, (int)128, (int)3 > > bytes=98304 memories=1
+output/andon_4cam/color_black_input name=MISSING type=4 qscale=1 qoffset=0 dims=1,128,128,3,
+output/andon_4cam/color_black_output caps=neural-network/tensors, type=(string)FLOAT32, dimensions=(int)< < (int)1, (int)8 > >, rate=(fraction)30/1 bytes=32 memories=1
+output/andon_4cam/color_black_output name=logits type=10 qscale=1 qoffset=0 dims=1,8,
+output/andon_4cam/color_white_source caps=video/x-raw, format=(string)RGB, width=(int)320, height=(int)240, framerate=(fraction)30/1, multiview-mode=(string)mono, pixel-aspect-ratio=(fraction)1/1, interlace-mode=(string)progressive bytes=307200 memories=1
+output/andon_4cam/color_white_input caps=neural-network/tensors, type=(string)UINT16, rate=(fraction)30/1, dimensions=(int)< < (int)1, (int)128, (int)128, (int)3 > > bytes=98304 memories=1
+output/andon_4cam/color_white_input name=MISSING type=4 qscale=1 qoffset=0 dims=1,128,128,3,
+output/andon_4cam/color_white_output caps=neural-network/tensors, type=(string)FLOAT32, dimensions=(int)< < (int)1, (int)8 > >, rate=(fraction)30/1 bytes=32 memories=1
+output/andon_4cam/color_white_output name=logits type=10 qscale=1 qoffset=0 dims=1,8,
+output/andon_4cam/color_red_source caps=video/x-raw, format=(string)RGB, width=(int)320, height=(int)240, framerate=(fraction)30/1, multiview-mode=(string)mono, pixel-aspect-ratio=(fraction)1/1, interlace-mode=(string)progressive bytes=307200 memories=1
+output/andon_4cam/color_red_input caps=neural-network/tensors, type=(string)UINT16, rate=(fraction)30/1, dimensions=(int)< < (int)1, (int)128, (int)128, (int)3 > > bytes=98304 memories=1
+output/andon_4cam/color_red_input name=MISSING type=4 qscale=1 qoffset=0 dims=1,128,128,3,
+output/andon_4cam/color_red_output caps=neural-network/tensors, type=(string)FLOAT32, dimensions=(int)< < (int)1, (int)8 > >, rate=(fraction)30/1 bytes=32 memories=1
+output/andon_4cam/color_red_output name=logits type=10 qscale=1 qoffset=0 dims=1,8,
+output/andon_4cam/color_green_source caps=video/x-raw, format=(string)RGB, width=(int)320, height=(int)240, framerate=(fraction)30/1, multiview-mode=(string)mono, pixel-aspect-ratio=(fraction)1/1, interlace-mode=(string)progressive bytes=307200 memories=1
+output/andon_4cam/color_green_input caps=neural-network/tensors, type=(string)UINT16, rate=(fraction)30/1, dimensions=(int)< < (int)1, (int)128, (int)128, (int)3 > > bytes=98304 memories=1
+output/andon_4cam/color_green_input name=MISSING type=4 qscale=1 qoffset=0 dims=1,128,128,3,
+output/andon_4cam/color_green_output caps=neural-network/tensors, type=(string)FLOAT32, dimensions=(int)< < (int)1, (int)8 > >, rate=(fraction)30/1 bytes=32 memories=1
+output/andon_4cam/color_green_output name=logits type=10 qscale=1 qoffset=0 dims=1,8,
+output/andon_4cam/color_blue_source caps=video/x-raw, format=(string)RGB, width=(int)320, height=(int)240, framerate=(fraction)30/1, multiview-mode=(string)mono, pixel-aspect-ratio=(fraction)1/1, interlace-mode=(string)progressive bytes=307200 memories=1
+output/andon_4cam/color_blue_input caps=neural-network/tensors, type=(string)UINT16, rate=(fraction)30/1, dimensions=(int)< < (int)1, (int)128, (int)128, (int)3 > > bytes=98304 memories=1
+output/andon_4cam/color_blue_input name=MISSING type=4 qscale=1 qoffset=0 dims=1,128,128,3,
+output/andon_4cam/color_blue_output caps=neural-network/tensors, type=(string)FLOAT32, dimensions=(int)< < (int)1, (int)8 > >, rate=(fraction)30/1 bytes=32 memories=1
+output/andon_4cam/color_blue_output name=logits type=10 qscale=1 qoffset=0 dims=1,8,

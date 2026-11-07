@@ -1,0 +1,1194 @@
+============================================================
+  AIBox Stream Pipeline Demo  v1.0.0
+============================================================
+[INFO] RLIMIT_NOFILE soft=65536 hard=65536
+[INFO] GStreamer initialized (version 1.24.2)
+[INFO] snapshot : /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/raisehands_acceptance_20261103/video/multi/snapshot/pipeline_raisehands_4cam.txt
+[INFO] dump_plan_only : no
+[INFO] build_only     : no
+[INFO] run_seconds    : 0
+[INFO] run_forever    : yes
+[INFO] Snapshot loaded: raisehands_4cam
+[INFO]   streams   : 4
+[INFO]   algorithms: 1
+[INFO]   models    : 2
+[INFO] frame_cache min_interval_ms=150 max_total_bytes=536870912
+[INFO] ExecutionPlan  : plan_raisehands_4cam
+[INFO]   stream_plans : 4
+[INFO]   algo_groups  : 1
+[INFO]   time_mux_grps: 1
+[INFO]   stage_plans  : 2
+[INFO]   chain_plans  : 1
+[INFO] Exported: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/raisehands_acceptance_20261103/video/multi/execution_plan.json
+[INFO] Exported: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/raisehands_acceptance_20261103/video/multi/structure.txt
+[INFO] Annotated RTSP output enabled (127.0.0.1:8555/cam/{camera_id})
+[BATCH_DISPATCH] path=time_mux groups=1
+[annotated] VPU budget OK: 4 dec + 4 annotated_enc(build) + 0 rec_enc = 8 / 32
+[init] GstAiboxFrameMeta registration triggered (aiboxframemeta)
+[RTSP_TRANSPORT] camera=cam-001 requested=tcp flags=4 udp_retry_timeout_us=60000000 readback=OK
+[DECODE_COLOR_CAPS] element=decode_color_caps_cam-002 codec=h265 override=bt709
+[RTSP_TRANSPORT] camera=cam-002 requested=tcp flags=4 udp_retry_timeout_us=60000000 readback=OK
+[DECODE_COLOR_CAPS] element=decode_color_caps_cam-003 codec=h265 override=bt709
+[RTSP_TRANSPORT] camera=cam-003 requested=tcp flags=4 udp_retry_timeout_us=60000000 readback=OK
+[DECODE_COLOR_CAPS] element=decode_color_caps_cam-004 codec=h265 override=bt709
+[RTSP_TRANSPORT] camera=cam-004 requested=tcp flags=4 udp_retry_timeout_us=60000000 readback=OK
+[STAGE_CONFIG] stage=human_detect model=yolox_ppe_w8a16 crop=1 input=1 module=yolox-ppe
+failed to get driver name for fd 22
+MESA-LOADER: failed to retrieve device information
+failed to get driver name for fd 22
+[PPE_INPUT] model=yolox_ppe_w8a16 path=/mnt/workspace/0924/aibox_pipeline/data/models/ppe/yolox_ppe_w8a16.bin name=images shape=[1,640,640,3] requested_dtype=UINT16 disposition=centre layout=reverse readback=OK
+[HTP] stage=human_detect stage_index=1 -> backend-device-id=1 (n_htp=2)
+[DBG class-filter] stage=human_detect class-filter="Human"
+[DBG module] stage=human_detect nick=yolox-ppe gtype=187650777801632
+[DBG module] enum_class=0xaaaad9f3c8e0 n_values=12
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo-nas value=1
+[DBG module]   nick[2]=ppyoloe value=2
+[DBG module]   nick[3]=yolo26-obb value=3
+[DBG module]   nick[4]=yolo26-noe2e value=4
+[DBG module]   nick[5]=yolo26-otm value=5
+[DBG module]   nick[6]=mobilenet-softmax value=6
+[DBG module]   nick[7]=yolox-color8 value=7
+[DBG module]   nick[8]=yolox-stacklight value=8
+[DBG module]   nick[9]=siglip2-image value=9
+[DBG module]   nick[10]=siglip2-text value=10
+[DBG module]   nick[11]=yolox-ppe value=11
+[DBG module] final check=11
+[PPE_POSTPROCESS] confidence=0.050000 nms_iou=0.450 results=50
+[STAGE_CONFIG] stage=gesture_classify model=mobilenetv3_gesture_w8a16 crop=2 input=2 module=mobilenet-softmax
+[HTP] stage=gesture_classify stage_index=2 -> backend-device-id=0 (n_htp=2)
+[DBG module] stage=gesture_classify nick=mobilenet-softmax gtype=187650777801632
+[DBG module] enum_class=0xaaaad9f3c8e0 n_values=12
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo-nas value=1
+[DBG module]   nick[2]=ppyoloe value=2
+[DBG module]   nick[3]=yolo26-obb value=3
+[DBG module]   nick[4]=yolo26-noe2e value=4
+[DBG module]   nick[5]=yolo26-otm value=5
+[DBG module]   nick[6]=mobilenet-softmax value=6
+[DBG module]   nick[7]=yolox-color8 value=7
+[DBG module]   nick[8]=yolox-stacklight value=8
+[DBG module]   nick[9]=siglip2-image value=9
+[DBG module]   nick[10]=siglip2-text value=10
+[DBG module]   nick[11]=yolox-ppe value=11
+[DBG module] final check=6
+[FACE-OC] draw handler attached (mode=(null))
+[annotated] overlay_tmux_group_0_0 before tee_post (writable DMA-BUF path)
+[annotated] tmux_group_0_0 slot0(cam-001) codec=h265: demux→vscale→caps→enc→parse→tee_webrtc
+[annotated] tmux_group_0_0 slot1(cam-002) codec=h265: demux→vscale→caps→enc→parse→tee_webrtc
+[annotated] tmux_group_0_0 slot2(cam-003) codec=h265: demux→vscale→caps→enc→parse→tee_webrtc
+[annotated] tmux_group_0_0 slot3(cam-004) codec=h265: demux→vscale→caps→enc→parse→tee_webrtc
+[INFO] GstPipeline built successfully (P1: mux + decode + fakesink)
+[INFO] Registering 1 appsink callbacks...
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO] Exported: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/raisehands_acceptance_20261103/video/multi/runtime.dot
+bash: scripts/render_dot.sh: No such file or directory
+[WARN] Dot render failed (graphviz installed?). Run: bash scripts/render_dot.sh /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/raisehands_acceptance_20261103/video/multi/runtime.dot
+[NatsAdapter] Connected to nats://127.0.0.1:4222 (client=aibox-pipeline-detection)
+[INFO] FrameEventPublisher started (NATS subject: detection.frame)
+[INFO] SnapshotRequestSubscriber listening on event.pipeline.snapshot.request
+[INFO] AnomalySnapshotService started media_dir=/mnt/workspace/0924/aibox_pipeline/media encoder_ready=yes thumb_encoder_ready=yes
+[INFO] Setting pipeline to PLAYING (run-forever; Ctrl+C / SIGTERM to stop)...
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:38:dummy call to rpcmem_init, rpcmem APIs will be used from libxdsprpc
+[INFO] set_state(PLAYING) ret=2
+[RTSP] cam=cam-003 pad=recv_rtp_src_0_1303284012_96: linked H265 video RTP -> depay
+[RTSP] cam=cam-002 pad=recv_rtp_src_0_3528720026_96: linked H265 video RTP -> depay
+Tue Nov 03 2026 10:19:13.242081: INFO: GPU alignment: 64
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+PFP: 0x016dc112, ME: 0x00000000
+Pre-rotation disabled !!!
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+Pre-rotation disabled !!!
+Tue Nov 03 2026 10:19:13.252636: Initilized EGL display version: 1.5
+[RTSP] cam=cam-004 pad=recv_rtp_src_0_893651621_96: linked H265 video RTP -> depay
+Falling back to plain text label parsing.
+Falling back to plain text label parsing.
+[RTSP] cam=cam-001 pad=recv_rtp_src_0_4197011675_96: linked H265 video RTP -> depay
+[ROI_EXPAND] ratio=0.050000 id=256 before=757,451,210,628 after=746,419,232,661 frame=1920,1080 header_copy=1
+[ROI_EXPAND] ratio=0.050000 id=257 before=2,119,73,250 after=0,106,79,276 frame=1920,1080 header_copy=1
+[ROI_EXPAND] ratio=0.050000 id=258 before=1797,387,120,560 after=1791,359,129,616 frame=1920,1080 header_copy=1
+[ROI_EXPAND] ratio=0.050000 id=259 before=828,319,123,179 after=821,310,137,197 frame=1920,1080 header_copy=1
+[ROI_EXPAND] ratio=0.050000 id=260 before=963,200,72,133 after=959,193,80,147 frame=1920,1080 header_copy=1
+[RGB_INPUT_ENCODING] RGB U16 -> ImageNet QNN scale=7.260096026584506e-05 offset=-29172 bytes=98304 in_place=1
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[annotated-rtsp] cam-004 codec=h265 mounted at rtsp://127.0.0.1:8555/cam/cam-004
+[annotated-rtsp] cam-003 codec=h265 mounted at rtsp://127.0.0.1:8555/cam/cam-003
+[annotated-rtsp] cam-002 codec=h265 mounted at rtsp://127.0.0.1:8555/cam/cam-002
+[annotated-rtsp] cam-001 codec=h265 mounted at rtsp://127.0.0.1:8555/cam/cam-001
+[annotated-rtsp] server up: 4 camera(s) on rtsp://127.0.0.1:8555/cam/<camera_id>
+[ANNOTATED_RTSP_READY] rtsp://127.0.0.1:8555/cam/{camera_id}
+[PIPELINE_READY] state=PLAYING
+[ROI_CLASSIFICATION] camera=cam-001 frame=1 roi_id=256 label=Normal confidence=100.000 box=757,451,210,628
+[ROI_CLASSIFICATION] camera=cam-001 frame=1 roi_id=257 label=Normal confidence=100.000 box=2,119,73,250
+[ROI_CLASSIFICATION] camera=cam-001 frame=1 roi_id=258 label=Normal confidence=100.000 box=1797,387,120,560
+[ROI_CLASSIFICATION] camera=cam-001 frame=1 roi_id=259 label=Gesture confidence=95.978 box=828,319,123,179
+[ROI_CLASSIFICATION] camera=cam-001 frame=1 roi_id=260 label=Gesture confidence=99.869 box=963,200,72,133
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=1 rois=5 classified=5
+[TERMINAL] seq=1 camera=cam-001 frame=1 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=256 before=758,451,210,628 after=747,419,232,661 frame=1920,1080 header_copy=1
+[ROI_EXPAND] ratio=0.050000 id=257 before=2,119,73,250 after=0,106,79,276 frame=1920,1080 header_copy=1
+[ROI_EXPAND] ratio=0.050000 id=258 before=1797,387,120,561 after=1791,358,129,619 frame=1920,1080 header_copy=1
+[ROI_EXPAND] ratio=0.050000 id=259 before=828,318,123,179 after=821,309,137,197 frame=1920,1080 header_copy=1
+[ROI_EXPAND] ratio=0.050000 id=260 before=963,200,72,133 after=959,193,80,147 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=2 roi_id=256 label=Normal confidence=100.000 box=758,451,210,628
+[ROI_CLASSIFICATION] camera=cam-001 frame=2 roi_id=257 label=Normal confidence=100.000 box=2,119,73,250
+[ROI_CLASSIFICATION] camera=cam-001 frame=2 roi_id=258 label=Normal confidence=100.000 box=1797,387,120,561
+[ROI_CLASSIFICATION] camera=cam-001 frame=2 roi_id=259 label=Gesture confidence=99.883 box=828,318,123,179
+[ROI_CLASSIFICATION] camera=cam-001 frame=2 roi_id=260 label=Gesture confidence=99.894 box=963,200,72,133
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=2 rois=5 classified=5
+[TERMINAL] seq=2 camera=cam-001 frame=2 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=256 before=757,451,210,628 after=746,419,232,661 frame=1920,1080 header_copy=1
+[ROI_EXPAND] ratio=0.050000 id=257 before=2,119,73,250 after=0,106,79,276 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=3 roi_id=256 label=Normal confidence=100.000 box=757,451,210,628
+[ROI_CLASSIFICATION] camera=cam-001 frame=3 roi_id=257 label=Normal confidence=100.000 box=2,119,73,250
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=3 rois=5 classified=5
+[TERMINAL] seq=3 camera=cam-001 frame=3 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=4 rois=5 classified=5
+[TERMINAL] seq=4 camera=cam-001 frame=4 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=5 rois=5 classified=5
+[TERMINAL] seq=5 camera=cam-001 frame=5 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=6 rois=5 classified=5
+[TERMINAL] seq=6 camera=cam-001 frame=6 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=7 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=7 rois=5 classified=5
+[TERMINAL] seq=7 camera=cam-001 frame=7 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=8 rois=5 classified=5
+[TERMINAL] seq=8 camera=cam-001 frame=8 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=9 rois=5 classified=5
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=10 rois=5 classified=5
+[annotated-rtsp] cam-003: client media configured
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=11 rois=5 classified=5
+[ROI_CLASSIFICATION] camera=cam-001 frame=12 roi_id=260 label=Normal confidence=55.244 box=963,202,71,126
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=12 rois=5 classified=5
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=13 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[annotated-rtsp] cam-002: client media configured
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=23 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=20 roi_id=258 label=Normal confidence=100.000 box=107,154,68,150
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=21 rois=6 classified=6
+[TERMINAL] seq=30 camera=cam-001 frame=21 rois=6 labels=Human,Human,Human,Human,Human,Human
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=40 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=26 roi_id=260 label=Normal confidence=100.000 box=1790,398,129,215
+[AGG] camera=cam-001 frame=30 detections=5 (cam_total=30 det_total=160 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-003 frame=19 roi_id=257 label=Normal confidence=100.000 box=1218,118,113,394
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=60 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=20 rois=2 classified=2
+[TERMINAL] seq=60 camera=cam-003 frame=20 rois=2 labels=Human,Human
+[ROI_EXPAND] ratio=0.050000 id=257 before=1218,118,113,394 after=1212,98,125,434 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-003 frame=24 roi_id=257 label=Normal confidence=100.000 box=1218,118,113,394
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=79 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[annotated-rtsp] cam-001: client media configured
+[annotated-rtsp] cam-004: client media configured
+[ROI_CLASSIFICATION] camera=cam-004 frame=19 roi_id=257 label=Normal confidence=100.000 box=1686,374,222,443
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=29 rois=2 classified=2
+[TERMINAL] seq=90 camera=cam-003 frame=29 rois=2 labels=Human,Human
+[AGG] camera=cam-003 frame=30 detections=2 (cam_total=30 det_total=60 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=101 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=24 roi_id=258 label=Normal confidence=100.000 box=1642,720,277,359
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=27 rois=4 classified=4
+[TERMINAL] seq=120 camera=cam-004 frame=27 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-003 frame=37 roi_id=256 label=Normal confidence=100.000 box=675,248,187,542
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=127 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=30 detections=3 (cam_total=30 det_total=141 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=15 roi_id=257 label=Normal confidence=100.000 box=1263,78,89,257
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=46 rois=2 classified=2
+[TERMINAL] seq=150 camera=cam-003 frame=46 rois=2 labels=Human,Human
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=153 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=257 before=1793,391,123,552 after=1786,363,134,608 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=57 roi_id=257 label=Normal confidence=99.999 box=1793,391,123,552
+[AGG] camera=cam-001 frame=60 detections=6 (cam_total=60 det_total=331 qd=1 drop=0)
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=174 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=24 roi_id=256 label=Gesture confidence=77.821 box=1172,171,143,393
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=25 rois=2 classified=2
+[TERMINAL] seq=180 camera=cam-002 frame=25 rois=2 labels=Human,Human
+[annotated-rtsp] cam-003: client media configured
+[annotated-rtsp] cam-001: client media configured
+[annotated-rtsp] cam-004: client media configured
+[annotated-rtsp] cam-002: client media configured
+[ROI_CLASSIFICATION] camera=cam-004 frame=47 roi_id=256 label=Normal confidence=100.000 box=1602,343,216,489
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=199 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=30 detections=4 (cam_total=30 det_total=68 qd=1 drop=0)
+[AGG] camera=cam-003 frame=60 detections=2 (cam_total=60 det_total=120 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=33 rois=4 classified=4
+[TERMINAL] seq=210 camera=cam-002 frame=33 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=69 roi_id=258 label=Normal confidence=94.383 box=960,202,77,130
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=223 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=74 roi_id=259 label=Normal confidence=99.997 box=0,91,40,123
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=53 rois=3 classified=3
+[TERMINAL] seq=240 camera=cam-004 frame=53 rois=3 labels=Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=256 before=740,457,298,622 after=725,425,328,655 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=81 roi_id=256 label=Normal confidence=100.000 box=740,457,298,622
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=249 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=58 roi_id=258 label=Normal confidence=100.000 box=1646,698,262,381
+[AGG] camera=cam-004 frame=60 detections=3 (cam_total=60 det_total=231 qd=1 drop=0)
+[annotated-rtsp] cam-001: client media configured
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=88 rois=5 classified=5
+[TERMINAL] seq=270 camera=cam-001 frame=88 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=272 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=90 det_frame=0 age_ms=0 have_state=0 pts=0:00:16.541072771
+[AGG] camera=cam-001 frame=90 detections=6 (cam_total=90 det_total=486 qd=1 drop=0)
+[annotated-rtsp] cam-003: client media configured
+[ROI_CLASSIFICATION] camera=cam-004 frame=63 roi_id=256 label=Normal confidence=100.000 box=1602,340,193,491
+[annotated-rtsp] cam-002: client media configured
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=294 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=95 roi_id=256 label=Normal confidence=100.000 box=752,463,204,616
+[annotated-rtsp] cam-004: client media configured
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=81 rois=2 classified=2
+[TERMINAL] seq=300 camera=cam-003 frame=81 rois=2 labels=Human,Human
+
+** (aibox_stream_pipeline_demo:2365949): WARNING **: 10:19:29.872: v4l2h265dec_cam_003: 20 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:2365949): WARNING **: 10:19:29.915: v4l2h265dec_cam_004: 29 initial frames were not dequeued: bug in decoder -- please file a bug
+[ROI_CLASSIFICATION] camera=cam-001 frame=99 roi_id=258 label=Normal confidence=100.000 box=74,134,59,95
+
+** (aibox_stream_pipeline_demo:2365949): WARNING **: 10:19:30.433: v4l2h265dec_cam_001: 2 initial frames were not dequeued: bug in decoder -- please file a bug
+
+** (aibox_stream_pipeline_demo:2365949): WARNING **: 10:19:30.560: v4l2h265dec_cam_002: 45 initial frames were not dequeued: bug in decoder -- please file a bug
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=318 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=90 det_frame=0 age_ms=0 have_state=0 pts=0:00:18.781919609
+[AGG] camera=cam-003 frame=90 detections=2 (cam_total=90 det_total=180 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=60 rois=3 classified=3
+[TERMINAL] seq=330 camera=cam-002 frame=60 rois=3 labels=Human,Human,Human
+[AGG] camera=cam-002 frame=60 detections=3 (cam_total=60 det_total=178 qd=1 drop=0)
+[ROI_EXPAND] ratio=0.050000 id=258 before=1625,711,290,368 after=1610,692,310,388 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-004 frame=79 roi_id=258 label=Normal confidence=100.000 box=1625,711,290,368
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=340 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-003 frame=97 roi_id=257 label=Normal confidence=100.000 box=1430,147,117,337
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=88 rois=3 classified=3
+[TERMINAL] seq=360 camera=cam-004 frame=88 rois=3 labels=Human,Human,Human
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=90 det_frame=0 age_ms=0 have_state=0 pts=0:00:20.250305430
+[AGG] camera=cam-004 frame=90 detections=3 (cam_total=90 det_total=321 qd=1 drop=0)
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=368 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=109 roi_id=256 label=Normal confidence=100.000 box=751,462,204,617
+[ROI_CLASSIFICATION] camera=cam-004 frame=93 roi_id=257 label=Normal confidence=100.000 box=1231,559,201,259
+[annotated-rtsp] cam-001: client media configured
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=116 rois=4 classified=4
+[TERMINAL] seq=390 camera=cam-001 frame=116 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=391 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-003 frame=106 roi_id=257 label=Normal confidence=100.000 box=1217,131,134,377
+[AGG] camera=cam-001 frame=120 detections=4 (cam_total=120 det_total=652 qd=1 drop=0)
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=411 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=259 before=1228,104,115,346 after=1222,86,127,382 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=86 roi_id=259 label=Normal confidence=100.000 box=1228,104,115,346
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=87 rois=4 classified=4
+[TERMINAL] seq=420 camera=cam-002 frame=87 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=427 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=90 det_frame=0 age_ms=0 have_state=0 pts=0:00:23.575922178
+[AGG] camera=cam-002 frame=90 detections=4 (cam_total=90 det_total=283 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-003 frame=115 roi_id=257 label=Normal confidence=100.000 box=1217,130,135,377
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=449 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=109 rois=4 classified=4
+[TERMINAL] seq=450 camera=cam-004 frame=109 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-004 frame=110 roi_id=259 label=Normal confidence=99.833 box=796,341,102,177
+[AGG] camera=cam-003 frame=120 detections=2 (cam_total=120 det_total=240 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=114 roi_id=259 label=Normal confidence=99.883 box=795,344,103,175
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=475 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=139 rois=4 classified=4
+[TERMINAL] seq=480 camera=cam-001 frame=139 rois=4 labels=Human,Human,Human,Human
+[annotated-rtsp] cam-001: client media configured
+[ROI_CLASSIFICATION] camera=cam-001 frame=141 roi_id=260 label=Gesture confidence=97.078 box=956,195,80,132
+[AGG] camera=cam-004 frame=120 detections=4 (cam_total=120 det_total=431 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=495 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=258 before=71,148,62,131 after=67,141,70,145 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=145 roi_id=258 label=Normal confidence=100.000 box=71,148,62,131
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=106 rois=4 classified=4
+[TERMINAL] seq=510 camera=cam-002 frame=106 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-004 frame=127 roi_id=259 label=Normal confidence=100.000 box=0,206,36,137
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=522 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=150 detections=5 (cam_total=150 det_total=783 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=114 roi_id=256 label=Normal confidence=100.000 box=1152,197,157,376
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=131 rois=4 classified=4
+[TERMINAL] seq=540 camera=cam-004 frame=131 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=543 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=135 roi_id=256 label=Normal confidence=100.000 box=1506,337,215,502
+[AGG] camera=cam-002 frame=120 detections=4 (cam_total=120 det_total=401 qd=1 drop=0)
+[AGG] camera=cam-003 frame=150 detections=2 (cam_total=150 det_total=300 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=121 roi_id=258 label=Normal confidence=100.000 box=1699,115,53,93
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=569 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=140 rois=4 classified=4
+[TERMINAL] seq=570 camera=cam-004 frame=140 rois=4 labels=Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=256 before=1162,197,136,355 after=1155,179,150,391 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=127 roi_id=256 label=Normal confidence=76.500 box=1162,197,136,355
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=594 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=159 rois=2 classified=2
+[TERMINAL] seq=600 camera=cam-003 frame=159 rois=2 labels=Human,Human
+[ROI_CLASSIFICATION] camera=cam-002 frame=131 roi_id=257 label=Normal confidence=78.862 box=1162,197,137,355
+[AGG] camera=cam-004 frame=150 detections=4 (cam_total=150 det_total=557 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=624 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=141 roi_id=256 label=Normal confidence=99.999 box=1264,71,92,258
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=173 rois=0 classified=0
+[TERMINAL] seq=630 camera=cam-001 frame=173 rois=0 labels=
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:32.371428820
+[AGG] camera=cam-001 frame=180 detections=0 (cam_total=180 det_total=868 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=654 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-003 frame=172 roi_id=256 label=Normal confidence=100.000 box=674,250,187,542
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=148 rois=3 classified=3
+[TERMINAL] seq=660 camera=cam-002 frame=148 rois=3 labels=Human,Human,Human
+[AGG] camera=cam-002 frame=150 detections=3 (cam_total=150 det_total=496 qd=1 drop=0)
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=674 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=186 roi_id=260 label=Normal confidence=100.000 box=1822,360,97,243
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:34.469652132
+[AGG] camera=cam-003 frame=180 detections=2 (cam_total=180 det_total=360 qd=1 drop=0)
+[ROI_EXPAND] ratio=0.050000 id=256 before=673,250,188,540 after=663,223,208,594 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-003 frame=181 roi_id=256 label=Normal confidence=100.000 box=673,250,188,540
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=153 rois=4 classified=4
+[TERMINAL] seq=690 camera=cam-002 frame=153 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=697 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-003 frame=186 roi_id=257 label=Normal confidence=100.000 box=1224,130,118,378
+[ROI_CLASSIFICATION] camera=cam-002 frame=159 roi_id=256 label=Normal confidence=100.000 box=155,675,273,395
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=195 rois=4 classified=4
+[TERMINAL] seq=720 camera=cam-001 frame=195 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=724 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=198 roi_id=259 label=Normal confidence=100.000 box=70,143,67,103
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:36.198290057
+[AGG] camera=cam-004 frame=180 detections=5 (cam_total=180 det_total=716 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=184 roi_id=256 label=Normal confidence=100.000 box=1236,560,199,260
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=749 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=185 rois=5 classified=5
+[TERMINAL] seq=750 camera=cam-004 frame=185 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=257 before=1228,132,117,376 after=1222,113,129,414 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-003 frame=200 roi_id=257 label=Normal confidence=100.000 box=1228,132,117,376
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=774 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=191 roi_id=260 label=Normal confidence=100.000 box=13,172,68,183
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=204 rois=2 classified=2
+[TERMINAL] seq=780 camera=cam-003 frame=204 rois=2 labels=Human,Human
+[AGG] camera=cam-001 frame=210 detections=4 (cam_total=210 det_total=979 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-003 frame=208 roi_id=256 label=Normal confidence=100.000 box=675,248,187,541
+[AGG] camera=cam-003 frame=210 detections=2 (cam_total=210 det_total=420 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:39.096351564
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=800 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=180 detections=4 (cam_total=180 det_total=638 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=199 roi_id=260 label=Normal confidence=100.000 box=13,172,68,182
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=182 rois=4 classified=4
+[TERMINAL] seq=810 camera=cam-002 frame=182 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=825 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-003 frame=220 roi_id=256 label=Normal confidence=100.000 box=675,248,187,541
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=222 rois=5 classified=5
+[TERMINAL] seq=840 camera=cam-001 frame=222 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=256 before=1234,562,198,260 after=1224,549,218,286 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-004 frame=205 roi_id=256 label=Normal confidence=100.000 box=1234,562,198,260
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=853 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=210 roi_id=256 label=Normal confidence=100.000 box=1234,562,198,259
+[AGG] camera=cam-004 frame=210 detections=3 (cam_total=210 det_total=850 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=230 rois=2 classified=2
+[TERMINAL] seq=870 camera=cam-003 frame=230 rois=2 labels=Human,Human
+[ROI_CLASSIFICATION] camera=cam-003 frame=232 roi_id=256 label=Normal confidence=100.000 box=675,249,184,541
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=880 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=219 roi_id=258 label=Normal confidence=100.000 box=1604,709,302,370
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=239 rois=5 classified=5
+[TERMINAL] seq=900 camera=cam-001 frame=239 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=904 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=240 detections=6 (cam_total=240 det_total=1125 qd=1 drop=0)
+[AGG] camera=cam-003 frame=240 detections=2 (cam_total=240 det_total=480 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-003 frame=241 roi_id=257 label=Normal confidence=86.821 box=1223,69,119,435
+[ROI_EXPAND] ratio=0.050000 id=259 before=1691,112,58,92 after=1688,107,64,102 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=210 roi_id=259 label=Normal confidence=99.911 box=1691,112,58,92
+[AGG] camera=cam-002 frame=210 detections=4 (cam_total=210 det_total=758 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=211 rois=4 classified=4
+[TERMINAL] seq=930 camera=cam-002 frame=211 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=931 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=231 roi_id=258 label=Normal confidence=100.000 box=1590,708,306,371
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=954 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=220 roi_id=259 label=Normal confidence=99.916 box=1691,112,58,93
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=239 rois=3 classified=3
+[TERMINAL] seq=960 camera=cam-004 frame=239 rois=3 labels=Human,Human,Human
+[AGG] camera=cam-004 frame=240 detections=3 (cam_total=240 det_total=940 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=254 roi_id=260 label=Normal confidence=100.000 box=0,93,40,124
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=974 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=257 roi_id=260 label=Normal confidence=100.000 box=0,93,39,123
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=258 rois=2 classified=2
+[TERMINAL] seq=990 camera=cam-003 frame=258 rois=2 labels=Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=998 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=261 before=71,138,53,77 after=68,134,59,85 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=262 roi_id=261 label=Normal confidence=100.000 box=71,138,53,77
+[ROI_CLASSIFICATION] camera=cam-002 frame=237 roi_id=258 label=Normal confidence=100.000 box=173,519,298,560
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=266 rois=7 classified=7
+[TERMINAL] seq=1020 camera=cam-001 frame=266 rois=7 labels=Human,Human,Human,Human,Human,Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1023 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=240 detections=4 (cam_total=240 det_total=878 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=257 roi_id=256 label=Normal confidence=100.000 box=1234,559,199,258
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=270 det_frame=0 age_ms=0 have_state=0 pts=0:00:48.933312148
+[AGG] camera=cam-003 frame=270 detections=2 (cam_total=270 det_total=540 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=270 det_frame=0 age_ms=0 have_state=0 pts=0:00:49.037776205
+[AGG] camera=cam-001 frame=270 detections=4 (cam_total=270 det_total=1315 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=246 rois=4 classified=4
+[TERMINAL] seq=1050 camera=cam-002 frame=246 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1051 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=272 roi_id=258 label=Normal confidence=100.000 box=0,113,63,303
+[ROI_CLASSIFICATION] camera=cam-001 frame=277 roi_id=258 label=Normal confidence=100.000 box=2,120,55,321
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1074 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=268 rois=4 classified=4
+[TERMINAL] seq=1080 camera=cam-004 frame=268 rois=4 labels=Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=256 before=674,248,187,543 after=664,220,207,599 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-003 frame=282 roi_id=256 label=Normal confidence=100.000 box=674,248,187,543
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=270 det_frame=0 age_ms=0 have_state=0 pts=0:00:50.947061839
+[AGG] camera=cam-004 frame=270 detections=4 (cam_total=270 det_total=1050 qd=1 drop=0)
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1102 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=274 roi_id=259 label=Normal confidence=100.000 box=1706,725,209,354
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=287 rois=2 classified=2
+[TERMINAL] seq=1110 camera=cam-003 frame=287 rois=2 labels=Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=290 roi_id=259 label=Normal confidence=100.000 box=67,141,60,99
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1130 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=270 det_frame=0 age_ms=0 have_state=0 pts=0:00:52.648467591
+[AGG] camera=cam-002 frame=270 detections=4 (cam_total=270 det_total=989 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-003 frame=296 roi_id=256 label=Normal confidence=100.000 box=675,248,187,543
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=296 rois=2 classified=2
+[TERMINAL] seq=1140 camera=cam-003 frame=296 rois=2 labels=Human,Human
+[ROI_CLASSIFICATION] camera=cam-004 frame=286 roi_id=260 label=Normal confidence=100.000 box=1416,17,51,66
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1158 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=300 detections=2 (cam_total=300 det_total=600 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=293 rois=5 classified=5
+[TERMINAL] seq=1170 camera=cam-004 frame=293 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=256 before=847,470,263,606 after=833,439,291,641 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=299 roi_id=256 label=Normal confidence=100.000 box=847,470,263,606
+[AGG] camera=cam-001 frame=300 detections=3 (cam_total=300 det_total=1427 qd=1 drop=0)
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1179 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=286 roi_id=257 label=Normal confidence=99.885 box=229,689,276,385
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=306 rois=3 classified=3
+[TERMINAL] seq=1200 camera=cam-003 frame=306 rois=3 labels=Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1203 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=300 detections=5 (cam_total=300 det_total=1188 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=291 roi_id=256 label=Normal confidence=100.000 box=1203,151,138,407
+[ROI_CLASSIFICATION] camera=cam-003 frame=314 roi_id=257 label=Normal confidence=100.000 box=1224,133,121,374
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1230 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=303 rois=4 classified=4
+[TERMINAL] seq=1230 camera=cam-004 frame=303 rois=4 labels=Human,Human,Human,Human
+[AGG] camera=cam-002 frame=300 detections=4 (cam_total=300 det_total=1109 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-003 frame=319 roi_id=257 label=Normal confidence=100.000 box=1224,132,122,374
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1253 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=257 before=1251,391,222,494 after=1239,366,246,544 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=321 roi_id=257 label=Normal confidence=99.959 box=1251,391,222,494
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=321 rois=4 classified=4
+[TERMINAL] seq=1260 camera=cam-001 frame=321 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=1278 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=317 roi_id=258 label=Normal confidence=100.000 box=1617,715,290,364
+[AGG] camera=cam-003 frame=330 detections=3 (cam_total=330 det_total=673 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=334 rois=3 classified=3
+[TERMINAL] seq=1290 camera=cam-003 frame=334 rois=3 labels=Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-003 frame=335 roi_id=257 label=Normal confidence=100.000 box=1222,130,128,378
+[AGG] camera=cam-001 frame=330 detections=4 (cam_total=330 det_total=1530 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=1308 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=316 roi_id=258 label=Normal confidence=100.000 box=1642,59,68,159
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=336 rois=4 classified=4
+[TERMINAL] seq=1320 camera=cam-001 frame=336 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-003 frame=345 roi_id=256 label=Normal confidence=100.000 box=674,249,184,541
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=1335 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=330 detections=5 (cam_total=330 det_total=1296 qd=1 drop=0)
+[ROI_EXPAND] ratio=0.050000 id=257 before=1222,130,127,378 after=1215,111,141,416 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-003 frame=349 roi_id=257 label=Normal confidence=100.000 box=1222,130,127,378
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=333 rois=5 classified=5
+[TERMINAL] seq=1350 camera=cam-004 frame=333 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1359 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=329 roi_id=259 label=Normal confidence=100.000 box=1756,78,63,101
+[AGG] camera=cam-002 frame=330 detections=4 (cam_total=330 det_total=1204 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=332 roi_id=259 label=Normal confidence=100.000 box=1756,78,66,108
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=355 rois=2 classified=2
+[TERMINAL] seq=1380 camera=cam-003 frame=355 rois=2 labels=Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1381 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=338 roi_id=257 label=Normal confidence=100.000 box=1557,71,88,238
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=360 det_frame=0 age_ms=0 have_state=0 pts=0:01:03.325603098
+[AGG] camera=cam-003 frame=360 detections=2 (cam_total=360 det_total=753 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1407 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=343 roi_id=259 label=Normal confidence=100.000 box=1756,78,64,102
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=343 rois=4 classified=4
+[TERMINAL] seq=1410 camera=cam-002 frame=343 rois=4 labels=Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=258 before=236,675,274,404 after=222,654,302,426 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=347 roi_id=258 label=Normal confidence=99.915 box=236,675,274,404
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1431 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=360 det_frame=0 age_ms=0 have_state=0 pts=0:01:04.676971184
+[AGG] camera=cam-001 frame=360 detections=4 (cam_total=360 det_total=1650 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=358 rois=5 classified=5
+[TERMINAL] seq=1440 camera=cam-004 frame=358 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-004 frame=359 roi_id=259 label=Normal confidence=100.000 box=1615,703,294,376
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=360 det_frame=0 age_ms=0 have_state=0 pts=0:01:05.395085158
+[AGG] camera=cam-004 frame=360 detections=5 (cam_total=360 det_total=1448 qd=1 drop=0)
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1455 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=364 roi_id=257 label=Normal confidence=100.000 box=1244,395,160,217
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=367 rois=5 classified=5
+[TERMINAL] seq=1470 camera=cam-004 frame=367 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=371 roi_id=257 label=Normal confidence=99.915 box=1254,392,219,494
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1478 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=360 det_frame=0 age_ms=0 have_state=0 pts=0:01:07.300257349
+[ROI_CLASSIFICATION] camera=cam-002 frame=360 roi_id=258 label=Normal confidence=100.000 box=1345,80,106,263
+[AGG] camera=cam-002 frame=360 detections=4 (cam_total=360 det_total=1320 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=376 rois=5 classified=5
+[TERMINAL] seq=1500 camera=cam-001 frame=376 rois=5 labels=Human,Human,Human,Human,Human
+[AGG] camera=cam-003 frame=390 detections=2 (cam_total=390 det_total=813 qd=1 drop=0)
+[ROI_EXPAND] ratio=0.050000 id=257 before=244,684,260,394 after=231,664,286,416 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=364 roi_id=257 label=Normal confidence=99.867 box=244,684,260,394
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1508 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=379 roi_id=258 label=Normal confidence=100.000 box=1,266,50,239
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=383 rois=5 classified=5
+[TERMINAL] seq=1530 camera=cam-001 frame=383 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1533 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=383 roi_id=258 label=Normal confidence=100.000 box=0,266,49,240
+[ROI_CLASSIFICATION] camera=cam-004 frame=387 roi_id=260 label=Normal confidence=100.000 box=1549,637,255,415
+[AGG] camera=cam-004 frame=390 detections=6 (cam_total=390 det_total=1609 qd=1 drop=0)
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1557 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=390 detections=5 (cam_total=390 det_total=1793 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=391 rois=6 classified=6
+[TERMINAL] seq=1560 camera=cam-004 frame=391 rois=6 labels=Human,Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-004 frame=392 roi_id=261 label=Normal confidence=100.000 box=154,65,81,185
+[ROI_EXPAND] ratio=0.050000 id=261 before=153,65,81,186 after=148,55,91,206 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-004 frame=397 roi_id=261 label=Normal confidence=100.000 box=153,65,81,186
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1583 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=387 rois=3 classified=3
+[TERMINAL] seq=1590 camera=cam-002 frame=387 rois=3 labels=Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-003 frame=410 roi_id=257 label=Normal confidence=100.000 box=1218,118,114,394
+[AGG] camera=cam-002 frame=390 detections=3 (cam_total=390 det_total=1425 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=1605 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=403 roi_id=259 label=Normal confidence=99.996 box=1569,473,240,392
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=404 rois=4 classified=4
+[TERMINAL] seq=1620 camera=cam-004 frame=404 rois=4 labels=Human,Human,Human,Human
+[AGG] camera=cam-003 frame=420 detections=2 (cam_total=420 det_total=873 qd=1 drop=0)
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1629 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-003 frame=421 roi_id=257 label=Normal confidence=100.000 box=1218,118,113,394
+[ROI_CLASSIFICATION] camera=cam-004 frame=412 roi_id=259 label=Normal confidence=100.000 box=1565,479,242,393
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=413 rois=4 classified=4
+[TERMINAL] seq=1650 camera=cam-004 frame=413 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1654 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=260 before=1632,41,71,150 after=1628,33,79,166 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=404 roi_id=260 label=Normal confidence=99.999 box=1632,41,71,150
+[AGG] camera=cam-004 frame=420 detections=4 (cam_total=420 det_total=1747 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=421 roi_id=257 label=Normal confidence=98.819 box=1511,685,210,325
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=421 rois=4 classified=4
+[TERMINAL] seq=1680 camera=cam-004 frame=421 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1681 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=420 detections=5 (cam_total=420 det_total=1930 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=425 roi_id=258 label=Normal confidence=100.000 box=1727,791,188,288
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1707 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=443 rois=2 classified=2
+[TERMINAL] seq=1710 camera=cam-003 frame=443 rois=2 labels=Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=425 roi_id=259 label=Normal confidence=100.000 box=9,138,85,228
+[AGG] camera=cam-002 frame=420 detections=5 (cam_total=420 det_total=1555 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=429 roi_id=260 label=Normal confidence=100.000 box=0,145,52,252
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1735 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=436 rois=2 classified=2
+[TERMINAL] seq=1740 camera=cam-004 frame=436 rois=2 labels=Human,Human
+[ROI_EXPAND] ratio=0.050000 id=259 before=11,139,84,227 after=6,127,94,251 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=434 roi_id=259 label=Normal confidence=100.000 box=11,139,84,227
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:01:17.661973314
+[AGG] camera=cam-003 frame=450 detections=2 (cam_total=450 det_total=933 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1760 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=442 roi_id=257 label=Normal confidence=100.000 box=1595,740,186,307
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=445 rois=2 classified=2
+[TERMINAL] seq=1770 camera=cam-004 frame=445 rois=2 labels=Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=443 roi_id=257 label=Gesture confidence=99.950 box=831,353,286,726
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=1781 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=440 roi_id=259 label=Normal confidence=99.780 box=1639,56,63,146
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:01:19.525962776
+[AGG] camera=cam-004 frame=450 detections=2 (cam_total=450 det_total=1817 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=442 rois=5 classified=5
+[TERMINAL] seq=1800 camera=cam-002 frame=442 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1804 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:01:20.501759148
+[ROI_CLASSIFICATION] camera=cam-001 frame=450 roi_id=256 label=Normal confidence=94.537 box=1273,384,200,498
+[AGG] camera=cam-001 frame=450 detections=5 (cam_total=450 det_total=2075 qd=1 drop=0)
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1827 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=259 before=71,132,52,67 after=68,128,58,75 frame=1920,1080 header_copy=1
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:01:21.406847343
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=450 rois=5 classified=5
+[TERMINAL] seq=1830 camera=cam-002 frame=450 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=454 roi_id=259 label=Normal confidence=100.000 box=71,132,52,67
+[AGG] camera=cam-002 frame=451 detections=5 (cam_total=450 det_total=1705 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1845 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=459 roi_id=256 label=Normal confidence=97.899 box=1273,383,201,498
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=454 rois=5 classified=5
+[TERMINAL] seq=1860 camera=cam-002 frame=454 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1866 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=457 roi_id=257 label=Normal confidence=100.000 box=1274,78,75,204
+[AGG] camera=cam-003 frame=480 detections=2 (cam_total=480 det_total=993 qd=1 drop=0)
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1886 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=460 roi_id=260 label=Normal confidence=100.000 box=215,659,242,420
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=477 rois=1 classified=1
+[TERMINAL] seq=1890 camera=cam-004 frame=477 rois=1 labels=Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=471 roi_id=258 label=Normal confidence=99.993 box=3,109,59,270
+[AGG] camera=cam-004 frame=480 detections=1 (cam_total=480 det_total=1872 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=1910 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=470 rois=5 classified=5
+[TERMINAL] seq=1920 camera=cam-002 frame=470 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=259 before=1233,110,94,372 after=1228,91,104,410 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=471 roi_id=259 label=Normal confidence=100.000 box=1233,110,94,372
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=1937 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=480 detections=4 (cam_total=480 det_total=2212 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=477 roi_id=259 label=Normal confidence=99.993 box=1274,78,74,204
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=478 rois=5 classified=5
+[TERMINAL] seq=1950 camera=cam-002 frame=478 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=1962 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=481 detections=4 (cam_total=480 det_total=1852 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=495 roi_id=256 label=Normal confidence=100.000 box=1795,356,122,487
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=491 rois=4 classified=4
+[TERMINAL] seq=1980 camera=cam-001 frame=491 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-003 frame=509 roi_id=256 label=Normal confidence=100.000 box=674,247,193,544
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=1987 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=510 detections=2 (cam_total=510 det_total=1053 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=498 roi_id=259 label=Normal confidence=100.000 box=822,186,60,67
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=494 rois=4 classified=4
+[TERMINAL] seq=2010 camera=cam-002 frame=494 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=2012 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=256 before=1191,143,119,414 after=1185,122,131,456 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=500 roi_id=256 label=Normal confidence=100.000 box=1191,143,119,414
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2029 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=504 rois=4 classified=4
+[TERMINAL] seq=2040 camera=cam-001 frame=504 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-003 frame=529 roi_id=257 label=Normal confidence=100.000 box=1224,130,123,376
+[AGG] camera=cam-004 frame=510 detections=3 (cam_total=510 det_total=1922 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2052 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=507 roi_id=260 label=Normal confidence=100.000 box=1246,97,103,304
+[AGG] camera=cam-001 frame=510 detections=4 (cam_total=510 det_total=2332 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=509 rois=5 classified=5
+[TERMINAL] seq=2070 camera=cam-002 frame=509 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-002 frame=511 roi_id=258 label=Normal confidence=79.363 box=1638,89,66,140
+[AGG] camera=cam-002 frame=511 detections=5 (cam_total=510 det_total=1983 qd=1 drop=0)
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2080 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:01:32.868116057
+[AGG] camera=cam-003 frame=540 detections=2 (cam_total=540 det_total=1113 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=517 roi_id=259 label=Normal confidence=100.000 box=821,186,61,68
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=518 rois=5 classified=5
+[TERMINAL] seq=2100 camera=cam-002 frame=518 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=2109 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=259 before=75,141,58,119 after=72,135,64,131 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=520 roi_id=259 label=Normal confidence=100.000 box=75,141,58,119
+[ROI_CLASSIFICATION] camera=cam-004 frame=531 roi_id=256 label=Normal confidence=100.000 box=1686,353,218,445
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=525 rois=5 classified=5
+[TERMINAL] seq=2130 camera=cam-002 frame=525 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=2132 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=535 roi_id=257 label=Normal confidence=99.987 box=1573,824,207,255
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:01:35.323477326
+[AGG] camera=cam-004 frame=540 detections=3 (cam_total=540 det_total=2017 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=529 roi_id=259 label=Normal confidence=99.998 box=1644,81,69,141
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2160 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=530 rois=5 classified=5
+[TERMINAL] seq=2160 camera=cam-002 frame=530 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=538 roi_id=257 label=Normal confidence=95.665 box=790,462,251,617
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:01:36.296489898
+[ROI_EXPAND] ratio=0.050000 id=259 before=75,140,58,118 after=72,134,64,130 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=541 roi_id=259 label=Normal confidence=100.000 box=75,140,58,118
+[AGG] camera=cam-001 frame=541 detections=6 (cam_total=540 det_total=2500 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2189 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=542 rois=6 classified=6
+[TERMINAL] seq=2190 camera=cam-001 frame=542 rois=6 labels=Human,Human,Human,Human,Human,Human
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:01:36.930755354
+[AGG] camera=cam-002 frame=541 detections=5 (cam_total=540 det_total=2133 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=545 roi_id=256 label=Normal confidence=99.996 box=863,471,249,608
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2210 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=570 detections=2 (cam_total=570 det_total=1173 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=547 roi_id=257 label=Normal confidence=100.000 box=1201,163,129,401
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=571 rois=2 classified=2
+[TERMINAL] seq=2220 camera=cam-003 frame=571 rois=2 labels=Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2233 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=562 roi_id=257 label=Normal confidence=100.000 box=1542,775,246,304
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=579 rois=2 classified=2
+[TERMINAL] seq=2250 camera=cam-003 frame=579 rois=2 labels=Human,Human
+[AGG] camera=cam-004 frame=570 detections=2 (cam_total=570 det_total=2087 qd=1 drop=0)
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2257 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=558 roi_id=256 label=Normal confidence=100.000 box=863,471,250,608
+[ROI_EXPAND] ratio=0.050000 id=257 before=239,684,267,394 after=225,664,295,416 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=557 roi_id=257 label=Normal confidence=98.908 box=239,684,267,394
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=558 rois=5 classified=5
+[TERMINAL] seq=2280 camera=cam-002 frame=558 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2287 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=583 roi_id=256 label=Normal confidence=100.000 box=1696,350,199,412
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=588 rois=2 classified=2
+[TERMINAL] seq=2310 camera=cam-004 frame=588 rois=2 labels=Human,Human
+[ROI_CLASSIFICATION] camera=cam-002 frame=566 roi_id=258 label=Normal confidence=100.000 box=1269,75,81,119
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2317 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=571 detections=6 (cam_total=570 det_total=2630 qd=1 drop=0)
+[AGG] camera=cam-002 frame=571 detections=5 (cam_total=570 det_total=2283 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=573 roi_id=256 label=Normal confidence=99.999 box=882,464,226,614
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=600 rois=2 classified=2
+[TERMINAL] seq=2340 camera=cam-003 frame=600 rois=2 labels=Human,Human
+[AGG] camera=cam-003 frame=600 detections=2 (cam_total=600 det_total=1233 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2341 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=577 roi_id=258 label=Normal confidence=100.000 box=4,117,56,268
+[AGG] camera=cam-004 frame=600 detections=2 (cam_total=600 det_total=2147 qd=1 drop=0)
+[ROI_EXPAND] ratio=0.050000 id=258 before=4,117,56,268 after=1,103,62,296 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=582 roi_id=258 label=Normal confidence=100.000 box=4,117,56,268
+[OV-NATIVE] rois=7 faces=0 decision=0 | frames=2363 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=601 rois=2 classified=2
+[TERMINAL] seq=2370 camera=cam-004 frame=601 rois=2 labels=Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=587 roi_id=256 label=Normal confidence=99.999 box=882,464,225,614
+[ROI_CLASSIFICATION] camera=cam-001 frame=591 roi_id=262 label=Normal confidence=100.000 box=0,94,35,120
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2389 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=594 rois=4 classified=4
+[TERMINAL] seq=2400 camera=cam-001 frame=594 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=595 roi_id=257 label=Normal confidence=100.000 box=3,113,57,268
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2416 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=594 roi_id=259 label=Normal confidence=100.000 box=1277,80,77,142
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=597 rois=6 classified=6
+[TERMINAL] seq=2430 camera=cam-002 frame=597 rois=6 labels=Human,Human,Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=257 before=1220,130,117,378 after=1214,111,129,416 frame=1920,1080 header_copy=1
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2440 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-003 frame=625 roi_id=257 label=Normal confidence=100.000 box=1220,130,117,378
+[AGG] camera=cam-001 frame=601 detections=4 (cam_total=600 det_total=2810 qd=1 drop=0)
+[AGG] camera=cam-002 frame=601 detections=4 (cam_total=600 det_total=2442 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=605 roi_id=259 label=Normal confidence=100.000 box=82,130,63,123
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=603 rois=5 classified=5
+[TERMINAL] seq=2460 camera=cam-002 frame=603 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=2461 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=630 det_frame=0 age_ms=0 have_state=0 pts=0:01:47.795300370
+[AGG] camera=cam-003 frame=630 detections=2 (cam_total=630 det_total=1293 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=630 det_frame=0 age_ms=0 have_state=0 pts=0:01:48.573508843
+[AGG] camera=cam-004 frame=630 detections=1 (cam_total=630 det_total=2202 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=608 roi_id=257 label=Normal confidence=99.954 box=225,678,273,401
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=2490 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=612 rois=4 classified=4
+[TERMINAL] seq=2490 camera=cam-001 frame=612 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-003 frame=641 roi_id=257 label=Normal confidence=86.821 box=1223,69,119,435
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=2515 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=617 rois=4 classified=4
+[TERMINAL] seq=2520 camera=cam-001 frame=617 rois=4 labels=Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-002 frame=622 roi_id=259 label=Normal confidence=100.000 box=1276,81,78,136
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=2539 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=259 before=83,130,55,103 after=80,124,61,115 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=623 roi_id=259 label=Normal confidence=100.000 box=83,130,55,103
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=648 rois=1 classified=1
+[TERMINAL] seq=2550 camera=cam-004 frame=648 rois=1 labels=Human
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=630 det_frame=0 age_ms=0 have_state=0 pts=0:01:51.911085405
+[OV-NATIVE] rois=1 faces=0 decision=0 | frames=2561 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=630 det_frame=0 age_ms=0 have_state=0 pts=0:01:52.146246540
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=631 roi_id=260 label=Normal confidence=100.000 box=1263,95,85,247
+[AGG] camera=cam-002 frame=631 detections=6 (cam_total=630 det_total=2571 qd=1 drop=0)
+[AGG] camera=cam-001 frame=631 detections=4 (cam_total=630 det_total=2930 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=636 roi_id=259 label=Normal confidence=99.999 box=152,679,232,392
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=660 rois=2 classified=2
+[TERMINAL] seq=2580 camera=cam-003 frame=660 rois=2 labels=Human,Human
+[AGG] camera=cam-003 frame=660 detections=2 (cam_total=660 det_total=1353 qd=1 drop=0)
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=2587 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-003 frame=665 roi_id=257 label=Normal confidence=99.999 box=1223,76,126,429
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=657 rois=2 classified=2
+[TERMINAL] seq=2610 camera=cam-004 frame=657 rois=2 labels=Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2613 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=644 roi_id=257 label=Normal confidence=99.999 box=1698,114,54,95
+[AGG] camera=cam-004 frame=660 detections=2 (cam_total=660 det_total=2242 qd=1 drop=0)
+[ROI_EXPAND] ratio=0.050000 id=257 before=1672,399,234,512 after=1660,373,258,564 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=647 roi_id=257 label=Normal confidence=98.700 box=1672,399,234,512
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2637 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=650 rois=6 classified=6
+[TERMINAL] seq=2640 camera=cam-002 frame=650 rois=6 labels=Human,Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-004 frame=668 roi_id=257 label=Normal confidence=99.980 box=1579,808,187,271
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2661 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=690 detections=2 (cam_total=690 det_total=1413 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=653 roi_id=260 label=Normal confidence=100.000 box=961,205,78,133
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=653 rois=5 classified=5
+[TERMINAL] seq=2670 camera=cam-001 frame=653 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2686 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=656 roi_id=260 label=Normal confidence=99.996 box=961,205,78,132
+[AGG] camera=cam-002 frame=661 detections=5 (cam_total=660 det_total=2740 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=661 rois=5 classified=5
+[TERMINAL] seq=2700 camera=cam-001 frame=661 rois=5 labels=Human,Human,Human,Human,Human
+[AGG] camera=cam-001 frame=661 detections=5 (cam_total=660 det_total=3067 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=680 roi_id=258 label=Gesture confidence=66.610 box=610,138,56,73
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2707 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=258 before=1269,78,83,147 after=1264,70,93,163 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=669 roi_id=258 label=Normal confidence=100.000 box=1269,78,83,147
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=705 rois=3 classified=3
+[TERMINAL] seq=2730 camera=cam-003 frame=705 rois=3 labels=Human,Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2733 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=690 detections=2 (cam_total=690 det_total=2310 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=668 roi_id=260 label=Normal confidence=95.841 box=967,207,66,107
+[ROI_CLASSIFICATION] camera=cam-004 frame=694 roi_id=257 label=Normal confidence=99.980 box=1572,809,184,270
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=696 rois=2 classified=2
+[TERMINAL] seq=2760 camera=cam-004 frame=696 rois=2 labels=Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2761 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=679 roi_id=258 label=Normal confidence=99.948 box=1698,113,54,96
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=720 det_frame=0 age_ms=0 have_state=0 pts=0:02:01.197226697
+[AGG] camera=cam-003 frame=720 detections=2 (cam_total=720 det_total=1481 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=684 roi_id=258 label=Normal confidence=67.351 box=1698,112,54,96
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2786 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=701 rois=2 classified=2
+[TERMINAL] seq=2790 camera=cam-004 frame=701 rois=2 labels=Human,Human
+[ROI_EXPAND] ratio=0.050000 id=259 before=160,540,274,539 after=146,513,302,567 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-002 frame=688 roi_id=259 label=Normal confidence=100.000 box=160,540,274,539
+[AGG] camera=cam-002 frame=691 detections=5 (cam_total=690 det_total=2896 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2811 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=691 roi_id=256 label=Gesture confidence=94.483 box=751,370,256,709
+[AGG] camera=cam-001 frame=691 detections=4 (cam_total=690 det_total=3211 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=729 rois=3 classified=3
+[TERMINAL] seq=2820 camera=cam-003 frame=729 rois=3 labels=Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-003 frame=734 roi_id=258 label=Normal confidence=100.000 box=1754,74,65,112
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2836 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=738 rois=3 classified=3
+[TERMINAL] seq=2850 camera=cam-003 frame=738 rois=3 labels=Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-002 frame=700 roi_id=258 label=Normal confidence=97.892 box=1697,112,54,96
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=720 det_frame=0 age_ms=0 have_state=0 pts=0:02:04.155376471
+[AGG] camera=cam-004 frame=720 detections=2 (cam_total=720 det_total=2370 qd=1 drop=0)
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2859 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=725 roi_id=257 label=Normal confidence=99.575 box=1590,819,184,259
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=747 rois=3 classified=3
+[TERMINAL] seq=2880 camera=cam-003 frame=747 rois=3 labels=Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2881 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=256 before=1060,256,157,421 after=1052,234,173,465 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-004 frame=729 roi_id=256 label=Normal confidence=100.000 box=1060,256,157,421
+[AGG] camera=cam-003 frame=750 detections=3 (cam_total=750 det_total=1566 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=711 roi_id=256 label=Normal confidence=100.000 box=215,457,310,622
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2905 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=737 rois=2 classified=2
+[TERMINAL] seq=2910 camera=cam-004 frame=737 rois=2 labels=Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=714 roi_id=257 label=Normal confidence=100.000 box=3,122,76,247
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=2933 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=720 det_frame=0 age_ms=0 have_state=0 pts=0:02:07.410710082
+[ROI_CLASSIFICATION] camera=cam-002 frame=721 roi_id=259 label=Normal confidence=100.000 box=1275,77,73,133
+[AGG] camera=cam-002 frame=721 detections=5 (cam_total=720 det_total=3043 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=745 rois=2 classified=2
+[TERMINAL] seq=2940 camera=cam-004 frame=745 rois=2 labels=Human,Human
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=720 det_frame=0 age_ms=0 have_state=0 pts=0:02:07.986149161
+[AGG] camera=cam-001 frame=721 detections=5 (cam_total=720 det_total=3360 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=725 roi_id=256 label=Normal confidence=100.000 box=215,457,310,622
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=2958 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=750 detections=2 (cam_total=750 det_total=2430 qd=1 drop=0)
+[ROI_EXPAND] ratio=0.050000 id=259 before=0,92,39,119 after=0,86,41,131 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=728 roi_id=259 label=Normal confidence=100.000 box=0,92,39,119
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=728 rois=5 classified=5
+[TERMINAL] seq=2970 camera=cam-001 frame=728 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=2982 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=733 roi_id=257 label=Normal confidence=100.000 box=1267,73,83,205
+[ROI_CLASSIFICATION] camera=cam-004 frame=757 roi_id=258 label=Normal confidence=100.000 box=1571,737,326,342
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=735 rois=5 classified=5
+[TERMINAL] seq=3000 camera=cam-001 frame=735 rois=5 labels=Human,Human,Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=3012 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=760 roi_id=260 label=Normal confidence=100.000 box=169,57,77,184
+[AGG] camera=cam-003 frame=780 detections=2 (cam_total=780 det_total=1626 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=764 roi_id=259 label=Normal confidence=100.000 box=1843,496,76,295
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=742 rois=5 classified=5
+[TERMINAL] seq=3030 camera=cam-001 frame=742 rois=5 labels=Human,Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=256 before=675,249,185,542 after=665,221,205,598 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-003 frame=786 roi_id=256 label=Normal confidence=100.000 box=675,249,185,542
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=3043 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=747 roi_id=258 label=Normal confidence=100.000 box=89,133,53,100
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=748 rois=6 classified=6
+[TERMINAL] seq=3060 camera=cam-001 frame=748 rois=6 labels=Human,Human,Human,Human,Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=3063 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=751 detections=5 (cam_total=750 det_total=3193 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=749 roi_id=259 label=Normal confidence=100.000 box=762,103,54,81
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=3083 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=780 detections=4 (cam_total=780 det_total=2572 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=781 roi_id=258 label=Normal confidence=100.000 box=1574,723,338,356
+[AGG] camera=cam-001 frame=751 detections=6 (cam_total=750 det_total=3522 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=752 rois=6 classified=6
+[TERMINAL] seq=3090 camera=cam-001 frame=752 rois=6 labels=Human,Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=754 roi_id=259 label=Normal confidence=100.000 box=89,133,52,93
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=3110 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=258 before=760,104,54,80 after=757,100,60,88 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=757 roi_id=258 label=Normal confidence=100.000 box=760,104,54,80
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=790 rois=4 classified=4
+[TERMINAL] seq=3120 camera=cam-004 frame=790 rois=4 labels=Human,Human,Human,Human
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=810 det_frame=0 age_ms=0 have_state=0 pts=0:02:15.285824927
+[AGG] camera=cam-003 frame=810 detections=2 (cam_total=810 det_total=1686 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=768 roi_id=256 label=Normal confidence=100.000 box=645,294,254,603
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=3138 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=771 roi_id=258 label=Gesture confidence=92.695 box=1090,234,175,499
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=765 rois=6 classified=6
+[TERMINAL] seq=3150 camera=cam-001 frame=765 rois=6 labels=Human,Human,Human,Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=767 roi_id=258 label=Normal confidence=100.000 box=760,103,55,81
+[OV-NATIVE] rois=6 faces=0 decision=0 | frames=3160 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-003 frame=822 roi_id=256 label=Normal confidence=100.000 box=676,248,183,542
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=826 rois=2 classified=2
+[TERMINAL] seq=3180 camera=cam-003 frame=826 rois=2 labels=Human,Human
+[ROI_EXPAND] ratio=0.050000 id=260 before=1787,398,132,214 after=1780,387,140,236 frame=1920,1080 header_copy=1
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=3186 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=775 roi_id=260 label=Normal confidence=100.000 box=1787,398,132,214
+[AGG] camera=cam-002 frame=781 detections=5 (cam_total=780 det_total=3357 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=810 det_frame=0 age_ms=0 have_state=0 pts=0:02:18.468644171
+[AGG] camera=cam-004 frame=810 detections=3 (cam_total=810 det_total=2682 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=778 roi_id=257 label=Normal confidence=100.000 box=1793,392,124,548
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=3208 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=833 rois=2 classified=2
+[TERMINAL] seq=3210 camera=cam-003 frame=833 rois=2 labels=Human,Human
+[AGG] camera=cam-001 frame=781 detections=5 (cam_total=780 det_total=3688 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=790 roi_id=257 label=Normal confidence=100.000 box=1272,73,83,205
+[ROI_CLASSIFICATION] camera=cam-001 frame=786 roi_id=257 label=Normal confidence=100.000 box=1793,392,124,547
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=3240 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION_FRAME] camera=cam-004 frame=820 rois=3 classified=3
+[TERMINAL] seq=3240 camera=cam-004 frame=820 rois=3 labels=Human,Human,Human
+[AGG] camera=cam-003 frame=840 detections=2 (cam_total=840 det_total=1746 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=824 roi_id=256 label=Normal confidence=100.000 box=767,200,126,299
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=3264 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=257 before=1226,133,121,373 after=1219,114,135,411 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-003 frame=847 roi_id=257 label=Normal confidence=100.000 box=1226,133,121,373
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=848 rois=2 classified=2
+[TERMINAL] seq=3270 camera=cam-003 frame=848 rois=2 labels=Human,Human
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=3281 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=807 roi_id=256 label=Normal confidence=99.980 box=267,483,339,596
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=810 det_frame=0 age_ms=0 have_state=0 pts=0:02:22.593870701
+[AGG] camera=cam-002 frame=811 detections=4 (cam_total=810 det_total=3496 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-002 frame=812 roi_id=256 label=Normal confidence=100.000 box=269,483,337,596
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=854 rois=2 classified=2
+[TERMINAL] seq=3300 camera=cam-003 frame=854 rois=2 labels=Human,Human
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=3301 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=840 detections=4 (cam_total=840 det_total=2787 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=802 roi_id=261 label=Normal confidence=99.994 box=953,195,82,118
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=3322 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=805 roi_id=257 label=Normal confidence=100.000 box=1794,392,123,546
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=805 rois=6 classified=6
+[TERMINAL] seq=3330 camera=cam-001 frame=805 rois=6 labels=Human,Human,Human,Human,Human,Human
+[ROI_EXPAND] ratio=0.050000 id=259 before=1216,130,115,365 after=1210,111,127,403 frame=1920,1080 header_copy=1
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=3345 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=828 roi_id=259 label=Normal confidence=99.999 box=1216,130,115,365
+[AGG] camera=cam-003 frame=870 detections=2 (cam_total=870 det_total=1806 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=810 det_frame=0 age_ms=0 have_state=0 pts=0:02:25.686222427
+[AGG] camera=cam-001 frame=811 detections=6 (cam_total=810 det_total=3851 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=832 rois=3 classified=3
+[TERMINAL] seq=3360 camera=cam-002 frame=832 rois=3 labels=Human,Human,Human
+[ROI_CLASSIFICATION] camera=cam-001 frame=812 roi_id=257 label=Normal confidence=100.000 box=1795,391,122,546
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=3369 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-002 frame=839 roi_id=256 label=Normal confidence=97.556 box=1176,187,135,381
+[AGG] camera=cam-002 frame=841 detections=3 (cam_total=840 det_total=3604 qd=1 drop=0)
+[ROI_CLASSIFICATION_FRAME] camera=cam-001 frame=819 rois=4 classified=4
+[TERMINAL] seq=3390 camera=cam-001 frame=819 rois=4 labels=Human,Human,Human,Human
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=3391 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-004 frame=854 roi_id=256 label=Normal confidence=100.000 box=1618,297,158,443
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=3418 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=826 roi_id=256 label=Normal confidence=99.958 box=782,439,270,640
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=850 rois=3 classified=3
+[TERMINAL] seq=3420 camera=cam-002 frame=850 rois=3 labels=Human,Human,Human
+[OV-NATIVE] rois=2 faces=0 decision=0 | frames=3437 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=257 before=1661,388,250,550 after=1648,360,272,606 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=831 roi_id=257 label=Normal confidence=99.579 box=1661,388,250,550
+[ROI_CLASSIFICATION_FRAME] camera=cam-003 frame=895 rois=2 classified=2
+[TERMINAL] seq=3450 camera=cam-003 frame=895 rois=2 labels=Human,Human
+[AGG] camera=cam-004 frame=870 detections=3 (cam_total=870 det_total=2887 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-001 frame=837 roi_id=258 label=Gesture confidence=55.972 box=959,201,77,134
+[OV-NATIVE] rois=4 faces=0 decision=0 | frames=3469 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=841 detections=4 (cam_total=840 det_total=3983 qd=1 drop=0)
+[ROI_CLASSIFICATION] camera=cam-004 frame=876 roi_id=258 label=Normal confidence=100.000 box=1623,714,283,365
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=862 rois=3 classified=3
+[TERMINAL] seq=3480 camera=cam-002 frame=862 rois=3 labels=Human,Human,Human
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=900 det_frame=0 age_ms=0 have_state=0 pts=0:02:31.347506952
+[AGG] camera=cam-003 frame=900 detections=2 (cam_total=900 det_total=1866 qd=1 drop=0)
+[OV-NATIVE] rois=3 faces=0 decision=0 | frames=3489 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_CLASSIFICATION] camera=cam-001 frame=847 roi_id=259 label=Normal confidence=100.000 box=70,148,62,132
+[ROI_CLASSIFICATION] camera=cam-004 frame=886 roi_id=259 label=Normal confidence=100.000 box=1713,700,200,379
+[ROI_CLASSIFICATION_FRAME] camera=cam-002 frame=871 rois=3 classified=3
+[TERMINAL] seq=3510 camera=cam-002 frame=871 rois=3 labels=Human,Human,Human
+[AGG] camera=cam-002 frame=871 detections=3 (cam_total=870 det_total=3694 qd=1 drop=0)
+[OV-NATIVE] rois=5 faces=0 decision=0 | frames=3516 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ROI_EXPAND] ratio=0.050000 id=260 before=0,91,42,129 after=0,84,45,143 frame=1920,1080 header_copy=1
+[ROI_CLASSIFICATION] camera=cam-001 frame=851 roi_id=260 label=Normal confidence=99.775 box=0,91,42,129
+[INFO] Signal received, stopping pipeline...
+[INFO] Stopping annotated RTSP server...
+[annotated-rtsp] cam-001 stopped (pushed=910 dropped=0)
+[annotated-rtsp] cam-002 stopped (pushed=923 dropped=0)
+[annotated-rtsp] cam-003 stopped (pushed=960 dropped=0)
+[annotated-rtsp] cam-004 stopped (pushed=920 dropped=0)
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:42:dummy call to rpcmem_deinit, rpcmem APIs will be used from libxdsprpc
+[INFO] Pipeline reached NULL; VPU decode sessions released.
+[INFO] FrameSnapshotCache frames=48 bytes=149299200 dropped=2249
+[INFO] SnapshotRequestSubscriber received=0 rejected=0 alarm_published=0 alarm_dropped=0
+[NatsAdapter] Disconnected.
+[AGG] SUMMARY cameras=4 total_submitted=3530 total_dropped=0
+[AGG]   camera=cam-001 submitted=851 detections=4037 dropped=0 last_frame=852 queue_depth=0
+[AGG]   camera=cam-002 submitted=875 detections=3709 dropped=0 last_frame=876 queue_depth=0
+[AGG]   camera=cam-003 submitted=913 detections=1892 dropped=0 last_frame=913 queue_depth=0
+[AGG]   camera=cam-004 submitted=891 detections=2977 dropped=0 last_frame=891 queue_depth=0
+[INFO] FrameEventPublisher: published=3530 republished=0 build_failures=0 publish_failures=0
+[INFO] CaptureTimestampTracker records=3533 misses=0 regress_fixes=0
+[INFO] AnomalySnapshotService enqueued=4 written_ok=4 write_failures=0 published=13 dropped=0 publish_failures=0
+GEM Handle for BO=12 closed 
+GEM Handle for BO=5 closed 
+GEM Handle for BO=11 closed 
+GEM Handle for BO=20 closed 
+GEM Handle for BO=10 closed 
+GEM Handle for BO=26 closed 
+GEM Handle for BO=9 closed 
+GEM Handle for BO=21 closed 
+GEM Handle for BO=8 closed 
+GEM Handle for BO=14 closed 
+GEM Handle for BO=7 closed 
+GEM Handle for BO=13 closed 
+GEM Handle for BO=6 closed 
+GEM Handle for BO=27 closed 
+GEM Handle for BO=4 closed 
+GEM Handle for BO=3 closed 
+GEM Handle for BO=23 closed 
+GEM Handle for BO=17 closed 
+GEM Handle for BO=22 closed 
+GEM Handle for BO=15 closed 
+GEM Handle for BO=1 closed 
+GEM Handle for BO=30 closed 
+GEM Handle for BO=29 closed 
+GEM Handle for BO=19 closed 
+GEM Handle for BO=25 closed 
+GEM Handle for BO=18 closed 
+GEM Handle for BO=24 closed 
+GEM Handle for BO=28 closed 
+GEM Handle for BO=2 closed 
+GEM Handle for BO=16 closed 
+
+=== Frame Count Summary ===
+Camera            IN       OUT     delta
+cam-001          852       851         1
+cam-002          876       875         1
+cam-003          913       913         0
+cam-004          892       891         1
+----------------------------------------
+TOTAL           3533      3530         3
+[INFO] Done.

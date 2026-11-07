@@ -1,0 +1,82 @@
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-001
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-002
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-003
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-004
+RUNTIME_LOG_CHECK mode=zero failures=0 inactive_rtsp_lines=50
+FRAME_BINDING_OK mode=zero camera=cam-001 samples=34
+FRAME_BINDING_OK mode=zero camera=cam-002 samples=22
+FRAME_BINDING_OK mode=zero camera=cam-003 samples=29
+FRAME_BINDING_OK mode=zero camera=cam-004 samples=15
+MEMORY_OBSERVATION mode=zero rss_min_kib=635576 rss_max_kib=657072 late_growth_kib=9304
+ANDON_ROUND_OK zero
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-001
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-002
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-003
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-004
+RUNTIME_LOG_CHECK mode=single failures=0 inactive_rtsp_lines=52
+FRAME_BINDING_OK mode=single camera=cam-001 samples=30
+FRAME_BINDING_OK mode=single camera=cam-002 samples=23
+FRAME_BINDING_OK mode=single camera=cam-003 samples=23
+FRAME_BINDING_OK mode=single camera=cam-004 samples=22
+MEMORY_OBSERVATION mode=single rss_min_kib=632868 rss_max_kib=638412 late_growth_kib=3480
+ANDON_ROUND_OK single
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-001
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-002
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-003
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavfilter.so.9)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ffmpeg: /lib/aarch64-linux-gnu/libOpenCL.so.1: no version information available (required by /lib/aarch64-linux-gnu/libavutil.so.58)
+ANNOTATED_FRAME_OK cam-004
+RUNTIME_LOG_CHECK mode=multi failures=0 inactive_rtsp_lines=186
+FRAME_BINDING_OK mode=multi camera=cam-001 samples=92
+FRAME_BINDING_OK mode=multi camera=cam-002 samples=62
+FRAME_BINDING_OK mode=multi camera=cam-003 samples=79
+FRAME_BINDING_OK mode=multi camera=cam-004 samples=82
+MEMORY_OBSERVATION mode=multi rss_min_kib=648308 rss_max_kib=678356 late_growth_kib=28888
+ANDON_ROUND_OK multi
+ANDON_VIDEO_ACCEPTANCE_OK

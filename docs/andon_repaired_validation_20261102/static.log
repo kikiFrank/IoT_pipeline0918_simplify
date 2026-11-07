@@ -1,0 +1,14 @@
+data/models/andon/yolox_light_w8a16.bin: OK
+data/models/andon/mobilenet_v2_color_w8a16.bin: OK
+data/models/andon/yolox_s_light_v2_w8a16.bin: OK
+data/models/andon/mobilenetv3_light_w8a16.bin: OK
+Falling back to plain text label parsing.
+Falling back to plain text label parsing.
+Falling back to plain text label parsing.
+Falling back to plain text label parsing.
+Falling back to plain text label parsing.
+PPE_POSTPROCESS_TEST_OK
+Falling back to plain text label parsing.
+Falling back to plain text label parsing.
+LIGHT_POSTPROCESS_TEST_OK
+ANDON_STATIC_ACCEPTANCE_OK

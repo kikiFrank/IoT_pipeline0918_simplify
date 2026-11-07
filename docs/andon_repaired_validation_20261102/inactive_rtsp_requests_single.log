@@ -1,0 +1,52 @@
+0:00:04.294987573 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb3fa6b0: no factory for path /cam/cam-008
+0:00:04.295309634 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb3fa6b0: no media
+0:00:06.966625835 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb402050: no factory for path /cam/cam-005
+0:00:06.966777386 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb402050: no media
+0:00:09.298266109 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb402dc0: no factory for path /cam/cam-008
+0:00:09.298450211 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb402dc0: no media
+0:00:11.949853997 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb403f60: no factory for path /cam/cam-006
+0:00:11.950032422 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb403f60: no media
+0:00:13.959402068 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb404530: no factory for path /cam/cam-009
+0:00:13.959549610 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb404530: no media
+0:00:14.922326430 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb404ae0: no factory for path /cam/cam-007
+0:00:14.922461785 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb404ae0: no media
+0:00:16.952682073 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb405120: no factory for path /cam/cam-006
+0:00:16.952908204 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb405120: no media
+0:00:18.962394238 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb4059a0: no factory for path /cam/cam-009
+0:00:18.962534124 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb4059a0: no media
+0:00:19.925721658 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb405950: no factory for path /cam/cam-007
+0:00:19.925901437 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb405950: no media
+0:00:22.950956517 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb3d42b0: no factory for path /cam/cam-005
+0:00:22.951080051 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb3d42b0: no media
+0:00:24.971772745 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb405910: no factory for path /cam/cam-008
+0:00:24.971875238 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb405910: no media
+0:00:27.954596504 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb3d4980: no factory for path /cam/cam-005
+0:00:27.954766076 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb3d4980: no media
+0:00:29.975128497 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb3d4980: no factory for path /cam/cam-008
+0:00:29.975278956 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb3d4980: no media
+0:00:32.977953129 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb405950: no factory for path /cam/cam-006
+0:00:32.978084839 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb405950: no media
+0:00:34.933316863 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb4027d0: no factory for path /cam/cam-009
+0:00:34.933426491 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb4027d0: no media
+0:00:36.011257783 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb405950: no factory for path /cam/cam-007
+0:00:36.011413450 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb405950: no media
+0:00:37.979778726 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb3d4980: no factory for path /cam/cam-006
+0:00:37.979974026 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb3d4980: no media
+0:00:39.936448095 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb3d4980: no factory for path /cam/cam-009
+0:00:39.936629906 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb3d4980: no media
+0:00:41.014146182 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb3d4980: no factory for path /cam/cam-007
+0:00:41.014304036 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb3d4980: no media
+0:00:43.963330633 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb3d4980: no factory for path /cam/cam-005
+0:00:43.963443387 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb3d4980: no media
+0:00:45.969523022 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb3d4980: no factory for path /cam/cam-008
+0:00:45.969602757 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb3d4980: no media
+0:00:48.968095312 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb404a50: no factory for path /cam/cam-005
+0:00:48.968262645 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb404a50: no media
+0:00:50.971745152 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb408900: no factory for path /cam/cam-008
+0:00:50.971913995 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb408900: no media
+0:00:53.968568363 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb408ab0: no factory for path /cam/cam-006
+0:00:53.968728769 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb408ab0: no media
+0:00:55.930952957 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb4044e0: no factory for path /cam/cam-009
+0:00:55.931051076 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb4044e0: no media
+0:00:56.967101607 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaadb408e10: no factory for path /cam/cam-007
+0:00:56.967258836 [31m1384026[00m 0xffff74009020 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaadb408e10: no media

@@ -1,0 +1,1105 @@
+============================================================
+  AIBox Stream Pipeline Demo  v1.0.0
+============================================================
+[INFO] RLIMIT_NOFILE soft=65536 hard=65536
+[INFO] GStreamer initialized (version 1.24.2)
+[INFO] snapshot : /mnt/workspace/0924/aibox_pipeline/config_snapshots/andon_4cam/pipeline_andon_4cam.txt
+[INFO] dump_plan_only : no
+[INFO] build_only     : no
+[INFO] run_seconds    : 240
+[INFO] run_forever    : no
+[INFO] Snapshot loaded: andon_light_color_4cam
+[INFO]   streams   : 4
+[INFO]   algorithms: 1
+[INFO]   models    : 2
+[INFO] frame_cache min_interval_ms=150 max_total_bytes=536870912
+[INFO] ExecutionPlan  : plan_andon_light_color_4cam
+[INFO]   stream_plans : 4
+[INFO]   algo_groups  : 1
+[INFO]   time_mux_grps: 1
+[INFO]   stage_plans  : 2
+[INFO]   chain_plans  : 1
+[INFO] Exported: ./output/andon_4cam/execution_plan.json
+[INFO] Exported: ./output/andon_4cam/pipeline_structure.txt
+[INFO] Annotated RTSP output enabled (127.0.0.1:8555/cam/{camera_id})
+[BATCH_DISPATCH] path=time_mux groups=1
+[annotated] VPU budget OK: 4 dec + 4 annotated_enc(build) + 0 rec_enc = 8 / 32
+[init] GstAiboxFrameMeta registration triggered (aiboxframemeta)
+[STAGE_CONFIG] stage=light_detect model=yolox_s_light_v2_w8a16 crop=1 input=1 module=yolox-stacklight
+failed to get driver name for fd 22
+MESA-LOADER: failed to retrieve device information
+failed to get driver name for fd 22
+[HTP] stage=light_detect stage_index=1 -> backend-device-id=1 (n_htp=2)
+[DBG module] stage=light_detect nick=yolox-stacklight gtype=187650390030192
+[DBG module] enum_class=0xaaaac2d6c760 n_values=11
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo-nas value=1
+[DBG module]   nick[2]=ppyoloe value=2
+[DBG module]   nick[3]=yolo26-obb value=3
+[DBG module]   nick[4]=yolo26-noe2e value=4
+[DBG module]   nick[5]=yolo26-otm value=5
+[DBG module]   nick[6]=mobilenet-softmax value=6
+[DBG module]   nick[7]=yolox-stacklight value=7
+[DBG module]   nick[8]=siglip2-image value=8
+[DBG module]   nick[9]=siglip2-text value=9
+[DBG module]   nick[10]=yolox-ppe value=10
+[DBG module] final check=7
+[STAGE_CONFIG] stage=color_classify model=mobilenetv3_light_w8a16 crop=2 input=2 module=mobilenet-softmax
+[HTP] stage=color_classify stage_index=2 -> backend-device-id=0 (n_htp=2)
+[DBG module] stage=color_classify nick=mobilenet-softmax gtype=187650390030192
+[DBG module] enum_class=0xaaaac2d6c760 n_values=11
+[DBG module]   nick[0]=none value=0
+[DBG module]   nick[1]=yolo-nas value=1
+[DBG module]   nick[2]=ppyoloe value=2
+[DBG module]   nick[3]=yolo26-obb value=3
+[DBG module]   nick[4]=yolo26-noe2e value=4
+[DBG module]   nick[5]=yolo26-otm value=5
+[DBG module]   nick[6]=mobilenet-softmax value=6
+[DBG module]   nick[7]=yolox-stacklight value=7
+[DBG module]   nick[8]=siglip2-image value=8
+[DBG module]   nick[9]=siglip2-text value=9
+[DBG module]   nick[10]=yolox-ppe value=10
+[DBG module] final check=6
+[FACE-OC] draw handler attached (mode=(null))
+[annotated] overlay_tmux_group_0_0 before tee_post (writable DMA-BUF path)
+[annotated] tmux_group_0_0 slot0(cam-001): demux→vscale→caps→enc→parse→tee_webrtc
+[annotated] tmux_group_0_0 slot1(cam-002): demux→vscale→caps→enc→parse→tee_webrtc
+[annotated] tmux_group_0_0 slot2(cam-003): demux→vscale→caps→enc→parse→tee_webrtc
+[annotated] tmux_group_0_0 slot3(cam-004): demux→vscale→caps→enc→parse→tee_webrtc
+[INFO] GstPipeline built successfully (P1: mux + decode + fakesink)
+[INFO] Registering 1 appsink callbacks...
+[INFO]   appsink registered: stage=__terminal__ (terminal/metamux -> aggregator)
+[INFO] Exported: ./output/andon_4cam/pipeline_runtime.dot
+bash: scripts/render_dot.sh: No such file or directory
+[WARN] Dot render failed (graphviz installed?). Run: bash scripts/render_dot.sh ./output/andon_4cam/pipeline_runtime.dot
+[NatsAdapter] Connected to nats://127.0.0.1:4222 (client=aibox-pipeline-detection)
+[INFO] FrameEventPublisher started (NATS subject: detection.frame)
+[INFO] SnapshotRequestSubscriber listening on event.pipeline.snapshot.request
+[INFO] AnomalySnapshotService started media_dir=/mnt/workspace/0924/aibox_pipeline/media encoder_ready=yes thumb_encoder_ready=yes
+[INFO] Setting pipeline to PLAYING for 240s (Ctrl+C to stop early)...
+0:00:00.126235547 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-004:sink>[00m no range added, leaving default
+0:00:00.126340706 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-004:sink>[00m no range added, leaving default
+0:00:00.126399978 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-004:sink>[00m no range added, leaving default
+0:00:00.126533679 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:5109:gst_v4l2_object_probe_caps:<enc_webrtc_cam-004:src>[00m Failed to probe pixel aspect ratio with VIDIOC_CROPCAP: Invalid argument
+0:00:00.127430677 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-003:sink>[00m no range added, leaving default
+0:00:00.127521773 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-003:sink>[00m no range added, leaving default
+0:00:00.127565628 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-003:sink>[00m no range added, leaving default
+0:00:00.128017617 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:5109:gst_v4l2_object_probe_caps:<enc_webrtc_cam-003:src>[00m Failed to probe pixel aspect ratio with VIDIOC_CROPCAP: Invalid argument
+0:00:00.128800082 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-002:sink>[00m no range added, leaving default
+0:00:00.128896751 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-002:sink>[00m no range added, leaving default
+0:00:00.128939668 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-002:sink>[00m no range added, leaving default
+0:00:00.129047379 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:5109:gst_v4l2_object_probe_caps:<enc_webrtc_cam-002:src>[00m Failed to probe pixel aspect ratio with VIDIOC_CROPCAP: Invalid argument
+0:00:00.129590672 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-001:sink>[00m no range added, leaving default
+0:00:00.129686664 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-001:sink>[00m no range added, leaving default
+0:00:00.129742967 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2885:gst_v4l2_object_probe_caps_for_format_and_size:<enc_webrtc_cam-001:sink>[00m no range added, leaving default
+0:00:00.129843542 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:5109:gst_v4l2_object_probe_caps:<enc_webrtc_cam-001:src>[00m Failed to probe pixel aspect ratio with VIDIOC_CROPCAP: Invalid argument
+0:00:00.131621133 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m          ml-qnn-sdk ml-qnn-engine.cc:407:gst_ml_qnn_log_callback:[00m  <W> Initializing HtpProvider
+
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:38:dummy call to rpcmem_init, rpcmem APIs will be used from libxdsprpc
+0:00:00.259695574 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m          ml-qnn-sdk ml-qnn-engine.cc:407:gst_ml_qnn_log_callback:[00m  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+0:00:00.409602156 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m          ml-qnn-sdk ml-qnn-engine.cc:407:gst_ml_qnn_log_callback:[00m  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+[INFO] set_state(PLAYING) ret=2
+[RTSP] cam=cam-001 pad=recv_rtp_src_0_1292512800_96: linked H264 video RTP -> depay
+[RTSP] cam=cam-004 pad=recv_rtp_src_0_153838679_96: linked H264 video RTP -> depay
+[RTSP] cam=cam-003 pad=recv_rtp_src_0_2896921413_96: linked H264 video RTP -> depay
+0:00:01.621133510 [31m1381884[00m 0xffff9c005f50 [33;01mWARN   [00m [00;01;34m            GST_CAPS gstpad.c:5819:pre_eventfunc_check:<v4l2h264dec_cam_001:sink>[00m caps video/x-h264, stream-format=(string)byte-stream, alignment=(string)au, parsed=(boolean)true not accepted
+0:00:01.621186897 [31m1381884[00m 0xffff9c005f50 [33;01mWARN   [00m [00;01;34m            GST_CAPS gstpad.c:5819:pre_eventfunc_check:<v4l2h264dec_cam_001:sink>[00m caps video/x-h264, stream-format=(string)byte-stream, alignment=(string)au, parsed=(boolean)true not accepted
+0:00:01.621195335 [31m1381884[00m 0xffff9c005f50 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<h264parse_cam_001:src>[00m could not send sticky events
+0:00:01.621138198 [31m1381884[00m 0xffff9c006510 [33;01mWARN   [00m [00;01;34m            GST_CAPS gstpad.c:5819:pre_eventfunc_check:<v4l2h264dec_cam_003:sink>[00m caps video/x-h264, stream-format=(string)byte-stream, alignment=(string)au, parsed=(boolean)true not accepted
+0:00:01.621352317 [31m1381884[00m 0xffff9c006510 [33;01mWARN   [00m [00;01;34m            GST_CAPS gstpad.c:5819:pre_eventfunc_check:<v4l2h264dec_cam_003:sink>[00m caps video/x-h264, stream-format=(string)byte-stream, alignment=(string)au, parsed=(boolean)true not accepted
+0:00:01.621364974 [31m1381884[00m 0xffff9c006510 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<h264parse_cam_003:src>[00m could not send sticky events
+0:00:01.621562947 [31m1381884[00m 0xffff9c005f50 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3525:gst_v4l2_object_reset_compose_region:<v4l2h264dec_cam_001:sink>[00m Failed to get default compose rectangle with VIDIOC_G_SELECTION: Invalid argument
+0:00:01.621566176 [31m1381884[00m 0xffff9c005c70 [33;01mWARN   [00m [00;01;34m            GST_CAPS gstpad.c:5819:pre_eventfunc_check:<v4l2h264dec_cam_004:sink>[00m caps video/x-h264, stream-format=(string)byte-stream, alignment=(string)au, parsed=(boolean)true not accepted
+0:00:01.621635969 [31m1381884[00m 0xffff9c005c70 [33;01mWARN   [00m [00;01;34m            GST_CAPS gstpad.c:5819:pre_eventfunc_check:<v4l2h264dec_cam_004:sink>[00m caps video/x-h264, stream-format=(string)byte-stream, alignment=(string)au, parsed=(boolean)true not accepted
+0:00:01.621645188 [31m1381884[00m 0xffff9c005c70 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<h264parse_cam_004:src>[00m could not send sticky events
+0:00:01.621938945 [31m1381884[00m 0xffff9c005c70 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3525:gst_v4l2_object_reset_compose_region:<v4l2h264dec_cam_004:sink>[00m Failed to get default compose rectangle with VIDIOC_G_SELECTION: Invalid argument
+[RTSP] cam=cam-002 pad=recv_rtp_src_0_1430476852_96: linked H264 video RTP -> depay
+0:00:01.625907468 [31m1381884[00m 0xffff9c006230 [33;01mWARN   [00m [00;01;34m            GST_CAPS gstpad.c:5819:pre_eventfunc_check:<v4l2h264dec_cam_002:sink>[00m caps video/x-h264, stream-format=(string)byte-stream, alignment=(string)au, parsed=(boolean)true not accepted
+0:00:01.625963771 [31m1381884[00m 0xffff9c006230 [33;01mWARN   [00m [00;01;34m            GST_CAPS gstpad.c:5819:pre_eventfunc_check:<v4l2h264dec_cam_002:sink>[00m caps video/x-h264, stream-format=(string)byte-stream, alignment=(string)au, parsed=(boolean)true not accepted
+0:00:01.625973615 [31m1381884[00m 0xffff9c006230 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<h264parse_cam_002:src>[00m could not send sticky events
+0:00:01.627272966 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2457:gst_v4l2_object_get_streamparm:<v4l2h264dec_cam_001:src>[00m VIDIOC_G_PARM failed
+0:00:01.627714538 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3535:gst_v4l2_object_reset_compose_region:<v4l2h264dec_cam_001:src>[00m Failed to set default compose rectangle with VIDIOC_S_SELECTION: Invalid argument
+0:00:01.628477003 [31m1381884[00m 0xffff9c006230 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3525:gst_v4l2_object_reset_compose_region:<v4l2h264dec_cam_002:sink>[00m Failed to get default compose rectangle with VIDIOC_G_SELECTION: Invalid argument
+0:00:01.629458170 [31m1381884[00m 0xffff9c0044d0 [33;01mWARN   [00m [00m     qtimlvconverter mlvconverter.c:1644:gst_ml_video_converter_translate_video_caps:<converter_light_detect_tmux_group_0_0>[00m Unsupported format: NV12, falling back to RGB!
+0:00:01.630573715 [31m1381884[00m 0xffff9c0037b0 [33;01mWARN   [00m [00m     qtimlvconverter mlvconverter.c:1644:gst_ml_video_converter_translate_video_caps:<converter_color_classify_tmux_group_0_0>[00m Unsupported format: NV12, falling back to RGB!
+Mon Nov 02 2026 05:23:23.967952: INFO: GPU alignment: 64
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+0:00:01.636913644 [31m1381884[00m 0xffff9c006510 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3525:gst_v4l2_object_reset_compose_region:<v4l2h264dec_cam_003:sink>[00m Failed to get default compose rectangle with VIDIOC_G_SELECTION: Invalid argument
+PFP: 0x016dc112, ME: 0x00000000
+0:00:01.637816997 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2457:gst_v4l2_object_get_streamparm:<v4l2h264dec_cam_002:src>[00m VIDIOC_G_PARM failed
+Pre-rotation disabled !!!
+QUALCOMM build                   : 9edda9b564, I712cfa371e
+Build Date                       : 03/26/26
+OpenGL ES Shader Compiler Version: E031.50.31.01
+Local Branch                     : 
+Remote Branch                    : 
+Remote Branch                    : 
+Reconstruct Branch               : 
+
+Build Config                     : G ESX_C_COMPILER_OPT 2.2.0 AArch64
+Driver Path                      : /lib/aarch64-linux-gnu/libGLESv2_adreno.so.2
+Driver Version                   : 0855.3
+Process Name                     : aibox_stream_pipeline_demo
+Pre-rotation disabled !!!
+0:00:01.638220756 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3535:gst_v4l2_object_reset_compose_region:<v4l2h264dec_cam_002:src>[00m Failed to set default compose rectangle with VIDIOC_S_SELECTION: Invalid argument
+Mon Nov 02 2026 05:23:23.974615: Initilized EGL display version: 1.5
+0:00:01.643062423 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2457:gst_v4l2_object_get_streamparm:<v4l2h264dec_cam_004:src>[00m VIDIOC_G_PARM failed
+0:00:01.643529100 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3535:gst_v4l2_object_reset_compose_region:<v4l2h264dec_cam_004:src>[00m Failed to set default compose rectangle with VIDIOC_S_SELECTION: Invalid argument
+0:00:01.655070079 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:2457:gst_v4l2_object_get_streamparm:<v4l2h264dec_cam_003:src>[00m VIDIOC_G_PARM failed
+0:00:01.655614101 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3535:gst_v4l2_object_reset_compose_region:<v4l2h264dec_cam_003:src>[00m Failed to set default compose rectangle with VIDIOC_S_SELECTION: Invalid argument
+Falling back to plain text label parsing.
+Falling back to plain text label parsing.
+0:00:03.716461303 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:1339:gst_v4l2_buffer_pool_dqbuf:<v4l2h264dec_cam_003:pool0:src>[00m Driver should never set v4l2_buffer.field to ANY
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[annotated-rtsp] cam-004 mounted at rtsp://127.0.0.1:8555/cam/cam-004
+[annotated-rtsp] cam-003 mounted at rtsp://127.0.0.1:8555/cam/cam-003
+0:00:03.750916060 [31m1381884[00m 0xffff9c0012f0 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3525:gst_v4l2_object_reset_compose_region:<enc_webrtc_cam-003:src>[00m Failed to get default compose rectangle with VIDIOC_G_SELECTION: Invalid argument
+[annotated-rtsp] cam-002 mounted at rtsp://127.0.0.1:8555/cam/cam-002
+[annotated-rtsp] cam-001 mounted at rtsp://127.0.0.1:8555/cam/cam-001
+[annotated-rtsp] server up: 4 camera(s) on rtsp://127.0.0.1:8555/cam/<camera_id>
+[ANNOTATED_RTSP_READY] rtsp://127.0.0.1:8555/cam/{camera_id}
+[PIPELINE_READY] state=PLAYING
+0:00:03.754851562 [31m1381884[00m 0xffff9c0044d0 [33;01mWARN   [00m [00m     qtimlvconverter mlvconverter.c:1644:gst_ml_video_converter_translate_video_caps:<converter_light_detect_tmux_group_0_0>[00m Unsupported format: NV12, falling back to RGB!
+0:00:03.756035598 [31m1381884[00m 0xffff9c0012f0 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:852:gst_v4l2_buffer_pool_start:<enc_webrtc_cam-003:pool0:src>[00m Uncertain or not enough buffers, enabling copy threshold
+[ANDON_FRAME] camera=cam-003 frame=1 rois=0 classified=0
+[TERMINAL] seq=1 camera=cam-003 frame=1 rois=0 labels=
+0:00:03.766331082 [31m1381884[00m 0xffff9c008bb0 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:1339:gst_v4l2_buffer_pool_dqbuf:<enc_webrtc_cam-003:pool0:src>[00m Driver should never set v4l2_buffer.field to ANY
+0:00:03.776953239 [31m1381884[00m 0xffff9c0037b0 [33;01mWARN   [00m [00m     qtimlvconverter mlvconverter.c:1644:gst_ml_video_converter_translate_video_caps:<converter_color_classify_tmux_group_0_0>[00m Unsupported format: NV12, falling back to RGB!
+[ANDON_FRAME] camera=cam-003 frame=2 rois=0 classified=0
+[TERMINAL] seq=2 camera=cam-003 frame=2 rois=0 labels=
+[ANDON_FRAME] camera=cam-003 frame=3 rois=0 classified=0
+[TERMINAL] seq=3 camera=cam-003 frame=3 rois=0 labels=
+[ANDON_FRAME] camera=cam-003 frame=4 rois=0 classified=0
+[TERMINAL] seq=4 camera=cam-003 frame=4 rois=0 labels=
+[ANDON_FRAME] camera=cam-003 frame=5 rois=0 classified=0
+[TERMINAL] seq=5 camera=cam-003 frame=5 rois=0 labels=
+[ANDON_FRAME] camera=cam-003 frame=6 rois=0 classified=0
+[TERMINAL] seq=6 camera=cam-003 frame=6 rois=0 labels=
+[ANDON_FRAME] camera=cam-003 frame=7 rois=0 classified=0
+[TERMINAL] seq=7 camera=cam-003 frame=7 rois=0 labels=
+[ANDON_FRAME] camera=cam-003 frame=8 rois=0 classified=0
+[TERMINAL] seq=8 camera=cam-003 frame=8 rois=0 labels=
+[ANDON_FRAME] camera=cam-003 frame=9 rois=0 classified=0
+[ANDON_FRAME] camera=cam-003 frame=10 rois=0 classified=0
+0:00:04.272325742 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:1339:gst_v4l2_buffer_pool_dqbuf:<v4l2h264dec_cam_001:pool0:src>[00m Driver should never set v4l2_buffer.field to ANY
+[ANDON_FRAME] camera=cam-001 frame=1 rois=0 classified=0
+0:00:04.297051746 [31m1381884[00m 0xffff9c001ad0 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3525:gst_v4l2_object_reset_compose_region:<enc_webrtc_cam-001:src>[00m Failed to get default compose rectangle with VIDIOC_G_SELECTION: Invalid argument
+0:00:04.302312329 [31m1381884[00m 0xffff9c001ad0 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:852:gst_v4l2_buffer_pool_start:<enc_webrtc_cam-001:pool0:src>[00m Uncertain or not enough buffers, enabling copy threshold
+0:00:04.312061290 [31m1381884[00m 0xffff9c007bc0 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:1339:gst_v4l2_buffer_pool_dqbuf:<enc_webrtc_cam-001:pool0:src>[00m Driver should never set v4l2_buffer.field to ANY
+[ANDON_FRAME] camera=cam-003 frame=11 rois=0 classified=0
+0:00:04.370321979 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:1339:gst_v4l2_buffer_pool_dqbuf:<v4l2h264dec_cam_002:pool0:src>[00m Driver should never set v4l2_buffer.field to ANY
+0:00:04.421363450 [31m1381884[00m 0xffff9c001830 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3525:gst_v4l2_object_reset_compose_region:<enc_webrtc_cam-002:src>[00m Failed to get default compose rectangle with VIDIOC_G_SELECTION: Invalid argument
+0:00:04.426444914 [31m1381884[00m 0xffff9c001830 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:852:gst_v4l2_buffer_pool_start:<enc_webrtc_cam-002:pool0:src>[00m Uncertain or not enough buffers, enabling copy threshold
+0:00:04.448619457 [31m1381884[00m 0xffff9c008ee0 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:1339:gst_v4l2_buffer_pool_dqbuf:<enc_webrtc_cam-002:pool0:src>[00m Driver should never set v4l2_buffer.field to ANY
+[annotated-rtsp] cam-004: client media configured
+0:00:04.483936837 [31m1381884[00m 0xffff9c009870 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+[ANDON_FRAME] camera=cam-001 frame=8 rois=0 classified=0
+[TERMINAL] seq=30 camera=cam-001 frame=8 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=32 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-001 frame=18 rois=0 classified=0
+[TERMINAL] seq=60 camera=cam-001 frame=18 rois=0 labels=
+0:00:05.382860426 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:1339:gst_v4l2_buffer_pool_dqbuf:<v4l2h264dec_cam_004:pool0:src>[00m Driver should never set v4l2_buffer.field to ANY
+0:00:05.465608989 [31m1381884[00m 0xffff9c001590 [33;01mWARN   [00m [00m                v4l2 gstv4l2object.c:3525:gst_v4l2_object_reset_compose_region:<enc_webrtc_cam-004:src>[00m Failed to get default compose rectangle with VIDIOC_G_SELECTION: Invalid argument
+0:00:05.470811914 [31m1381884[00m 0xffff9c001590 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:852:gst_v4l2_buffer_pool_start:<enc_webrtc_cam-004:pool0:src>[00m Uncertain or not enough buffers, enabling copy threshold
+0:00:05.480728587 [31m1381884[00m 0xffff9c009ba0 [33;01mWARN   [00m [00m      v4l2bufferpool gstv4l2bufferpool.c:1339:gst_v4l2_buffer_pool_dqbuf:<enc_webrtc_cam-004:pool0:src>[00m Driver should never set v4l2_buffer.field to ANY
+0:00:05.483302185 [31m1381884[00m 0xffff9c009870 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:05.483739903 [31m1381884[00m 0xffff9c009870 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:05.483839592 [31m1381884[00m 0xffff9c009870 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:05.483863760 [31m1381884[00m 0xffff9c009870 [33;01mWARN   [00m [00m          rtpsession gstrtpsession.c:2484:gst_rtp_session_chain_send_rtp_common:<rtpsession4>[00m Can't determine running time for this packet without knowing configured latency
+0:00:05.485155142 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:4934:gst_rtsp_media_suspend:[00m media 0xfffe7800e100 was not prepared
+0:00:05.488388233 [31m1381884[00m 0xffff9c009ed0 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<udpsrc0:src>[00m could not send sticky events
+0:00:05.490161917 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink0>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:05.490247127 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink0>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:05.490221241 [31m1381884[00m 0xffff9c009540 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink0>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:05.490537810 [31m1381884[00m 0xffff9c009540 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink0>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:05.490784222 [31m1381884[00m 0xffff9c009540 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7800e100: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink0:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:05.490863234 [31m1381884[00m 0xffff9c009540 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7800e100: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink0:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+[annotated-rtsp] cam-003: client media configured
+0:00:05.511764364 [31m1381884[00m 0xffff9c00ab90 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:05.512445472 [31m1381884[00m 0xffff9c00ab90 [33;01mWARN   [00m [00m           h264parse gsth264parse.c:1529:gst_h264_parse_handle_frame:<h264parse1>[00m broken/invalid nal Type: 1 Slice, Size: 10713 will be dropped
+0:00:05.524948816 [31m1381884[00m 0xffff9c00ab90 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:05.525245021 [31m1381884[00m 0xffff9c00ab90 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:05.525371638 [31m1381884[00m 0xffff9c00ab90 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:05.525419712 [31m1381884[00m 0xffff9c00ab90 [33;01mWARN   [00m [00m          rtpsession gstrtpsession.c:2484:gst_rtp_session_chain_send_rtp_common:<rtpsession5>[00m Can't determine running time for this packet without knowing configured latency
+0:00:05.526636665 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:4934:gst_rtsp_media_suspend:[00m media 0xfffe78026530 was not prepared
+0:00:05.528624729 [31m1381884[00m 0xffff9c00aec0 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<udpsrc2:src>[00m could not send sticky events
+0:00:05.529050207 [31m1381884[00m 0xffff9c00b1f0 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<udpsrc3:src>[00m could not send sticky events
+0:00:05.529944133 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink2>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:05.529983613 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink2>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:05.530038249 [31m1381884[00m 0xffff9c00a860 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink2>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:05.530078719 [31m1381884[00m 0xffff9c00a860 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink2>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:05.530155127 [31m1381884[00m 0xffff9c00a860 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe78026530: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink2:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:05.530213149 [31m1381884[00m 0xffff9c00a860 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe78026530: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink2:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+[AGG] camera=cam-003 frame=30 detections=0 (cam_total=30 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=80 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-004 frame=9 rois=0 classified=0
+[TERMINAL] seq=90 camera=cam-004 frame=9 rois=0 labels=
+[AGG] camera=cam-001 frame=30 detections=0 (cam_total=30 det_total=0 qd=1 drop=0)
+0:00:06.447798235 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f3e060: no factory for path /cam/cam-005
+0:00:06.447969437 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f3e060: no media
+[ANDON_FRAME] camera=cam-002 frame=30 rois=0 classified=0
+[TERMINAL] seq=120 camera=cam-002 frame=30 rois=0 labels=
+[AGG] camera=cam-002 frame=30 detections=0 (cam_total=30 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=129 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+0:00:06.822176502 [31m1381884[00m 0xffff9c009540 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink0>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:06.822263900 [31m1381884[00m 0xffff9c009540 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink0>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:06.822471717 [31m1381884[00m 0xffff9c009540 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7800e100: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink0:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+[ANDON_FRAME] camera=cam-001 frame=39 rois=0 classified=0
+[TERMINAL] seq=150 camera=cam-001 frame=39 rois=0 labels=
+[AGG] camera=cam-004 frame=30 detections=0 (cam_total=30 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=178 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-002 frame=49 rois=0 classified=0
+[TERMINAL] seq=180 camera=cam-002 frame=49 rois=0 labels=
+0:00:07.859342459 [31m1381884[00m 0xffff9c00a860 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink2>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:07.859436159 [31m1381884[00m 0xffff9c00a860 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink2>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:07.859571110 [31m1381884[00m 0xffff9c00a860 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe78026530: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink2:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:08.205127501 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:01.177007586 < 0:00:07.740053519)
+0:00:08.205369277 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:05.491913223 < 0:00:07.740053519)
+0:00:08.205452248 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:05.531913223 < 0:00:07.740053519)
+0:00:08.205467457 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:05.571913223 < 0:00:07.740053519)
+0:00:08.205477717 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:05.611913223 < 0:00:07.740053519)
+0:00:08.205505687 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:05.651913223 < 0:00:07.740053519)
+0:00:08.205515218 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:05.691913223 < 0:00:07.740053519)
+0:00:08.205540896 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:05.731913223 < 0:00:07.740053519)
+0:00:08.205549281 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:05.771913223 < 0:00:07.740053519)
+0:00:08.205556521 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.017610477 < 0:00:07.740053519)
+0:00:08.205570271 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.057610477 < 0:00:07.740053519)
+0:00:08.205577772 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.097610477 < 0:00:07.740053519)
+0:00:08.205585688 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.137610477 < 0:00:07.740053519)
+0:00:08.205593136 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.177610477 < 0:00:07.740053519)
+0:00:08.205601418 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.217610477 < 0:00:07.740053519)
+0:00:08.205608814 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.850814829 < 0:00:07.740053519)
+0:00:08.205615949 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.890814829 < 0:00:07.740053519)
+0:00:08.205624335 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.930814829 < 0:00:07.740053519)
+0:00:08.205632408 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:06.970814829 < 0:00:07.740053519)
+0:00:08.205640690 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.010814829 < 0:00:07.740053519)
+0:00:08.205648294 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.050814829 < 0:00:07.740053519)
+0:00:08.205700326 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.090814829 < 0:00:07.740053519)
+0:00:08.205725587 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.130814829 < 0:00:07.740053519)
+0:00:08.205759286 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.170814829 < 0:00:07.740053519)
+0:00:08.205778088 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.210814829 < 0:00:07.740053519)
+0:00:08.205800120 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.250814829 < 0:00:07.740053519)
+0:00:08.205826371 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.290814829 < 0:00:07.740053519)
+0:00:08.205880851 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.330814829 < 0:00:07.740053519)
+0:00:08.205910018 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.370814829 < 0:00:07.740053519)
+0:00:08.206011166 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.410814829 < 0:00:07.740053519)
+0:00:08.206044605 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.450814829 < 0:00:07.740053519)
+0:00:08.206064865 [31m1381884[00m 0xffff9c007890 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_003>[00m decreasing timestamp (0:00:07.490814829 < 0:00:07.740053519)
+
+** (aibox_stream_pipeline_demo:1381884): WARNING **: 05:23:30.542: v4l2h264dec_cam_003: 33 initial frames were not dequeued: bug in decoder -- please file a bug
+[AGG] camera=cam-003 frame=60 detections=0 (cam_total=60 det_total=0 qd=1 drop=0)
+0:00:08.272026346 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:01.183330223 < 0:00:07.821497196)
+0:00:08.272158797 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.069109934 < 0:00:07.821497196)
+0:00:08.272185048 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.109109934 < 0:00:07.821497196)
+0:00:08.272203277 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.149109934 < 0:00:07.821497196)
+0:00:08.272225778 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.189109934 < 0:00:07.821497196)
+0:00:08.272245934 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.229109934 < 0:00:07.821497196)
+0:00:08.272261299 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.548048691 < 0:00:07.821497196)
+0:00:08.272327290 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.588048691 < 0:00:07.821497196)
+0:00:08.272350260 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.628048691 < 0:00:07.821497196)
+0:00:08.272365156 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.668048691 < 0:00:07.821497196)
+0:00:08.272383906 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.708048691 < 0:00:07.821497196)
+0:00:08.272398073 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.748048691 < 0:00:07.821497196)
+0:00:08.272413334 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.788048691 < 0:00:07.821497196)
+0:00:08.272426407 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.828048691 < 0:00:07.821497196)
+0:00:08.272441772 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.868048691 < 0:00:07.821497196)
+0:00:08.272454741 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.908048691 < 0:00:07.821497196)
+0:00:08.272471148 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.948048691 < 0:00:07.821497196)
+0:00:08.272484429 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:05.988048691 < 0:00:07.821497196)
+0:00:08.272497502 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.028048691 < 0:00:07.821497196)
+0:00:08.272511305 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.068048691 < 0:00:07.821497196)
+0:00:08.272525159 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.310851726 < 0:00:07.821497196)
+0:00:08.272550733 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.350851726 < 0:00:07.821497196)
+0:00:08.272564900 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.390851726 < 0:00:07.821497196)
+0:00:08.272580994 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.430851726 < 0:00:07.821497196)
+0:00:08.272612505 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.470851726 < 0:00:07.821497196)
+0:00:08.272627349 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.510851726 < 0:00:07.821497196)
+0:00:08.272640370 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.753286518 < 0:00:07.821497196)
+0:00:08.272657610 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.793286518 < 0:00:07.821497196)
+0:00:08.272671725 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.833286518 < 0:00:07.821497196)
+0:00:08.272685944 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.873286518 < 0:00:07.821497196)
+0:00:08.272700684 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:06.913286518 < 0:00:07.821497196)
+0:00:08.272717976 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:07.199861453 < 0:00:07.821497196)
+0:00:08.272735112 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:07.239861453 < 0:00:07.821497196)
+0:00:08.272749591 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:07.279861453 < 0:00:07.821497196)
+0:00:08.272765217 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:07.319861453 < 0:00:07.821497196)
+0:00:08.272780477 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:07.359861453 < 0:00:07.821497196)
+0:00:08.272794280 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:07.399861453 < 0:00:07.821497196)
+0:00:08.272808342 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:07.439861453 < 0:00:07.821497196)
+0:00:08.272822874 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:07.741497196 < 0:00:07.821497196)
+0:00:08.272838864 [31m1381884[00m 0xffff9c007250 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_002>[00m decreasing timestamp (0:00:07.781497196 < 0:00:07.821497196)
+
+** (aibox_stream_pipeline_demo:1381884): WARNING **: 05:23:30.609: v4l2h264dec_cam_002: 41 initial frames were not dequeued: bug in decoder -- please file a bug
+[ANDON_FRAME] camera=cam-002 frame=56 rois=0 classified=0
+[TERMINAL] seq=210 camera=cam-002 frame=56 rois=0 labels=
+0:00:08.479089425 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f3e940: no factory for path /cam/cam-008
+0:00:08.479205678 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f3e940: no media
+0:00:08.745776504 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:01.178053911 < 0:00:08.086345338)
+0:00:08.745905934 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.074787434 < 0:00:08.086345338)
+0:00:08.745938800 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.114787434 < 0:00:08.086345338)
+0:00:08.745957915 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.154787434 < 0:00:08.086345338)
+0:00:08.745972654 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.194787434 < 0:00:08.086345338)
+0:00:08.745987863 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.234787434 < 0:00:08.086345338)
+0:00:08.746004218 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.274787434 < 0:00:08.086345338)
+0:00:08.746023749 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.314787434 < 0:00:08.086345338)
+0:00:08.746078855 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.354787434 < 0:00:08.086345338)
+0:00:08.746108230 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.633483614 < 0:00:08.086345338)
+0:00:08.746130575 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.673483614 < 0:00:08.086345338)
+0:00:08.746153023 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.713483614 < 0:00:08.086345338)
+0:00:08.746175263 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.753483614 < 0:00:08.086345338)
+0:00:08.746195628 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.793483614 < 0:00:08.086345338)
+0:00:08.746245577 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:05.833483614 < 0:00:08.086345338)
+0:00:08.746269432 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.096923706 < 0:00:08.086345338)
+0:00:08.746320110 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.136923706 < 0:00:08.086345338)
+0:00:08.746356621 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.176923706 < 0:00:08.086345338)
+0:00:08.746379070 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.216923706 < 0:00:08.086345338)
+0:00:08.746399226 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.256923706 < 0:00:08.086345338)
+0:00:08.746420893 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.296923706 < 0:00:08.086345338)
+0:00:08.746445008 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.336923706 < 0:00:08.086345338)
+0:00:08.746471676 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.376923706 < 0:00:08.086345338)
+0:00:08.746494072 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.416923706 < 0:00:08.086345338)
+0:00:08.746520166 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.713473260 < 0:00:08.086345338)
+0:00:08.746544490 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.753473260 < 0:00:08.086345338)
+0:00:08.746569907 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.793473260 < 0:00:08.086345338)
+0:00:08.746592407 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.833473260 < 0:00:08.086345338)
+0:00:08.746617929 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.873473260 < 0:00:08.086345338)
+0:00:08.746644075 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.913473260 < 0:00:08.086345338)
+0:00:08.746680951 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.953473260 < 0:00:08.086345338)
+0:00:08.746703712 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:06.993473260 < 0:00:08.086345338)
+0:00:08.746722202 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.033473260 < 0:00:08.086345338)
+0:00:08.746741265 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.073473260 < 0:00:08.086345338)
+0:00:08.746763453 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.113473260 < 0:00:08.086345338)
+0:00:08.746789339 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.361679906 < 0:00:08.086345338)
+0:00:08.746811631 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.401679906 < 0:00:08.086345338)
+0:00:08.746836267 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.441679906 < 0:00:08.086345338)
+0:00:08.746864497 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.481679906 < 0:00:08.086345338)
+0:00:08.746888716 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.521679906 < 0:00:08.086345338)
+0:00:08.746912935 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.766345338 < 0:00:08.086345338)
+0:00:08.746938717 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.806345338 < 0:00:08.086345338)
+0:00:08.746965697 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.846345338 < 0:00:08.086345338)
+0:00:08.746988145 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.886345338 < 0:00:08.086345338)
+0:00:08.747012052 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.926345338 < 0:00:08.086345338)
+0:00:08.747031063 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:07.966345338 < 0:00:08.086345338)
+0:00:08.747052574 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:08.006345338 < 0:00:08.086345338)
+0:00:08.747085074 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_004>[00m decreasing timestamp (0:00:08.046345338 < 0:00:08.086345338)
+
+** (aibox_stream_pipeline_demo:1381884): WARNING **: 05:23:31.083: v4l2h264dec_cam_004: 49 initial frames were not dequeued: bug in decoder -- please file a bug
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=227 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=63 detections=0 (cam_total=60 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-002 frame=65 detections=0 (cam_total=60 det_total=0 qd=1 drop=0)
+0:00:09.062314455 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:01.177951565 < 0:00:08.536647806)
+0:00:09.062472010 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:05.936871806 < 0:00:08.536647806)
+0:00:09.062499250 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:05.976871806 < 0:00:08.536647806)
+0:00:09.062517011 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.016871806 < 0:00:08.536647806)
+0:00:09.062591804 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.056871806 < 0:00:08.536647806)
+0:00:09.062616701 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.096871806 < 0:00:08.536647806)
+0:00:09.062633368 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.136871806 < 0:00:08.536647806)
+0:00:09.062652535 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.176871806 < 0:00:08.536647806)
+0:00:09.062668421 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.216871806 < 0:00:08.536647806)
+0:00:09.062788371 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.477709142 < 0:00:08.536647806)
+0:00:09.062820455 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.517709142 < 0:00:08.536647806)
+0:00:09.062842070 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.557709142 < 0:00:08.536647806)
+0:00:09.062865040 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.597709142 < 0:00:08.536647806)
+0:00:09.062885353 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.637709142 < 0:00:08.536647806)
+0:00:09.062933739 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.677709142 < 0:00:08.536647806)
+0:00:09.062956239 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.717709142 < 0:00:08.536647806)
+0:00:09.062982334 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:06.757709142 < 0:00:08.536647806)
+0:00:09.063002751 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.085566112 < 0:00:08.536647806)
+0:00:09.063032856 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.125566112 < 0:00:08.536647806)
+0:00:09.063049002 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.165566112 < 0:00:08.536647806)
+0:00:09.063089315 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.205566112 < 0:00:08.536647806)
+0:00:09.063111607 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.245566112 < 0:00:08.536647806)
+0:00:09.063125462 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.285566112 < 0:00:08.536647806)
+0:00:09.063138431 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.325566112 < 0:00:08.536647806)
+0:00:09.063159004 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.579846090 < 0:00:08.536647806)
+0:00:09.063172390 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.619846090 < 0:00:08.536647806)
+0:00:09.063184942 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.659846090 < 0:00:08.536647806)
+0:00:09.063197338 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.699846090 < 0:00:08.536647806)
+0:00:09.063209943 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.739846090 < 0:00:08.536647806)
+0:00:09.063229995 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.779846090 < 0:00:08.536647806)
+0:00:09.063261142 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.819846090 < 0:00:08.536647806)
+0:00:09.063299736 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:07.859846090 < 0:00:08.536647806)
+0:00:09.063324997 [31m1381884[00m 0xffff9c006f70 [33;01mWARN   [00m [00m        videodecoder gstvideodecoder.c:3133:gst_video_decoder_prepare_finish_frame:<v4l2h264dec_cam_001>[00m decreasing timestamp (0:00:08.105445132 < 0:00:08.536647806)
+
+** (aibox_stream_pipeline_demo:1381884): WARNING **: 05:23:31.399: v4l2h264dec_cam_001: 34 initial frames were not dequeued: bug in decoder -- please file a bug
+[ANDON_FRAME] camera=cam-003 frame=77 rois=0 classified=0
+[TERMINAL] seq=240 camera=cam-003 frame=77 rois=0 labels=
+[ANDON_FRAME] camera=cam-001 frame=70 rois=0 classified=0
+[TERMINAL] seq=270 camera=cam-001 frame=70 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=275 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=68 detections=0 (cam_total=60 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-003 frame=96 rois=0 classified=0
+[TERMINAL] seq=300 camera=cam-003 frame=96 rois=0 labels=
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=90 det_frame=0 age_ms=0 have_state=0 pts=0:00:09.445812561
+[AGG] camera=cam-003 frame=100 detections=0 (cam_total=90 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=324 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-001 frame=87 rois=0 classified=0
+[TERMINAL] seq=330 camera=cam-001 frame=87 rois=0 labels=
+[AGG] camera=cam-002 frame=102 detections=0 (cam_total=90 det_total=0 qd=1 drop=0)
+0:00:11.450813795 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f3f420: no factory for path /cam/cam-005
+0:00:11.450939162 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f3f420: no media
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=90 det_frame=0 age_ms=0 have_state=0 pts=0:00:10.478148094
+[ANDON_FRAME] camera=cam-001 frame=98 rois=0 classified=0
+[TERMINAL] seq=360 camera=cam-001 frame=98 rois=0 labels=
+[AGG] camera=cam-001 frame=98 detections=0 (cam_total=90 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=373 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-002 frame=111 rois=0 classified=0
+[TERMINAL] seq=390 camera=cam-002 frame=111 rois=0 labels=
+[AGG] camera=cam-004 frame=102 detections=0 (cam_total=90 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-001 frame=116 rois=0 classified=0
+[TERMINAL] seq=420 camera=cam-001 frame=116 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=421 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=135 detections=0 (cam_total=120 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-001 frame=123 rois=0 classified=0
+[TERMINAL] seq=450 camera=cam-001 frame=123 rois=0 labels=
+0:00:13.482249199 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f40060: no factory for path /cam/cam-008
+0:00:13.482414255 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f40060: no media
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=469 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=136 detections=0 (cam_total=120 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-002 frame=139 rois=0 classified=0
+[TERMINAL] seq=480 camera=cam-002 frame=139 rois=0 labels=
+[AGG] camera=cam-001 frame=132 detections=0 (cam_total=120 det_total=0 qd=1 drop=0)
+[annotated-rtsp] cam-002: client media configured
+0:00:14.441419244 [31m1381884[00m 0xffff9c00b520 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:14.442116863 [31m1381884[00m 0xffff9c00b520 [33;01mWARN   [00m [00m           h264parse gsth264parse.c:1529:gst_h264_parse_handle_frame:<h264parse2>[00m broken/invalid nal Type: 1 Slice, Size: 16503 will be dropped
+0:00:14.623642200 [31m1381884[00m 0xffff9c00b520 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:14.623850538 [31m1381884[00m 0xffff9c00b520 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:14.623911946 [31m1381884[00m 0xffff9c00b520 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:14.623938769 [31m1381884[00m 0xffff9c00b520 [33;01mWARN   [00m [00m          rtpsession gstrtpsession.c:2484:gst_rtp_session_chain_send_rtp_common:<rtpsession6>[00m Can't determine running time for this packet without knowing configured latency
+[annotated-rtsp] cam-001: client media configured
+0:00:14.628030004 [31m1381884[00m 0xffff9c00bb80 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:14.628385012 [31m1381884[00m 0xffff9c00bb80 [33;01mWARN   [00m [00m           h264parse gsth264parse.c:1529:gst_h264_parse_handle_frame:<h264parse3>[00m broken/invalid nal Type: 1 Slice, Size: 3268 will be dropped
+0:00:14.665403834 [31m1381884[00m 0xffff9c00bb80 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:14.665826187 [31m1381884[00m 0xffff9c00bb80 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:14.665905355 [31m1381884[00m 0xffff9c00bb80 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:14.665929835 [31m1381884[00m 0xffff9c00bb80 [33;01mWARN   [00m [00m          rtpsession gstrtpsession.c:2484:gst_rtp_session_chain_send_rtp_common:<rtpsession7>[00m Can't determine running time for this packet without knowing configured latency
+0:00:14.666740165 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:4934:gst_rtsp_media_suspend:[00m media 0xfffe780385b0 was not prepared
+0:00:14.667469139 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:4934:gst_rtsp_media_suspend:[00m media 0xfffe780422d0 was not prepared
+0:00:14.671031821 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink4>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:14.671107864 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink4>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:14.671031768 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink4>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:14.671202970 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink4>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:14.671389016 [31m1381884[00m 0xffff9c00c840 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<udpsrc6:src>[00m could not send sticky events
+0:00:14.671409433 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe780385b0: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink4:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:14.671516519 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe780385b0: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink4:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:14.672712638 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink6>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:14.672764046 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink6>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:14.672729201 [31m1381884[00m 0xffff9c00b850 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink6>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:14.672798057 [31m1381884[00m 0xffff9c00b850 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink6>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:14.672935039 [31m1381884[00m 0xffff9c00b850 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe780422d0: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink6:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:14.672963373 [31m1381884[00m 0xffff9c00b850 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe780422d0: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink6:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+[ANDON_FRAME] camera=cam-003 frame=158 rois=0 classified=0
+[TERMINAL] seq=510 camera=cam-003 frame=158 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=517 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=140 detections=0 (cam_total=120 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-004 frame=146 rois=0 classified=0
+[TERMINAL] seq=540 camera=cam-004 frame=146 rois=0 labels=
+[AGG] camera=cam-003 frame=170 detections=0 (cam_total=150 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=568 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-003 frame=178 rois=0 classified=0
+[TERMINAL] seq=570 camera=cam-003 frame=178 rois=0 labels=
+0:00:16.068413646 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink4>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:16.068497970 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink4>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:16.068623286 [31m1381884[00m 0xffff9c00a530 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe780385b0: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink4:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:15.206018663
+0:00:16.443263482 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f44cf0: no factory for path /cam/cam-006
+0:00:16.443403225 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f44cf0: no media
+[ANDON_FRAME] camera=cam-001 frame=171 rois=0 classified=0
+[TERMINAL] seq=600 camera=cam-001 frame=171 rois=0 labels=
+[AGG] camera=cam-001 frame=172 detections=0 (cam_total=150 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-002 frame=174 detections=0 (cam_total=150 det_total=0 qd=1 drop=0)
+0:00:16.857532714 [31m1381884[00m 0xffff9c00b850 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink6>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:16.857619851 [31m1381884[00m 0xffff9c00b850 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<multiudpsink6>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:16.857752667 [31m1381884[00m 0xffff9c00b850 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe780422d0: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstMultiUDPSink:multiudpsink6:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=618 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:15.861840393
+[ANDON_FRAME] camera=cam-002 frame=183 rois=0 classified=0
+[TERMINAL] seq=630 camera=cam-002 frame=183 rois=0 labels=
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:16.265156652
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=180 det_frame=0 age_ms=0 have_state=0 pts=0:00:16.379969925
+[AGG] camera=cam-004 frame=180 detections=0 (cam_total=150 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-004 frame=187 rois=0 classified=0
+[TERMINAL] seq=660 camera=cam-004 frame=187 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=663 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=206 detections=0 (cam_total=180 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-001 frame=202 rois=0 classified=0
+[TERMINAL] seq=690 camera=cam-001 frame=202 rois=0 labels=
+0:00:18.483937986 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f44cf0: no factory for path /cam/cam-009
+0:00:18.484040488 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f44cf0: no media
+[AGG] camera=cam-001 frame=209 detections=0 (cam_total=180 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=713 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=210 detections=0 (cam_total=180 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-002 frame=211 rois=0 classified=0
+[TERMINAL] seq=720 camera=cam-002 frame=211 rois=0 labels=
+0:00:19.413978750 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c0035d0, pts 0:00:05.302376661, dts 0:00:05.302376661, dur 0:00:00.040000000, size 230302, offset 3845608, offset_end 1, flags 0x200
+0:00:19.509812388 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f44cf0: no factory for path /cam/cam-007
+0:00:19.509928484 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f44cf0: no media
+[ANDON_FRAME] camera=cam-002 frame=219 rois=0 classified=0
+[TERMINAL] seq=750 camera=cam-002 frame=219 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=764 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=216 detections=0 (cam_total=180 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-002 frame=227 rois=0 classified=0
+[TERMINAL] seq=780 camera=cam-002 frame=227 rois=0 labels=
+[AGG] camera=cam-003 frame=245 detections=0 (cam_total=210 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-004 frame=228 rois=0 classified=0
+[TERMINAL] seq=810 camera=cam-004 frame=228 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=815 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=244 detections=0 (cam_total=210 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-001 frame=251 rois=0 classified=0
+[TERMINAL] seq=840 camera=cam-001 frame=251 rois=0 labels=
+0:00:21.446757246 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f45780: no factory for path /cam/cam-006
+0:00:21.446934854 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f45780: no media
+[AGG] camera=cam-002 frame=245 detections=0 (cam_total=210 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=865 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-002 frame=250 rois=0 classified=0
+[TERMINAL] seq=870 camera=cam-002 frame=250 rois=0 labels=
+[AGG] camera=cam-004 frame=249 detections=0 (cam_total=210 det_total=0 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=270 det_frame=0 age_ms=0 have_state=0 pts=0:00:21.360820213
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=270 det_frame=0 age_ms=0 have_state=0 pts=0:00:21.549193545
+[ANDON_FRAME] camera=cam-001 frame=270 rois=0 classified=0
+[TERMINAL] seq=900 camera=cam-001 frame=270 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=913 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-001 frame=279 rois=0 classified=0
+[TERMINAL] seq=930 camera=cam-001 frame=279 rois=0 labels=
+[AGG] camera=cam-003 frame=281 detections=0 (cam_total=240 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-001 frame=281 detections=0 (cam_total=240 det_total=0 qd=1 drop=0)
+0:00:23.487161163 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-009
+0:00:23.487337001 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[ANDON_FRAME] camera=cam-004 frame=282 rois=0 classified=0
+[TERMINAL] seq=960 camera=cam-004 frame=282 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=961 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=281 detections=0 (cam_total=240 det_total=0 qd=1 drop=0)
+0:00:24.512798317 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-007
+0:00:24.512958841 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[ANDON_FRAME] camera=cam-004 frame=293 rois=0 classified=0
+[TERMINAL] seq=990 camera=cam-004 frame=293 rois=0 labels=
+0:00:24.665405163 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c00dcc0, pts 0:00:10.414923890, dts 0:00:10.414923890, dur 0:00:00.040000000, size 10266, offset 4794984, offset_end 1, flags 0x2200
+0:00:24.665570427 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c0016f0, pts 0:00:10.454923890, dts 0:00:10.454923890, dur 0:00:00.040000000, size 253924, offset 4805244, offset_end 1, flags 0x200
+[AGG] camera=cam-004 frame=296 detections=0 (cam_total=240 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1009 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-003 frame=309 rois=0 classified=0
+[TERMINAL] seq=1020 camera=cam-003 frame=309 rois=0 labels=
+[AGG] camera=cam-003 frame=316 detections=0 (cam_total=270 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-001 frame=313 rois=0 classified=0
+[TERMINAL] seq=1050 camera=cam-001 frame=313 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1057 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=321 detections=0 (cam_total=270 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-003 frame=327 rois=0 classified=0
+[TERMINAL] seq=1080 camera=cam-003 frame=327 rois=0 labels=
+[AGG] camera=cam-002 frame=325 detections=0 (cam_total=270 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1106 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-001 frame=335 rois=0 classified=0
+[TERMINAL] seq=1110 camera=cam-001 frame=335 rois=0 labels=
+[AGG] camera=cam-004 frame=337 detections=0 (cam_total=270 det_total=0 qd=1 drop=0)
+0:00:27.473688839 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-005
+0:00:27.473808737 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[ANDON_FRAME] camera=cam-003 frame=347 rois=0 classified=0
+[TERMINAL] seq=1140 camera=cam-003 frame=347 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1155 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=355 detections=0 (cam_total=300 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-003 frame=358 rois=0 classified=0
+[TERMINAL] seq=1170 camera=cam-003 frame=358 rois=0 labels=
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=360 det_frame=0 age_ms=0 have_state=0 pts=0:00:27.585539656
+[AGG] camera=cam-001 frame=361 detections=0 (cam_total=300 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-001 frame=366 rois=0 classified=0
+[TERMINAL] seq=1200 camera=cam-001 frame=366 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1203 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=360 det_frame=0 age_ms=0 have_state=0 pts=0:00:27.928943621
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=360 det_frame=0 age_ms=0 have_state=0 pts=0:00:27.904205488
+[AGG] camera=cam-002 frame=362 detections=0 (cam_total=300 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-003 frame=377 rois=0 classified=0
+[TERMINAL] seq=1230 camera=cam-003 frame=377 rois=0 labels=
+0:00:29.657373537 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c004860, pts 0:00:15.317414687, dts 0:00:15.317414687, dur 0:00:00.040000000, size 9222, offset 5783974, offset_end 1, flags 0x2200
+0:00:29.657538212 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c008650, pts 0:00:15.357414687, dts 0:00:15.357414687, dur 0:00:00.040000000, size 6163, offset 5793190, offset_end 1, flags 0x2200
+0:00:29.657587948 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c0016f0, pts 0:00:15.437414687, dts 0:00:15.437414687, dur 0:00:00.040000000, size 233484, offset 5799347, offset_end 1, flags 0x200
+0:00:29.684667209 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-008
+0:00:29.684750380 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[AGG] camera=cam-004 frame=370 detections=0 (cam_total=300 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1251 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-001 frame=384 rois=0 classified=0
+[TERMINAL] seq=1260 camera=cam-001 frame=384 rois=0 labels=
+[AGG] camera=cam-003 frame=397 detections=0 (cam_total=330 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-003 frame=398 rois=0 classified=0
+[TERMINAL] seq=1290 camera=cam-003 frame=398 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1299 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=400 detections=0 (cam_total=330 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-004 frame=396 rois=0 classified=0
+[TERMINAL] seq=1320 camera=cam-004 frame=396 rois=0 labels=
+[AGG] camera=cam-001 frame=405 detections=0 (cam_total=330 det_total=0 qd=1 drop=0)
+0:00:31.587473874 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c014340, pts 0:00:17.187158410, dts 0:00:17.187158410, dur 0:00:00.040000000, size 20740, offset 6206020, offset_end 1, flags 0x2200
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1343 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-003 frame=418 rois=0 classified=0
+[TERMINAL] seq=1350 camera=cam-003 frame=418 rois=0 labels=
+[AGG] camera=cam-004 frame=406 detections=0 (cam_total=330 det_total=0 qd=1 drop=0)
+0:00:32.476671572 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-005
+0:00:32.476848694 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[ANDON_FRAME] camera=cam-003 frame=429 rois=0 classified=0
+[TERMINAL] seq=1380 camera=cam-003 frame=429 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1387 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=438 detections=0 (cam_total=360 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-004 frame=420 rois=0 classified=0
+[TERMINAL] seq=1410 camera=cam-004 frame=420 rois=0 labels=
+[AGG] camera=cam-002 frame=440 detections=0 (cam_total=360 det_total=0 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:00:32.889788068
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1431 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=448 detections=0 (cam_total=360 det_total=0 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:00:33.087539557
+[ANDON_FRAME] camera=cam-002 frame=445 rois=0 classified=0
+[TERMINAL] seq=1440 camera=cam-002 frame=445 rois=0 labels=
+0:00:34.329168412 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c007010, pts 0:00:19.965546351, dts 0:00:19.965546351, dur 0:00:00.040000000, size 49674, offset 6682267, offset_end 1, flags 0x2200
+0:00:34.329271946 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c00e1d0, pts 0:00:20.045546351, dts 0:00:20.045546351, dur 0:00:00.040000000, size 39897, offset 6731935, offset_end 1, flags 0x2200
+0:00:34.329336211 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c0035d0, pts 0:00:20.085546351, dts 0:00:20.085546351, dur 0:00:00.040000000, size 7741, offset 6771826, offset_end 1, flags 0x2200
+0:00:34.329365584 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c003b70, pts 0:00:20.125546351, dts 0:00:20.125546351, dur 0:00:00.040000000, size 256795, offset 6779561, offset_end 1, flags 0x200
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:00:33.395674841
+0:00:34.687963341 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-008
+0:00:34.688096821 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[ANDON_FRAME] camera=cam-002 frame=456 rois=0 classified=0
+[TERMINAL] seq=1470 camera=cam-002 frame=456 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1475 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-004 frame=443 detections=0 (cam_total=360 det_total=0 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=450 det_frame=0 age_ms=0 have_state=0 pts=0:00:34.442581929
+[ANDON_FRAME] camera=cam-001 frame=468 rois=0 classified=0
+[TERMINAL] seq=1500 camera=cam-001 frame=468 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1519 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-002 frame=475 rois=0 classified=0
+[TERMINAL] seq=1530 camera=cam-002 frame=475 rois=0 labels=
+[AGG] camera=cam-002 frame=477 detections=0 (cam_total=390 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-003 frame=485 detections=0 (cam_total=390 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-001 frame=488 detections=0 (cam_total=390 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-002 frame=488 rois=0 classified=0
+[TERMINAL] seq=1560 camera=cam-002 frame=488 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1563 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+0:00:37.476504509 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-006
+0:00:37.476642363 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[ANDON_FRAME] camera=cam-001 frame=504 rois=0 classified=0
+[TERMINAL] seq=1590 camera=cam-001 frame=504 rois=0 labels=
+[AGG] camera=cam-004 frame=486 detections=0 (cam_total=390 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1607 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-003 frame=510 rois=0 classified=0
+[TERMINAL] seq=1620 camera=cam-003 frame=510 rois=0 labels=
+[ANDON_FRAME] camera=cam-003 frame=520 rois=0 classified=0
+[TERMINAL] seq=1650 camera=cam-003 frame=520 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1651 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=524 detections=0 (cam_total=420 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-002 frame=524 detections=0 (cam_total=420 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-001 frame=533 detections=0 (cam_total=420 det_total=0 qd=1 drop=0)
+0:00:39.508684103 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-009
+0:00:39.508805760 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[ANDON_FRAME] camera=cam-004 frame=514 rois=0 classified=0
+[TERMINAL] seq=1680 camera=cam-004 frame=514 rois=0 labels=
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:00:38.753690694
+0:00:39.971862937 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c009230, pts 0:00:25.699300741, dts 0:00:25.699300741, dur 0:00:00.040000000, size 14582, offset 7923595, offset_end 1, flags 0x2200
+0:00:39.971983553 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c009da0, pts 0:00:25.819300741, dts 0:00:25.819300741, dur 0:00:00.040000000, size 255479, offset 7938171, offset_end 1, flags 0x200
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1698 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:00:39.283264038
+[ANDON_FRAME] camera=cam-002 frame=538 rois=0 classified=0
+[TERMINAL] seq=1710 camera=cam-002 frame=538 rois=0 labels=
+0:00:40.446492027 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-007
+0:00:40.446647432 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:00:39.496285697
+[AGG] camera=cam-004 frame=528 detections=0 (cam_total=420 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-002 frame=546 rois=0 classified=0
+[TERMINAL] seq=1740 camera=cam-002 frame=546 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1747 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=540 det_frame=0 age_ms=0 have_state=0 pts=0:00:40.373539320
+[ANDON_FRAME] camera=cam-002 frame=556 rois=0 classified=0
+[TERMINAL] seq=1770 camera=cam-002 frame=556 rois=0 labels=
+[AGG] camera=cam-003 frame=559 detections=0 (cam_total=450 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-002 frame=562 detections=0 (cam_total=450 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1796 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-001 frame=568 rois=0 classified=0
+[TERMINAL] seq=1800 camera=cam-001 frame=568 rois=0 labels=
+[AGG] camera=cam-001 frame=569 detections=0 (cam_total=450 det_total=0 qd=1 drop=0)
+0:00:42.478720548 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-006
+0:00:42.478804343 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[ANDON_FRAME] camera=cam-001 frame=579 rois=0 classified=0
+[TERMINAL] seq=1830 camera=cam-001 frame=579 rois=0 labels=
+[AGG] camera=cam-004 frame=568 detections=0 (cam_total=450 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1845 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-001 frame=590 rois=0 classified=0
+[TERMINAL] seq=1860 camera=cam-001 frame=590 rois=0 labels=
+0:00:43.892120628 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c00a0d0, pts 0:00:29.559745503, dts 0:00:29.559745503, dur 0:00:00.040000000, size 11594, offset 8868004, offset_end 1, flags 0x2200
+0:00:43.892316863 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c009da0, pts 0:00:29.599745503, dts 0:00:29.599745503, dur 0:00:00.040000000, size 10927, offset 8879592, offset_end 1, flags 0x2200
+0:00:43.892391128 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c009c60, pts 0:00:29.679745503, dts 0:00:29.679745503, dur 0:00:00.040000000, size 207089, offset 8890513, offset_end 1, flags 0x2200
+[ANDON_FRAME] camera=cam-001 frame=600 rois=0 classified=0
+[TERMINAL] seq=1890 camera=cam-001 frame=600 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1892 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=598 detections=0 (cam_total=480 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-002 frame=603 detections=0 (cam_total=480 det_total=0 qd=1 drop=0)
+0:00:44.511505133 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-009
+0:00:44.511609657 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[AGG] camera=cam-001 frame=608 detections=0 (cam_total=480 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-002 frame=608 rois=0 classified=0
+[TERMINAL] seq=1920 camera=cam-002 frame=608 rois=0 labels=
+0:00:44.835665628 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c0096b0, pts 0:00:30.497419896, dts 0:00:30.497419896, dur 0:00:00.040000000, size 14989, offset 9375920, offset_end 1, flags 0x2200
+0:00:44.835783952 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c003b70, pts 0:00:30.537419896, dts 0:00:30.537419896, dur 0:00:00.040000000, size 236802, offset 9390903, offset_end 1, flags 0x200
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1940 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-001 frame=620 rois=0 classified=0
+[TERMINAL] seq=1950 camera=cam-001 frame=620 rois=0 labels=
+0:00:45.448194707 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f46730: no factory for path /cam/cam-007
+0:00:45.448360528 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f46730: no media
+[AGG] camera=cam-004 frame=608 detections=0 (cam_total=480 det_total=0 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=630 det_frame=0 age_ms=0 have_state=0 pts=0:00:44.889283479
+[ANDON_FRAME] camera=cam-003 frame=626 rois=0 classified=0
+[TERMINAL] seq=1980 camera=cam-003 frame=626 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=1987 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=630 det_frame=0 age_ms=0 have_state=0 pts=0:00:45.194708561
+[ANDON_FRAME] camera=cam-001 frame=645 rois=0 classified=0
+[TERMINAL] seq=2010 camera=cam-001 frame=645 rois=0 labels=
+[AGG] camera=cam-003 frame=639 detections=0 (cam_total=510 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-002 frame=642 detections=0 (cam_total=510 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2031 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=652 detections=0 (cam_total=510 det_total=0 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-004 vframe=630 det_frame=0 age_ms=0 have_state=0 pts=0:00:46.189197686
+[ANDON_FRAME] camera=cam-001 frame=656 rois=0 classified=0
+[TERMINAL] seq=2040 camera=cam-001 frame=656 rois=0 labels=
+[ANDON_FRAME] camera=cam-001 frame=670 rois=0 classified=0
+[TERMINAL] seq=2070 camera=cam-001 frame=670 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2076 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[annotated-rtsp] cam-001: client media configured
+0:00:48.302579601 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:48.302790992 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m           h264parse gsth264parse.c:1529:gst_h264_parse_handle_frame:<h264parse4>[00m broken/invalid nal Type: 1 Slice, Size: 2991 will be dropped
+0:00:48.353723722 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:48.354057708 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:48.354129838 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:48.354151920 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtpsession gstrtpsession.c:2484:gst_rtp_session_chain_send_rtp_common:<rtpsession8>[00m Can't determine running time for this packet without knowing configured latency
+0:00:48.355338498 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:4934:gst_rtsp_media_suspend:[00m media 0xfffe7805b470 was not prepared
+0:00:48.356643766 [31m1381884[00m 0xffff9c00d1d0 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<appsrc0:src>[00m could not send sticky events
+0:00:48.357465684 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink0>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:48.357494224 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink0>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:48.357640255 [31m1381884[00m 0xffff9c00d500 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink0>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:48.357700979 [31m1381884[00m 0xffff9c00d500 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink0>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:48.357967314 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805b470: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink0:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:48.358011217 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805b470: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink0:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:48.478787201 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f48780: no factory for path /cam/cam-005
+0:00:48.478907348 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f48780: no media
+[ANDON_FRAME] camera=cam-003 frame=660 rois=0 classified=0
+[TERMINAL] seq=2100 camera=cam-003 frame=660 rois=0 labels=
+[AGG] camera=cam-004 frame=643 detections=0 (cam_total=510 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2126 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=688 detections=0 (cam_total=540 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-002 frame=678 rois=0 classified=0
+[TERMINAL] seq=2130 camera=cam-002 frame=678 rois=0 labels=
+[AGG] camera=cam-002 frame=679 detections=0 (cam_total=540 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-003 frame=674 detections=0 (cam_total=540 det_total=0 qd=1 drop=0)
+0:00:49.773395122 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c001930, pts 0:00:35.427143487, dts 0:00:35.427143487, dur 0:00:00.040000000, size 14325, offset 10497358, offset_end 1, flags 0x2200
+0:00:49.773591409 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c0035d0, pts 0:00:35.467143487, dts 0:00:35.467143487, dur 0:00:00.040000000, size 10259, offset 10511677, offset_end 1, flags 0x2200
+0:00:49.773642083 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c015ee0, pts 0:00:35.507143487, dts 0:00:35.507143487, dur 0:00:00.040000000, size 10397, offset 10521930, offset_end 1, flags 0x2200
+0:00:49.773684579 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c0048e0, pts 0:00:35.587143487, dts 0:00:35.587143487, dur 0:00:00.040000000, size 244650, offset 10532321, offset_end 1, flags 0x200
+[ANDON_FRAME] camera=cam-004 frame=659 rois=0 classified=0
+[TERMINAL] seq=2160 camera=cam-004 frame=659 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2175 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+0:00:50.449507353 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f48bf0: no factory for path /cam/cam-008
+0:00:50.449774729 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f48bf0: no media
+[ANDON_FRAME] camera=cam-002 frame=688 rois=0 classified=0
+[TERMINAL] seq=2190 camera=cam-002 frame=688 rois=0 labels=
+0:00:50.515111933 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:5325:gst_rtsp_media_set_state:[00m media 0xfffe7805b470 was not prepared
+0:00:50.515269213 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00;04m             default gstrtspconnection.c:1553:writev_bytes:[00m Error sending message: Connection reset by peer
+[annotated-rtsp] cam-002: client media configured
+0:00:50.594505546 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:50.594742403 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m           h264parse gsth264parse.c:1529:gst_h264_parse_handle_frame:<h264parse5>[00m broken/invalid nal Type: 1 Slice, Size: 55826 will be dropped
+0:00:50.640408977 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:50.640746504 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:50.640810301 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:50.640824936 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtpsession gstrtpsession.c:2484:gst_rtp_session_chain_send_rtp_common:<rtpsession9>[00m Can't determine running time for this packet without knowing configured latency
+0:00:50.642428984 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:4934:gst_rtsp_media_suspend:[00m media 0xfffe7805c8c0 was not prepared
+0:00:50.643422921 [31m1381884[00m 0xffff9c00d1d0 [33;01mWARN   [00m [00;01;31;44m            GST_PADS gstpad.c:4392:gst_pad_peer_query:<appsrc1:src>[00m could not send sticky events
+0:00:50.645050925 [31m1381884[00m 0xffff9c00d500 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink2>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:50.645111650 [31m1381884[00m 0xffff9c00d500 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink2>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:50.645272732 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink2>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:50.645321739 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink2>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:50.645392046 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805c8c0: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink2:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:50.645439230 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805c8c0: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink2:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:50.711231095 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c009350, pts 0:00:36.450336874, dts 0:00:36.450336874, dur 0:00:00.040000000, size 22900, offset 10901112, offset_end 1, flags 0x2200
+0:00:50.711402958 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c0060e0, pts 0:00:36.530336874, dts 0:00:36.530336874, dur 0:00:00.040000000, size 55836, offset 10924006, offset_end 1, flags 0x2200
+0:00:50.711449517 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c009230, pts 0:00:36.570336874, dts 0:00:36.570336874, dur 0:00:00.040000000, size 203975, offset 10979836, offset_end 1, flags 0x200
+[ANDON_FRAME] camera=cam-004 frame=680 rois=0 classified=0
+[TERMINAL] seq=2220 camera=cam-004 frame=680 rois=0 labels=
+[AGG] camera=cam-004 frame=680 detections=0 (cam_total=540 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2224 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=721 detections=0 (cam_total=570 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-004 frame=686 rois=0 classified=0
+[TERMINAL] seq=2250 camera=cam-004 frame=686 rois=0 labels=
+[AGG] camera=cam-003 frame=710 detections=0 (cam_total=570 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2269 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=716 detections=0 (cam_total=570 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-003 frame=719 rois=0 classified=0
+[TERMINAL] seq=2280 camera=cam-003 frame=719 rois=0 labels=
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=720 det_frame=0 age_ms=0 have_state=0 pts=0:00:51.416918715
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=720 det_frame=0 age_ms=0 have_state=0 pts=0:00:51.725236759
+[ANDON_FRAME] camera=cam-003 frame=727 rois=0 classified=0
+[TERMINAL] seq=2310 camera=cam-003 frame=727 rois=0 labels=
+0:00:53.183450316 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:5325:gst_rtsp_media_set_state:[00m media 0xfffe7805c8c0 was not prepared
+0:00:53.183595565 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00;04m             default gstrtspconnection.c:1553:writev_bytes:[00m Error sending message: Connection reset by peer
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2319 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[annotated-rtsp] cam-003: client media configured
+0:00:53.260365660 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:53.260540751 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m           h264parse gsth264parse.c:1529:gst_h264_parse_handle_frame:<h264parse6>[00m broken/invalid nal Type: 1 Slice, Size: 12353 will be dropped
+0:00:53.361151023 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:53.361455845 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:53.361552452 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:53.361578648 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtpsession gstrtpsession.c:2484:gst_rtp_session_chain_send_rtp_common:<rtpsession10>[00m Can't determine running time for this packet without knowing configured latency
+0:00:53.363356955 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:4934:gst_rtsp_media_suspend:[00m media 0xfffe7805b930 was not prepared
+0:00:53.366699262 [31m1381884[00m 0xffff9c00d500 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink4>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:53.366778996 [31m1381884[00m 0xffff9c00d500 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink4>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:53.367163915 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink4>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:53.367216932 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink4>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:53.367346141 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805b930: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink4:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:53.367434000 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805b930: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink4:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:53.481649211 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f47f20: no factory for path /cam/cam-005
+0:00:53.481802220 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f47f20: no media
+[AGG] camera=cam-004 frame=714 detections=0 (cam_total=570 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-002 frame=736 rois=0 classified=0
+[TERMINAL] seq=2340 camera=cam-002 frame=736 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2368 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-003 frame=746 detections=0 (cam_total=600 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-001 frame=761 rois=0 classified=0
+[TERMINAL] seq=2370 camera=cam-001 frame=761 rois=0 labels=
+[AGG] camera=cam-001 frame=761 detections=0 (cam_total=600 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-002 frame=750 detections=0 (cam_total=600 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-001 frame=770 rois=0 classified=0
+[TERMINAL] seq=2400 camera=cam-001 frame=770 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2417 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+0:00:55.306670272 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink4>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:55.306758807 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink4>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:55.306901296 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805b930: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink4:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:55.452054753 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f48170: no factory for path /cam/cam-008
+0:00:55.452202711 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f48170: no media
+0:00:55.476017585 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c001930, pts 0:00:41.155651749, dts 0:00:41.155651749, dur 0:00:00.040000000, size 12024, offset 12033577, offset_end 1, flags 0x2200
+0:00:55.476199239 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c00bb70, pts 0:00:41.235651749, dts 0:00:41.235651749, dur 0:00:00.040000000, size 11494, offset 12045595, offset_end 1, flags 0x2200
+0:00:55.476252933 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c00e250, pts 0:00:41.275651749, dts 0:00:41.275651749, dur 0:00:00.040000000, size 9144, offset 12057083, offset_end 1, flags 0x2200
+0:00:55.476330479 [31m1381884[00m 0xffff9c008550 [33;01mWARN   [00m [00m              appsrc gstappsrc.c:2469:gst_app_src_push_internal:<src>[00m Dropping old item buffer: 0xfffe6c009c60, pts 0:00:41.355651749, dts 0:00:41.355651749, dur 0:00:00.040000000, size 229825, offset 12066221, offset_end 1, flags 0x200
+[ANDON_FRAME] camera=cam-001 frame=783 rois=0 classified=0
+[TERMINAL] seq=2430 camera=cam-001 frame=783 rois=0 labels=
+0:00:55.786332118 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:5325:gst_rtsp_media_set_state:[00m media 0xfffe7805b930 was not prepared
+0:00:55.786478774 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00;04m             default gstrtspconnection.c:1553:writev_bytes:[00m Error sending message: Connection reset by peer
+[annotated-rtsp] cam-004: client media configured
+0:00:55.864676302 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:55.864861810 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m           h264parse gsth264parse.c:1529:gst_h264_parse_handle_frame:<h264parse7>[00m broken/invalid nal Type: 1 Slice, Size: 8072 will be dropped
+0:00:55.901538615 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:55.901892600 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:55.902163465 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtspstream rtsp-stream.c:5381:rtp_pad_blocking:[00m Passing event.
+0:00:55.902206483 [31m1381884[00m 0xffff9c00cea0 [33;01mWARN   [00m [00m          rtpsession gstrtpsession.c:2484:gst_rtp_session_chain_send_rtp_common:<rtpsession11>[00m Can't determine running time for this packet without knowing configured latency
+0:00:55.904517877 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:4934:gst_rtsp_media_suspend:[00m media 0xfffe7805da60 was not prepared
+0:00:55.906411072 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink6>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:55.906456486 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink6>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:55.906521429 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805da60: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink6:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+0:00:55.906916817 [31m1381884[00m 0xffff9c00d500 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink6>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:55.906962334 [31m1381884[00m 0xffff9c00d500 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink6>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:55.907059150 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805da60: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink6:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+[ANDON_FRAME] camera=cam-001 frame=785 rois=0 classified=0
+[TERMINAL] seq=2460 camera=cam-001 frame=785 rois=0 labels=
+[AGG] camera=cam-004 frame=748 detections=0 (cam_total=600 det_total=0 qd=1 drop=0)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2467 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-002 frame=785 detections=0 (cam_total=630 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-003 frame=780 detections=0 (cam_total=630 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-001 frame=794 rois=0 classified=0
+[TERMINAL] seq=2490 camera=cam-001 frame=794 rois=0 labels=
+0:00:57.105911298 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink6>[00m warning: Pipeline construction is invalid, please add queues.
+0:00:57.105997021 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m            basesink gstbasesink.c:1249:gst_base_sink_query_latency:<appsink6>[00m warning: Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.
+0:00:57.106129199 [31m1381884[00m 0xffff9c00c510 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:3566:default_handle_message:[00m 0xfffe7805da60: got warning Pipeline construction is invalid, please add queues. (../libs/gst/base/gstbasesink.c(1249): gst_base_sink_query_latency (): /GstPipeline:media-pipeline/GstAppSink:appsink6:
+Not enough buffering available for  the processing deadline of 0:00:00.020000000, add enough queues to buffer  0:00:00.020000000 additional data. Shortening processing latency to 0:00:00.000000000.)
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2515 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[ANDON_FRAME] camera=cam-004 frame=766 rois=0 classified=0
+[TERMINAL] seq=2520 camera=cam-004 frame=766 rois=0 labels=
+[AGG] camera=cam-001 frame=804 detections=0 (cam_total=630 det_total=0 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-001 vframe=810 det_frame=0 age_ms=0 have_state=0 pts=0:00:56.617067930
+[ANDON_FRAME] camera=cam-002 frame=803 rois=0 classified=0
+[TERMINAL] seq=2550 camera=cam-002 frame=803 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2562 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+0:00:58.402365131 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:5325:gst_rtsp_media_set_state:[00m media 0xfffe7805da60 was not prepared
+0:00:58.402496215 [31m1381884[00m 0xffff9c009210 [33;01mWARN   [00m [00;04m             default gstrtspconnection.c:1553:writev_bytes:[00m Error sending message: Connection reset by peer
+0:00:58.452496492 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:1073:find_media:[00m client 0xaaaac2f48970: no factory for path /cam/cam-006
+0:00:58.452676635 [31m1381884[00m 0xffff9c009210 [31;01mERROR  [00m [00m          rtspclient rtsp-client.c:3412:handle_describe_request:[00m client 0xaaaac2f48970: no media
+[face-sync] qtivoverlay.sink cam=cam-002 vframe=810 det_frame=0 age_ms=0 have_state=0 pts=0:00:57.407993645
+[ANDON_FRAME] camera=cam-004 frame=784 rois=0 classified=0
+[TERMINAL] seq=2580 camera=cam-004 frame=784 rois=0 labels=
+[AGG] camera=cam-004 frame=784 detections=0 (cam_total=630 det_total=0 qd=1 drop=0)
+[face-sync] qtivoverlay.sink cam=cam-003 vframe=810 det_frame=0 age_ms=0 have_state=0 pts=0:00:58.123904256
+[AGG] camera=cam-002 frame=818 detections=0 (cam_total=660 det_total=0 qd=1 drop=0)
+[AGG] camera=cam-003 frame=813 detections=0 (cam_total=660 det_total=0 qd=1 drop=0)
+[ANDON_FRAME] camera=cam-004 frame=793 rois=0 classified=0
+[TERMINAL] seq=2610 camera=cam-004 frame=793 rois=0 labels=
+[OV-NATIVE] rois=0 faces=0 decision=0 | frames=2612 face_frames=0 face_metas=0 last_face_ago_ms=-1 (no property set)
+[FACE-OC] clear rects=0 frame=1920x1080
+[AGG] camera=cam-001 frame=842 detections=0 (cam_total=660 det_total=0 qd=1 drop=0)
+0:00:59.888783990 [31m1381884[00m 0xffff9c007570 [33;01mWARN   [00m [00m        v4l2videodec gstv4l2videodec.c:865:gst_v4l2_video_dec_loop:<v4l2h264dec_cam_004>[00m Decoder is producing too many buffers
+[ANDON_FRAME] camera=cam-001 frame=844 rois=0 classified=0
+[TERMINAL] seq=2640 camera=cam-001 frame=844 rois=0 labels=
+[INFO] Signal received, stopping pipeline...
+[INFO] Stopping annotated RTSP server...
+0:01:00.038112575 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:5325:gst_rtsp_media_set_state:[00m media 0xfffe780422d0 was not prepared
+0:01:00.040359809 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:5325:gst_rtsp_media_set_state:[00m media 0xfffe780385b0 was not prepared
+0:01:00.042214622 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:5325:gst_rtsp_media_set_state:[00m media 0xfffe78026530 was not prepared
+0:01:00.045083530 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m           rtspmedia rtsp-media.c:5325:gst_rtsp_media_set_state:[00m media 0xfffe7800e100 was not prepared
+[annotated-rtsp] cam-001 stopped (pushed=566 dropped=0)
+[annotated-rtsp] cam-002 stopped (pushed=577 dropped=0)
+[annotated-rtsp] cam-003 stopped (pushed=672 dropped=0)
+[annotated-rtsp] cam-004 stopped (pushed=672 dropped=0)
+0:01:00.101609393 [31m1381884[00m 0xfffeec01b9f0 [33;01mWARN   [00m [00;04m             default gstrtspconnection.c:1553:writev_bytes:[00m Operation was cancelled
+0:01:00.272082232 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m          ml-qnn-sdk ml-qnn-engine.cc:407:gst_ml_qnn_log_callback:[00m  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+0:01:00.318994258 [31m1381884[00m 0xaaaac2e56170 [33;01mWARN   [00m [00m          ml-qnn-sdk ml-qnn-engine.cc:407:gst_ml_qnn_log_callback:[00m  <W> m_CFBCallbackInfoObj is not initialized, return emptyList
+
+/prj/qct/webtech_scratch20/mlg_user_admin/qaisw_source_repo/rel/qairt-2.46.0/release/SNPE_SRC/avante-tools/prebuilt/dsp/hexagon-sdk-5.5.5/ipc/fastrpc/rpcmem/src/rpcmem_android.c:42:dummy call to rpcmem_deinit, rpcmem APIs will be used from libxdsprpc
+[INFO] Pipeline reached NULL; VPU decode sessions released.
+[INFO] FrameSnapshotCache frames=53 bytes=164851200 dropped=1028
+[INFO] SnapshotRequestSubscriber received=0 rejected=0 alarm_published=0 alarm_dropped=0
+[NatsAdapter] Disconnected.
+[AGG] SUMMARY cameras=4 total_submitted=2645 total_dropped=0
+[AGG]   camera=cam-001 submitted=663 detections=0 dropped=0 last_frame=845 queue_depth=0
+[AGG]   camera=cam-002 submitted=671 detections=0 dropped=0 last_frame=831 queue_depth=0
+[AGG]   camera=cam-003 submitted=669 detections=0 dropped=0 last_frame=823 queue_depth=0
+[AGG]   camera=cam-004 submitted=642 detections=0 dropped=0 last_frame=800 queue_depth=0
+[INFO] FrameEventPublisher: published=2645 republished=0 build_failures=0 publish_failures=0
+[INFO] CaptureTimestampTracker records=3334 misses=0 regress_fixes=0
+[INFO] AnomalySnapshotService enqueued=0 written_ok=0 write_failures=0 published=0 dropped=0 publish_failures=0
+GEM Handle for BO=50 closed 
+GEM Handle for BO=20 closed 
+GEM Handle for BO=36 closed 
+GEM Handle for BO=23 closed 
+GEM Handle for BO=17 closed 
+GEM Handle for BO=37 closed 
+GEM Handle for BO=43 closed 
+GEM Handle for BO=16 closed 
+GEM Handle for BO=11 closed 
+GEM Handle for BO=30 closed 
+GEM Handle for BO=44 closed 
+GEM Handle for BO=24 closed 
+GEM Handle for BO=22 closed 
+GEM Handle for BO=8 closed 
+GEM Handle for BO=42 closed 
+GEM Handle for BO=19 closed 
+GEM Handle for BO=12 closed 
+GEM Handle for BO=32 closed 
+GEM Handle for BO=38 closed 
+GEM Handle for BO=26 closed 
+GEM Handle for BO=25 closed 
+GEM Handle for BO=6 closed 
+GEM Handle for BO=45 closed 
+GEM Handle for BO=33 closed 
+GEM Handle for BO=13 closed 
+GEM Handle for BO=7 closed 
+GEM Handle for BO=47 closed 
+GEM Handle for BO=39 closed 
+GEM Handle for BO=28 closed 
+GEM Handle for BO=1 closed 
+GEM Handle for BO=21 closed 
+GEM Handle for BO=15 closed 
+GEM Handle for BO=35 closed 
+GEM Handle for BO=14 closed 
+GEM Handle for BO=9 closed 
+GEM Handle for BO=48 closed 
+GEM Handle for BO=40 closed 
+GEM Handle for BO=29 closed 
+GEM Handle for BO=3 closed 
+GEM Handle for BO=18 closed 
+GEM Handle for BO=46 closed 
+GEM Handle for BO=34 closed 
+GEM Handle for BO=27 closed 
+GEM Handle for BO=10 closed 
+GEM Handle for BO=49 closed 
+GEM Handle for BO=41 closed 
+GEM Handle for BO=31 closed 
+GEM Handle for BO=5 closed 
+GEM Handle for BO=2 closed 
+GEM Handle for BO=4 closed 
+
+=== Frame Count Summary ===
+Camera            IN       OUT     delta
+cam-001          850       663       187
+cam-002          838       671       167
+cam-003          830       669       161
+cam-004          809       642       167
+----------------------------------------
+TOTAL           3327      2645       682
+[INFO] Done.

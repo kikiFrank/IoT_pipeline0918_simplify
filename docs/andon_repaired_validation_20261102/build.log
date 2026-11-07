@@ -1,0 +1,234 @@
+AIBOX_ROOT=/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline NPROC=8
+== cmake configure build_unified ==
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/build_unified
+== build aibox_stream_pipeline_demo ==
+[ 12%] Built target imsdk_proto
+[ 15%] Built target aibox_frame_cache
+[ 24%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/orchestrator/PipelineOrchestrator.cpp.o
+[ 24%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/config/TxtSnapshotLoader.cpp.o
+[ 24%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/main.cpp.o
+[ 30%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/orchestrator/PlanExporter.cpp.o
+[ 30%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/PipelineStructureDumper.cpp.o
+[ 33%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/pipeline/GstPipelineBuilder.cpp.o
+[ 36%] Building CXX object CMakeFiles/aibox_stream_pipeline_demo.dir/src/media/AnnotatedRtspServer.cpp.o
+/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/src/orchestrator/PlanExporter.cpp: In member function ‘aibox::pipeline::Status aibox::pipeline::PlanExporter::ExportExecutionPlanJson(const aibox::pipeline::ExecutionPlan&, const aibox::pipeline::FilePath&) const’:
+/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/src/orchestrator/PlanExporter.cpp:227:13: warning: ignoring return value of ‘int system(const char*)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+  227 |       system(cmd.c_str());
+      |       ~~~~~~^~~~~~~~~~~~~
+/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/src/pipeline/PipelineStructureDumper.cpp: In member function ‘aibox::pipeline::Status aibox::pipeline::PipelineStructureDumper::Dump(const aibox::pipeline::ExecutionPlan&, const aibox::pipeline::FilePath&) const’:
+/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/src/pipeline/PipelineStructureDumper.cpp:15:29: warning: ignoring return value of ‘int system(const char*)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   15 |     if (!dir.empty()) system(("mkdir -p \"" + dir + "\"").c_str());
+      |                       ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ 39%] Linking CXX executable aibox_stream_pipeline_demo
+[100%] Built target aibox_stream_pipeline_demo
+cec6fd1a005724ea2c2327b947dc4b2810b5c853c54dde2ba09b285502f8f717  /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/build_unified/aibox_stream_pipeline_demo
+== build aibox_siglip_worker ==
+[ 50%] Built target aibox_siglip_core
+[100%] Built target aibox_siglip_worker
+== build plugin aiboxframemeta_common ==
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxframemeta_common/build_board
+[100%] Built target gstaiboxframemeta
+AIBOX_FRAMEMETA_LIB=/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxframemeta_common/build_board/libgstaiboxframemeta.so
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxframemeta_common/build_board/libgstaiboxframemeta.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxframemeta.so'
+== build plugin aiboxtimemux ==
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxtimemux/build_board
+[100%] Built target gstaiboxtimemux
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxtimemux/build_board/libgstaiboxtimemux.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxtimemux.so'
+== build plugin aiboxstreamdemux ==
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxstreamdemux/build_board
+[100%] Built target gstaiboxstreamdemux
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxstreamdemux/build_board/libgstaiboxstreamdemux.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxstreamdemux.so'
+== build plugin aiboxcamsplit ==
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxcamsplit/build_board
+[100%] Built target gstaiboxcamsplit
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxcamsplit/build_board/libgstaiboxcamsplit.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxcamsplit.so'
+== build plugin mlpostprocess_roi ==
+-- QTI pkg-config packages not found, using fallback mode
+-- Using QTI source headers from: /mnt/workspace/ppe_imsdk_67189ab/gst-plugin-base
+-- Using QTI build libs from: /mnt/workspace/build-plugins/gst-plugin-base
+-- Configured ml-postprocess modules dir (build): /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board
+[ 17%] Built target gstqtimlpostprocess_roi
+[ 21%] Built target ml-postprocess-yolo-nas
+[ 39%] Built target ml-postprocess-yolox-stacklight
+[ 34%] Built target ml-postprocess-yolo26-noe2e
+[ 47%] Built target ml-postprocess-yolo26-otm
+[ 56%] Built target ml-postprocess-yolox-ppe
+[ 65%] Built target ml-postprocess-yolo26-obb
+[ 73%] Built target ml-postprocess-ppyoloe
+[ 91%] Built target ml-postprocess-siglip2-text
+[ 91%] Built target ml-postprocess-siglip2-image
+[100%] Built target ml-postprocess-mobilenet-softmax
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libgstqtimlpostprocess_roi.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstqtimlpostprocess_roi.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libgstqtimlpostprocess_roi.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstqtimlpostprocess_roi.so'
+-- Install configuration: "Release"
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/libgstqtimlpostprocess_roi.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-ppe.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-stacklight.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo-nas.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-otm.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-noe2e.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-obb.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-ppyoloe.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-image.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-text.so
+-- Up-to-date: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-mobilenet-softmax.so
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolo-nas.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo-nas.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolo-nas.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo-nas.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-ppyoloe.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-ppyoloe.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-ppyoloe.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-ppyoloe.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolo26-obb.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-obb.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolo26-obb.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo26-obb.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolo26-noe2e.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-noe2e.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolo26-noe2e.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo26-noe2e.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolo26-otm.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-otm.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolo26-otm.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo26-otm.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-mobilenet-softmax.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-mobilenet-softmax.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-mobilenet-softmax.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-mobilenet-softmax.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo-nas.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo-nas.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo-nas.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo-nas.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-ppyoloe.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-ppyoloe.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-ppyoloe.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-ppyoloe.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-obb.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-obb.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-obb.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo26-obb.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-noe2e.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-noe2e.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-noe2e.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo26-noe2e.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-otm.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-otm.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolo26-otm.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo26-otm.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-mobilenet-softmax.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-mobilenet-softmax.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-mobilenet-softmax.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-mobilenet-softmax.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-stacklight.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-stacklight.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-stacklight.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolox-stacklight.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-image.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-image.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-image.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-siglip2-image.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-text.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-text.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-text.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-siglip2-text.so'
+cp: '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-ppe.so' and '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-ppe.so' are the same file
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-ppe.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolox-ppe.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolox-stacklight.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-stacklight.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolox-stacklight.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolox-stacklight.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-siglip2-image.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-image.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-siglip2-image.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-siglip2-image.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-siglip2-text.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-siglip2-text.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-siglip2-text.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-siglip2-text.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolox-ppe.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules/libml-postprocess-yolox-ppe.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/libml-postprocess-yolox-ppe.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolox-ppe.so'
+ML_MODULES_BAKED=/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/mlpostprocess_roi/build_board/plugins/ml_modules
+total 828
+drwxrwxr-x 2 ubuntu ubuntu   4096 Nov  2 03:18 .
+drwxrwxr-x 3 ubuntu ubuntu   4096 Oct 30 13:42 ..
+-rwxrwxr-x 1 ubuntu ubuntu  84536 Oct 30 13:42 libml-postprocess-mobilenet-softmax.so
+-rwxrwxr-x 1 ubuntu ubuntu 156976 Oct 28 10:04 libml-postprocess-ppyoloe.so
+-rwxrwxr-x 1 ubuntu ubuntu  73432 Oct 28 10:04 libml-postprocess-siglip2-image.so
+-rwxrwxr-x 1 ubuntu ubuntu  73424 Oct 28 10:04 libml-postprocess-siglip2-text.so
+-rwxrwxr-x 1 ubuntu ubuntu  85264 Oct 28 10:04 libml-postprocess-yolo-nas.so
+-rwxrwxr-x 1 ubuntu ubuntu 153208 Oct 28 10:04 libml-postprocess-yolo26-noe2e.so
+-rwxrwxr-x 1 ubuntu ubuntu  85160 Oct 28 10:04 libml-postprocess-yolo26-obb.so
+-rwxrwxr-x 1 ubuntu ubuntu 153232 Oct 28 10:04 libml-postprocess-yolo26-otm.so
+-rwxrwxr-x 1 ubuntu ubuntu 154456 Nov  2 03:18 libml-postprocess-yolox-ppe.so
+-rwxrwxr-x 1 ubuntu ubuntu 154456 Nov  2 03:18 libml-postprocess-yolox-stacklight.so
+== build plugin aiboxbatchgate ==
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxbatchgate/build_board
+[100%] Built target gstaiboxbatchgate
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxbatchgate/build_board/libgstaiboxbatchgate.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxbatchgate.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxbatchgate/build_board/libgstaiboxbatchgate.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxbatchgate.so'
+== build plugin aiboxbatchsplit ==
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxbatchsplit/build_board
+[100%] Built target gstaiboxbatchsplit
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxbatchsplit/build_board/libgstaiboxbatchsplit.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxbatchsplit.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxbatchsplit/build_board/libgstaiboxbatchsplit.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxbatchsplit.so'
+== build plugin aiboxflowtap ==
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxflowtap/build_board
+[100%] Built target gstaiboxflowtap
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxflowtap/build_board/libgstaiboxflowtap.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxflowtap.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/aiboxflowtap/build_board/libgstaiboxflowtap.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxflowtap.so'
+== build plugin qtifaceinfer ==
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/qtifaceinfer/build_board
+[100%] Built target gstqtifaceinfer
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/qtifaceinfer/build_board/libgstqtifaceinfer.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstqtifaceinfer.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/qtifaceinfer/build_board/libgstqtifaceinfer.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstqtifaceinfer.so'
+== FrameMeta ABI staging MANIFEST ==
+b0a3c0a374ba3cb7ef36382105e5d360e0e217f663a3b677fed3ce394f234564  libgstaiboxframemeta.so
+1c9c66db960e39110c2d1e8cccd7d9ff107da1ea256586a78da4a4166b8dc2c3  libgstaiboxtimemux.so
+f1bd05e0a1ac3d9b485e2f6455ef3c86448b909dd78b029a645603e351cd298b  libgstaiboxcamsplit.so
+c73e87735d7f5ab30d8b4537296609105cd1864c1360e6f63e7ba7317064fdf0  libgstaiboxstreamdemux.so
+== atomic switch ABI quartet into runtime_plugins ==
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxframemeta.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxframemeta.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxtimemux.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxtimemux.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxcamsplit.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxcamsplit.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi/libgstaiboxstreamdemux.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxstreamdemux.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxbatchgate.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/libgstaiboxbatchgate.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxbatchsplit.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/libgstaiboxbatchsplit.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxcamsplit.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/libgstaiboxcamsplit.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxflowtap.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/libgstaiboxflowtap.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxframemeta.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/libgstaiboxframemeta.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxstreamdemux.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/libgstaiboxstreamdemux.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxtimemux.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/libgstaiboxtimemux.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstqtifaceinfer.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/libgstqtifaceinfer.so'
+'/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstqtimlpostprocess_roi.so' -> '/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/libgstqtimlpostprocess_roi.so'
+== inspect ==
+INSPECT_qtifaceinfer=OK
+INSPECT_framemeta=OK
+INSPECT_timemux=OK
+INSPECT_demux=OK
+INSPECT_camsplit=OK
+INSPECT_batchgate=OK
+INSPECT_batchsplit=OK
+INSPECT_flowtap=OK
+  Rank                     none (0)
+                        Enum "GstMLPostProcessModules" Default: 0, "none"
+                           (0): none             - No module, default invalid mode
+                           (1): yolo-nas         - 
+                           (2): ppyoloe          - 
+                           (3): yolo26-obb       - 
+                           (5): yolo26-otm       - 
+INSPECT_roi_yolo26_otm=OK
+INSPECT_roi_yolox_ppe=OK
+INSPECT_roi_yolox_stacklight=OK
+INSPECT_roi_mobilenet_softmax=OK
+INSPECT_roi_ppyoloe=OK
+INSPECT_roi_yolo26_obb=OK
+INSPECT_roi_yolo26_noe2e=OK
+INSPECT_roi_siglip2_image=OK
+RUNTIME_PLUGINS=/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins
+FRAMEMETA_STAGING=/mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/output/plugin_staging/framemeta_abi
+-rwxrwxr-x 1 ubuntu ubuntu  77224 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxbatchgate.so
+-rwxrwxr-x 1 ubuntu ubuntu  75848 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxbatchsplit.so
+-rwxrwxr-x 1 ubuntu ubuntu  75496 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxcamsplit.so
+-rwxrwxr-x 1 ubuntu ubuntu  72120 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxflowtap.so
+-rwxrwxr-x 1 ubuntu ubuntu  71200 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxframemeta.so
+-rwxrwxr-x 1 ubuntu ubuntu  78184 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxstreamdemux.so
+-rwxrwxr-x 1 ubuntu ubuntu  77392 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstaiboxtimemux.so
+-rwxrwxr-x 1 ubuntu ubuntu 242632 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstqtifaceinfer.so
+-rwxrwxr-x 1 ubuntu ubuntu 321624 Oct 30 13:42 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/runtime_plugins/libgstqtimlpostprocess_roi.so
+-rwxrwxr-x 1 ubuntu ubuntu  84536 Oct 30 13:42 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-mobilenet-softmax.so
+-rwxrwxr-x 1 ubuntu ubuntu 156976 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-ppyoloe.so
+-rwxrwxr-x 1 ubuntu ubuntu  73432 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-siglip2-image.so
+-rwxrwxr-x 1 ubuntu ubuntu  73424 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-siglip2-text.so
+-rwxrwxr-x 1 ubuntu ubuntu  85264 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo-nas.so
+-rwxrwxr-x 1 ubuntu ubuntu 153208 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo26-noe2e.so
+-rwxrwxr-x 1 ubuntu ubuntu  85160 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo26-obb.so
+-rwxrwxr-x 1 ubuntu ubuntu 153232 Oct 28 10:04 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolo26-otm.so
+-rwxrwxr-x 1 ubuntu ubuntu 154456 Nov  2 03:18 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolox-ppe.so
+-rwxrwxr-x 1 ubuntu ubuntu 154456 Nov  2 03:18 /mnt/workspace/1028pipeline_fix_and_service_embed_test/ai-box_stream_pipeline/plugins/ml_modules/libml-postprocess-yolox-stacklight.so
+BUILD_UNIFIED_DONE

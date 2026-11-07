@@ -1,0 +1,38 @@
+camera_id: "cam-003"
+timestamp_ms: 1793701183130
+detections {
+  event_id: "f64f6ab6-a29b-498e-9578-e2a990b83e98"
+  confidence: 0.877721846
+  class_id: "Human"
+  x_min: 674
+  y_min: 250
+  x_max: 862
+  y_max: 791
+  normalized_bbox {
+    x_min: 0.351041675
+    y_min: 0.231481478
+    x_max: 0.448958337
+    y_max: 0.732407391
+  }
+}
+detections {
+  event_id: "cf4ca029-9019-4c6a-8f3d-66a22e2e7a8d"
+  confidence: 0.836417258
+  class_id: "Human"
+  x_min: 1226
+  y_min: 130
+  x_max: 1348
+  y_max: 511
+  normalized_bbox {
+    x_min: 0.638541639
+    y_min: 0.120370373
+    x_max: 0.702083349
+    y_max: 0.473148137
+  }
+}
+algorithm_code: "alg_group_0"
+coordinate_space: NORMALIZED
+frame_width: 1920
+frame_height: 1080
+frame_id: "160"
+schema_version: 2

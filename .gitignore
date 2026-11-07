@@ -19,6 +19,3 @@ data/models/andon/mobilenetv3_light_w8a16.bin
 data/models/andon/yolox_s_light_v2_w8a16.bin
 data/models/raisehands/*.bin
 
-# Local documentation and validation notes
-/docs/
-/tests/
